@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JOSE Anthony — Portfolio</title>
+  <meta name="description" content="Portfolio de JOSE Anthony — Étudiant Licence Informatique 3, Administrateur système Linux & développeur." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span style="font-size:1.05rem;">JOSE Anthony</span>
+        <span class="badge">L3 Informatique • Linux • Dev</span>
+      </div>
+
+      <button class="menu-btn" data-menu-btn>Menu</button>
+
+      <nav class="nav-links" data-nav-links>
+        <a href="index.html">Accueil</a>
+        <a href="projets.html">Projets</a>
+        <a href="competences.html">Compétences</a>
+        <a href="experience.html">Expérience</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="grid-hero">
+        <div>
+          <h1 class="h1">Administrateur système Linux & développeur</h1>
+          <p class="lead">
+            Étudiant en Licence Informatique 3. J’aime construire des solutions utiles, propres et maintenables :
+            web, mobile (Flutter) et automatisation (Shell/Ansible).
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="projets.html">Voir mes projets</a>
+            <a class="btn" href="contact.html">Me contacter</a>
+            <!-- Ajoute ton CV PDF dans assets/cv/ puis remplace le lien -->
+            <a class="btn" href="assets/cv/CV_JOSE_Anthony.pdf" onclick="if(!this.getAttribute('data-ready')){alert('Ajoute ton CV en PDF dans assets/cv/CV_JOSE_Anthony.pdf (ou change ce lien).'); return false;}">Télécharger mon CV (PDF)</a>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="inline-links">
+            <a class="btn small" href="mailto:anthony.jose@outlook.fr">📧 anthony.jose@outlook.fr</a>
+            <a class="btn small" href="https://github.com/joseanthony-dev" target="_blank" rel="noopener">💻 GitHub</a>
+            <a class="btn small" href="https://www.linkedin.com/in/joseanthony-zacharias" target="_blank" rel="noopener">🔗 LinkedIn</a>
+          </div>
+        </div>
+
+        <aside class="kpis">
+          <div class="card">
+            <h3>Ce que je cherche</h3>
+            <p class="muted">Opportunités orientées systèmes Linux, dev logiciel / web, automatisation, cloud.</p>
+          </div>
+          <div class="card">
+            <h3>Stack favorite</h3>
+            <p class="muted">Linux • Shell • Ansible • Flutter • Firebase • Cloudflare • Home Assistant</p>
+          </div>
+          <div class="card">
+            <h3>Points forts</h3>
+            <p class="muted">Rigueur, sens du service, documentation, et approche “clean & fiable”.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Projets en avant</h2>
+        <p>Une sélection — le détail est dans la page Projets</p>
+      </div>
+
+      <div class="cards">
+        <article class="card project">
+          <div class="title">
+            <h3>Site web Photobooth (Cloudflare)</h3>
+            <span class="tag">Web</span>
+          </div>
+          <p>Réservation en ligne, formules, et contact automatique par mail.</p>
+          <div class="meta">
+            <span class="tag">Cloudflare</span><span class="tag">Réservation</span><span class="tag">Email</span>
+          </div>
+          <div class="actions">
+            <a class="btn small" href="projets.html#photobooth">Détails</a>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="title">
+            <h3>App Planning équipe (Flutter/Firebase)</h3>
+            <span class="tag">Mobile</span>
+          </div>
+          <p>Événements, présence/absence, export PDF des heures, contact SMS/mail.</p>
+          <div class="meta">
+            <span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">PDF</span>
+          </div>
+          <div class="actions">
+            <a class="btn small" href="projets.html#flutter-planning">Détails</a>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="title">
+            <h3>Purge applicative (Shell + Ansible)</h3>
+            <span class="tag">Ops</span>
+          </div>
+          <p>Suppression versions obsolètes, gestion anomalies, rollback possible, gain stockage.</p>
+          <div class="meta">
+            <span class="tag">Shell</span><span class="tag">Ansible</span><span class="tag">Automatisation</span>
+          </div>
+          <div class="actions">
+            <a class="btn small" href="projets.html#purge">Détails</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="inline-links">
+        <span>© <span id="y"></span> JOSE Anthony</span>
+        <span class="muted">•</span>
+        <a href="contact.html">Contact</a>
+        <a href="projets.html">Projets</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
