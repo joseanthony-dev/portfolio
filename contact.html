@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="fr">
 <head>
+  <meta property="og:title" content="JOSE Anthony — Administrateur systèmes Linux" />
+<meta property="og:description" content="Linux • Automatisation (Bash/Ansible/Python) • Réseaux • Exploitation • Projets & CV" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://joseanthony-dev.github.io/portfolio/" />
+<meta property="og:image" content="https://joseanthony-dev.github.io/portfolio/assets/img/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — JOSE Anthony</title>
@@ -40,19 +47,38 @@
 
       <div class="hr"></div>
 
-      <form class="form" action="mailto:anthony.jose@outlook.fr" method="post" enctype="text/plain">
-        <input class="input" name="Nom" placeholder="Ton nom" required />
-        <input class="input" name="Email" placeholder="Ton email" type="email" required />
-        <input class="input" name="Sujet" placeholder="Sujet" required />
-        <textarea name="Message" placeholder="Ton message..." required></textarea>
+	<form class="form" action="https://formspree.io/f/xvzaavle" method="POST">
+  <input class="input" name="name" placeholder="Ton nom" required />
+  <input class="input" name="email" placeholder="Ton email" type="email" required />
+  <input class="input" name="subject" placeholder="Sujet" required />
+  <textarea name="message" placeholder="Ton message..." required></textarea>
 
-        <button class="btn primary" type="submit">Envoyer</button>
-        <p class="note">
-          Note : ce formulaire utilise <b>mailto</b> (ouvre ton client mail).<br/>
-          Si tu veux un envoi <b>vraiment automatique</b>, je peux te mettre une version prête via Formspree / Netlify Forms / Cloudflare Worker.
-        </p>
-      </form>
+  <!-- anti-spam -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+  <button class="btn primary" type="submit">Envoyer</button>
+  <p class="note">Envoi direct (pas besoin d’ouvrir Outlook/Gmail).</p>
+</form>
+<p id="sent" class="note" style="display:none;"><b>Message envoyé ✅</b> Merci, je reviens vers vous rapidement.</p>
+<script>
+  if (new URLSearchParams(location.search).get("sent") === "1") {
+    document.getElementById("sent").style.display = "block";
+  }
+</script>
+
     </div>
+
+<div class="cta-banner">
+  <div>
+    <b>Stage Admin Systèmes — dès mai 2026</b><br/>
+    <span class="muted">Lyon / Saint-Étienne • Disponible 3 mois</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="contact.html">Me contacter</a>
+    <a class="btn" href="assets/cv/CV_JOSE_Anthony.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</div>
+
 
     <footer class="footer">
       <div class="inline-links">
