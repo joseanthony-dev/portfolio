@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta property="og:title" content="JOSE Anthony — Administrateur systèmes Linux" />
+<meta property="og:description" content="Linux • Automatisation (Bash/Ansible/Python) • Réseaux • Exploitation • Projets & CV" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://joseanthony-dev.github.io/portfolio/" />
+<meta property="og:image" content="https://joseanthony-dev.github.io/portfolio/assets/img/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — JOSE Anthony</title>
+  <meta name="description" content="Contacter JOSE Anthony (mail, LinkedIn, GitHub)." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span style="font-size:1.05rem;">JOSE Anthony</span>
+        <span class="badge">Contact</span>
+      </div>
+      <button class="menu-btn" data-menu-btn>Menu</button>
+      <nav class="nav-links" data-nav-links>
+        <a href="index.html">Accueil</a>
+        <a href="projets.html">Projets</a>
+        <a href="competences.html">Compétences</a>
+        <a href="experience.html">Expérience</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-title">
+      <h2>Contact</h2>
+      <p>Réponse rapide : mail ou LinkedIn</p>
+    </div>
+
+    <div class="card">
+      <div class="inline-links">
+        <a class="btn" href="mailto:anthony.jose@outlook.fr">📧 anthony.jose@outlook.fr</a>
+        <a class="btn" href="https://www.linkedin.com/in/joseanthony-zacharias" target="_blank" rel="noopener">🔗 LinkedIn</a>
+        <a class="btn" href="https://github.com/joseanthony-dev" target="_blank" rel="noopener">💻 GitHub</a>
+      </div>
+
+      <div class="hr"></div>
+
+	<form class="form" action="https://formspree.io/f/xvzaavle" method="POST">
+  <input class="input" name="name" placeholder="Ton nom" required />
+  <input class="input" name="email" placeholder="Ton email" type="email" required />
+  <input class="input" name="subject" placeholder="Sujet" required />
+  <textarea name="message" placeholder="Ton message..." required></textarea>
+
+  <!-- anti-spam -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+  <button class="btn primary" type="submit">Envoyer</button>
+</form>
+<p id="sent" class="note" style="display:none;"><b>Message envoyé ✅</b> Merci, je reviens vers vous rapidement.</p>
+<script>
+  if (new URLSearchParams(location.search).get("sent") === "1") {
+    document.getElementById("sent").style.display = "block";
+  }
+</script>
+
+    </div>
+
+<div class="cta-banner">
+  <div>
+    <b>Stage Admin Systèmes — dès mai 2026</b><br/>
+    <span class="muted">Lyon / Saint-Étienne • Disponible 3 mois</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="contact.html">Me contacter</a>
+    <a class="btn" href="assets/cv/CV_JOSE_Anthony.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</div>
+
+
+    <footer class="footer">
+      <div class="inline-links">
+        <a href="index.html">Accueil</a>
+        <a href="projets.html">Projets</a>
+        <a href="competences.html">Compétences</a>
+        <a href="experience.html">Expérience</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
