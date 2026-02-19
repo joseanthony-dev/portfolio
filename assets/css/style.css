@@ -317,3 +317,27 @@ textarea{min-height: 140px; resize:vertical}
   white-space:nowrap;
   border:0;
 }
+
+.home-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Sidebar (tu peux enlever "position: sticky" si tu ne veux pas l’effet) */
+.home-right{
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+  align-self: start;
+}
+
+@media (max-width: 980px){
+  .home-grid{
+    grid-template-columns: 1fr;
+  }
+  .home-right{
+    position: static;
+  }
+}
