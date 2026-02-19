@@ -8,10 +8,23 @@
 
   const btn = document.querySelector("[data-menu-btn]");
   const links = document.querySelector("[data-nav-links]");
+
   if (btn && links) {
-    btn.addEventListener("click", () => links.classList.toggle("open"));
+    const setOpen = (open) => {
+      links.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    };
+
+    btn.addEventListener("click", () => setOpen(!links.classList.contains("open")));
+
+    // ferme le menu quand on clique un lien
+    links.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+
+    // ferme si clic en dehors
     document.addEventListener("click", (e) => {
-      if (!links.contains(e.target) && e.target !== btn) links.classList.remove("open");
+      if (!links.contains(e.target) && e.target !== btn) setOpen(false);
     });
   }
 })();

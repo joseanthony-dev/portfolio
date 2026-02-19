@@ -21,12 +21,13 @@
         <span style="font-size:1.05rem;">JOSE Anthony</span>
         <span class="badge">Contact</span>
       </div>
-      <button class="menu-btn" data-menu-btn>Menu</button>
-      <nav class="nav-links" data-nav-links>
+	<button class="menu-btn" data-menu-btn aria-controls="site-nav" aria-expanded="false">Menu</button>
+	<nav id="site-nav" class="nav-links" data-nav-links>
         <a href="index.html">Accueil</a>
         <a href="projets.html">Projets</a>
         <a href="competences.html">Compétences</a>
         <a href="experience.html">Expérience</a>
+	<a href="assets/cv/CV_JOSE_Anthony.pdf" target="_blank" rel="noopener">CV</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -48,15 +49,24 @@
       <div class="hr"></div>
 
 	<form class="form" action="https://formspree.io/f/xvzaavle" method="POST">
-  <input class="input" name="name" placeholder="Ton nom" required />
-  <input class="input" name="email" placeholder="Ton email" type="email" required />
-  <input class="input" name="subject" placeholder="Sujet" required />
-  <textarea name="message" placeholder="Ton message..." required></textarea>
+
+	<label class="sr-only" for="name">Nom</label>
+<input id="name" class="input" name="name" placeholder="Ton nom" required />
+
+<label class="sr-only" for="email">Email</label>
+<input id="email" class="input" name="email" placeholder="Ton email" type="email" required />
+
+<label class="sr-only" for="subject">Sujet</label>
+<input id="subject" class="input" name="subject" placeholder="Sujet" required />
+
+<label class="sr-only" for="message">Message</label>
+<textarea id="message" name="message" placeholder="Ton message..." required></textarea>
 
   <!-- anti-spam -->
   <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
   <button class="btn primary" type="submit">Envoyer</button>
+<input type="hidden" name="_next" value="https://joseanthony-dev.github.io/portfolio/contact.html?sent=1">
 </form>
 <p id="sent" class="note" style="display:none;"><b>Message envoyé ✅</b> Merci, je reviens vers vous rapidement.</p>
 <script>
