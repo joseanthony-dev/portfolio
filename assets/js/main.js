@@ -85,6 +85,52 @@
   });
 })();
 
+// Hero image reveal
+(function () {
+  var imgs = document.querySelectorAll(".project-hero img");
+  if (!imgs.length) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  imgs.forEach(function (img) { observer.observe(img); });
+})();
+
+// Particles
+(function () {
+  var container = document.createElement("div");
+  container.className = "particles";
+  document.body.appendChild(container);
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (8 + Math.random() * 12) + "s";
+    p.style.animationDelay = (Math.random() * 10) + "s";
+    p.style.width = p.style.height = (2 + Math.random() * 3) + "px";
+    container.appendChild(p);
+  }
+})();
+
+// 3D tilt on cards
+(function () {
+  document.querySelectorAll(".card").forEach(function (card) {
+    card.addEventListener("mousemove", function (e) {
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = "perspective(800px) rotateY(" + (x * 6) + "deg) rotateX(" + (-y * 6) + "deg) translateY(-3px)";
+    });
+    card.addEventListener("mouseleave", function () {
+      card.style.transform = "";
+    });
+  });
+})();
+
 // Easter egg (Konami code)
 (function () {
   var seq = [38,38,40,40,37,39,37,39,66,65];
@@ -230,6 +276,29 @@ document.querySelectorAll(".year").forEach(function (el) {
     // ferme si clic en dehors
     document.addEventListener("click", (e) => {
       if (!links.contains(e.target) && e.target !== btn) setOpen(false);
+    });
+
+    // focus trap in mobile menu
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab" || !links.classList.contains("open")) return;
+      var focusable = [btn].concat(Array.from(links.querySelectorAll("a")));
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && links.classList.contains("open")) {
+        setOpen(false);
+        btn.focus();
+      }
     });
   }
 })();
