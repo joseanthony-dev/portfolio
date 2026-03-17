@@ -56,6 +56,37 @@
   });
 })();
 
+// Lightbox
+(function () {
+  var overlay = document.createElement("div");
+  overlay.className = "lightbox";
+  overlay.innerHTML = '<img src="" alt="">';
+  document.body.appendChild(overlay);
+  var img = overlay.querySelector("img");
+
+  document.querySelectorAll(".gallery a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      img.src = a.href;
+      img.alt = a.querySelector("img").alt;
+      overlay.classList.add("active");
+    });
+  });
+
+  overlay.addEventListener("click", function () {
+    overlay.classList.remove("active");
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") overlay.classList.remove("active");
+  });
+})();
+
+// Footer year
+document.querySelectorAll(".year").forEach(function (el) {
+  el.textContent = new Date().getFullYear();
+});
+
 // Active link + mobile menu
 (function () {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();

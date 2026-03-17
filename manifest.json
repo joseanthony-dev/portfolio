@@ -1,0 +1,16 @@
+{
+  "name": "JOSE Anthony — Portfolio",
+  "short_name": "Portfolio",
+  "description": "Administrateur systèmes Linux — automatisation, réseaux, exploitation.",
+  "start_url": "/portfolio/index.html",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
