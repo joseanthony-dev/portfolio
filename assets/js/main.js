@@ -1,3 +1,12 @@
+// Loader
+window.addEventListener("load", function () {
+  var loader = document.querySelector(".loader");
+  if (loader) {
+    loader.classList.add("hidden");
+    setTimeout(function () { loader.remove(); }, 400);
+  }
+});
+
 // Theme toggle
 (function () {
   const root = document.documentElement;
@@ -47,13 +56,10 @@
   els.forEach(function (el) { observer.observe(el); });
 })();
 
-// Back to top
+// Back to top (click only, scroll handled in unified handler)
 (function () {
   var btn = document.querySelector(".back-to-top");
   if (!btn) return;
-  window.addEventListener("scroll", function () {
-    btn.classList.toggle("show", window.scrollY > 400);
-  });
   btn.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
@@ -82,6 +88,21 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") overlay.classList.remove("active");
+  });
+})();
+
+// Magnetic buttons
+(function () {
+  document.querySelectorAll(".btn.primary").forEach(function (btn) {
+    btn.addEventListener("mousemove", function (e) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = "translate(" + (x * 0.15) + "px," + (y * 0.15) + "px)";
+    });
+    btn.addEventListener("mouseleave", function () {
+      btn.style.transform = "";
+    });
   });
 })();
 
@@ -175,23 +196,30 @@
   counters.forEach(function (el) { observer.observe(el); });
 })();
 
-// Hero parallax
+// Scroll handlers (unified)
 (function () {
   var hero = document.querySelector(".hero");
-  if (!hero) return;
-  window.addEventListener("scroll", function () {
-    hero.style.transform = "translateY(" + (window.scrollY * 0.15) + "px)";
-  });
-})();
-
-// Scroll progress bar
-(function () {
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
   document.body.prepend(bar);
+  var btt = document.querySelector(".back-to-top");
+  var ticking = false;
+
   window.addEventListener("scroll", function () {
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = h > 0 ? (window.scrollY / h * 100) + "%" : "0%";
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        // progress bar
+        bar.style.width = h > 0 ? (y / h * 100) + "%" : "0%";
+        // parallax
+        if (hero) hero.style.transform = "translateY(" + (y * 0.15) + "px)";
+        // back to top
+        if (btt) btt.classList.toggle("show", y > 400);
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 })();
 
