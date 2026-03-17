@@ -105,7 +105,6 @@ a:hover{opacity:.92}
   .particle{animation:none}
   .pulse-dot{animation:none}
   .h1{animation:none}
-  .project-hero img{clip-path:none}
 }
 
 .back-to-top{
@@ -452,11 +451,6 @@ textarea:valid:not(:placeholder-shown){
   height:auto;
   display:block;
   object-fit:cover;
-  clip-path:inset(0 100% 0 0);
-  transition:clip-path .6s ease;
-}
-.project-hero img.revealed{
-  clip-path:inset(0 0 0 0);
 }
 
 .gallery{

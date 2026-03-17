@@ -106,21 +106,6 @@ window.addEventListener("load", function () {
   });
 })();
 
-// Hero image reveal
-(function () {
-  var imgs = document.querySelectorAll(".project-hero img");
-  if (!imgs.length) return;
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  imgs.forEach(function (img) { observer.observe(img); });
-})();
-
 // Particles
 (function () {
   var container = document.createElement("div");
