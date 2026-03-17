@@ -44,6 +44,18 @@
   els.forEach(function (el) { observer.observe(el); });
 })();
 
+// Back to top
+(function () {
+  var btn = document.querySelector(".back-to-top");
+  if (!btn) return;
+  window.addEventListener("scroll", function () {
+    btn.classList.toggle("show", window.scrollY > 400);
+  });
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+
 // Active link + mobile menu
 (function () {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
