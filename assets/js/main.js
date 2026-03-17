@@ -11,6 +11,9 @@
     document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
       btn.textContent = isLight ? "\u263C" : "\u263E";
     });
+    // Update theme-color meta
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = isLight ? "#f4f6fb" : "#0b1220";
   }
   updateIcon();
 
@@ -79,6 +82,42 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") overlay.classList.remove("active");
+  });
+})();
+
+// Animated counters
+(function () {
+  var counters = document.querySelectorAll("[data-count]");
+  if (!counters.length) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      var target = parseInt(el.getAttribute("data-count"), 10);
+      var duration = 1200;
+      var start = 0;
+      var startTime = null;
+      function step(time) {
+        if (!startTime) startTime = time;
+        var progress = Math.min((time - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target + "+";
+      }
+      requestAnimationFrame(step);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function (el) { observer.observe(el); });
+})();
+
+// Hero parallax
+(function () {
+  var hero = document.querySelector(".hero");
+  if (!hero) return;
+  window.addEventListener("scroll", function () {
+    hero.style.transform = "translateY(" + (window.scrollY * 0.15) + "px)";
   });
 })();
 
