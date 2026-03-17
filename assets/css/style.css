@@ -275,6 +275,15 @@ a:hover{opacity:.92}
   outline:none;
 }
 textarea{min-height: 140px; resize:vertical}
+.input:focus, textarea:focus{border-color:var(--accent)}
+.input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown){
+  border-color:#e74c3c;
+}
+.input:valid:not(:placeholder-shown),
+textarea:valid:not(:placeholder-shown){
+  border-color:#2ecc71;
+}
 .note{ color:var(--muted); font-size:.95rem; }
 
 /* Photo de profil */

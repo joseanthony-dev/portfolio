@@ -56,25 +56,30 @@
 	<form class="form" action="https://formspree.io/f/xvzaavle" method="POST">
 
 	<label class="sr-only" for="name">Nom</label>
-<input id="name" class="input" name="name" placeholder="Ton nom" required />
+<input id="name" class="input" name="name" placeholder="Ton nom" required minlength="2" pattern="[A-Za-zÀ-ÿ\s\-]+" title="Lettres, espaces et tirets uniquement" autocomplete="name" />
 
 <label class="sr-only" for="email">Email</label>
-<input id="email" class="input" name="email" placeholder="Ton email" type="email" required />
+<input id="email" class="input" name="email" placeholder="Ton email" type="email" required autocomplete="email" />
 
 <label class="sr-only" for="subject">Sujet</label>
-<input id="subject" class="input" name="subject" placeholder="Sujet" required />
+<input id="subject" class="input" name="subject" placeholder="Sujet" required minlength="3" />
 
 <label class="sr-only" for="message">Message</label>
-<textarea id="message" name="message" placeholder="Ton message..." required></textarea>
+<textarea id="message" name="message" placeholder="Ton message..." required minlength="10"></textarea>
 
   <!-- anti-spam -->
   <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
-  <button class="btn primary" type="submit">Envoyer</button>
+  <button class="btn primary" type="submit" id="submit-btn">Envoyer</button>
 <input type="hidden" name="_next" value="https://joseanthony-dev.github.io/portfolio/contact.html?sent=1">
 </form>
 <p id="sent" class="note" style="display:none;"><b>Message envoyé ✅</b> Merci, je reviens vers vous rapidement.</p>
 <script>
+  document.querySelector(".form").addEventListener("submit", function () {
+    var btn = document.getElementById("submit-btn");
+    btn.disabled = true;
+    btn.textContent = "Envoi en cours\u2026";
+  });
   if (new URLSearchParams(location.search).get("sent") === "1") {
     document.getElementById("sent").style.display = "block";
   }
