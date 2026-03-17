@@ -7,7 +7,7 @@
   --border:rgba(255,255,255,.08);
   --shadow: 0 12px 35px rgba(0,0,0,.35);
   --radius:16px;
-  --max:1100px;
+  --max:1400px;
   --accent:#79b8ff;
   --accent2:#a78bfa;
   --nav-bg:rgba(11,18,32,.6);
@@ -83,7 +83,7 @@ a:hover{opacity:.92}
   transition: transform .12s ease;
 }
 .theme-toggle:hover{transform:translateY(-1px)}
-.container{max-width:var(--max); margin:0 auto; padding:24px}
+.container{max-width:var(--max); margin:0 auto; padding:24px 40px}
 
 .nav{
   position:sticky; top:0; z-index:50;
