@@ -29,6 +29,21 @@
   });
 })();
 
+// Fade-in on scroll
+(function () {
+  const els = document.querySelectorAll(".fade-in");
+  if (!els.length) return;
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function (el) { observer.observe(el); });
+})();
+
 // Active link + mobile menu
 (function () {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
