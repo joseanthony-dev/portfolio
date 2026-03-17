@@ -1,0 +1,17 @@
+# Windows / WSL metadata
+*:Zone.Identifier
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backups
+*.zip
+portfolio-pages-ready/
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
