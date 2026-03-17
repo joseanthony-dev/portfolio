@@ -82,6 +82,66 @@
   });
 })();
 
+// Scroll progress bar
+(function () {
+  var bar = document.createElement("div");
+  bar.className = "scroll-progress";
+  document.body.prepend(bar);
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = h > 0 ? (window.scrollY / h * 100) + "%" : "0%";
+  });
+})();
+
+// Prefetch on hover
+(function () {
+  var prefetched = {};
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var href = a.getAttribute("href") || "";
+    if (!href.endsWith(".html") || href.startsWith("http")) return;
+    a.addEventListener("mouseenter", function () {
+      if (prefetched[href]) return;
+      prefetched[href] = true;
+      var link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = href;
+      document.head.appendChild(link);
+    }, { once: true });
+  });
+})();
+
+// Copy email on click
+(function () {
+  var toast = document.createElement("div");
+  toast.className = "copy-toast";
+  toast.textContent = "Email copié !";
+  document.body.appendChild(toast);
+
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      var email = a.href.replace("mailto:", "");
+      navigator.clipboard.writeText(email).then(function () {
+        toast.classList.add("show");
+        setTimeout(function () { toast.classList.remove("show"); }, 2000);
+      });
+    });
+  });
+})();
+
+// Page transitions
+(function () {
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var href = a.getAttribute("href") || "";
+    if (href.startsWith("http") || href.startsWith("mailto") || href.startsWith("#") || a.target === "_blank") return;
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.body.classList.add("page-exit");
+      setTimeout(function () { window.location.href = href; }, 150);
+    });
+  });
+})();
+
 // Footer year
 document.querySelectorAll(".year").forEach(function (el) {
   el.textContent = new Date().getFullYear();

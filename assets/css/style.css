@@ -43,6 +43,10 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;transition:background .3s ease, color .3s ease}
+@keyframes bg-shift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -52,8 +56,10 @@ body{
     radial-gradient(900px 500px at 90% 30%, var(--grad2), transparent 55%),
     radial-gradient(900px 500px at 50% 100%, var(--grad3), transparent 50%),
     var(--bg);
+  background-size:200% 200%;
+  animation:bg-shift 20s ease infinite;
   line-height:1.6;
-  transition: background .3s ease, color .3s ease;
+  transition: color .3s ease;
 }
 
 ::selection{
@@ -179,9 +185,9 @@ a:hover{opacity:.92}
   border-radius:10px;
 }
 @media (max-width: 820px){
-  .menu-btn{display:inline-flex}
+  .menu-btn{display:inline-flex;cursor:pointer}
   .nav-links{
-    display:none;
+    display:flex;
     position:absolute;
     right:24px; top:56px;
     flex-direction:column;
@@ -192,8 +198,16 @@ a:hover{opacity:.92}
     background: var(--menu-bg);
     box-shadow: var(--shadow);
     min-width: 220px;
+    opacity:0;
+    transform:translateY(-10px) scale(.97);
+    pointer-events:none;
+    transition: opacity .2s ease, transform .2s ease;
   }
-  .nav-links.open{display:flex}
+  .nav-links.open{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
 }
 
 .hero{ padding:64px 0 40px; }
@@ -382,7 +396,7 @@ textarea:valid:not(:placeholder-shown){
 }
 .gallery img{
   width:100%;
-  height:200px;
+  height:clamp(140px, 18vw, 220px);
   object-fit:cover;
   display:block;
   transition: transform .3s ease;
@@ -500,10 +514,48 @@ textarea:valid:not(:placeholder-shown){
   box-shadow:0 0 40px rgba(0,0,0,.5);
 }
 
+/* Scroll progress */
+.scroll-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  background:var(--accent);
+  width:0%;
+  z-index:60;
+  transition: width .1s linear;
+}
+
+/* Copy tooltip */
+.copy-toast{
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:var(--accent);
+  color:var(--bg);
+  padding:8px 18px;
+  border-radius:10px;
+  font-size:.9rem;
+  font-weight:600;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index:200;
+}
+.copy-toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* Page transition */
+body{opacity:1;transition:opacity .15s ease}
+body.page-exit{opacity:0}
+
 /* Print */
 @media print{
   body{background:#fff;color:#000}
-  .nav,.back-to-top,.cta-banner,.menu-btn,.theme-toggle,.skip-link{display:none}
+  .nav,.back-to-top,.cta-banner,.menu-btn,.theme-toggle,.skip-link,.scroll-progress,.copy-toast,.lightbox{display:none}
   .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
   a{color:#000;text-decoration:underline}
   .fade-in{opacity:1;transform:none}
