@@ -1,9 +1,31 @@
+// Config
+var CONFIG = {
+  LOADER_REMOVE_DELAY: 400,
+  FADE_THRESHOLD: 0.1,
+  MAGNETIC_STRENGTH: 0.15,
+  PARTICLE_COUNT: 20,
+  PARTICLE_MIN_DURATION: 8,
+  PARTICLE_DURATION_RANGE: 12,
+  PARTICLE_MAX_DELAY: 10,
+  PARTICLE_MIN_SIZE: 2,
+  PARTICLE_SIZE_RANGE: 3,
+  TILT_ANGLE: 6,
+  TILT_PERSPECTIVE: 800,
+  COUNTER_DURATION: 1200,
+  COUNTER_THRESHOLD: 0.5,
+  PARALLAX_FACTOR: 0.15,
+  BACK_TO_TOP_OFFSET: 400,
+  TOAST_DURATION: 2000,
+  PAGE_TRANSITION_DELAY: 150,
+  EASTER_EGG_RESET_DELAY: 600
+};
+
 // Loader
 window.addEventListener("load", function () {
   var loader = document.querySelector(".loader");
   if (loader) {
     loader.classList.add("hidden");
-    setTimeout(function () { loader.remove(); }, 400);
+    setTimeout(function () { loader.remove(); }, CONFIG.LOADER_REMOVE_DELAY);
   }
 });
 
@@ -52,7 +74,7 @@ window.addEventListener("load", function () {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: CONFIG.FADE_THRESHOLD });
   els.forEach(function (el) { observer.observe(el); });
 })();
 
@@ -69,36 +91,63 @@ window.addEventListener("load", function () {
 (function () {
   var overlay = document.createElement("div");
   overlay.className = "lightbox";
-  overlay.innerHTML = '<img src="" alt="">';
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Image agrandie");
+  overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img src="" alt="">';
   document.body.appendChild(overlay);
   var img = overlay.querySelector("img");
+  var closeBtn = overlay.querySelector(".lightbox-close");
+  var lastFocused = null;
+
+  function openLightbox(href, alt) {
+    lastFocused = document.activeElement;
+    img.src = href;
+    img.alt = alt;
+    overlay.classList.add("active");
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove("active");
+    if (lastFocused) lastFocused.focus();
+  }
 
   document.querySelectorAll(".gallery a").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
-      img.src = a.href;
-      img.alt = a.querySelector("img").alt;
-      overlay.classList.add("active");
+      openLightbox(a.href, a.querySelector("img").alt);
     });
   });
 
-  overlay.addEventListener("click", function () {
-    overlay.classList.remove("active");
+  closeBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    closeLightbox();
+  });
+
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) closeLightbox();
   });
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") overlay.classList.remove("active");
+    if (e.key === "Escape" && overlay.classList.contains("active")) closeLightbox();
   });
 })();
 
-// Magnetic buttons
+// Magnetic buttons (throttled)
 (function () {
   document.querySelectorAll(".btn.primary").forEach(function (btn) {
+    var ticking = false;
     btn.addEventListener("mousemove", function (e) {
-      var rect = btn.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = "translate(" + (x * 0.15) + "px," + (y * 0.15) + "px)";
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = "translate(" + (x * CONFIG.MAGNETIC_STRENGTH) + "px," + (y * CONFIG.MAGNETIC_STRENGTH) + "px)";
+        ticking = false;
+      });
     });
     btn.addEventListener("mouseleave", function () {
       btn.style.transform = "";
@@ -111,25 +160,43 @@ window.addEventListener("load", function () {
   var container = document.createElement("div");
   container.className = "particles";
   document.body.appendChild(container);
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
     var p = document.createElement("div");
     p.className = "particle";
     p.style.left = Math.random() * 100 + "%";
-    p.style.animationDuration = (8 + Math.random() * 12) + "s";
-    p.style.animationDelay = (Math.random() * 10) + "s";
-    p.style.width = p.style.height = (2 + Math.random() * 3) + "px";
+    p.style.animationDuration = (CONFIG.PARTICLE_MIN_DURATION + Math.random() * CONFIG.PARTICLE_DURATION_RANGE) + "s";
+    p.style.animationDelay = (Math.random() * CONFIG.PARTICLE_MAX_DELAY) + "s";
+    p.style.width = p.style.height = (CONFIG.PARTICLE_MIN_SIZE + Math.random() * CONFIG.PARTICLE_SIZE_RANGE) + "px";
     container.appendChild(p);
   }
 })();
 
-// 3D tilt on cards
+// Pause animations when page is hidden
 (function () {
+  document.addEventListener("visibilitychange", function () {
+    var paused = document.hidden;
+    document.body.style.animationPlayState = paused ? "paused" : "running";
+    document.querySelectorAll(".particle, .pulse-dot, .badge-available").forEach(function (el) {
+      el.style.animationPlayState = paused ? "paused" : "running";
+    });
+  });
+})();
+
+// 3D tilt on cards (throttled, desktop only)
+(function () {
+  if (window.matchMedia("(pointer: coarse)").matches) return;
   document.querySelectorAll(".card").forEach(function (card) {
+    var ticking = false;
     card.addEventListener("mousemove", function (e) {
-      var rect = card.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = "perspective(800px) rotateY(" + (x * 6) + "deg) rotateX(" + (-y * 6) + "deg) translateY(-3px)";
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = "perspective(" + CONFIG.TILT_PERSPECTIVE + "px) rotateY(" + (x * CONFIG.TILT_ANGLE) + "deg) rotateX(" + (-y * CONFIG.TILT_ANGLE) + "deg) translateY(-3px)";
+        ticking = false;
+      });
     });
     card.addEventListener("mouseleave", function () {
       card.style.transform = "";
@@ -148,7 +215,7 @@ window.addEventListener("load", function () {
         pos = 0;
         document.body.style.transition = "transform .5s ease";
         document.body.style.transform = "rotate(360deg)";
-        setTimeout(function () { document.body.style.transform = ""; }, 600);
+        setTimeout(function () { document.body.style.transform = ""; }, CONFIG.EASTER_EGG_RESET_DELAY);
       }
     } else { pos = 0; }
   });
@@ -163,7 +230,7 @@ window.addEventListener("load", function () {
       if (!entry.isIntersecting) return;
       var el = entry.target;
       var target = parseInt(el.getAttribute("data-count"), 10);
-      var duration = 1200;
+      var duration = CONFIG.COUNTER_DURATION;
       var start = 0;
       var startTime = null;
       function step(time) {
@@ -177,7 +244,7 @@ window.addEventListener("load", function () {
       requestAnimationFrame(step);
       observer.unobserve(el);
     });
-  }, { threshold: 0.5 });
+  }, { threshold: CONFIG.COUNTER_THRESHOLD });
   counters.forEach(function (el) { observer.observe(el); });
 })();
 
@@ -198,9 +265,9 @@ window.addEventListener("load", function () {
         // progress bar
         bar.style.width = h > 0 ? (y / h * 100) + "%" : "0%";
         // parallax
-        if (hero) hero.style.transform = "translateY(" + (y * 0.15) + "px)";
+        if (hero) hero.style.transform = "translateY(" + (y * CONFIG.PARALLAX_FACTOR) + "px)";
         // back to top
-        if (btt) btt.classList.toggle("show", y > 400);
+        if (btt) btt.classList.toggle("show", y > CONFIG.BACK_TO_TOP_OFFSET);
         ticking = false;
       });
       ticking = true;
@@ -238,7 +305,7 @@ window.addEventListener("load", function () {
       var email = a.href.replace("mailto:", "");
       navigator.clipboard.writeText(email).then(function () {
         toast.classList.add("show");
-        setTimeout(function () { toast.classList.remove("show"); }, 2000);
+        setTimeout(function () { toast.classList.remove("show"); }, CONFIG.TOAST_DURATION);
       });
     });
   });
@@ -252,7 +319,7 @@ window.addEventListener("load", function () {
     a.addEventListener("click", function (e) {
       e.preventDefault();
       document.body.classList.add("page-exit");
-      setTimeout(function () { window.location.href = href; }, 150);
+      setTimeout(function () { window.location.href = href; }, CONFIG.PAGE_TRANSITION_DELAY);
     });
   });
 })();
