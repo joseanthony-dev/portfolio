@@ -85,6 +85,23 @@
   });
 })();
 
+// Easter egg (Konami code)
+(function () {
+  var seq = [38,38,40,40,37,39,37,39,66,65];
+  var pos = 0;
+  document.addEventListener("keydown", function (e) {
+    if (e.keyCode === seq[pos]) {
+      pos++;
+      if (pos === seq.length) {
+        pos = 0;
+        document.body.style.transition = "transform .5s ease";
+        document.body.style.transform = "rotate(360deg)";
+        setTimeout(function () { document.body.style.transform = ""; }, 600);
+      }
+    } else { pos = 0; }
+  });
+})();
+
 // Animated counters
 (function () {
   var counters = document.querySelectorAll("[data-count]");

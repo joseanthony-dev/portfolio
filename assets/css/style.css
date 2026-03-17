@@ -19,6 +19,7 @@
   --btn-primary-border:rgba(121,184,255,.35);
   --btn-primary-bg:linear-gradient(135deg, rgba(121,184,255,.22), rgba(167,139,250,.18));
   --cta-bg:linear-gradient(135deg, rgba(121,184,255,.14), rgba(167,139,250,.12));
+  --btn-glow:rgba(121,184,255,.3);
 }
 
 [data-theme="light"]{
@@ -39,10 +40,11 @@
   --btn-primary-border:rgba(37,99,235,.3);
   --btn-primary-bg:linear-gradient(135deg, rgba(37,99,235,.12), rgba(124,58,237,.1));
   --cta-bg:linear-gradient(135deg, rgba(37,99,235,.08), rgba(124,58,237,.06));
+  --btn-glow:rgba(37,99,235,.25);
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;transition:background .3s ease, color .3s ease}
+html{scroll-behavior:smooth;scroll-padding-top:70px;transition:background .3s ease, color .3s ease}
 @keyframes bg-shift{
   0%,100%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -193,6 +195,11 @@ a:hover{opacity:.92}
   border-color:var(--border);
   background:var(--subtle);
 }
+.nav-links a.active::after{
+  width:60%;
+  left:20%;
+  background:var(--accent);
+}
 .menu-btn{
   display:none;
   background:transparent;
@@ -239,10 +246,19 @@ a:hover{opacity:.92}
   align-items:start;
 }
 @media (max-width: 920px){ .grid-hero{grid-template-columns:1fr;} }
+@keyframes slide-in{
+  from{opacity:0;transform:translateX(-30px)}
+  to{opacity:1;transform:translateX(0)}
+}
 .h1{
   font-size: clamp(2rem, 4vw, 3.1rem);
   line-height:1.15;
   margin: 0 0 10px;
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:slide-in .6s ease both;
 }
 .lead{ color:var(--muted); font-size:1.08rem; margin:0 0 24px; line-height:1.7; }
 .cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
@@ -260,6 +276,10 @@ a:hover{opacity:.92}
 .btn.primary{
   border-color: var(--btn-primary-border);
   background: var(--btn-primary-bg);
+  transition: transform .12s ease, box-shadow .25s ease;
+}
+.btn.primary:hover{
+  box-shadow:0 0 20px var(--btn-glow);
 }
 .btn.small{ padding:8px 12px; border-radius:10px; font-size:.95rem }
 .btn:hover{ transform: translateY(-1px) }
@@ -269,6 +289,8 @@ a:hover{opacity:.92}
 .card{
   border:1px solid var(--border);
   background: var(--subtle);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   border-radius: var(--radius);
   padding:24px;
   box-shadow: 0 8px 24px rgba(0,0,0,.18);
@@ -411,6 +433,24 @@ textarea:valid:not(:placeholder-shown){
   background: var(--subtle);
   transition: transform .2s ease, border-color .2s ease;
 }
+.gallery a{position:relative}
+.gallery a::before{
+  content:"Voir en grand";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,.7);
+  color:#fff;
+  padding:6px 14px;
+  border-radius:8px;
+  font-size:.85rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:2;
+}
+.gallery a:hover::before{opacity:1}
 .gallery a:hover{
   transform: translateY(-2px);
   border-color: var(--accent);
