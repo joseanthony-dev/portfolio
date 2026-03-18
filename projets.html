@@ -31,14 +31,14 @@
   </script>
 </head>
 <body>
-  <noscript><style>.fade-in{opacity:1;transform:none}.loader{display:none}</style></noscript>
+  <noscript><style>.fade-in{opacity:1;transform:none}.loader{display:none}[data-component]{display:none}</style><nav style="padding:1rem;text-align:center"><a href="index.html">Accueil</a> | <a href="projets.html">Projets</a> | <a href="competences.html">Compétences</a> | <a href="experience.html">Expérience</a> | <a href="contact.html">Contact</a></nav></noscript>
   <div class="loader"><div class="loader-spinner"></div></div>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <div data-component="header"></div>
 
   <main id="main" class="container">
     <div class="section-title">
-      <h2>Projets</h2>
+      <h1 class="h1" style="font-size:1.35rem;">Projets</h1>
       <p>Objectifs, stack, fonctionnalités — orienté “recruteur”</p>
     </div>
 
@@ -344,7 +344,7 @@
   <div data-component="footer"></div>
 
   <button class="back-to-top" aria-label="Retour en haut">&#8593;</button>
-  <script src="assets/js/components.js"></script>
+  <script src="assets/js/components.min.js"></script>
   <script src="assets/js/main.min.js"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@
 </head>
 
 <body>
-  <noscript><style>.fade-in{opacity:1;transform:none}.loader{display:none}</style></noscript>
+  <noscript><style>.fade-in{opacity:1;transform:none}.loader{display:none}[data-component]{display:none}</style><nav style="padding:1rem;text-align:center"><a href="index.html">Accueil</a> | <a href="projets.html">Projets</a> | <a href="competences.html">Compétences</a> | <a href="experience.html">Expérience</a> | <a href="contact.html">Contact</a></nav></noscript>
   <div class="loader"><div class="loader-spinner"></div></div>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <div data-component="header"></div>
@@ -181,6 +181,20 @@
 
             <article class="card project fade-in">
               <div class="title">
+                <h3>App planning équipe (Flutter)</h3>
+                <span class="tag">Mobile</span>
+              </div>
+              <p>Gestion d'événements, présences, heures, export PDF et notifications SMS/mail.</p>
+              <div class="meta">
+                <span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Firestore</span>
+              </div>
+              <div class="actions">
+                <a class="btn small" href="projets.html#flutter-planning">Détails</a>
+              </div>
+            </article>
+
+            <article class="card project fade-in">
+              <div class="title">
                 <h3>Domotique Home Assistant</h3>
                 <span class="tag">IoT</span>
               </div>
@@ -262,7 +276,7 @@
   <div data-component="footer"></div>
 
   <button class="back-to-top" aria-label="Retour en haut">&#8593;</button>
-  <script src="assets/js/components.js"></script>
+  <script src="assets/js/components.min.js"></script>
   <script src="assets/js/main.min.js"></script>
 </body>
 </html>
