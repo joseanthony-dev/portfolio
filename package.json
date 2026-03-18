@@ -7,6 +7,9 @@
     "build:css": "cleancss -o assets/css/style.min.css assets/css/style.css",
     "build:js": "terser assets/js/main.js -o assets/js/main.min.js -c -m && terser assets/js/components.js -o assets/js/components.min.js -c -m",
     "build": "npm run build:css && npm run build:js",
+    "lint:js": "eslint --no-warn-ignored assets/js/*.js",
+    "lint:css": "stylelint assets/css/style.css",
+    "lint": "npm run lint:js && npm run lint:css",
     "watch:css": "chokidar 'assets/css/style.css' -c 'npm run build:css'",
     "watch:js": "chokidar 'assets/js/main.js' 'assets/js/components.js' -c 'npm run build:js'",
     "watch": "npm run watch:css & npm run watch:js"
@@ -14,6 +17,9 @@
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
     "terser": "^5.37.0",
-    "chokidar-cli": "^3.0.0"
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^9.0.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^37.0.0"
   }
 }

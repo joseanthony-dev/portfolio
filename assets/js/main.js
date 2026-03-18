@@ -231,7 +231,6 @@ window.addEventListener("load", function () {
       var el = entry.target;
       var target = parseInt(el.getAttribute("data-count"), 10);
       var duration = CONFIG.COUNTER_DURATION;
-      var start = 0;
       var startTime = null;
       function step(time) {
         if (!startTime) startTime = time;
@@ -321,6 +320,42 @@ window.addEventListener("load", function () {
       e.preventDefault();
       document.body.classList.add("page-exit");
       setTimeout(function () { window.location.href = href; }, CONFIG.PAGE_TRANSITION_DELAY);
+    });
+  });
+})();
+
+// Project filters
+(function () {
+  var buttons = document.querySelectorAll(".filter-btn");
+  if (!buttons.length) return;
+  var sections = document.querySelectorAll(".project-section");
+  var separators = document.querySelectorAll("#main > .hr");
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      buttons.forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      var filter = btn.getAttribute("data-filter");
+
+      sections.forEach(function (section) {
+        var cat = section.getAttribute("data-category");
+        if (filter === "all" || cat === filter) {
+          section.classList.remove("hidden-filter");
+        } else {
+          section.classList.add("hidden-filter");
+        }
+      });
+
+      // Hide separators between hidden sections
+      separators.forEach(function (hr) {
+        var prev = hr.previousElementSibling;
+        var next = hr.nextElementSibling;
+        if ((prev && prev.classList.contains("hidden-filter")) || (next && next.classList.contains("hidden-filter"))) {
+          hr.classList.add("hidden-filter");
+        } else {
+          hr.classList.remove("hidden-filter");
+        }
+      });
     });
   });
 })();

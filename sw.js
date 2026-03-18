@@ -1,4 +1,5 @@
-var CACHE_NAME = "portfolio-v1";
+var CACHE_VERSION = "2";
+var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
   "/portfolio/index.html",

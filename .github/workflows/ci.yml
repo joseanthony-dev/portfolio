@@ -1,0 +1,51 @@
+name: CI — Build, Lint & Lighthouse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint JS
+        run: npm run lint:js
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Build (minify CSS & JS)
+        run: npm run build
+
+      - name: Check minified files are up to date
+        run: |
+          git diff --exit-code assets/css/style.min.css assets/js/main.min.js assets/js/components.min.js || {
+            echo "::error::Minified files are out of date. Run 'npm run build' and commit."
+            exit 1
+          }
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    needs: build-and-lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://joseanthony-dev.github.io/portfolio/
+          budgetPath: .github/lighthouse-budget.json
+          uploadArtifacts: true
