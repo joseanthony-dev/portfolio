@@ -94,16 +94,18 @@ window.addEventListener("load", function () {
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Image agrandie");
-  overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img src="" alt="">';
+  overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img src="" alt=""><span class="sr-only" role="status" aria-live="polite"></span>';
   document.body.appendChild(overlay);
   var img = overlay.querySelector("img");
   var closeBtn = overlay.querySelector(".lightbox-close");
+  var liveRegion = overlay.querySelector("[role='status']");
   var lastFocused = null;
 
   function openLightbox(href, alt) {
     lastFocused = document.activeElement;
     img.src = href;
     img.alt = alt;
+    liveRegion.textContent = "Image agrandie : " + alt;
     overlay.classList.add("active");
     closeBtn.focus();
   }
@@ -130,7 +132,13 @@ window.addEventListener("load", function () {
   });
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && overlay.classList.contains("active")) closeLightbox();
+    if (!overlay.classList.contains("active")) return;
+    if (e.key === "Escape") { closeLightbox(); return; }
+    // Focus trap: keep Tab within lightbox
+    if (e.key === "Tab") {
+      e.preventDefault();
+      closeBtn.focus();
+    }
   });
 })();
 
@@ -213,6 +221,7 @@ window.addEventListener("load", function () {
       pos++;
       if (pos === seq.length) {
         pos = 0;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         document.body.style.transition = "transform .5s ease";
         document.body.style.transform = "rotate(360deg)";
         setTimeout(function () { document.body.style.transform = ""; }, CONFIG.EASTER_EGG_RESET_DELAY);
@@ -364,10 +373,22 @@ window.addEventListener("load", function () {
   var sections = document.querySelectorAll(".project-section");
   var separators = document.querySelectorAll("#main > .hr");
 
+  // ARIA: mark filter bar as tablist
+  var filterBar = document.querySelector(".filter-bar");
+  if (filterBar) filterBar.setAttribute("role", "tablist");
+  buttons.forEach(function (b) {
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", String(b.classList.contains("active")));
+  });
+
   buttons.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      buttons.forEach(function (b) { b.classList.remove("active"); });
+      buttons.forEach(function (b) {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
       var filter = btn.getAttribute("data-filter");
 
       sections.forEach(function (section) {

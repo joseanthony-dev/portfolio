@@ -16,6 +16,10 @@ portfolio-pages-ready/
 *.swo
 *~
 
+# Build artifacts
+assets/css/*.min.css
+assets/js/*.min.js
+
 # Node
 node_modules/
 package-lock.json

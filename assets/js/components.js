@@ -56,6 +56,8 @@
           '<span class="muted">\u2022</span>' +
           '<a href="https://github.com/joseanthony-dev" target="_blank" rel="noopener">GitHub</a>' +
           '<a href="https://www.linkedin.com/in/joseanthony-zacharias" target="_blank" rel="noopener">LinkedIn</a>' +
+          '<span class="muted">\u2022</span>' +
+          '<a href="mentions-legales.html">Mentions l\u00e9gales</a>' +
         '</div>' +
       '</footer>';
   }
