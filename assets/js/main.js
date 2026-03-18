@@ -292,7 +292,11 @@ window.addEventListener("load", function () {
     "projets.html": ["contact.html", "competences.html"],
     "competences.html": ["experience.html", "projets.html"],
     "experience.html": ["contact.html", "competences.html"],
-    "contact.html": ["projets.html"]
+    "contact.html": ["projets.html"],
+    "blog.html": ["projets.html", "contact.html"],
+    "projects.html": ["contact.html", "skills.html"],
+    "skills.html": ["experience.html", "projects.html"],
+    "experience.html": ["contact.html", "skills.html"]
   };
 
   // Eager prefetch for priority pages (after load)

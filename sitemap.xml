@@ -1,33 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/index.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/projets.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/projets.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/projects.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/competences.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/competences.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/skills.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/experience.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/experience.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/contact.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/blog.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/blog.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://joseanthony-dev.github.io/portfolio/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/mentions-legales.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/legal.html" />
     <lastmod>2026-03-18</lastmod>
     <priority>0.3</priority>
+  </url>
+  <!-- English versions -->
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/index.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/projects.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/projets.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/skills.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/skills.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/competences.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/experience.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/experience.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/contact.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/blog.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/blog.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joseanthony-dev.github.io/portfolio/en/legal.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/mentions-legales.html" />
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.2</priority>
   </url>
 </urlset>

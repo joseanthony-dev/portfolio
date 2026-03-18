@@ -1,4 +1,4 @@
-var CACHE_VERSION = "4";
+var CACHE_VERSION = "5";
 var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
@@ -7,9 +7,19 @@ var STATIC_ASSETS = [
   "/portfolio/competences.html",
   "/portfolio/experience.html",
   "/portfolio/contact.html",
+  "/portfolio/blog.html",
+  "/portfolio/blog/purge-ansible.html",
   "/portfolio/404.html",
   "/portfolio/mentions-legales.html",
   "/portfolio/offline.html",
+  "/portfolio/en/index.html",
+  "/portfolio/en/projects.html",
+  "/portfolio/en/skills.html",
+  "/portfolio/en/experience.html",
+  "/portfolio/en/contact.html",
+  "/portfolio/en/blog.html",
+  "/portfolio/en/blog/purge-ansible.html",
+  "/portfolio/en/legal.html",
   "/portfolio/assets/css/style.min.css",
   "/portfolio/assets/js/main.min.js",
   "/portfolio/assets/js/components.min.js",
