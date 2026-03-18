@@ -105,6 +105,8 @@ a:hover{opacity:.92}
   .particle{animation:none}
   .pulse-dot{animation:none}
   .h1{animation:none}
+  body{animation:none}
+  .badge-available{animation:none}
 }
 
 .back-to-top{

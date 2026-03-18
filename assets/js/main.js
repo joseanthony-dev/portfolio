@@ -206,10 +206,10 @@ window.addEventListener("load", function () {
 
 // Easter egg (Konami code)
 (function () {
-  var seq = [38,38,40,40,37,39,37,39,66,65];
+  var seq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","KeyB","KeyA"];
   var pos = 0;
   document.addEventListener("keydown", function (e) {
-    if (e.keyCode === seq[pos]) {
+    if (e.code === seq[pos]) {
       pos++;
       if (pos === seq.length) {
         pos = 0;
@@ -300,8 +300,7 @@ window.addEventListener("load", function () {
   document.body.appendChild(toast);
 
   document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      e.preventDefault();
+    a.addEventListener("click", function () {
       var email = a.href.replace("mailto:", "");
       navigator.clipboard.writeText(email).then(function () {
         toast.classList.add("show");
