@@ -13,6 +13,7 @@
   <link rel="preload" href="assets/js/main.min.js" as="script">
   <meta name="theme-color" content="#0b1220">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
   <link rel="canonical" href="https://joseanthony-dev.github.io/portfolio/projets.html" />
   <link rel="dns-prefetch" href="https://github.com">
@@ -26,6 +27,69 @@
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://joseanthony-dev.github.io/portfolio/index.html"},
       {"@type": "ListItem", "position": 2, "name": "Projets", "item": "https://joseanthony-dev.github.io/portfolio/projets.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Projets de JOSE Anthony",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Site web de location de Photobooth",
+          "description": "Site vitrine avec réservation en ligne, formules et contact automatique par mail, déployé sur Cloudflare.",
+          "url": "https://joseanthony-dev.github.io/portfolio/projets.html#photobooth",
+          "image": "https://joseanthony-dev.github.io/portfolio/assets/img/projects/photobooth/hero.webp",
+          "author": {"@type": "Person", "name": "JOSE Anthony"},
+          "keywords": ["HTML", "CSS", "JavaScript", "Cloudflare"]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "App planning équipe (Flutter)",
+          "description": "Application mobile de gestion d'événements avec présences, heures, export PDF et notifications SMS/mail.",
+          "url": "https://joseanthony-dev.github.io/portfolio/projets.html#flutter-planning",
+          "image": "https://joseanthony-dev.github.io/portfolio/assets/img/projects/planning/hero.webp",
+          "author": {"@type": "Person", "name": "JOSE Anthony"},
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Android, iOS"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Purge applicative (Shell + Ansible)",
+          "description": "Scripts de suppression de versions obsolètes avec gestion d'anomalies et rollback, déployés sur ~300 serveurs.",
+          "url": "https://joseanthony-dev.github.io/portfolio/projets.html#purge",
+          "image": "https://joseanthony-dev.github.io/portfolio/assets/img/projects/purge/hero.webp",
+          "author": {"@type": "Person", "name": "JOSE Anthony"},
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Linux"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Domotique — Home Assistant",
+          "description": "Installation domotique avec capteurs, automatisations YAML et dashboard centralisé sur tablette.",
+          "url": "https://joseanthony-dev.github.io/portfolio/projets.html#domotique",
+          "image": "https://joseanthony-dev.github.io/portfolio/assets/img/projects/domotique/hero.webp",
+          "author": {"@type": "Person", "name": "JOSE Anthony"},
+          "keywords": ["Home Assistant", "IoT", "YAML", "Automatisation"]
+        }
+      }
     ]
   }
   </script>

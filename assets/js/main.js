@@ -296,6 +296,8 @@ window.addEventListener("load", function () {
 (function () {
   var toast = document.createElement("div");
   toast.className = "copy-toast";
+  toast.setAttribute("role", "status");
+  toast.setAttribute("aria-live", "polite");
   toast.textContent = "Email copié !";
   document.body.appendChild(toast);
 
@@ -327,6 +329,13 @@ window.addEventListener("load", function () {
 document.querySelectorAll(".year").forEach(function (el) {
   el.textContent = new Date().getFullYear();
 });
+
+// Service Worker registration
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
 
 // Active link + mobile menu
 (function () {

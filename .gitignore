@@ -15,3 +15,7 @@ portfolio-pages-ready/
 *.swp
 *.swo
 *~
+
+# Node
+node_modules/
+package-lock.json
