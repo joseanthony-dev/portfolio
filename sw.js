@@ -1,4 +1,4 @@
-var CACHE_VERSION = "2";
+var CACHE_VERSION = "3";
 var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
@@ -8,6 +8,7 @@ var STATIC_ASSETS = [
   "/portfolio/experience.html",
   "/portfolio/contact.html",
   "/portfolio/404.html",
+  "/portfolio/offline.html",
   "/portfolio/assets/css/style.min.css",
   "/portfolio/assets/js/main.min.js",
   "/portfolio/assets/js/components.min.js",
@@ -57,7 +58,7 @@ self.addEventListener("fetch", function (e) {
         return res;
       }).catch(function () {
         return caches.match(e.request).then(function (cached) {
-          return cached || caches.match("/portfolio/404.html");
+          return cached || caches.match("/portfolio/offline.html");
         });
       })
     );

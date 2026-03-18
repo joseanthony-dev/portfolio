@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
   <meta property="og:title" content="Expérience — JOSE Anthony" />
   <meta property="og:description" content="Expériences : Alliance Healthcare, CTI Assurance Maladie, saisonnier." />
   <meta property="og:type" content="website" />
@@ -37,6 +39,44 @@
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://joseanthony-dev.github.io/portfolio/index.html"},
       {"@type": "ListItem", "position": 2, "name": "Expérience", "item": "https://joseanthony-dev.github.io/portfolio/experience.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Expériences professionnelles de JOSE Anthony",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "OrganizationRole",
+          "roleName": "Responsable d'équipe",
+          "startDate": "2022",
+          "memberOf": {
+            "@type": "Organization",
+            "name": "Alliance Healthcare Répartition"
+          },
+          "description": "Management opérationnel d'une équipe de ~15 préparateurs, organisation du travail, priorisation et suivi qualité."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "OrganizationRole",
+          "roleName": "Analyste alternant en informatique de production",
+          "startDate": "2024",
+          "endDate": "2025",
+          "memberOf": {
+            "@type": "Organization",
+            "name": "CTI — Assurance Maladie"
+          },
+          "description": "Installation/support d'applications, fiabilisation des environnements et automatisation via Ansible (~80% de temps gagné)."
+        }
+      }
     ]
   }
   </script>

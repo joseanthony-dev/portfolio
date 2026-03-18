@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <title>Hors ligne — JOSE Anthony</title>
+  <style>
+    :root{--bg:#0b1220;--text:#e8eefc;--muted:#a9b6d6;--accent:#79b8ff;--border:rgba(255,255,255,.08);--radius:1rem}
+    [data-theme="light"]{--bg:#f4f6fb;--text:#1a1a2e;--muted:#555e70;--accent:#2563eb;--border:rgba(0,0,0,.1)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:var(--bg);line-height:1.6;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
+    .card{border:1px solid var(--border);border-radius:var(--radius);padding:3rem 2rem;max-width:28rem;text-align:center}
+    .icon{font-size:4rem;line-height:1;margin-bottom:1rem}
+    h1{font-size:1.35rem;margin:0 0 .75rem;color:var(--accent)}
+    p{color:var(--muted);margin:0 0 1.5rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem .875rem;border-radius:.75rem;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text);text-decoration:none;cursor:pointer;font:inherit}
+    .btn:hover{border-color:var(--accent)}
+  </style>
+  <script>
+    (function(){var s=localStorage.getItem("theme");if(s==="light")document.documentElement.setAttribute("data-theme","light");})();
+  </script>
+</head>
+<body>
+  <div class="card">
+    <div class="icon" aria-hidden="true">&#x1F4E1;</div>
+    <h1>Vous êtes hors ligne</h1>
+    <p>
+      Pas de connexion internet pour le moment.<br>
+      Les pages déjà visitées sont disponibles en cache.
+    </p>
+    <button class="btn" onclick="location.reload()">Réessayer</button>
+  </div>
+</body>
+</html>

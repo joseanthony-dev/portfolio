@@ -12,14 +12,21 @@
     "lint": "npm run lint:js && npm run lint:css",
     "watch:css": "chokidar 'assets/css/style.css' -c 'npm run build:css'",
     "watch:js": "chokidar 'assets/js/main.js' 'assets/js/components.js' -c 'npm run build:js'",
-    "watch": "npm run watch:css & npm run watch:js"
+    "watch": "npm run watch:css & npm run watch:js",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.6.3",
-    "terser": "^5.37.0",
     "chokidar-cli": "^3.0.0",
+    "clean-css-cli": "^5.6.3",
     "eslint": "^9.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "stylelint": "^16.0.0",
-    "stylelint-config-standard": "^37.0.0"
+    "stylelint-config-standard": "^37.0.0",
+    "terser": "^5.37.0"
+  },
+  "lint-staged": {
+    "assets/js/*.js": "eslint --no-warn-ignored",
+    "assets/css/style.css": "stylelint"
   }
 }

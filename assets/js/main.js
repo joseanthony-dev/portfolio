@@ -274,9 +274,32 @@ window.addEventListener("load", function () {
   });
 })();
 
-// Prefetch on hover
+// Prefetch: eager for likely next pages, hover for others
 (function () {
   var prefetched = {};
+  var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  var priorities = {
+    "index.html": ["projets.html", "contact.html"],
+    "projets.html": ["contact.html", "competences.html"],
+    "competences.html": ["experience.html", "projets.html"],
+    "experience.html": ["contact.html", "competences.html"],
+    "contact.html": ["projets.html"]
+  };
+
+  // Eager prefetch for priority pages (after load)
+  window.addEventListener("load", function () {
+    var next = priorities[page] || [];
+    next.forEach(function (href) {
+      if (prefetched[href]) return;
+      prefetched[href] = true;
+      var link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = href;
+      document.head.appendChild(link);
+    });
+  });
+
+  // Hover prefetch for all other internal links
   document.querySelectorAll('a[href]').forEach(function (a) {
     var href = a.getAttribute("href") || "";
     if (!href.endsWith(".html") || href.startsWith("http")) return;
@@ -311,15 +334,25 @@ window.addEventListener("load", function () {
   });
 })();
 
-// Page transitions
+// Page transitions (View Transitions API with fallback)
 (function () {
   document.querySelectorAll('a[href]').forEach(function (a) {
     var href = a.getAttribute("href") || "";
     if (href.startsWith("http") || href.startsWith("mailto") || href.startsWith("#") || a.target === "_blank") return;
     a.addEventListener("click", function (e) {
       e.preventDefault();
-      document.body.classList.add("page-exit");
-      setTimeout(function () { window.location.href = href; }, CONFIG.PAGE_TRANSITION_DELAY);
+      function navigate() { window.location.href = href; }
+      if (document.startViewTransition) {
+        document.startViewTransition(function () {
+          document.body.classList.add("page-exit");
+          return new Promise(function (resolve) {
+            setTimeout(function () { resolve(); navigate(); }, CONFIG.PAGE_TRANSITION_DELAY);
+          });
+        });
+      } else {
+        document.body.classList.add("page-exit");
+        setTimeout(navigate, CONFIG.PAGE_TRANSITION_DELAY);
+      }
     });
   });
 })();
@@ -357,6 +390,68 @@ window.addEventListener("load", function () {
         }
       });
     });
+  });
+})();
+
+// Visited projects indicator
+(function () {
+  var key = "visited-projects";
+  var visited = JSON.parse(localStorage.getItem(key) || "[]");
+
+  // Mark current project as visited (on projets.html with hash)
+  if (location.hash && location.pathname.indexOf("projets") !== -1) {
+    var id = location.hash.slice(1);
+    if (id && visited.indexOf(id) === -1) {
+      visited.push(id);
+      localStorage.setItem(key, JSON.stringify(visited));
+    }
+  }
+
+  // On index.html, mark project cards linking to visited sections
+  document.querySelectorAll('a[href*="projets.html#"]').forEach(function (a) {
+    var hash = a.getAttribute("href").split("#")[1];
+    if (hash && visited.indexOf(hash) !== -1) {
+      var card = a.closest(".card");
+      if (card && !card.querySelector(".visited-badge")) {
+        var badge = document.createElement("span");
+        badge.className = "visited-badge";
+        badge.textContent = "Vu";
+        badge.setAttribute("aria-label", "Projet déjà consulté");
+        var title = card.querySelector(".title");
+        if (title) title.appendChild(badge);
+      }
+    }
+  });
+
+  // On projets.html, observe sections to mark as visited on scroll
+  document.querySelectorAll(".project-section[id]").forEach(function (section) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var sid = section.id;
+          var current = JSON.parse(localStorage.getItem(key) || "[]");
+          if (current.indexOf(sid) === -1) {
+            current.push(sid);
+            localStorage.setItem(key, JSON.stringify(current));
+          }
+          obs.unobserve(section);
+        }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(section);
+  });
+
+  // On projets.html, mark visited sections
+  visited.forEach(function (id) {
+    var section = document.getElementById(id);
+    if (section && !section.querySelector(".visited-badge")) {
+      var badge = document.createElement("span");
+      badge.className = "visited-badge";
+      badge.textContent = "Vu";
+      badge.setAttribute("aria-label", "Projet déjà consulté");
+      var title = section.querySelector(".section-title");
+      if (title) title.appendChild(badge);
+    }
   });
 })();
 
