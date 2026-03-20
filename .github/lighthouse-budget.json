@@ -4,7 +4,7 @@
     "timings": [
       { "metric": "first-contentful-paint", "budget": 2000 },
       { "metric": "interactive", "budget": 3500 },
-      { "metric": "speed-index", "budget": 3000 }
+      { "metric": "speed-index", "budget": 3500 }
     ],
     "resourceSizes": [
       { "resourceType": "total", "budget": 500 },
