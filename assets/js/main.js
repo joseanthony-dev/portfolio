@@ -61,6 +61,18 @@ window.addEventListener("load", function () {
       updateIcon();
     });
   });
+
+  // Follow system theme changes if no manual preference saved
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+    var manual; try { manual = localStorage.getItem("theme"); } catch (err) { manual = null; }
+    if (manual) return;
+    if (e.matches) {
+      root.removeAttribute("data-theme");
+    } else {
+      root.setAttribute("data-theme", "light");
+    }
+    updateIcon();
+  });
 })();
 
 // Fade-in on scroll
@@ -94,7 +106,7 @@ window.addEventListener("load", function () {
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Image agrandie");
-  overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img src="" alt=""><span class="sr-only" role="status" aria-live="polite"></span>';
+  overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img src="" alt="" tabindex="0"><span class="sr-only" role="status" aria-live="polite"></span>';
   document.body.appendChild(overlay);
   var img = overlay.querySelector("img");
   var closeBtn = overlay.querySelector(".lightbox-close");
@@ -134,10 +146,10 @@ window.addEventListener("load", function () {
   document.addEventListener("keydown", function (e) {
     if (!overlay.classList.contains("active")) return;
     if (e.key === "Escape") { closeLightbox(); return; }
-    // Focus trap: keep Tab within lightbox
+    // Focus trap: cycle between close button and image
     if (e.key === "Tab") {
       e.preventDefault();
-      closeBtn.focus();
+      if (document.activeElement === closeBtn) { img.focus(); } else { closeBtn.focus(); }
     }
   });
 })();
