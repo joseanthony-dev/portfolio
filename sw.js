@@ -1,4 +1,4 @@
-var CACHE_VERSION = "7";
+var CACHE_VERSION = "8";
 var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
@@ -9,6 +9,9 @@ var STATIC_ASSETS = [
   "/portfolio/contact.html",
   "/portfolio/blog.html",
   "/portfolio/blog/purge-ansible.html",
+  "/portfolio/blog/domotique-home-assistant.html",
+  "/portfolio/blog/flutter-planning.html",
+  "/portfolio/blog/photobooth-site.html",
   "/portfolio/404.html",
   "/portfolio/mentions-legales.html",
   "/portfolio/offline.html",
@@ -19,6 +22,9 @@ var STATIC_ASSETS = [
   "/portfolio/en/contact.html",
   "/portfolio/en/blog.html",
   "/portfolio/en/blog/purge-ansible.html",
+  "/portfolio/en/blog/domotique-home-assistant.html",
+  "/portfolio/en/blog/flutter-planning.html",
+  "/portfolio/en/blog/photobooth-site.html",
   "/portfolio/en/legal.html",
   "/portfolio/assets/css/style.min.css",
   "/portfolio/assets/js/main.min.js",
