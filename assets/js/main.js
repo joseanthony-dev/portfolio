@@ -3,7 +3,7 @@ var CONFIG = {
   LOADER_REMOVE_DELAY: 400,
   FADE_THRESHOLD: 0.1,
   MAGNETIC_STRENGTH: 0.15,
-  PARTICLE_COUNT: 20,
+  PARTICLE_COUNT: 10,
   PARTICLE_MIN_DURATION: 8,
   PARTICLE_DURATION_RANGE: 12,
   PARTICLE_MAX_DELAY: 10,
@@ -142,8 +142,11 @@ window.addEventListener("load", function () {
   });
 })();
 
-// Magnetic buttons (throttled)
-(function () {
+// Deferred visual effects (non-critical, loaded after main content)
+var deferEffect = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); };
+
+deferEffect(function () {
+  // Magnetic buttons (throttled)
   document.querySelectorAll(".btn.primary").forEach(function (btn) {
     var ticking = false;
     btn.addEventListener("mousemove", function (e) {
@@ -161,10 +164,8 @@ window.addEventListener("load", function () {
       btn.style.transform = "";
     });
   });
-})();
 
-// Particles
-(function () {
+  // Particles
   var container = document.createElement("div");
   container.className = "particles";
   document.body.appendChild(container);
@@ -177,10 +178,8 @@ window.addEventListener("load", function () {
     p.style.width = p.style.height = (CONFIG.PARTICLE_MIN_SIZE + Math.random() * CONFIG.PARTICLE_SIZE_RANGE) + "px";
     container.appendChild(p);
   }
-})();
 
-// Pause animations when page is hidden
-(function () {
+  // Pause animations when page is hidden
   document.addEventListener("visibilitychange", function () {
     var paused = document.hidden;
     document.body.style.animationPlayState = paused ? "paused" : "running";
@@ -188,32 +187,29 @@ window.addEventListener("load", function () {
       el.style.animationPlayState = paused ? "paused" : "running";
     });
   });
-})();
 
-// 3D tilt on cards (throttled, desktop only)
-(function () {
-  if (window.matchMedia("(pointer: coarse)").matches) return;
-  document.querySelectorAll(".card").forEach(function (card) {
-    var ticking = false;
-    card.addEventListener("mousemove", function (e) {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        var rect = card.getBoundingClientRect();
-        var x = (e.clientX - rect.left) / rect.width - 0.5;
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = "perspective(" + CONFIG.TILT_PERSPECTIVE + "px) rotateY(" + (x * CONFIG.TILT_ANGLE) + "deg) rotateX(" + (-y * CONFIG.TILT_ANGLE) + "deg) translateY(-3px)";
-        ticking = false;
+  // 3D tilt on cards (throttled, desktop only)
+  if (!window.matchMedia("(pointer: coarse)").matches) {
+    document.querySelectorAll(".card").forEach(function (card) {
+      var ticking = false;
+      card.addEventListener("mousemove", function (e) {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = "perspective(" + CONFIG.TILT_PERSPECTIVE + "px) rotateY(" + (x * CONFIG.TILT_ANGLE) + "deg) rotateX(" + (-y * CONFIG.TILT_ANGLE) + "deg) translateY(-3px)";
+          ticking = false;
+        });
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.transform = "";
       });
     });
-    card.addEventListener("mouseleave", function () {
-      card.style.transform = "";
-    });
-  });
-})();
+  }
 
-// Easter egg (Konami code)
-(function () {
+  // Easter egg (Konami code)
   var seq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","KeyB","KeyA"];
   var pos = 0;
   document.addEventListener("keydown", function (e) {
@@ -228,7 +224,7 @@ window.addEventListener("load", function () {
       }
     } else { pos = 0; }
   });
-})();
+});
 
 // Animated counters
 (function () {
