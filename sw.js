@@ -1,4 +1,4 @@
-var CACHE_VERSION = "8";
+var CACHE_VERSION = "9";
 var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
@@ -32,6 +32,8 @@ var STATIC_ASSETS = [
   "/portfolio/assets/img/favicon.svg",
   "/portfolio/assets/img/profile.webp",
   "/portfolio/assets/img/profile-400w.webp",
+  "/portfolio/assets/img/profile.avif",
+  "/portfolio/assets/img/profile-400w.avif",
   "/portfolio/assets/cv/CV_JOSE_Anthony.pdf",
   "/portfolio/manifest.json"
 ];

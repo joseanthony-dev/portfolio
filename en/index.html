@@ -241,12 +241,15 @@
 
       <aside class="home-right kpis">
         <div class="card fade-in">
-          <img class="avatar" src="../assets/img/profile.webp"
+          <picture>
+  <source type="image/avif" srcset="../assets/img/profile-400w.avif 400w, ../assets/img/profile-700w.avif 700w, ../assets/img/profile.avif 1024w" sizes="(max-width: 600px) 200px, 300px">
+  <img class="avatar" src="../assets/img/profile.webp"
                srcset="../assets/img/profile-400w.webp 400w,
                        ../assets/img/profile-700w.webp 700w,
                        ../assets/img/profile.webp 1024w"
                sizes="(max-width: 600px) 200px, 300px"
                alt="Photo of JOSE Anthony" width="700" height="700" loading="lazy" decoding="async">
+</picture>
 
           <div style="margin-top:12px;">
             <h3 style="margin:0;">JOSE Anthony</h3>

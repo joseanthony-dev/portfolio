@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
 // Theme toggle
 (function () {
   const root = document.documentElement;
-  var saved; try { saved = localStorage.getItem("theme"); } catch (e) { saved = null; }
+  var saved; try { saved = localStorage.getItem("theme"); } catch { saved = null; }
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const theme = saved || (prefersDark ? "dark" : "light");
   if (theme === "light") root.setAttribute("data-theme", "light");
@@ -53,10 +53,10 @@ window.addEventListener("load", function () {
       const isLight = root.getAttribute("data-theme") === "light";
       if (isLight) {
         root.removeAttribute("data-theme");
-        try { localStorage.setItem("theme", "dark"); } catch (e) {}
+        try { localStorage.setItem("theme", "dark"); } catch {}
       } else {
         root.setAttribute("data-theme", "light");
-        try { localStorage.setItem("theme", "light"); } catch (e) {}
+        try { localStorage.setItem("theme", "light"); } catch {}
       }
       updateIcon();
     });
@@ -64,7 +64,7 @@ window.addEventListener("load", function () {
 
   // Follow system theme changes if no manual preference saved
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
-    var manual; try { manual = localStorage.getItem("theme"); } catch (err) { manual = null; }
+    var manual; try { manual = localStorage.getItem("theme"); } catch { manual = null; }
     if (manual) return;
     if (e.matches) {
       root.removeAttribute("data-theme");
@@ -431,14 +431,14 @@ deferEffect(function () {
 // Visited projects indicator
 (function () {
   var key = "visited-projects";
-  var visited; try { visited = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { visited = []; }
+  var visited; try { visited = JSON.parse(localStorage.getItem(key) || "[]"); } catch { visited = []; }
 
   // Mark current project as visited (on projets.html with hash)
   if (location.hash && location.pathname.indexOf("projets") !== -1) {
     var id = location.hash.slice(1);
     if (id && visited.indexOf(id) === -1) {
       visited.push(id);
-      try { localStorage.setItem(key, JSON.stringify(visited)); } catch (e) {}
+      try { localStorage.setItem(key, JSON.stringify(visited)); } catch {}
     }
   }
 
@@ -464,10 +464,10 @@ deferEffect(function () {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var sid = section.id;
-          var current; try { current = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { current = []; }
+          var current; try { current = JSON.parse(localStorage.getItem(key) || "[]"); } catch { current = []; }
           if (current.indexOf(sid) === -1) {
             current.push(sid);
-            try { localStorage.setItem(key, JSON.stringify(current)); } catch (e) {}
+            try { localStorage.setItem(key, JSON.stringify(current)); } catch {}
           }
           obs.unobserve(section);
         }
