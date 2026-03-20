@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
 // Theme toggle
 (function () {
   const root = document.documentElement;
-  const saved = localStorage.getItem("theme");
+  var saved; try { saved = localStorage.getItem("theme"); } catch (e) { saved = null; }
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const theme = saved || (prefersDark ? "dark" : "light");
   if (theme === "light") root.setAttribute("data-theme", "light");
@@ -53,10 +53,10 @@ window.addEventListener("load", function () {
       const isLight = root.getAttribute("data-theme") === "light";
       if (isLight) {
         root.removeAttribute("data-theme");
-        localStorage.setItem("theme", "dark");
+        try { localStorage.setItem("theme", "dark"); } catch (e) {}
       } else {
         root.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
+        try { localStorage.setItem("theme", "light"); } catch (e) {}
       }
       updateIcon();
     });
@@ -417,14 +417,14 @@ deferEffect(function () {
 // Visited projects indicator
 (function () {
   var key = "visited-projects";
-  var visited = JSON.parse(localStorage.getItem(key) || "[]");
+  var visited; try { visited = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { visited = []; }
 
   // Mark current project as visited (on projets.html with hash)
   if (location.hash && location.pathname.indexOf("projets") !== -1) {
     var id = location.hash.slice(1);
     if (id && visited.indexOf(id) === -1) {
       visited.push(id);
-      localStorage.setItem(key, JSON.stringify(visited));
+      try { localStorage.setItem(key, JSON.stringify(visited)); } catch (e) {}
     }
   }
 
@@ -450,10 +450,10 @@ deferEffect(function () {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var sid = section.id;
-          var current = JSON.parse(localStorage.getItem(key) || "[]");
+          var current; try { current = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { current = []; }
           if (current.indexOf(sid) === -1) {
             current.push(sid);
-            localStorage.setItem(key, JSON.stringify(current));
+            try { localStorage.setItem(key, JSON.stringify(current)); } catch (e) {}
           }
           obs.unobserve(section);
         }
