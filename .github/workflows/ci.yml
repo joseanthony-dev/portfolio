@@ -43,8 +43,8 @@ jobs:
 
       - name: Serve site and check all HTML pages return 200
         run: |
-          npx -y serve . -l 8080 -s &
-          sleep 2
+          python3 -m http.server 8080 &
+          sleep 1
           FAILED=0
           for file in $(find . -name '*.html' -not -path './node_modules/*'); do
             path="${file#.}"
