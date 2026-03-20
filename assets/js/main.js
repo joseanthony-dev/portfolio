@@ -310,8 +310,10 @@ deferEffect(function () {
 
   // Hover prefetch for all other internal links
   document.querySelectorAll('a[href]').forEach(function (a) {
-    var href = a.getAttribute("href") || "";
-    if (!href.endsWith(".html") || href.startsWith("http")) return;
+    var raw = a.getAttribute("href") || "";
+    if (raw.startsWith("http") || raw.startsWith("mailto") || raw.startsWith("#")) return;
+    var href = raw.split("#")[0].split("?")[0];
+    if (!href.endsWith(".html")) return;
     a.addEventListener("mouseenter", function () {
       if (prefetched[href]) return;
       prefetched[href] = true;
@@ -503,6 +505,7 @@ if ("serviceWorker" in navigator) {
     const setOpen = (open) => {
       links.classList.toggle("open", open);
       btn.setAttribute("aria-expanded", String(open));
+      if (open) { var first = links.querySelector("a"); if (first) first.focus(); }
     };
 
     btn.addEventListener("click", () => setOpen(!links.classList.contains("open")));
