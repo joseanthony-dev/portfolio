@@ -7,7 +7,7 @@
     "doctype-style": "off",
     "void-style": "off",
     "no-inline-style": "off",
-    "no-raw-characters": "off",
+    "no-raw-characters": "error",
     "element-permitted-content": "off"
   }
 }

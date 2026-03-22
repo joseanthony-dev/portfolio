@@ -1,5 +1,5 @@
 // Config
-var CONFIG = {
+var CONFIG = { // eslint-disable-line no-implicit-globals
   LOADER_REMOVE_DELAY: 400,
   FADE_THRESHOLD: 0.1,
   MAGNETIC_STRENGTH: 0.15,
@@ -155,7 +155,7 @@ window.addEventListener("load", function () {
 })();
 
 // Deferred visual effects (non-critical, loaded after main content)
-var deferEffect = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); };
+var deferEffect = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); }; // eslint-disable-line no-implicit-globals
 
 deferEffect(function () {
   // Magnetic buttons (throttled)
@@ -477,8 +477,8 @@ deferEffect(function () {
   });
 
   // On projets.html, mark visited sections
-  visited.forEach(function (id) {
-    var section = document.getElementById(id);
+  visited.forEach(function (vid) {
+    var section = document.getElementById(vid);
     if (section && !section.querySelector(".visited-badge")) {
       var badge = document.createElement("span");
       badge.className = "visited-badge";

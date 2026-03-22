@@ -33,7 +33,10 @@ export default [
       "no-undef": "error",
       "eqeqeq": ["warn", "smart"],
       "semi": ["warn", "always"],
-      "no-console": "off"
+      "no-console": "off",
+      "curly": ["warn", "multi-line"],
+      "no-implicit-globals": ["warn", { "lexicalBindings": true }],
+      "no-shadow": "warn"
     }
   }
 ];
