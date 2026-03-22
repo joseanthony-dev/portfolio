@@ -10,12 +10,12 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const BASE_URL = 'https://joseanthony-dev.github.io/portfolio';
 
-const BLOG_ARTICLES = [
-  'domotique-home-assistant.html',
-  'flutter-planning.html',
-  'photobooth-site.html',
-  'purge-ansible.html'
-];
+/**
+ * Auto-discover blog articles from the FR blog directory.
+ */
+const BLOG_ARTICLES = fs.readdirSync(path.join(ROOT, 'blog'))
+  .filter(f => f.endsWith('.html'))
+  .sort();
 
 /**
  * Extract metadata from an HTML file.
