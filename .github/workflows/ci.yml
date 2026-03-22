@@ -87,7 +87,7 @@ jobs:
           )
           for page in "${PAGES[@]}"; do
             echo "--- Testing $page ---"
-            npx pa11y "http://localhost:8080/$page" --standard WCAG2AA --reporter cli --chromium-arg='--no-sandbox' || FAILED=1
+            npx pa11y --config .pa11yci.json "http://localhost:8080/$page" --reporter cli || FAILED=1
           done
           exit $FAILED
 
