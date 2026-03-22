@@ -1,0 +1,156 @@
+<!--
+{
+  "title": "Automatiser la purge applicative avec Shell et Ansible — JOSE Anthony",
+  "description": "Retour d'exp&eacute;rience : automatisation de la purge de versions obsolètes sur ~300 serveurs Linux avec Bash et Ansible.",
+  "og_title": "Automatiser la purge applicative avec Shell et Ansible — JOSE Anthony",
+  "og_description": "Retour d'exp&eacute;rience : automatisation de la purge de versions obsolètes sur ~300 serveurs Linux avec Bash et Ansible.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Automatiser la purge applicative avec Shell et Ansible",
+      "description": "Retour d'expérience : automatisation de la purge de versions obsolètes sur ~300 serveurs Linux.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-18",
+      "url": "https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html",
+      "keywords": [
+        "Bash",
+        "Ansible",
+        "Linux",
+        "Automatisation",
+        "DevOps"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Purge applicative</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Automatiser la purge applicative avec Shell et Ansible</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">Mars 2026 &bull; Retour d'exp&eacute;rience — Alternance CTI (Assurance Maladie)</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Bash</span><span class="tag">Ansible</span><span class="tag">Linux</span><span class="tag">Automatisation</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">Le probl&egrave;me</h2>
+      <p class="muted">
+        Au CTI (Centre de Traitement Informatique) de l'Assurance Maladie &agrave; Saint-&Eacute;tienne,
+        les serveurs de production accumulent des <b>versions obsolètes d'applications</b> au fil des d&eacute;ploiements.
+        Le probl&egrave;me : chaque serveur peut contenir des dizaines de versions inutilis&eacute;es qui consomment
+        de l'espace disque pr&eacute;cieux, sans aucune valeur op&eacute;rationnelle.
+      </p>
+      <p class="muted">
+        Avant mon intervention, la purge &eacute;tait manuelle : un technicien se connectait sur chaque
+        serveur, identifiait les versions &agrave; supprimer, v&eacute;rifiait qu'elles n'&eacute;taient plus actives,
+        et les supprimait une par une. Temps moyen : <b>30 minutes &agrave; 1 heure par serveur</b>.
+        Avec ~300 serveurs concern&eacute;s, la t&acirc;che &eacute;tait irr&eacute;aliste manuellement.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">La solution</h2>
+      <p class="muted">
+        J'ai con&ccedil;u une solution en deux couches :
+      </p>
+
+      <h3 style="font-size:1.05rem;">1. Script Shell — la logique m&eacute;tier</h3>
+      <p class="muted">
+        Un script Bash qui s'ex&eacute;cute localement sur chaque serveur et g&egrave;re toute la logique :
+      </p>
+      <ul class="bullets">
+        <li><b>D&eacute;tection automatique</b> des versions obsolètes (comparaison avec la version active en production)</li>
+        <li><b>Gestion des anomalies</b> : si une version est dans un &eacute;tat incoh&eacute;rent (fichier verrou, processus actif), elle est signal&eacute;e mais pas supprim&eacute;e</li>
+        <li><b>Logs d&eacute;taill&eacute;s</b> : chaque action est trac&eacute;e (version supprim&eacute;e, espace lib&eacute;r&eacute;, anomalies rencontr&eacute;es)</li>
+        <li><b>Mode dry-run</b> : possibilit&eacute; de simuler la purge sans rien supprimer pour validation</li>
+        <li><b>Rollback</b> : sauvegarde avant suppression pour permettre un retour arri&egrave;re si n&eacute;cessaire</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;">2. Playbook Ansible — l'orchestration</h3>
+      <p class="muted">
+        Un playbook Ansible qui d&eacute;ploie et ex&eacute;cute le script sur l'ensemble du parc :
+      </p>
+      <ul class="bullets">
+        <li><b>Inventaire dynamique</b> : ciblage par groupes de serveurs (prod, pr&eacute;prod, etc.)</li>
+        <li><b>D&eacute;ploiement du script</b> : copie automatis&eacute;e sur chaque cible</li>
+        <li><b>Ex&eacute;cution orchestr&eacute;e</b> : parall&eacute;lisation contr&ocirc;l&eacute;e (forks) pour limiter la charge</li>
+        <li><b>Collecte des rapports</b> : r&eacute;cup&eacute;ration centralis&eacute;e des logs de chaque serveur</li>
+        <li><b>Idempotence</b> : le playbook peut &ecirc;tre rejou&eacute; sans risque (les versions d&eacute;j&agrave; purg&eacute;es sont ignor&eacute;es)</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Les d&eacute;fis techniques</h2>
+
+      <h3 style="font-size:1.05rem;">Gestion des cas limites</h3>
+      <p class="muted">
+        Le plus gros d&eacute;fi n'&eacute;tait pas la suppression en elle-m&ecirc;me, mais la <b>gestion des anomalies</b>.
+        En production, on rencontre des situations impr&eacute;vues : versions partiellement d&eacute;ploy&eacute;es,
+        fichiers verrouill&eacute;s, liens symboliques cass&eacute;s, etc. Le script devait &ecirc;tre
+        <b>d&eacute;fensif par d&eacute;faut</b> : en cas de doute, ne rien supprimer et remonter l'information.
+      </p>
+
+      <h3 style="font-size:1.05rem;">S&eacute;curit&eacute; et tra&ccedil;abilit&eacute;</h3>
+      <p class="muted">
+        Dans un environnement de production li&eacute; &agrave; l'Assurance Maladie, chaque action doit &ecirc;tre
+        trac&eacute;e et justifiable. Le syst&egrave;me de logs permet de reconstituer exactement ce qui a &eacute;t&eacute;
+        fait, quand, et sur quel serveur. Le mode dry-run permet de valider le comportement avant toute action r&eacute;elle.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">R&eacute;sultats</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~300</div>
+          <span class="muted">serveurs trait&eacute;s</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~70%</div>
+          <span class="muted">espace disque lib&eacute;r&eacute;</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~2 min</div>
+          <span class="muted">vs 30 min &agrave; 1h</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        Le script a &eacute;t&eacute; valid&eacute; en pr&eacute;production puis d&eacute;ploy&eacute; progressivement sur le parc.
+        L'ex&eacute;cution compl&egrave;te sur ~300 serveurs prend d&eacute;sormais quelques heures au lieu de
+        semaines de travail manuel.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Ce que j'en retiens</h2>
+      <ul class="bullets">
+        <li><b>Automatiser, c'est d'abord comprendre</b> : avant d'&eacute;crire une seule ligne, j'ai pass&eacute; du temps &agrave; comprendre le process manuel, les cas limites, les contraintes de production.</li>
+        <li><b>La s&eacute;curit&eacute; avant la vitesse</b> : le mode dry-run et le rollback n'&eacute;taient pas optionnels. En production, on ne prend pas de risques.</li>
+        <li><b>Ansible pour l'&eacute;chelle</b> : un bon script local + Ansible pour l'orchestration = une combinaison redoutable pour g&eacute;rer un parc de serveurs.</li>
+        <li><b>Les logs, c'est la confiance</b> : des logs clairs et complets permettent de valider le travail et de rassurer les &eacute;quipes.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Retour au blog</a>
+        <a class="btn primary" href="../projets.html#purge">Voir le projet</a>
+      </div>
+    </article>
+  </main>

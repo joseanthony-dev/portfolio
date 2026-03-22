@@ -1,0 +1,158 @@
+<!--
+{
+  "title": "Building a photobooth and its rental website — JOSE Anthony",
+  "description": "Experience report: from hardware assembly to building the rental website with online booking.",
+  "og_title": "Building a photobooth and its rental website — JOSE Anthony",
+  "og_description": "Experience report: from hardware assembly to building the rental website with online booking.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Building a photobooth and its rental website",
+      "description": "Experience report: from hardware assembly to building the rental website with online booking.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-20",
+      "url": "https://joseanthony-dev.github.io/portfolio/en/blog/photobooth-site.html",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Cloudflare",
+        "Web"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Photobooth</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Building a photobooth and its rental website</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">March 2026 &bull; Experience report — Personal project</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Cloudflare</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">The idea</h2>
+      <p class="muted">
+        It all started with a simple observation: renting a photobooth for an event is expensive,
+        and the available options are not always up to standard. I decided to
+        <b>build my own from scratch</b> — the hardware first, then the website to offer it for rent.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Building the photobooth</h2>
+      <p class="muted">
+        Before writing any code, I had to <b>design and assemble the hardware</b>.
+        The enclosure, lighting, screen, camera, printer — each component
+        was chosen and tested to achieve a professional result. This project is
+        as much technical (wiring, integration) as it is aesthetic (final look, ergonomics).
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">The website</h2>
+
+      <h3 style="font-size:1.05rem;">Goal</h3>
+      <p class="muted">
+        Create a <b>professional showcase website</b> to present the photobooth,
+        display rental packages and enable online booking.
+        The site needed to be fast, responsive and inspire trust.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Features</h3>
+      <ul class="bullets">
+        <li><b>Packages page</b>: clear presentation of offers with prices and inclusions</li>
+        <li><b>Online booking</b>: form with date selection, package choice and contact details</li>
+        <li><b>Automatic email contact</b>: each request automatically sends an email with the details</li>
+        <li><b>Responsive design</b>: adapted for mobile, tablet and desktop</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;">Hosting</h3>
+      <p class="muted">
+        The site is deployed on <b>Cloudflare</b> with custom DNS configuration.
+        Cloudflare provides speed (global CDN), security (automatic HTTPS, DDoS protection)
+        and management simplicity.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Challenges</h2>
+
+      <h3 style="font-size:1.05rem;">The hardware</h3>
+      <p class="muted">
+        Making all components coexist in a compact and aesthetic enclosure
+        was not simple. Each element has its constraints: heat, wiring,
+        accessibility for maintenance. Several prototypes were needed.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Website credibility</h3>
+      <p class="muted">
+        For a rental service, the website <b>must inspire trust</b> from the first visit.
+        Design, photos, clear packages and a functional form are essential.
+        A sloppy site means a lost customer.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Email delivery</h3>
+      <p class="muted">
+        Integrating automatic email on a static site requires a third-party service.
+        The setup had to be reliable to never miss a booking request.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Results</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">End to end</div>
+          <span class="muted">hardware + website</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">Cloudflare</div>
+          <span class="muted">CDN + HTTPS</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">100%</div>
+          <span class="muted">functional</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        The photobooth is assembled and functional. The website is live,
+        bookings come in by email, and everything is ready for production use.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Key takeaways</h2>
+      <ul class="bullets">
+        <li><b>A complete project</b>: from hardware to web, it's rare to touch so many domains in a single project.</li>
+        <li><b>Design matters</b>: for a commercial site, appearance and information clarity make the difference.</li>
+        <li><b>Cloudflare simplifies everything</b>: DNS, HTTPS, CDN — in a few clicks, the site is fast and secure.</li>
+        <li><b>Test with real users</b>: feedback from early visitors helped improve the booking flow.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Back to blog</a>
+        <a class="btn primary" href="../projects.html#photobooth">View project</a>
+      </div>
+    </article>
+  </main>

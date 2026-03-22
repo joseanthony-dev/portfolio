@@ -1,0 +1,166 @@
+<!--
+{
+  "title": "Ma maison connect&eacute;e avec Home Assistant — JOSE Anthony",
+  "description": "Retour d'exp&eacute;rience : installation domotique compl&egrave;te avec capteurs, automatisations YAML et dashboard centralis&eacute;.",
+  "og_title": "Ma maison connect&eacute;e avec Home Assistant — JOSE Anthony",
+  "og_description": "Retour d'exp&eacute;rience : installation domotique compl&egrave;te avec capteurs, automatisations YAML et dashboard centralis&eacute;.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Ma maison connectée avec Home Assistant",
+      "description": "Retour d'expérience : installation domotique complète avec capteurs, automatisations YAML et dashboard centralisé.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-20",
+      "url": "https://joseanthony-dev.github.io/portfolio/blog/domotique-home-assistant.html",
+      "keywords": [
+        "Home Assistant",
+        "IoT",
+        "Domotique",
+        "YAML",
+        "Automatisation"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Domotique Home Assistant</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Ma maison connect&eacute;e avec Home Assistant</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">Mars 2026 &bull; Retour d'exp&eacute;rience — Projet personnel</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Home Assistant</span><span class="tag">IoT</span><span class="tag">YAML</span><span class="tag">R&eacute;seau local</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">Le point de d&eacute;part</h2>
+      <p class="muted">
+        L'id&eacute;e &eacute;tait simple : centraliser le pilotage de la maison sur un seul &eacute;cran.
+        Avant, chaque &eacute;quipement connect&eacute; avait sa propre app, ses propres notifications,
+        et aucune communication entre eux. Je voulais un syst&egrave;me <b>unifi&eacute;, local et personnalisable</b>.
+      </p>
+      <p class="muted">
+        Mon choix s'est port&eacute; sur <b>Home Assistant</b> : open source, auto-h&eacute;berg&eacute;,
+        avec une communaut&eacute; active et une compatibilit&eacute; mat&eacute;rielle tr&egrave;s large.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">L'installation</h2>
+
+      <h3 style="font-size:1.05rem;">1. Le serveur</h3>
+      <p class="muted">
+        Home Assistant tourne sur un serveur maison d&eacute;di&eacute;. L'installation a n&eacute;cessit&eacute;
+        la configuration du r&eacute;seau local, l'attribution d'une IP fixe, et la mise en place
+        de l'acc&egrave;s au dashboard via le navigateur.
+      </p>
+
+      <h3 style="font-size:1.05rem;">2. Les &eacute;quipements</h3>
+      <p class="muted">
+        J'ai int&eacute;gr&eacute; une dizaine d'&eacute;quipements via un hub Tapo :
+      </p>
+      <ul class="bullets">
+        <li><b>Capteurs d'ouverture</b> : portes et fen&ecirc;tres (d&eacute;tection ouvert/ferm&eacute;)</li>
+        <li><b>Capteurs de temp&eacute;rature</b> : suivi pi&egrave;ce par pi&egrave;ce</li>
+        <li><b>Capteurs de mouvement</b> : d&eacute;tection de pr&eacute;sence</li>
+        <li><b>Prises et &eacute;clairages connect&eacute;s</b> : contr&ocirc;le &agrave; distance</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;">3. Le dashboard</h3>
+      <p class="muted">
+        Un dashboard centralis&eacute; affich&eacute; en permanence sur une <b>tablette d&eacute;di&eacute;e</b>.
+        Il regroupe l'&eacute;tat de tous les capteurs, les contr&ocirc;les des &eacute;quipements,
+        et les alertes en cours. L'interface est personnalis&eacute;e avec des cartes adapt&eacute;es
+        &agrave; chaque pi&egrave;ce de la maison.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Les automatisations</h2>
+      <p class="muted">
+        Le c&oelig;ur du projet : les <b>automatisations YAML</b>. J'en ai &eacute;crit une dizaine,
+        chacune d&eacute;clench&eacute;e par un &eacute;v&eacute;nement capteur :
+      </p>
+      <ul class="bullets">
+        <li><b>Alerte intrusion</b> : notification si un capteur d'ouverture se d&eacute;clenche en mode absence</li>
+        <li><b>Gestion &eacute;clairage</b> : allumage automatique sur d&eacute;tection de mouvement, extinction apr&egrave;s d&eacute;lai</li>
+        <li><b>Suivi temp&eacute;rature</b> : alerte si une pi&egrave;ce d&eacute;passe un seuil configur&eacute;</li>
+        <li><b>Sc&eacute;narios</b> : "Bonne nuit" (extinction g&eacute;n&eacute;rale, activation alarme), "D&eacute;part" (v&eacute;rification portes, mode absence)</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Les d&eacute;fis techniques</h2>
+
+      <h3 style="font-size:1.05rem;">Compatibilit&eacute; mat&eacute;rielle</h3>
+      <p class="muted">
+        Tous les &eacute;quipements ne s'int&egrave;grent pas aussi facilement. Certains capteurs
+        n&eacute;cessitent des int&eacute;grations sp&eacute;cifiques ou des configurations manuelles.
+        Le hub Tapo a simplifi&eacute; la communication, mais il a fallu tester chaque &eacute;quipement
+        individuellement pour s'assurer de sa fiabilit&eacute;.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Fiabilit&eacute; des automatisations</h3>
+      <p class="muted">
+        Une automatisation mal calibr&eacute;e peut devenir g&ecirc;nante rapidement :
+        faux positifs sur les capteurs de mouvement, alertes intempestives, etc.
+        Chaque automatisation a &eacute;t&eacute; test&eacute;e et ajust&eacute;e sur plusieurs jours
+        avant d'&ecirc;tre valid&eacute;e.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">R&eacute;sultats</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~10</div>
+          <span class="muted">&eacute;quipements int&eacute;gr&eacute;s</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~10</div>
+          <span class="muted">automatisations YAML</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">1</div>
+          <span class="muted">dashboard tablette</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        La maison est d&eacute;sormais pilot&eacute;e depuis un seul &eacute;cran. Les automatisations
+        tournent 24h/24 sans intervention, et les alertes arrivent directement sur le t&eacute;l&eacute;phone.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Ce que j'en retiens</h2>
+      <ul class="bullets">
+        <li><b>Local d'abord</b> : h&eacute;berger soi-m&ecirc;me, c'est garder le contr&ocirc;le sur ses donn&eacute;es et ne pas d&eacute;pendre du cloud.</li>
+        <li><b>YAML, c'est puissant</b> : les automatisations textuelles sont versionnables, lisibles et modifiables sans interface graphique.</li>
+        <li><b>Tester avant d'activer</b> : chaque automatisation doit &ecirc;tre rod&eacute;e sur plusieurs jours pour &eacute;viter les faux positifs.</li>
+        <li><b>Un bon dashboard change tout</b> : l'interface centralis&eacute;e sur tablette rend le syst&egrave;me utilisable par toute la famille.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Retour au blog</a>
+        <a class="btn primary" href="../projets.html#domotique">Voir le projet</a>
+      </div>
+    </article>
+  </main>

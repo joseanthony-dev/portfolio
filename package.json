@@ -8,7 +8,8 @@
     "build:js": "terser assets/js/main.js -o assets/js/main.min.js -c -m && terser assets/js/components.js -o assets/js/components.min.js -c -m",
     "build:rss": "node scripts/generate-rss.js",
     "build:sw": "node scripts/hash-sw-version.js",
-    "build": "npm run build:css && npm run build:js && npm run build:rss && npm run build:sw",
+    "build:html": "node scripts/build-html.js",
+    "build": "npm run build:html && npm run build:css && npm run build:js && npm run build:rss && npm run build:sw",
     "lint:js": "eslint --no-warn-ignored assets/js/*.js",
     "lint:css": "stylelint assets/css/style.css",
     "lint:html": "html-validate --formatter stylish *.html en/*.html blog/*.html",
@@ -39,6 +40,6 @@
   "lint-staged": {
     "assets/js/*.js": "eslint --no-warn-ignored",
     "assets/css/style.css": "stylelint",
-    "*.html": "html-validate"
+    "!(src)/**/*.html": "html-validate"
   }
 }

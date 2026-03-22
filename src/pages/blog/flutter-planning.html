@@ -1,0 +1,158 @@
+<!--
+{
+  "title": "Cr&eacute;er une app de planning d'&eacute;quipe avec Flutter et Firebase — JOSE Anthony",
+  "description": "Retour d'exp&eacute;rience : d&eacute;velopper une app mobile de gestion d'&eacute;v&eacute;nements avec pr&eacute;sences, export PDF et notifications.",
+  "og_title": "Cr&eacute;er une app de planning d'&eacute;quipe avec Flutter et Firebase — JOSE Anthony",
+  "og_description": "Retour d'exp&eacute;rience : d&eacute;velopper une app mobile de gestion d'&eacute;v&eacute;nements avec pr&eacute;sences, export PDF et notifications.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Créer une app de planning d'équipe avec Flutter et Firebase",
+      "description": "Retour d'expérience : développer une app mobile de gestion d'événements avec présences, export PDF et notifications.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-20",
+      "url": "https://joseanthony-dev.github.io/portfolio/blog/flutter-planning.html",
+      "keywords": [
+        "Flutter",
+        "Firebase",
+        "Firestore",
+        "Mobile",
+        "PDF"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">App planning Flutter</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Cr&eacute;er une app de planning d'&eacute;quipe avec Flutter et Firebase</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">Mars 2026 &bull; Retour d'exp&eacute;rience — Projet personnel</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Firestore</span><span class="tag">PDF</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">Le besoin</h2>
+      <p class="muted">
+        Dans mon &eacute;quipe de pr&eacute;parateurs de commandes, on se retrouve chaque samedi
+        pour des &eacute;v&eacute;nements. Le probl&egrave;me : <b>personne ne savait qui venait, &agrave; quelle heure,
+        et combien d'heures chacun avait fait</b>. Tout passait par des messages de groupe,
+        sans historique ni suivi fiable.
+      </p>
+      <p class="muted">
+        J'ai d&eacute;cid&eacute; de cr&eacute;er une app d&eacute;di&eacute;e pour centraliser tout &ccedil;a :
+        &eacute;v&eacute;nements, pr&eacute;sences, heures et communication.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">La stack technique</h2>
+
+      <h3 style="font-size:1.05rem;">Pourquoi Flutter ?</h3>
+      <p class="muted">
+        Je voulais une app mobile native, rapide &agrave; d&eacute;velopper, qui tourne sur
+        <b>Android et iOS</b> avec un seul code. Flutter cochait toutes les cases :
+        UI reactive, hot reload pour it&eacute;rer vite, et un &eacute;cosyst&egrave;me de packages solide.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Pourquoi Firebase ?</h3>
+      <p class="muted">
+        Pour le backend, Firebase &eacute;tait le choix &eacute;vident : <b>Firestore</b> pour la base
+        temps r&eacute;el (les r&eacute;ponses de pr&eacute;sence se mettent &agrave; jour instantan&eacute;ment),
+        l'authentification int&eacute;gr&eacute;e, et z&eacute;ro serveur &agrave; g&eacute;rer.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Les fonctionnalit&eacute;s</h2>
+      <ul class="bullets">
+        <li><b>Cr&eacute;ation d'&eacute;v&eacute;nements</b> : date, lieu, description — l'organisateur publie, l'&eacute;quipe r&eacute;pond</li>
+        <li><b>Pr&eacute;sence / absence</b> : chaque membre indique s'il vient ou non, visible par tous en temps r&eacute;el</li>
+        <li><b>Suivi des heures</b> : chaque participant peut saisir ses heures, l'admin voit le total</li>
+        <li><b>Export PDF</b> : g&eacute;n&eacute;ration d'un r&eacute;capitulatif propre avec pr&eacute;sences et heures par &eacute;v&eacute;nement</li>
+        <li><b>Notifications SMS et mail</b> : rappels automatiques avant chaque &eacute;v&eacute;nement et contact direct</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Les d&eacute;fis techniques</h2>
+
+      <h3 style="font-size:1.05rem;">G&eacute;n&eacute;ration PDF</h3>
+      <p class="muted">
+        G&eacute;n&eacute;rer un PDF propre depuis Flutter n'est pas trivial. Il a fallu construire
+        le layout manuellement (tableaux, alignements, styles) avec le package <b>pdf</b>,
+        puis g&eacute;rer le partage du fichier g&eacute;n&eacute;r&eacute; selon la plateforme (Android/iOS).
+      </p>
+
+      <h3 style="font-size:1.05rem;">Temps r&eacute;el avec Firestore</h3>
+      <p class="muted">
+        Le temps r&eacute;el est un atout majeur, mais il faut bien structurer les donn&eacute;es.
+        J'ai d&ucirc; revoir le mod&egrave;le Firestore plusieurs fois pour &eacute;viter les lectures
+        excessives (et les co&ucirc;ts associ&eacute;s) tout en gardant la r&eacute;activit&eacute;.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Notifications multi-canaux</h3>
+      <p class="muted">
+        Int&eacute;grer SMS et mail dans une app Flutter demande de passer par des services externes.
+        La difficult&eacute; &eacute;tait de rendre &ccedil;a fiable et de g&eacute;rer les cas d'erreur
+        (num&eacute;ro invalide, mail non d&eacute;livr&eacute;) sans bloquer l'exp&eacute;rience utilisateur.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">R&eacute;sultats</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~2 mois</div>
+          <span class="muted">de d&eacute;veloppement</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">100%</div>
+          <span class="muted">seul d&eacute;veloppeur</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">Android + iOS</div>
+          <span class="muted">cross-platform</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        L'app est fonctionnelle et couvre tout le besoin initial : cr&eacute;ation d'&eacute;v&eacute;nements,
+        gestion des pr&eacute;sences, suivi des heures avec export PDF, et notifications int&eacute;gr&eacute;es.
+        La mise en production aupr&egrave;s de l'&eacute;quipe est envisag&eacute;e prochainement.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Ce que j'en retiens</h2>
+      <ul class="bullets">
+        <li><b>Partir du besoin r&eacute;el</b> : l'app r&eacute;pond &agrave; un probl&egrave;me concret de mon &eacute;quipe, pas &agrave; un exercice th&eacute;orique.</li>
+        <li><b>Flutter acc&eacute;l&egrave;re le d&eacute;veloppement</b> : le hot reload et le syst&egrave;me de widgets permettent d'it&eacute;rer tr&egrave;s vite sur l'UI.</li>
+        <li><b>Firebase simplifie le backend</b> : pas de serveur &agrave; g&eacute;rer, le temps r&eacute;el est natif, et l'auth est pr&ecirc;te &agrave; l'emploi.</li>
+        <li><b>Le PDF, c'est du travail</b> : g&eacute;n&eacute;rer un document propre depuis le mobile demande plus d'effort qu'on ne le pense.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Retour au blog</a>
+        <a class="btn primary" href="../projets.html#flutter-planning">Voir le projet</a>
+      </div>
+    </article>
+  </main>

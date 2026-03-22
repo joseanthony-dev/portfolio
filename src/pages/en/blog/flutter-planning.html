@@ -1,0 +1,158 @@
+<!--
+{
+  "title": "Building a team planning app with Flutter and Firebase — JOSE Anthony",
+  "description": "Experience report: developing a mobile event management app with attendance, PDF export and notifications.",
+  "og_title": "Building a team planning app with Flutter and Firebase — JOSE Anthony",
+  "og_description": "Experience report: developing a mobile event management app with attendance, PDF export and notifications.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Building a team planning app with Flutter and Firebase",
+      "description": "Experience report: developing a mobile event management app with attendance, PDF export and notifications.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-20",
+      "url": "https://joseanthony-dev.github.io/portfolio/en/blog/flutter-planning.html",
+      "keywords": [
+        "Flutter",
+        "Firebase",
+        "Firestore",
+        "Mobile",
+        "PDF"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Flutter Planning App</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Building a team planning app with Flutter and Firebase</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">March 2026 &bull; Experience report — Personal project</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Firestore</span><span class="tag">PDF</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">The need</h2>
+      <p class="muted">
+        In my order preparation team, we meet every Saturday for events.
+        The problem: <b>nobody knew who was coming, at what time,
+        or how many hours each person had worked</b>. Everything went through group messages,
+        with no history or reliable tracking.
+      </p>
+      <p class="muted">
+        I decided to build a dedicated app to centralize all of this:
+        events, attendance, hours and communication.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">The tech stack</h2>
+
+      <h3 style="font-size:1.05rem;">Why Flutter?</h3>
+      <p class="muted">
+        I wanted a native mobile app, fast to develop, that runs on
+        <b>Android and iOS</b> with a single codebase. Flutter checked all the boxes:
+        reactive UI, hot reload for fast iteration, and a solid package ecosystem.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Why Firebase?</h3>
+      <p class="muted">
+        For the backend, Firebase was the obvious choice: <b>Firestore</b> for real-time
+        data (attendance responses update instantly),
+        built-in authentication, and zero servers to manage.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Features</h2>
+      <ul class="bullets">
+        <li><b>Event creation</b>: date, location, description — the organizer publishes, the team responds</li>
+        <li><b>Attendance tracking</b>: each member indicates if they're coming or not, visible to all in real time</li>
+        <li><b>Hour tracking</b>: each participant logs their hours, the admin sees the total</li>
+        <li><b>PDF export</b>: generates a clean summary with attendance and hours per event</li>
+        <li><b>SMS and email notifications</b>: automatic reminders before each event and direct contact</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Technical challenges</h2>
+
+      <h3 style="font-size:1.05rem;">PDF generation</h3>
+      <p class="muted">
+        Generating a clean PDF from Flutter is not trivial. I had to build
+        the layout manually (tables, alignment, styles) with the <b>pdf</b> package,
+        then handle file sharing across platforms (Android/iOS).
+      </p>
+
+      <h3 style="font-size:1.05rem;">Real-time with Firestore</h3>
+      <p class="muted">
+        Real-time is a major asset, but data needs to be well structured.
+        I had to rework the Firestore model several times to avoid excessive reads
+        (and associated costs) while keeping reactivity.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Multi-channel notifications</h3>
+      <p class="muted">
+        Integrating SMS and email in a Flutter app requires external services.
+        The challenge was making it reliable and handling error cases
+        (invalid number, undelivered email) without blocking the user experience.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Results</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~2 months</div>
+          <span class="muted">of development</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">100%</div>
+          <span class="muted">solo developer</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">Android + iOS</div>
+          <span class="muted">cross-platform</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        The app is functional and covers the entire initial need: event creation,
+        attendance management, hour tracking with PDF export, and integrated notifications.
+        Production rollout to the team is planned soon.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Key takeaways</h2>
+      <ul class="bullets">
+        <li><b>Start from a real need</b>: the app solves a concrete problem for my team, not a theoretical exercise.</li>
+        <li><b>Flutter accelerates development</b>: hot reload and the widget system allow very fast UI iteration.</li>
+        <li><b>Firebase simplifies the backend</b>: no server to manage, real-time is native, and auth is ready to use.</li>
+        <li><b>PDF is more work than expected</b>: generating a clean document from mobile takes more effort than you think.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Back to blog</a>
+        <a class="btn primary" href="../projects.html#flutter-planning">View project</a>
+      </div>
+    </article>
+  </main>

@@ -1,0 +1,195 @@
+<!--
+{
+  "title": "Contact — JOSE Anthony",
+  "description": "Contact JOSE Anthony (email, LinkedIn, GitHub).",
+  "og_title": "Contact — JOSE Anthony",
+  "og_description": "Contact JOSE Anthony: email, LinkedIn, GitHub.",
+  "dns_prefetch": [
+    "https://formspree.io",
+    "https://www.linkedin.com",
+    "https://github.com"
+  ],
+  "csp_connect_extra": [
+    "https://formspree.io"
+  ],
+  "csp_form_extra": [
+    "https://formspree.io"
+  ],
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://joseanthony-dev.github.io/portfolio/en/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://joseanthony-dev.github.io/portfolio/en/contact.html"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact — JOSE Anthony",
+      "description": "Contact JOSE Anthony by email, LinkedIn or GitHub.",
+      "url": "https://joseanthony-dev.github.io/portfolio/en/contact.html",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "JOSE Anthony",
+        "email": "anthony.jose@outlook.fr",
+        "sameAs": [
+          "https://github.com/joseanthony-dev",
+          "https://www.linkedin.com/in/joseanthony-zacharias"
+        ]
+      }
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Contact</span>
+    </nav>
+    <div class="section-title">
+      <h1 class="h1" style="font-size:1.35rem;">Contact</h1>
+      <p>Quick response: email or LinkedIn</p>
+    </div>
+
+    <div class="card fade-in">
+      <div class="inline-links">
+        <a class="btn" href="mailto:anthony.jose@outlook.fr"><span aria-hidden="true">📧</span> anthony.jose@outlook.fr</a>
+        <a class="btn" href="https://www.linkedin.com/in/joseanthony-zacharias" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> LinkedIn</a>
+        <a class="btn" href="https://github.com/joseanthony-dev" target="_blank" rel="noopener"><span aria-hidden="true">💻</span> GitHub</a>
+      </div>
+
+      <div class="hr"></div>
+
+	<form class="form" action="https://formspree.io/f/xvzaavle" method="POST">
+
+	<div class="field">
+  <input type="text" id="name" class="input" name="name" placeholder=" " required minlength="2" maxlength="100" pattern="[A-Za-zÀ-ÿ\s\-']+" title="Letters, spaces, hyphens and apostrophes only" autocomplete="name" aria-describedby="name-error" />
+  <label for="name">Name</label>
+  <span class="field-error" id="name-error"></span>
+</div>
+
+<div class="field">
+  <input id="email" class="input" name="email" placeholder=" " type="email" required autocomplete="email" aria-describedby="email-error" />
+  <label for="email">Email</label>
+  <span class="field-error" id="email-error"></span>
+</div>
+
+<div class="field">
+  <input type="text" id="subject" class="input" name="subject" placeholder=" " required minlength="3" maxlength="200" aria-describedby="subject-error" />
+  <label for="subject">Subject</label>
+  <span class="field-error" id="subject-error"></span>
+</div>
+
+<div class="field">
+  <textarea id="message" name="message" placeholder=" " required minlength="10" maxlength="5000" aria-describedby="message-error"></textarea>
+  <label for="message">Message</label>
+  <span class="field-error" id="message-error"></span>
+</div>
+
+  <!-- anti-spam -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Do not fill">
+
+  <button class="btn primary" type="submit" id="submit-btn">Send</button>
+</form>
+<p id="sent" class="note" style="display:none;"></p>
+<script>
+  var messages = {
+    name: "Please enter your name (2 characters min., letters, spaces, hyphens and apostrophes only)",
+    email: "Please enter a valid email address (e.g. name@example.com)",
+    subject: "Please specify a subject (3 characters minimum)",
+    message: "Please write your message (10 characters minimum)"
+  };
+
+  document.querySelectorAll(".form .input, .form textarea").forEach(function (input) {
+    function validate() {
+      var error = document.getElementById(input.id + "-error");
+      if (!error) return;
+      if (input.value.trim() === "") {
+        error.textContent = "";
+        error.classList.remove("visible");
+      } else if (!input.validity.valid) {
+        error.textContent = messages[input.id] || "Invalid field";
+        error.classList.add("visible");
+      } else {
+        error.textContent = "";
+        error.classList.remove("visible");
+      }
+    }
+    input.addEventListener("blur", validate);
+    input.addEventListener("input", validate);
+  });
+
+  document.querySelector(".form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var form = this;
+    var firstInvalid = form.querySelector(":invalid");
+    if (firstInvalid) {
+      form.querySelectorAll(".input, textarea").forEach(function (input) {
+        var error = document.getElementById(input.id + "-error");
+        if (!error) return;
+        if (!input.validity.valid) {
+          error.textContent = messages[input.id] || "Invalid field";
+          error.classList.add("visible");
+        }
+      });
+      firstInvalid.focus();
+      return;
+    }
+
+    var btn = document.getElementById("submit-btn");
+    var sent = document.getElementById("sent");
+    btn.disabled = true;
+    btn.textContent = "Sending\u2026";
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "Accept": "application/json" }
+    }).then(function (res) {
+      if (res.ok) {
+        sent.innerHTML = "<b>Message sent! \u2705</b> Thank you, I'll get back to you shortly.";
+        sent.style.display = "block";
+        sent.style.color = "";
+        form.reset();
+      } else {
+        throw new Error("Server error");
+      }
+    }).catch(function () {
+      sent.innerHTML = "<b>Error \u274c</b> The message could not be sent. Please try again or contact me by email.";
+      sent.style.display = "block";
+      sent.style.color = getComputedStyle(document.documentElement).getPropertyValue("--error").trim();
+    }).finally(function () {
+      btn.disabled = false;
+      btn.textContent = "Send";
+    });
+  });
+</script>
+
+    </div>
+
+<div class="cta-banner fade-in">
+  <div>
+    <b>System Admin Internship — from May 2026</b><br/>
+    <span class="muted">Lyon / Saint-Etienne — Available 3 months</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="contact.html">Contact me</a>
+    <a class="btn" href="../assets/cv/CV_JOSE_Anthony.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</div>
+
+
+  </main>

@@ -1,0 +1,165 @@
+<!--
+{
+  "title": "My smart home with Home Assistant — JOSE Anthony",
+  "description": "Experience report: full home automation setup with sensors, YAML automations and a centralized dashboard.",
+  "og_title": "My smart home with Home Assistant — JOSE Anthony",
+  "og_description": "Experience report: full home automation setup with sensors, YAML automations and a centralized dashboard.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "My smart home with Home Assistant",
+      "description": "Experience report: full home automation setup with sensors, YAML automations and a centralized dashboard.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-20",
+      "url": "https://joseanthony-dev.github.io/portfolio/en/blog/domotique-home-assistant.html",
+      "keywords": [
+        "Home Assistant",
+        "IoT",
+        "Home Automation",
+        "YAML",
+        "Automation"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Home Assistant</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">My smart home with Home Assistant</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">March 2026 &bull; Experience report — Personal project</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Home Assistant</span><span class="tag">IoT</span><span class="tag">YAML</span><span class="tag">Local network</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">The starting point</h2>
+      <p class="muted">
+        The idea was simple: control the entire house from a single screen.
+        Before, each connected device had its own app, its own notifications,
+        and no communication between them. I wanted a system that was <b>unified, local and customizable</b>.
+      </p>
+      <p class="muted">
+        I chose <b>Home Assistant</b>: open source, self-hosted,
+        with an active community and very broad hardware compatibility.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">The setup</h2>
+
+      <h3 style="font-size:1.05rem;">1. The server</h3>
+      <p class="muted">
+        Home Assistant runs on a dedicated home server. The setup required
+        configuring the local network, assigning a static IP, and setting up
+        dashboard access via the browser.
+      </p>
+
+      <h3 style="font-size:1.05rem;">2. The devices</h3>
+      <p class="muted">
+        I integrated about ten devices via a Tapo hub:
+      </p>
+      <ul class="bullets">
+        <li><b>Door/window sensors</b>: open/closed detection</li>
+        <li><b>Temperature sensors</b>: room-by-room monitoring</li>
+        <li><b>Motion sensors</b>: presence detection</li>
+        <li><b>Smart plugs and lights</b>: remote control</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;">3. The dashboard</h3>
+      <p class="muted">
+        A centralized dashboard displayed permanently on a <b>dedicated tablet</b>.
+        It shows the status of all sensors, device controls,
+        and active alerts. The interface is customized with cards tailored
+        to each room in the house.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Automations</h2>
+      <p class="muted">
+        The heart of the project: <b>YAML automations</b>. I wrote about ten of them,
+        each triggered by a sensor event:
+      </p>
+      <ul class="bullets">
+        <li><b>Intrusion alert</b>: notification if a door sensor triggers while in away mode</li>
+        <li><b>Lighting control</b>: automatic on when motion detected, off after a delay</li>
+        <li><b>Temperature monitoring</b>: alert if a room exceeds a configured threshold</li>
+        <li><b>Scenarios</b>: "Good night" (all lights off, alarm on), "Leaving" (check doors, away mode)</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Technical challenges</h2>
+
+      <h3 style="font-size:1.05rem;">Hardware compatibility</h3>
+      <p class="muted">
+        Not all devices integrate as easily. Some sensors require specific integrations
+        or manual configuration. The Tapo hub simplified communication, but each device
+        had to be tested individually for reliability.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Automation reliability</h3>
+      <p class="muted">
+        A poorly calibrated automation can quickly become annoying:
+        false positives on motion sensors, unwanted alerts, etc.
+        Each automation was tested and adjusted over several days
+        before being validated.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Results</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~10</div>
+          <span class="muted">devices integrated</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~10</div>
+          <span class="muted">YAML automations</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">1</div>
+          <span class="muted">tablet dashboard</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        The house is now controlled from a single screen. Automations run 24/7 without
+        intervention, and alerts arrive directly on my phone.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Key takeaways</h2>
+      <ul class="bullets">
+        <li><b>Local first</b>: self-hosting means keeping control of your data without depending on the cloud.</li>
+        <li><b>YAML is powerful</b>: text-based automations are versionable, readable, and editable without a GUI.</li>
+        <li><b>Test before activating</b>: each automation needs several days of testing to avoid false positives.</li>
+        <li><b>A good dashboard changes everything</b>: a centralized tablet interface makes the system usable by the whole family.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Back to blog</a>
+        <a class="btn primary" href="../projects.html#domotique">View project</a>
+      </div>
+    </article>
+  </main>

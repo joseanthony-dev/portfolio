@@ -1,0 +1,156 @@
+<!--
+{
+  "title": "Automating application purge with Shell and Ansible — JOSE Anthony",
+  "description": "Experience report: automating obsolete version removal on ~300 Linux servers with Bash and Ansible.",
+  "og_title": "Automating application purge with Shell and Ansible — JOSE Anthony",
+  "og_description": "Experience report: automating obsolete version removal on ~300 Linux servers with Bash and Ansible.",
+  "og_type": "article",
+  "json_ld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Automating application purge with Shell and Ansible",
+      "description": "Experience report: automating obsolete version removal on ~300 Linux servers.",
+      "author": {
+        "@type": "Person",
+        "name": "JOSE Anthony"
+      },
+      "datePublished": "2026-03-18",
+      "url": "https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html",
+      "keywords": [
+        "Bash",
+        "Ansible",
+        "Linux",
+        "Automation",
+        "DevOps"
+      ]
+    }
+  ]
+}
+-->
+<main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../blog.html">Blog</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Application Purge</span>
+    </nav>
+
+    <article class="card fade-in" style="max-width:52rem;">
+      <div class="section-title" style="margin-top:0;">
+        <div>
+          <h1 style="font-size:1.35rem;margin:0;">Automating application purge with Shell and Ansible</h1>
+          <p class="muted" style="margin:0.5rem 0 0;font-size:.9rem;">March 2026 &bull; Experience report — Work-study at CTI (French Health Insurance)</p>
+        </div>
+      </div>
+      <div class="meta" style="margin-bottom:1.5rem;">
+        <span class="tag">Bash</span><span class="tag">Ansible</span><span class="tag">Linux</span><span class="tag">Automation</span>
+      </div>
+
+      <h2 style="font-size:1.15rem;">The Problem</h2>
+      <p class="muted">
+        At the CTI (Centre de Traitement Informatique) of the French Health Insurance in Saint-Etienne,
+        production servers accumulate <b>obsolete application versions</b> over successive deployments.
+        The issue: each server can contain dozens of unused versions consuming
+        precious disk space, with no operational value.
+      </p>
+      <p class="muted">
+        Before my intervention, the cleanup was manual: a technician would connect to each
+        server, identify versions to remove, verify they were no longer active,
+        and delete them one by one. Average time: <b>30 minutes to 1 hour per server</b>.
+        With ~300 servers concerned, the task was unrealistic to perform manually.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">The Solution</h2>
+      <p class="muted">
+        I designed a two-layer solution:
+      </p>
+
+      <h3 style="font-size:1.05rem;">1. Shell Script — business logic</h3>
+      <p class="muted">
+        A Bash script that runs locally on each server and handles all the logic:
+      </p>
+      <ul class="bullets">
+        <li><b>Auto-detection</b> of obsolete versions (comparison with the active production version)</li>
+        <li><b>Anomaly handling</b>: if a version is in an inconsistent state (lock file, active process), it is flagged but not deleted</li>
+        <li><b>Detailed logs</b>: every action is traced (deleted version, freed space, encountered anomalies)</li>
+        <li><b>Dry-run mode</b>: ability to simulate the purge without deleting anything for validation</li>
+        <li><b>Rollback</b>: backup before deletion to allow reverting if needed</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;">2. Ansible Playbook — orchestration</h3>
+      <p class="muted">
+        An Ansible playbook that deploys and executes the script across the entire fleet:
+      </p>
+      <ul class="bullets">
+        <li><b>Dynamic inventory</b>: targeting by server groups (prod, pre-prod, etc.)</li>
+        <li><b>Automated script deployment</b>: automated copy to each target</li>
+        <li><b>Controlled parallel execution</b>: controlled parallelization (forks) to limit load</li>
+        <li><b>Centralized report collection</b>: centralized retrieval of logs from each server</li>
+        <li><b>Idempotence</b>: the playbook can be replayed safely (already purged versions are skipped)</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Technical Challenges</h2>
+
+      <h3 style="font-size:1.05rem;">Edge case handling</h3>
+      <p class="muted">
+        The biggest challenge was not the deletion itself, but <b>anomaly handling</b>.
+        In production, you encounter unexpected situations: partially deployed versions,
+        locked files, broken symlinks, etc. The script had to be
+        <b>defensive by default</b>: when in doubt, delete nothing and report the information.
+      </p>
+
+      <h3 style="font-size:1.05rem;">Security and traceability</h3>
+      <p class="muted">
+        In a production environment tied to the French Health Insurance, every action must be
+        traced and justifiable. The logging system allows reconstructing exactly what was done,
+        when, and on which server. The dry-run mode allows validating behavior before any real action.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Results</h2>
+      <div class="cards" style="grid-template-columns:repeat(3,1fr);margin:1rem 0;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~300</div>
+          <span class="muted">servers processed</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~70%</div>
+          <span class="muted">disk space freed</span>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.6rem;font-weight:700;color:var(--accent);">~2 min</div>
+          <span class="muted">vs 30 min to 1h</span>
+        </div>
+      </div>
+
+      <p class="muted">
+        The script was validated in pre-production then progressively deployed across the fleet.
+        Full execution on ~300 servers now takes a few hours instead of
+        weeks of manual work.
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="font-size:1.15rem;">Key Takeaways</h2>
+      <ul class="bullets">
+        <li><b>Automating starts with understanding</b>: before writing a single line, I spent time understanding the manual process, edge cases, and production constraints.</li>
+        <li><b>Safety before speed</b>: dry-run mode and rollback were not optional. In production, you don't take risks.</li>
+        <li><b>Ansible for scale</b>: a good local script + Ansible for orchestration = a powerful combination for managing a server fleet.</li>
+        <li><b>Logs build trust</b>: clear and comprehensive logs allow validating the work and reassuring the teams.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="cta" style="justify-content:space-between;">
+        <a class="btn" href="../blog.html">&larr; Back to blog</a>
+        <a class="btn primary" href="../projects.html#purge">View project</a>
+      </div>
+    </article>
+  </main>
