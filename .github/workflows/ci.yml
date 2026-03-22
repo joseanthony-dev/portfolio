@@ -136,7 +136,7 @@ jobs:
         run: sleep 2
 
       - name: Check for broken links (internal only)
-        run: npx linkinator http://localhost:8080 --recurse --skip '^(?!http://localhost)' --timeout 10000
+        run: npx linkinator http://localhost:8080 --recurse --skip '^(?!http://localhost)' --timeout 30000 --concurrency 5
 
   lighthouse:
     runs-on: ubuntu-latest
