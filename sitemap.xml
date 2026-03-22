@@ -78,6 +78,11 @@
     <lastmod>2026-03-18</lastmod>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/feed.xml</loc>
+    <lastmod>2026-03-20</lastmod>
+    <priority>0.3</priority>
+  </url>
   <!-- English versions -->
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/en/index.html</loc>
@@ -148,6 +153,11 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://joseanthony-dev.github.io/portfolio/blog/photobooth-site.html" />
     <lastmod>2026-03-20</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://joseanthony-dev.github.io/portfolio/en/feed.xml</loc>
+    <lastmod>2026-03-20</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://joseanthony-dev.github.io/portfolio/en/legal.html</loc>

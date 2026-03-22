@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "cleancss -o assets/css/style.min.css assets/css/style.css",
     "build:js": "terser assets/js/main.js -o assets/js/main.min.js -c -m && terser assets/js/components.js -o assets/js/components.min.js -c -m",
-    "build": "npm run build:css && npm run build:js",
+    "build:rss": "node scripts/generate-rss.js",
+    "build": "npm run build:css && npm run build:js && npm run build:rss",
     "lint:js": "eslint --no-warn-ignored assets/js/*.js",
     "lint:css": "stylelint assets/css/style.css",
     "lint:html": "html-validate --formatter stylish *.html en/*.html blog/*.html",
@@ -14,6 +15,7 @@
     "watch:css": "chokidar 'assets/css/style.css' -c 'npm run build:css'",
     "watch:js": "chokidar 'assets/js/main.js' 'assets/js/components.js' -c 'npm run build:js'",
     "watch": "npm run watch:css & npm run watch:js",
+    "test:links": "python3 -m http.server 8080 & sleep 1 && npx linkinator http://localhost:8080 --recurse --skip '^(?!http://localhost)' --timeout 10000 ; kill %1 2>/dev/null",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "lint-staged": "^16.4.0",
     "sharp": "^0.34.5",
     "html-validate": "^9.0.0",
+    "linkinator": "^6.0.0",
     "pa11y": "^8.0.0",
     "stylelint": "^16.0.0",
     "stylelint-config-standard": "^37.0.0",

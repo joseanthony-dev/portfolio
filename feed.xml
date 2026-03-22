@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog — JOSE Anthony</title>
+    <description>Articles techniques sur l&apos;administration Linux, l&apos;automatisation (Bash/Ansible) et les retours d&apos;experience.</description>
+    <link>https://joseanthony-dev.github.io/portfolio/blog.html</link>
+    <language>fr</language>
+    <atom:link href="https://joseanthony-dev.github.io/portfolio/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Fri, 20 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Ma maison connectee avec Home Assistant</title>
+      <link>https://joseanthony-dev.github.io/portfolio/blog/domotique-home-assistant.html</link>
+      <description>Retour d&apos;experience : installation domotique complete avec capteurs, automatisations YAML et dashboard centralise.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/blog/domotique-home-assistant.html</guid>
+    </item>
+    <item>
+      <title>Creer une app de planning d&apos;equipe avec Flutter et Firebase</title>
+      <link>https://joseanthony-dev.github.io/portfolio/blog/flutter-planning.html</link>
+      <description>Retour d&apos;experience : developper une app mobile de gestion d&apos;evenements avec presences, export PDF et notifications.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/blog/flutter-planning.html</guid>
+    </item>
+    <item>
+      <title>Construire un photobooth et son site de location</title>
+      <link>https://joseanthony-dev.github.io/portfolio/blog/photobooth-site.html</link>
+      <description>Retour d&apos;experience : du montage materiel a la creation du site web de location avec reservation en ligne.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/blog/photobooth-site.html</guid>
+    </item>
+    <item>
+      <title>Automatiser la purge applicative avec Shell et Ansible</title>
+      <link>https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html</link>
+      <description>Retour d&apos;experience : automatisation de la purge de versions obsolètes sur ~300 serveurs Linux avec Bash et Ansible.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/blog/purge-ansible.html</guid>
+    </item>
+  </channel>
+</rss>

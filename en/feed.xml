@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog — JOSE Anthony</title>
+    <description>Technical articles on Linux administration, automation (Bash/Ansible) and experience reports.</description>
+    <link>https://joseanthony-dev.github.io/portfolio/en/blog.html</link>
+    <language>en</language>
+    <atom:link href="https://joseanthony-dev.github.io/portfolio/en/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Fri, 20 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>My smart home with Home Assistant</title>
+      <link>https://joseanthony-dev.github.io/portfolio/en/blog/domotique-home-assistant.html</link>
+      <description>Experience report: full home automation setup with sensors, YAML automations and a centralized dashboard.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/en/blog/domotique-home-assistant.html</guid>
+    </item>
+    <item>
+      <title>Building a team planning app with Flutter and Firebase</title>
+      <link>https://joseanthony-dev.github.io/portfolio/en/blog/flutter-planning.html</link>
+      <description>Experience report: developing a mobile event management app with attendance, PDF export and notifications.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/en/blog/flutter-planning.html</guid>
+    </item>
+    <item>
+      <title>Building a photobooth and its rental website</title>
+      <link>https://joseanthony-dev.github.io/portfolio/en/blog/photobooth-site.html</link>
+      <description>Experience report: from hardware assembly to building the rental website with online booking.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/en/blog/photobooth-site.html</guid>
+    </item>
+    <item>
+      <title>Automating application purge with Shell and Ansible</title>
+      <link>https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html</link>
+      <description>Experience report: automating obsolete version removal on ~300 Linux servers with Bash and Ansible.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://joseanthony-dev.github.io/portfolio/en/blog/purge-ansible.html</guid>
+    </item>
+  </channel>
+</rss>

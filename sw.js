@@ -1,4 +1,4 @@
-var CACHE_VERSION = "9";
+var CACHE_VERSION = "10";
 var CACHE_NAME = "portfolio-v" + CACHE_VERSION;
 var STATIC_ASSETS = [
   "/portfolio/",
@@ -25,6 +25,8 @@ var STATIC_ASSETS = [
   "/portfolio/en/blog/domotique-home-assistant.html",
   "/portfolio/en/blog/flutter-planning.html",
   "/portfolio/en/blog/photobooth-site.html",
+  "/portfolio/feed.xml",
+  "/portfolio/en/feed.xml",
   "/portfolio/en/legal.html",
   "/portfolio/assets/css/style.min.css",
   "/portfolio/assets/js/main.min.js",
