@@ -18,3 +18,7 @@ portfolio-pages-ready/
 
 # Node
 node_modules/
+
+# Playwright
+test-results/
+playwright-report/
