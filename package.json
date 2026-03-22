@@ -9,7 +9,8 @@
     "build": "npm run build:css && npm run build:js",
     "lint:js": "eslint --no-warn-ignored assets/js/*.js",
     "lint:css": "stylelint assets/css/style.css",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint:html": "html-validate --formatter stylish *.html en/*.html blog/*.html",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "watch:css": "chokidar 'assets/css/style.css' -c 'npm run build:css'",
     "watch:js": "chokidar 'assets/js/main.js' 'assets/js/components.js' -c 'npm run build:js'",
     "watch": "npm run watch:css & npm run watch:js",
@@ -22,12 +23,15 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "sharp": "^0.34.5",
+    "html-validate": "^9.0.0",
+    "pa11y": "^8.0.0",
     "stylelint": "^16.0.0",
     "stylelint-config-standard": "^37.0.0",
     "terser": "^5.37.0"
   },
   "lint-staged": {
     "assets/js/*.js": "eslint --no-warn-ignored",
-    "assets/css/style.css": "stylelint"
+    "assets/css/style.css": "stylelint",
+    "*.html": "html-validate"
   }
 }
