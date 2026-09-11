@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr" data-theme="clair">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Anthony Jose — Développeur logiciel</title>
+    <meta
+      name="description"
+      content="Étudiant en Master Informatique à Lyon, en recherche d'alternance pour la rentrée 2027. Applications web, desktop et mobile : React, TypeScript, Electron, React Native."
+    />
+    <meta name="author" content="Anthony Jose" />
+    <link rel="canonical" href="https://exemple.vercel.app/" />
+
+    <!-- Partage sur les réseaux / messageries — à mettre à jour après le déploiement -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anthony Jose — Développeur logiciel" />
+    <meta
+      property="og:description"
+      content="Applications web, desktop et mobile : React, TypeScript, Electron, React Native. Projets, parcours et CV."
+    />
+    <meta property="og:url" content="https://exemple.vercel.app/" />
+    <meta property="og:image" content="https://exemple.vercel.app/apercu.png" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Évite le clignotement blanc au chargement en thème sombre -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme')
+          if (t !== 'clair' && t !== 'sombre') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
+          }
+          document.documentElement.dataset.theme = t
+        } catch (e) {
+          /* pas de préférence accessible : on garde le thème clair */
+        }
+      })()
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anthony Jose",
+        "jobTitle": "Développeur logiciel",
+        "email": "mailto:anthony.jose@outlook.fr",
+        "address": { "@type": "PostalAddress", "addressLocality": "Montagny", "addressRegion": "Rhône", "addressCountry": "FR" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Université Claude Bernard Lyon 1" },
+        "sameAs": [
+          "https://github.com/joseanthony-dev",
+          "https://www.linkedin.com/in/joseanthony-zacharias"
+        ],
+        "knowsAbout": ["TypeScript", "React", "React Native", "Electron", "Node.js"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
