@@ -168,13 +168,13 @@ export const en: Contenu = {
         ],
       },
       {
-        diplome: 'BTS CIEL — Cybersecurity, Computing, Networks and Electronics',
+        diplome: 'BTS CIEL — Computing and Networks option',
         etablissement: 'Lycée Georges Brassens',
         lieu: 'Rive-de-Gier, France',
-        periode: 'TO FILL IN — e.g. 2023 — 2025',
+        periode: '2023 — 2025',
         details: [
-          'TO FILL IN — which option: Computing & Networks (IR) or Electronics & Networks (ER).',
-          'Two-year higher technical diploma; the networks, systems and security grounding I am now building on with the SRS master’s track.',
+          'Two-year higher technical diploma: network and system administration, software development, cybersecurity and databases.',
+          'The networks and security grounding I am now building on with the SRS master’s track.',
         ],
       },
     ],

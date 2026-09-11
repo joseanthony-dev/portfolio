@@ -175,13 +175,13 @@ export const fr: Contenu = {
         ],
       },
       {
-        diplome: 'BTS CIEL — Cybersécurité, Informatique et réseaux, Électronique',
+        diplome: 'BTS CIEL — option A, Informatique et Réseaux',
         etablissement: 'Lycée Georges Brassens',
         lieu: 'Rive-de-Gier (42)',
-        periode: 'À COMPLÉTER — ex. 2023 — 2025',
+        periode: '2023 — 2025',
         details: [
-          'À COMPLÉTER — option suivie : Informatique et Réseaux (IR) ou Électronique et Réseaux (ER).',
-          'Socle réseaux, systèmes et sécurité que je prolonge aujourd’hui avec la spécialisation SRS du Master.',
+          'Administration de réseaux et de systèmes, développement logiciel, cybersécurité et bases de données.',
+          'Socle réseaux et sécurité que je prolonge aujourd’hui avec la spécialisation SRS du Master.',
         ],
       },
     ],
