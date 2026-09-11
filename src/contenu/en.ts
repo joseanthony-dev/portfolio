@@ -160,10 +160,21 @@ export const en: Contenu = {
         diplome: "Bachelor's in Computer Science",
         etablissement: 'Université Claude Bernard Lyon 1',
         lieu: 'Lyon, France',
-        periode: '2023 — 2026', // TO CHECK — inferred from starting the master's in September 2026.
+        periode: '2025 — 2026',
         details: [
-          'General computer science training: algorithms, data structures, object-oriented programming, databases, systems and networks.',
-          'TO FILL IN — honours obtained and notable projects (e.g. the final-year LIFPROJET).',
+          'Admitted directly into the final year on the strength of the BTS.',
+          'Algorithms, object-oriented programming, databases, systems and networks.',
+          'TO FILL IN — honours obtained and final-year project, if you want them shown.',
+        ],
+      },
+      {
+        diplome: 'BTS CIEL — Cybersecurity, Computing, Networks and Electronics',
+        etablissement: 'Lycée Georges Brassens',
+        lieu: 'Rive-de-Gier, France',
+        periode: 'TO FILL IN — e.g. 2023 — 2025',
+        details: [
+          'TO FILL IN — which option: Computing & Networks (IR) or Electronics & Networks (ER).',
+          'Two-year higher technical diploma; the networks, systems and security grounding I am now building on with the SRS master’s track.',
         ],
       },
     ],

@@ -167,10 +167,21 @@ export const fr: Contenu = {
         diplome: 'Licence Informatique',
         etablissement: 'Université Claude Bernard Lyon 1',
         lieu: 'Lyon',
-        periode: '2023 — 2026', // À VÉRIFIER — déduit de ton entrée en M1 à la rentrée 2026.
+        periode: '2025 — 2026',
         details: [
-          'Formation générale en informatique : algorithmique, structures de données, programmation orientée objet, bases de données, systèmes et réseaux.',
-          'À COMPLÉTER — mention obtenue et projets marquants (ex. : LIFPROJET).',
+          'Admission directe en 3ᵉ année à l’issue du BTS.',
+          'Algorithmique, programmation orientée objet, bases de données, systèmes et réseaux.',
+          'À COMPLÉTER — mention obtenue et projet de fin de licence, si tu veux les afficher.',
+        ],
+      },
+      {
+        diplome: 'BTS CIEL — Cybersécurité, Informatique et réseaux, Électronique',
+        etablissement: 'Lycée Georges Brassens',
+        lieu: 'Rive-de-Gier (42)',
+        periode: 'À COMPLÉTER — ex. 2023 — 2025',
+        details: [
+          'À COMPLÉTER — option suivie : Informatique et Réseaux (IR) ou Électronique et Réseaux (ER).',
+          'Socle réseaux, systèmes et sécurité que je prolonge aujourd’hui avec la spécialisation SRS du Master.',
         ],
       },
     ],
