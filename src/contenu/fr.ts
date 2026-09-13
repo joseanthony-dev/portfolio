@@ -90,12 +90,12 @@ export const fr: Contenu = {
         id: 'team-manager',
         titre: 'Team Manager',
         resume:
-          'Application mobile de gestion d’équipe et d’événements : affectations, disponibilités, covoiturage et messagerie, avec deux rôles distincts.',
+          'Application mobile de gestion d’équipe : affectation des heures et des secteurs, disponibilités, covoiturage et messagerie, avec deux rôles distincts.',
         contexte:
-          'Affecter une équipe sur des événements, suivre qui est disponible et prévenir tout le monde à temps se fait mal par téléphone et par messages. L’application centralise les événements, les affectations et les échanges, avec une vue différente selon qu’on encadre ou qu’on est affecté.',
+          'J’encadre chaque samedi une équipe d’une quinzaine de préparateurs. Répartir les heures et les secteurs, savoir qui est disponible et prévenir tout le monde se faisait au téléphone et par messages, avec les oublis que ça suppose. J’ai développé l’outil qui manquait — en connaissant le problème de l’intérieur, puisque c’est moi qui le vivais.',
         points: [
           'Deux rôles séparés, chef et préparateur, portés par des droits Firebase (custom claims) et des écrans distincts.',
-          'Affectations par secteur avec détection automatique des conflits avant validation.',
+          'Affectation des heures et des secteurs, avec détection automatique des conflits avant validation.',
           'Déclaration des disponibilités, covoiturage entre participants et messagerie intégrée.',
           'Notifications push (Firebase Cloud Messaging) routées vers le bon écran à l’ouverture.',
           'Tableau de bord, retours des participants et export du récapitulatif.',
@@ -227,6 +227,7 @@ export const fr: Contenu = {
           'Poste tenu chaque samedi depuis 2022, en parallèle des études.',
           'Management opérationnel d’une équipe d’environ 15 préparateurs : organisation, priorisation, qualité.',
           'Gestion des process logistiques et respect des normes.',
+          'De ma propre initiative, développement de l’application mobile qui gère les affectations de l’équipe : heures, secteurs et disponibilités.',
         ],
       },
       {

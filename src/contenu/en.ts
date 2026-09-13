@@ -84,12 +84,12 @@ export const en: Contenu = {
         id: 'team-manager',
         titre: 'Team Manager',
         resume:
-          'A mobile app for running a team and its events: assignments, availability, car sharing and messaging, with two distinct roles.',
+          'A mobile app for running a team: assigning hours and sectors, availability, car sharing and messaging, with two distinct roles.',
         contexte:
-          'Assigning a team to events, tracking who is available and telling everyone in time all go badly over phone calls and messages. The app centralises the events, the assignments and the conversations, with a different view depending on whether you run the team or are assigned to it.',
+          'Every Saturday I lead a team of around fifteen order pickers. Splitting up the hours and the sectors, knowing who was available and telling everyone in time was done by phone and by text, with the oversights that come with it. I built the tool that was missing — knowing the problem from the inside, since I was the one living it.',
         points: [
           'Two separate roles, lead and picker, backed by Firebase custom claims and distinct screens.',
-          'Assignment by sector, with automatic conflict detection before anything is confirmed.',
+          'Assignment of hours and sectors, with automatic conflict detection before anything is confirmed.',
           'Availability declarations, car sharing between participants and built-in messaging.',
           'Push notifications (Firebase Cloud Messaging) routed to the right screen on open.',
           'Dashboard, participant feedback and summary export.',
@@ -221,6 +221,7 @@ export const en: Contenu = {
           'Role held every Saturday since 2022, alongside my studies.',
           'Day-to-day management of a team of around 15 order pickers: organising, prioritising, keeping the quality up.',
           'Running the logistics processes and keeping them within the standards.',
+          'On my own initiative, built the mobile app that handles the team’s assignments: hours, sectors and availability.',
         ],
       },
       {
