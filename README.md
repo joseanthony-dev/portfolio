@@ -79,8 +79,6 @@ Si tu déploies ailleurs (Vercel, domaine propre), retire `base` et remets les U
 
 - [ ] Remplacer les mentions restantes (`grep -rn "À COMPLÉTER\|TO FILL IN" src/`)
 - [ ] Déposer `public/cv.pdf`
-- [ ] Remplacer `https://exemple.vercel.app/` par ta vraie URL dans `index.html`
-      (balises `canonical`, `og:url`, `og:image`)
 - [ ] Ajouter une image de partage `public/apercu.png` (1200 × 630 px) — c'est ce qui s'affiche
       quand tu envoies le lien sur LinkedIn ou WhatsApp
 
