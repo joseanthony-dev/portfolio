@@ -21,6 +21,7 @@ export const en: Contenu = {
       'I come from operations: a year as an apprentice in IT production at the French national health insurance fund, handling incidents on a reimbursement processing chain and watching over servers and batch jobs with Centreon. Linux, automation, reliability — and development as the extension of it, to build the tools that are missing.',
     recherche:
       'Looking for a one-year apprenticeship alongside my final master’s year — starting September 2027, between Lyon and Saint-Étienne, or remote.',
+    photoAlt: 'Portrait of Anthony Jose',
     ctaProjets: 'See my work',
     ctaContact: 'Get in touch',
     ctaCv: 'Download my résumé',
@@ -80,21 +81,23 @@ export const en: Contenu = {
         liens: [],
       },
       {
-        id: 'application-planning',
-        titre: 'Event planning app',
+        id: 'team-manager',
+        titre: 'Team Manager',
         resume:
-          'A mobile app for running events: sign-ups, attendance replies, statistics and PDF export.',
+          'A mobile app for running a team and its events: assignments, availability, car sharing and messaging, with two distinct roles.',
         contexte:
-          'Organising events and keeping track of who is coming quickly becomes a headache. The app centralises the events, collects attendance replies and produces a summary you can actually use.',
+          'Assigning a team to events, tracking who is available and telling everyone in time all go badly over phone calls and messages. The app centralises the events, the assignments and the conversations, with a different view depending on whether you run the team or are assigned to it.',
         points: [
-          'Event management and collection of attendance replies.',
-          'Attendance statistics and PDF export of the summary.',
-          'Data synced through Firebase and reachable from several devices.',
+          'Two separate roles, lead and picker, backed by Firebase custom claims and distinct screens.',
+          'Assignment by sector, with automatic conflict detection before anything is confirmed.',
+          'Availability declarations, car sharing between participants and built-in messaging.',
+          'Push notifications (Firebase Cloud Messaging) routed to the right screen on open.',
+          'Dashboard, participant feedback and summary export.',
         ],
-        technos: ['Flutter', 'Firebase', 'Dart'],
+        technos: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Cloud Messaging', 'App Check'],
         periode: '2025',
         statut: 'livre',
-        vedette: false,
+        vedette: true,
         liens: [],
       },
       {
@@ -112,6 +115,46 @@ export const en: Contenu = {
         periode: '2024',
         statut: 'livre',
         vedette: false,
+        liens: [],
+      },
+      {
+        id: 'shapez-craft',
+        titre: 'Shapez Craft',
+        resume:
+          'A production-chain game in Java: place machines on a grid to manufacture shapes and deliver them.',
+        contexte:
+          'A university team project inspired by shapez.io. The player lays down mines, belts and machines on a board to cut, stack, paint and mix shapes until they match what the level asks for.',
+        points: [
+          'Strict MVC architecture: the model (board, machines, items) knows nothing at all about the display.',
+          'Eight machines with distinct behaviour — mine, belt, cutter, rotator, stacker, mixer, painter, delivery — derived from a shared base class.',
+          'Observer pattern between model and view: the grid redraws on notification, with no coupling.',
+          'Saving and reloading a game in progress.',
+          'Built as a team under Git, with a project report and an oral defence.',
+        ],
+        technos: ['Java', 'MVC', 'Swing', 'Observer', 'Maven', 'Git'],
+        periode: '2026',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
+        id: 'emotion-recognition',
+        titre: 'Emotion recognition',
+        resume:
+          'A full image-processing pipeline: real-time face detection, emotion classification and face generation.',
+        contexte:
+          'A university project introducing artificial intelligence. Three models chained inside a desktop application: find the faces in a webcam feed, recognise the emotion, and generate new faces conditioned on an emotion.',
+        points: [
+          'Real-time face detection on a webcam feed (YOLO).',
+          'Classification across seven emotions — anger, disgust, fear, joy, sadness, surprise, neutral — with a ResNet18 trained on FER2013.',
+          'Face generation through a variational autoencoder, with interpolation in the latent space.',
+          'Bilingual PyQt5 interface: video feed, predictions and dataset exploration.',
+          'Tooled training: early stopping, TensorBoard tracking, structured logging and 32 pytest tests.',
+        ],
+        technos: ['Python', 'PyTorch', 'YOLO', 'ResNet18', 'VAE', 'PyQt5', 'TensorBoard', 'pytest'],
+        periode: '2026',
+        statut: 'livre',
+        vedette: true,
         liens: [],
       },
       {

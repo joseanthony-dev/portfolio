@@ -6,6 +6,7 @@ export function Hero({ t }: { t: Contenu }) {
     <section className="hero" id="haut">
       <div className="hero__grille" aria-hidden="true" />
       <div className="section__interieur hero__interieur">
+        <div className="hero__texte">
         <p className="hero__salutation">{t.hero.salutation}</p>
         <h1 className="hero__nom">{t.hero.nom}</h1>
         <p className="hero__titre">{t.hero.titre}</p>
@@ -29,6 +30,15 @@ export function Hero({ t }: { t: Contenu }) {
             {t.hero.ctaCv}
           </a>
         </div>
+        </div>
+
+        <img
+          className="hero__photo"
+          src={`${import.meta.env.BASE_URL}photo.png`}
+          alt={t.hero.photoAlt}
+          width={308}
+          height={461}
+        />
       </div>
     </section>
   )

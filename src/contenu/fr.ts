@@ -27,6 +27,7 @@ export const fr: Contenu = {
       "Je viens de l'exploitation : une année d'alternance en informatique de production à l'Assurance Maladie, à traiter les incidents d'une chaîne de remboursement et à superviser serveurs et traitements sous Centreon. Linux, automatisation, fiabilité — et le développement en prolongement, pour construire les outils qui manquent.",
     recherche:
       'En recherche d’une alternance pour mon Master 2 — rentrée 2027, entre Lyon et Saint-Étienne, ou en télétravail.',
+    photoAlt: 'Portrait d’Anthony Jose',
     ctaProjets: 'Voir mes projets',
     ctaContact: 'Me contacter',
     ctaCv: 'Télécharger mon CV',
@@ -86,21 +87,23 @@ export const fr: Contenu = {
         liens: [],
       },
       {
-        id: 'application-planning',
-        titre: 'Application planning',
+        id: 'team-manager',
+        titre: 'Team Manager',
         resume:
-          'Application mobile de gestion d’événements : inscriptions, réponses de présence, statistiques et export PDF.',
+          'Application mobile de gestion d’équipe et d’événements : affectations, disponibilités, covoiturage et messagerie, avec deux rôles distincts.',
         contexte:
-          'Organiser des événements et suivre qui vient relève vite du casse-tête. L’application centralise les événements, collecte les réponses de présence et sort un récapitulatif exploitable.',
+          'Affecter une équipe sur des événements, suivre qui est disponible et prévenir tout le monde à temps se fait mal par téléphone et par messages. L’application centralise les événements, les affectations et les échanges, avec une vue différente selon qu’on encadre ou qu’on est affecté.',
         points: [
-          'Gestion des événements et collecte des réponses de présence.',
-          'Statistiques de participation et export PDF du récapitulatif.',
-          'Données synchronisées via Firebase, accessibles depuis plusieurs appareils.',
+          'Deux rôles séparés, chef et préparateur, portés par des droits Firebase (custom claims) et des écrans distincts.',
+          'Affectations par secteur avec détection automatique des conflits avant validation.',
+          'Déclaration des disponibilités, covoiturage entre participants et messagerie intégrée.',
+          'Notifications push (Firebase Cloud Messaging) routées vers le bon écran à l’ouverture.',
+          'Tableau de bord, retours des participants et export du récapitulatif.',
         ],
-        technos: ['Flutter', 'Firebase', 'Dart'],
+        technos: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Cloud Messaging', 'App Check'],
         periode: '2025',
         statut: 'livre',
-        vedette: false,
+        vedette: true,
         liens: [],
       },
       {
@@ -118,6 +121,46 @@ export const fr: Contenu = {
         periode: '2024',
         statut: 'livre',
         vedette: false,
+        liens: [],
+      },
+      {
+        id: 'shapez-craft',
+        titre: 'Shapez Craft',
+        resume:
+          'Jeu de chaînes de production en Java : poser des machines sur une grille pour fabriquer des formes et les livrer.',
+        contexte:
+          'Projet universitaire en équipe, inspiré de shapez.io. Le joueur pose mines, tapis et machines sur un plateau pour découper, empiler, peindre et mélanger des formes jusqu’à obtenir celle que le niveau réclame.',
+        points: [
+          'Architecture MVC stricte : le modèle (plateau, machines, items) ignore totalement l’affichage.',
+          'Huit machines aux comportements distincts — mine, tapis, découpeur, rotateur, empileur, mélangeur, peinture, livraison — dérivées d’une classe commune.',
+          'Patron Observer entre le modèle et la vue : la grille se redessine sur notification, sans couplage.',
+          'Sauvegarde et rechargement d’une partie en cours.',
+          'Travail en groupe sous Git, rapport de projet et soutenance.',
+        ],
+        technos: ['Java', 'MVC', 'Swing', 'Observer', 'Maven', 'Git'],
+        periode: '2026',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
+        id: 'emotion-recognition',
+        titre: 'Reconnaissance d’émotions',
+        resume:
+          'Chaîne complète de traitement d’images : détection de visages en temps réel, classification d’émotions et génération de visages.',
+        contexte:
+          'Projet universitaire d’introduction à l’intelligence artificielle. Trois modèles enchaînés dans une application de bureau : repérer les visages dans un flux webcam, reconnaître l’émotion, et générer de nouveaux visages conditionnés par une émotion.',
+        points: [
+          'Détection de visages en temps réel sur flux webcam (YOLO).',
+          'Classification sur sept émotions — colère, dégoût, peur, joie, tristesse, surprise, neutre — avec un ResNet18 entraîné sur FER2013.',
+          'Génération de visages par autoencodeur variationnel, avec interpolation dans l’espace latent.',
+          'Interface PyQt5 bilingue : flux vidéo, prédictions et exploration du jeu de données.',
+          'Entraînement outillé : early stopping, suivi TensorBoard, journalisation structurée et 32 tests pytest.',
+        ],
+        technos: ['Python', 'PyTorch', 'YOLO', 'ResNet18', 'VAE', 'PyQt5', 'TensorBoard', 'pytest'],
+        periode: '2026',
+        statut: 'livre',
+        vedette: true,
         liens: [],
       },
       {

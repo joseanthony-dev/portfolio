@@ -280,7 +280,25 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
 }
 
-.hero__interieur { position: relative; }
+.hero__interieur {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.hero__photo {
+  width: clamp(150px, 17vw, 205px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  /* Le portrait est cadré haut : on recentre sur le visage dans le carré. */
+  object-position: 50% 28%;
+  border-radius: 50%;
+  border: 1px solid var(--bordure-forte);
+  box-shadow: var(--ombre);
+  background: var(--surface);
+}
 
 .hero__salutation { color: var(--encre-douce); font-size: 1rem; margin-bottom: 0.4rem; }
 
@@ -627,6 +645,8 @@ a:hover { text-decoration: underline; }
   .entete__nav a { padding: 0.75rem 0.8rem; }
 
   .parcours__colonnes { gap: 2.5rem; }
+  .hero__interieur { grid-template-columns: 1fr; justify-items: start; }
+  .hero__photo { order: -1; width: clamp(116px, 30vw, 150px); }
   .hero__actions .bouton { flex: 1 1 auto; }
 }
 

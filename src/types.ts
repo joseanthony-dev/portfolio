@@ -56,6 +56,7 @@ export type Contenu = {
     titre: string
     accroche: string
     recherche: string
+    photoAlt: string
     ctaProjets: string
     ctaContact: string
     ctaCv: string
