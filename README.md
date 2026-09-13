@@ -1,99 +1,83 @@
 # Portfolio — Anthony Jose
 
-Site vitrine personnel : CV, projets, parcours et contact. Bilingue FR/EN, thème clair/sombre,
-responsive, sans aucune dépendance externe au moment de l'exécution (pas de police Google, pas de CDN).
+Site personnel présentant mon parcours, mes projets et mes compétences en systèmes, réseaux
+et sécurité.
 
-**Stack** : React 19 + TypeScript + Vite. Site 100 % statique → hébergeable gratuitement partout.
+**→ [joseanthony-dev.github.io/portfolio](https://joseanthony-dev.github.io/portfolio/)**
+
+Bilingue français / anglais, thème clair et sombre, responsive, accessible au clavier.
+Le site ne charge **aucune ressource externe** à l'exécution : pas de police Google, pas de CDN,
+pas de script tiers. Tout est servi depuis le domaine, ce qui évite toute requête vers un service
+tiers pour le visiteur.
+
+## Stack
+
+React 19 · TypeScript · Vite 8 · CSS natif (aucun framework de style)
+
+Le site est entièrement statique : le build produit du HTML, du CSS et un bundle JS, hébergeables
+n'importe où. Aucune dépendance d'exécution en dehors de React.
+
+## Quelques partis pris
+
+**Contenu et présentation séparés.** Tout le texte vit dans `src/contenu/fr.ts` et
+`src/contenu/en.ts`, jamais dans les composants. Les deux fichiers doivent satisfaire le même type
+`Contenu` (`src/types.ts`) : si une traduction manque un champ, la compilation échoue. Les deux
+langues ne peuvent donc pas diverger silencieusement.
+
+**Thème sans clignotement.** Un script inline dans `index.html` applique le thème enregistré avant
+le premier rendu, ce qui évite l'éclair blanc au chargement en mode sombre. Toute lecture de
+`localStorage` est protégée : le site fonctionne en navigation privée ou site data bloqué.
+
+**Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
+thèmes, et `prefers-reduced-motion` respecté.
+
+**Styles.** Environ 12 ko de CSS écrits à la main, pilotés par des variables de thème regroupées en
+tête de `src/index.css`. Changer la couleur d'accent tient en une ligne.
 
 ## Démarrer
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev        # serveur de développement
 npm run build      # génère dist/
 npm run preview    # sert le dist/ compilé
 npm run lint
 ```
 
-## Modifier le contenu
-
-**Tout le texte du site est dans deux fichiers, et nulle part ailleurs :**
-
-| Fichier | Rôle |
-|---|---|
-| `src/contenu/fr.ts` | version française |
-| `src/contenu/en.ts` | version anglaise |
-
-Les deux fichiers ont exactement la même structure (garantie par `src/types.ts` : si tu oublies un
-champ, `npm run build` te le signale). Pour ajouter un projet, copie un bloc de `projets.liste`
-dans les deux fichiers.
-
-Les endroits marqués **« À COMPLÉTER »** / **« TO FILL IN »** attendent tes informations —
-voir `A-FAIRE.md`.
-
-### Afficher le lien GitHub d'un projet
-
-Les dépôts étant privés pour l'instant, les cartes projets n'affichent aucun lien (`liens: []`).
-Une fois un dépôt rendu public, décommente la ligne juste au-dessus, dans les **deux** fichiers :
-
-```ts
-liens: [{ label: 'Code source', url: 'https://github.com/joseanthony-dev/photomaton-locations', type: 'github' }],
-```
-
-### Ajouter ton CV en PDF
-
-Dépose ton CV dans `public/cv.pdf`. Le bouton « Télécharger mon CV » pointe déjà vers ce fichier.
-Tant qu'il n'existe pas, le bouton renvoie une erreur 404.
-
-### Changer la couleur d'accent
-
-Une seule variable, en haut de `src/index.css` :
-
-```css
---accent: #0d6a5a;   /* thème clair */
-```
-et son équivalent dans le bloc `:root[data-theme='sombre']`.
-
-## Déployer
-
-### Vercel (recommandé — gratuit, 2 minutes)
-
-1. Pousse le projet sur GitHub.
-2. [vercel.com](https://vercel.com) → *Add New Project* → importe le dépôt.
-3. Vercel détecte Vite automatiquement (build `npm run build`, sortie `dist`). Clique *Deploy*.
-4. Chaque `git push` redéploie le site tout seul.
-
-Pour un nom propre à mettre sur ton CV, achète un domaine (~10 €/an chez OVH, Gandi ou Namecheap)
-et ajoute-le dans *Settings → Domains*.
-
-### GitHub Pages (cible actuelle)
-
-L'URL visée est <https://joseanthony-dev.github.io/portfolio/>, celle indiquée sur le CV.
-`vite.config.ts` contient déjà `base: '/portfolio/'` : le site étant servi depuis un sous-dossier,
-sans cette base le CSS et le JS seraient demandés à la racine du domaine et la page s'afficherait
-blanche. Publie ensuite `dist/` via une action GitHub Pages ou la branche `gh-pages`.
-
-Si tu déploies ailleurs (Vercel, domaine propre), retire `base` et remets les URL de `index.html`.
-
-## Avant de diffuser le lien
-
-- [ ] Remplacer les mentions restantes (`grep -rn "À COMPLÉTER\|TO FILL IN" src/`)
-- [ ] Déposer `public/cv.pdf`
-- [ ] Ajouter une image de partage `public/apercu.png` (1200 × 630 px) — c'est ce qui s'affiche
-      quand tu envoies le lien sur LinkedIn ou WhatsApp
+Node 22 ou plus.
 
 ## Structure
 
 ```
 src/
-  types.ts              structure des données (contrat entre FR et EN)
-  contenu/fr.ts         ← le texte français
-  contenu/en.ts         ← le texte anglais
+  types.ts              contrat de données, garant de la parité FR / EN
+  contenu/fr.ts         texte français
+  contenu/en.ts         texte anglais
   App.tsx               langue, thème, assemblage des sections
-  index.css             toute la mise en forme (variables de thème en haut)
+  index.css             mise en forme complète (variables de thème en tête)
   composants/
     EnTete.tsx          navigation, bascule langue et thème, menu mobile
-    Hero.tsx            bandeau d'accueil
-    APropos.tsx  Projets.tsx  Parcours.tsx  Competences.tsx  Contact.tsx
-    PiedDePage.tsx  Icones.tsx
+    Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
+    Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 ```
+
+## Déploiement
+
+Publié sur GitHub Pages par `.github/workflows/deploy.yml`, qui construit et met en ligne le site
+à chaque `push` sur `main`.
+
+Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/portfolio/'`. Sans cette
+base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
+déployer ailleurs, retirer `base` et mettre à jour les URL canoniques de `index.html`.
+
+---
+
+## In English
+
+A personal site presenting my background, projects and skills in systems, networks and security.
+Bilingual, light and dark themes, responsive, keyboard accessible, and with **no external runtime
+dependencies** — no web fonts, no CDN, no third-party scripts.
+
+Built with React 19, TypeScript and Vite. All copy lives in two content files that must satisfy the
+same TypeScript type, so the French and English versions cannot drift apart without the build
+failing. Deployed to GitHub Pages on every push to `main`.

@@ -1,8 +1,8 @@
 import type { Contenu } from '../types'
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  CONTENU FRANÇAIS — c'est ICI que tu modifies le texte du site.
-//  Ce qui est marqué « À COMPLÉTER » attend encore tes informations.
+//  CONTENU FRANÇAIS — tout le texte affiché en français est dans ce fichier.
+//  Sa structure est imposée par src/types.ts et doit rester identique à en.ts.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const fr: Contenu = {
@@ -315,7 +315,6 @@ export const fr: Contenu = {
         details: [
           'Admission directe en 3ᵉ année à l’issue du BTS.',
           'Algorithmique, programmation orientée objet, bases de données, systèmes et réseaux.',
-          'À COMPLÉTER — mention obtenue et projet de fin de licence, si tu veux les afficher.',
         ],
       },
       {

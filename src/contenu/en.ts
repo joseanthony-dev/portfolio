@@ -308,7 +308,6 @@ export const en: Contenu = {
         details: [
           'Admitted directly into the final year on the strength of the BTS.',
           'Algorithms, object-oriented programming, databases, systems and networks.',
-          'TO FILL IN — honours obtained and final-year project, if you want them shown.',
         ],
       },
       {
