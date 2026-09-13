@@ -8,7 +8,7 @@ export const en: Contenu = {
   meta: {
     titre: 'Anthony Jose — Systems, Networks & Security',
     description:
-      "Computer science master's student in Lyon, France, on the Systems, Networks and Security track, looking for a September 2027 apprenticeship. System and network administration, monitoring, automation, cybersecurity.",
+      "Computer science master's student in Lyon, France, on the Systems, Networks and Security track, looking for a September 2027 apprenticeship. System and network administration, monitoring, automation, cybersecurity — and building the tooling that goes with it.",
   },
 
   nav: { projets: 'Projects', parcours: 'Background', competences: 'Skills', contact: 'Contact' },
@@ -16,7 +16,7 @@ export const en: Contenu = {
   hero: {
     salutation: "Hi, I'm",
     nom: 'Anthony Jose',
-    titre: 'Systems, networks & security',
+    titre: 'Systems, networks & security — and a bit of development',
     accroche:
       'I come from operations: a year as an apprentice in IT production at the French national health insurance fund, handling incidents on a reimbursement processing chain and watching over servers and batch jobs with Centreon. Linux, automation, reliability — and development as the extension of it, to build the tools that are missing.',
     recherche:
@@ -37,7 +37,7 @@ export const en: Contenu = {
 
   projets: {
     titre: 'Projects',
-    sousTitre: 'Real applications, designed and built end to end.',
+    sousTitre: 'I build things on the side too: real applications, designed and shipped end to end.',
     voirTout: 'View code',
     statuts: { 'en-cours': 'In progress', livre: 'In production' },
     liste: [

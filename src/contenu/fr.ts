@@ -9,7 +9,7 @@ export const fr: Contenu = {
   meta: {
     titre: 'Anthony Jose — Systèmes, réseaux & sécurité',
     description:
-      "Étudiant en Master Informatique à Lyon, parcours SRS, en recherche d'alternance pour la rentrée 2027. Administration système et réseau, supervision, automatisation, cybersécurité.",
+      "Étudiant en Master Informatique à Lyon, parcours SRS, en recherche d'alternance pour la rentrée 2027. Administration système et réseau, supervision, automatisation, cybersécurité — et le développement des outils qui vont avec.",
   },
 
   nav: {
@@ -22,7 +22,7 @@ export const fr: Contenu = {
   hero: {
     salutation: 'Bonjour, je suis',
     nom: 'Anthony Jose',
-    titre: 'Systèmes, réseaux & sécurité',
+    titre: 'Systèmes, réseaux & sécurité — et un peu de développement',
     accroche:
       "Je viens de l'exploitation : une année d'alternance en informatique de production à l'Assurance Maladie, à traiter les incidents d'une chaîne de remboursement et à superviser serveurs et traitements sous Centreon. Linux, automatisation, fiabilité — et le développement en prolongement, pour construire les outils qui manquent.",
     recherche:
@@ -43,7 +43,7 @@ export const fr: Contenu = {
 
   projets: {
     titre: 'Projets',
-    sousTitre: 'Des applications réelles, conçues et développées de bout en bout.',
+    sousTitre: 'Je développe aussi, à côté : des applications réelles, conçues et livrées de bout en bout.',
     voirTout: 'Voir le code',
     statuts: { 'en-cours': 'En cours', livre: 'En production' },
     liste: [
