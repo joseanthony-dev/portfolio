@@ -49,6 +49,24 @@ export function Parcours({ t }: { t: Contenu }) {
             </ol>
           </div>
         </div>
+
+        <h3 className="parcours__sous-titre parcours__sous-titre--large">
+          {t.parcours.certificationsTitre}
+        </h3>
+        <ul className="certifications">
+          {t.parcours.certifications.map((certif, i) => (
+            <li key={i} className="certification">
+              <div className="frise__periode">{certif.periode}</div>
+              <h4 className="frise__titre">{certif.intitule}</h4>
+              <p className="frise__organisation">{certif.organisme}</p>
+              <ul className="frise__details">
+                {certif.details.map((detail, j) => (
+                  <li key={j}>{detail}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

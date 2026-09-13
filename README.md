@@ -66,15 +66,14 @@ et son équivalent dans le bloc `:root[data-theme='sombre']`.
 Pour un nom propre à mettre sur ton CV, achète un domaine (~10 €/an chez OVH, Gandi ou Namecheap)
 et ajoute-le dans *Settings → Domains*.
 
-### GitHub Pages (alternative)
+### GitHub Pages (cible actuelle)
 
-Ajoute la base dans `vite.config.ts` (le site est servi depuis un sous-dossier) :
+L'URL visée est <https://joseanthony-dev.github.io/portfolio/>, celle indiquée sur le CV.
+`vite.config.ts` contient déjà `base: '/portfolio/'` : le site étant servi depuis un sous-dossier,
+sans cette base le CSS et le JS seraient demandés à la racine du domaine et la page s'afficherait
+blanche. Publie ensuite `dist/` via une action GitHub Pages ou la branche `gh-pages`.
 
-```ts
-export default defineConfig({ plugins: [react()], base: '/portfolio/' })
-```
-
-puis publie `dist/` via une action GitHub Pages ou la branche `gh-pages`.
+Si tu déploies ailleurs (Vercel, domaine propre), retire `base` et remets les URL de `index.html`.
 
 ## Avant de diffuser le lien
 

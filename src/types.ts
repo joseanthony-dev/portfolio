@@ -35,6 +35,13 @@ export type Formation = {
   details: string[]
 }
 
+export type Certification = {
+  intitule: string
+  organisme: string
+  periode: string
+  details: string[]
+}
+
 export type GroupeCompetences = {
   categorie: string
   items: string[]
@@ -65,8 +72,10 @@ export type Contenu = {
     titre: string
     experienceTitre: string
     formationTitre: string
+    certificationsTitre: string
     experiences: Poste[]
     formations: Formation[]
+    certifications: Certification[]
   }
   competences: { titre: string; sousTitre: string; groupes: GroupeCompetences[] }
   contact: {

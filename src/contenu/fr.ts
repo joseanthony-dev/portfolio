@@ -48,6 +48,79 @@ export const fr: Contenu = {
     statuts: { 'en-cours': 'En cours', livre: 'En production' },
     liste: [
       {
+        id: 'outils-purge-shell',
+        titre: 'Outils de purge Shell',
+        resume:
+          'Scripts d’exploitation qui libèrent l’espace disque des serveurs de production en supprimant les anciennes versions applicatives.',
+        contexte:
+          'Au CTI de l’Assurance Maladie, chaque montée de version laissait les livraisons précédentes sur les serveurs : l’espace disque se réduisait à vue d’œil et le nettoyage se faisait à la main. J’ai écrit les outils qui automatisent cette purge.',
+        points: [
+          'Scripts Bash de nettoyage des anciennes versions et des logs, déclenchés par cron.',
+          'Déploiement et configuration des scripts sur le parc via Ansible.',
+          'Jusqu’à 80 % de temps gagné sur les tâches de nettoyage auparavant manuelles.',
+          'Procédures rédigées pour que l’équipe puisse reprendre et adapter les outils.',
+        ],
+        technos: ['Bash', 'Ansible', 'cron', 'Linux'],
+        periode: '2024 — 2025',
+        statut: 'livre',
+        vedette: true,
+        liens: [],
+      },
+      {
+        id: 'domotique-home-assistant',
+        titre: 'Domotique — Home Assistant',
+        resume:
+          'Installation domotique complète sur réseau local : intégrations, automatisations, tableaux de bord et notifications.',
+        contexte:
+          'Un terrain de jeu permanent pour tout ce qui m’intéresse en systèmes et réseaux : des équipements hétérogènes à faire dialoguer, un service à garder disponible, et de l’automatisation à écrire pour que la maison réagisse sans qu’on lui demande.',
+        points: [
+          'Intégration d’équipements IoT variés sur un réseau local maîtrisé.',
+          'Automatisations et scénarios déclenchés par capteurs, horaires et présence.',
+          'Tableaux de bord sur mesure et notifications pilotées par événement.',
+          'Auto-hébergement : supervision du service, sauvegardes et mises à jour.',
+        ],
+        technos: ['Home Assistant', 'IoT', 'YAML', 'Réseau local', 'Linux'],
+        periode: 'En continu',
+        statut: 'en-cours',
+        vedette: true,
+        liens: [],
+      },
+      {
+        id: 'application-planning',
+        titre: 'Application planning',
+        resume:
+          'Application mobile de gestion d’événements : inscriptions, réponses de présence, statistiques et export PDF.',
+        contexte:
+          'Organiser des événements et suivre qui vient relève vite du casse-tête. L’application centralise les événements, collecte les réponses de présence et sort un récapitulatif exploitable.',
+        points: [
+          'Gestion des événements et collecte des réponses de présence.',
+          'Statistiques de participation et export PDF du récapitulatif.',
+          'Données synchronisées via Firebase, accessibles depuis plusieurs appareils.',
+        ],
+        technos: ['Flutter', 'Firebase', 'Dart'],
+        periode: '2025',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
+        id: 'site-web-personnel',
+        titre: 'Site web personnel',
+        resume: 'Site vitrine avec système de réservations, servi derrière Cloudflare.',
+        contexte:
+          'Un site vitrine classique, écrit sans framework, doublé d’un système de réservations en ligne. L’occasion de prendre en main la mise en ligne de bout en bout : nom de domaine, DNS, certificat et mise en cache.',
+        points: [
+          'Site statique en HTML, CSS et JavaScript, sans dépendance externe.',
+          'Système de réservations en ligne.',
+          'Mise en ligne derrière Cloudflare : DNS, certificat TLS et cache.',
+        ],
+        technos: ['HTML', 'CSS', 'JavaScript', 'Cloudflare'],
+        periode: '2024',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
         id: 'photomaton-locations',
         titre: 'Photomaton Locations',
         resume:
@@ -131,6 +204,7 @@ export const fr: Contenu = {
     titre: 'Parcours',
     experienceTitre: 'Expérience',
     formationTitre: 'Formation',
+    certificationsTitre: 'Certifications',
     experiences: [
       {
         titre: 'Développeur — application de gestion sur mesure',
@@ -145,25 +219,37 @@ export const fr: Contenu = {
         ],
       },
       {
-        titre: 'Stage puis alternance — informatique de production',
-        organisation: 'Assurance Maladie — CTI de Saint-Étienne',
+        titre: 'Analyste alternant en informatique de production',
+        organisation: "Centre de Traitements Informatique — Assurance Maladie",
         lieu: 'Saint-Étienne (42)',
         periode: '2024 — 2025',
         details: [
-          "Stage de 6 semaines en 2024, prolongé par une année d'alternance (2024 — 2025) au Centre de Traitement Informatique de l'Assurance Maladie.",
-          "Traitement des incidents de la chaîne de remboursement, au cœur d'un système d'information de grande échelle.",
-          'Interventions sur le superviseur Centreon : surveillance des serveurs et des traitements de production.',
-          "Automatisation de la purge des anciennes versions applicatives : à chaque montée de version, les livraisons précédentes restaient sur les serveurs et saturaient l'espace disque — la purge libère la place sans intervention manuelle.",
+          "Stage de 6 semaines en 2024, prolongé par une année d'alternance.",
+          'Automatisation de tâches d’exploitation via Ansible (déploiements, configurations) : jusqu’à 80 % de temps gagné sur certaines tâches.',
+          'Installation et support d’applications : diagnostic, correctifs, rédaction des procédures.',
+          'Contribution à la fiabilisation des environnements : suivi de configuration, documentation, bonnes pratiques.',
+          'Support technique sur les processus de remboursement — orientation et résolution d’incidents, environ 3 tickets par semaine.',
         ],
       },
       {
-        titre: 'Responsable — management terrain',
-        organisation: 'Alliance Healthcare',
+        titre: 'Manager',
+        organisation: 'Alliance Healthcare Répartition',
         lieu: 'Montagny (69)',
         periode: 'Depuis 2022',
         details: [
-          'Poste de responsable tenu chaque samedi depuis 2022, en parallèle des études.',
-          "Encadrement d'une équipe de 15 personnes : organisation du travail, répartition des tâches et suivi sur le terrain.",
+          'Poste tenu chaque samedi depuis 2022, en parallèle des études.',
+          'Management opérationnel d’une équipe d’environ 15 préparateurs : organisation, priorisation, qualité.',
+          'Gestion des process logistiques et respect des normes.',
+        ],
+      },
+      {
+        titre: 'Saisonnier',
+        organisation: 'Soleil Levant',
+        lieu: '',
+        periode: '2020 — 2021',
+        details: [
+          'Récolte et tri des fruits, dans le respect des normes de qualité et de sécurité.',
+          'Travail en équipe et gestion des cadences de production.',
         ],
       },
     ],
@@ -191,14 +277,30 @@ export const fr: Contenu = {
       },
       {
         diplome: 'BTS CIEL — option A, Informatique et Réseaux',
-        etablissement: 'Lycée Georges Brassens',
+        etablissement: 'LPO Georges Brassens',
         lieu: 'Rive-de-Gier (42)',
         periode: '2023 — 2025',
         details: [
-          'Administration de réseaux et de systèmes, développement logiciel, cybersécurité et bases de données.',
+          'Cybersécurité, informatique et réseaux, électronique.',
           "2ᵉ année effectuée en alternance à l'Assurance Maladie, au CTI de Saint-Étienne.",
           'Socle réseaux et sécurité que je prolonge aujourd’hui avec la spécialisation SRS du Master.',
         ],
+      },
+    ],
+    certifications: [
+      {
+        intitule: 'CCNA 1 & 2',
+        organisme: 'Cisco Networking Academy',
+        periode: '2025 & 2026',
+        details: [
+          'Fondamentaux des réseaux, commutation, routage et adressage IP.',
+        ],
+      },
+      {
+        intitule: 'Certification PIX',
+        organisme: 'PIX',
+        periode: '2022 & 2025',
+        details: ['Score de 542 en 2025, après un premier passage à 201 en 2022.'],
       },
     ],
   },
@@ -208,25 +310,39 @@ export const fr: Contenu = {
     sousTitre: 'Les outils que j’utilise réellement, en production comme sur mes projets.',
     groupes: [
       {
-        categorie: 'Systèmes & réseaux',
-        items: ['Linux', 'Administration système & réseau', 'Supervision (Centreon)', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
-      },
-      { categorie: 'Langages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
-      {
-        categorie: 'Front-end',
-        items: ['React', 'Vite', 'React Native / Expo', 'Flutter / Firebase', 'PWA & Service Workers', 'SVG', 'Accessibilité (WCAG)'],
+        categorie: 'Systèmes',
+        items: ['Linux (admin, logs, permissions)', 'cron', 'Gestion de l’espace disque', 'VMware'],
       },
       {
-        categorie: 'Back-end & données',
-        items: ['Node.js', 'API REST', 'Odoo / XML-RPC', 'SQLite', 'Tomcat / Jakarta EE'],
+        categorie: 'Automatisation',
+        items: ['Scripts Bash', 'Ansible', 'Python'],
       },
       {
-        categorie: 'Desktop & distribution',
-        items: ['Electron', 'electron-builder', 'Paquets .deb', 'EAS Build'],
+        categorie: 'Réseaux',
+        items: [
+          'TCP / IP',
+          'SSH (clés, scp)',
+          'Diagnostic (ping, traceroute, ip)',
+          'Routeurs & switchs',
+          'Adressage & segmentation (CIDR, VLAN)',
+          'DHCP',
+        ],
       },
       {
-        categorie: 'Qualité & outillage',
-        items: ['Vitest', 'Jest', 'Playwright', 'ESLint', 'Prettier', 'Git', 'CI/CD'],
+        categorie: 'Exploitation',
+        items: ['Supervision Centreon', 'Nginx', 'Documentation & procédures', 'Outil de tickets (ICD)'],
+      },
+      {
+        categorie: 'Bases de données',
+        items: ['MySQL (utilisateurs, droits, notions de sauvegarde)', 'SQLite'],
+      },
+      {
+        categorie: 'Développement (complément)',
+        items: ['C / C++', 'HTML / CSS / JS', 'React & TypeScript', 'Git', 'Méthodes agiles'],
+      },
+      {
+        categorie: 'Savoir-être',
+        items: ['Esprit d’équipe', 'Curiosité', 'Rigueur', 'Sens de l’organisation'],
       },
       {
         categorie: 'Langues',

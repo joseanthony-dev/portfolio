@@ -42,6 +42,79 @@ export const en: Contenu = {
     statuts: { 'en-cours': 'In progress', livre: 'In production' },
     liste: [
       {
+        id: 'outils-purge-shell',
+        titre: 'Shell purge tooling',
+        resume:
+          'Operations scripts that reclaim disk space on production servers by clearing out superseded application versions.',
+        contexte:
+          'At the Assurance Maladie data centre, every upgrade left the previous releases sitting on the servers: disk space kept shrinking and the clean-up was done by hand. I wrote the tooling that automates the purge.',
+        points: [
+          'Bash scripts that clear out old versions and logs, driven by cron.',
+          'Scripts deployed and configured across the estate with Ansible.',
+          'Up to 80% of the time saved on clean-up work that used to be manual.',
+          'Procedures written up so the team can pick the tooling up and adapt it.',
+        ],
+        technos: ['Bash', 'Ansible', 'cron', 'Linux'],
+        periode: '2024 — 2025',
+        statut: 'livre',
+        vedette: true,
+        liens: [],
+      },
+      {
+        id: 'domotique-home-assistant',
+        titre: 'Home automation — Home Assistant',
+        resume:
+          'A full home automation setup on a local network: integrations, automations, dashboards and notifications.',
+        contexte:
+          'A permanent playground for everything that interests me in systems and networks: mismatched devices that have to talk to each other, a service to keep available, and automations to write so the house reacts without being asked.',
+        points: [
+          'A range of IoT devices integrated on a local network I control end to end.',
+          'Automations and scenarios triggered by sensors, schedules and presence.',
+          'Custom dashboards and event-driven notifications.',
+          'Self-hosted: monitoring the service, backups and updates.',
+        ],
+        technos: ['Home Assistant', 'IoT', 'YAML', 'Local networking', 'Linux'],
+        periode: 'Ongoing',
+        statut: 'en-cours',
+        vedette: true,
+        liens: [],
+      },
+      {
+        id: 'application-planning',
+        titre: 'Event planning app',
+        resume:
+          'A mobile app for running events: sign-ups, attendance replies, statistics and PDF export.',
+        contexte:
+          'Organising events and keeping track of who is coming quickly becomes a headache. The app centralises the events, collects attendance replies and produces a summary you can actually use.',
+        points: [
+          'Event management and collection of attendance replies.',
+          'Attendance statistics and PDF export of the summary.',
+          'Data synced through Firebase and reachable from several devices.',
+        ],
+        technos: ['Flutter', 'Firebase', 'Dart'],
+        periode: '2025',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
+        id: 'site-web-personnel',
+        titre: 'Personal website',
+        resume: 'A brochure site with an online booking system, served behind Cloudflare.',
+        contexte:
+          'A plain brochure site, written without a framework, paired with an online booking system. A chance to handle going live end to end: domain name, DNS, certificate and caching.',
+        points: [
+          'Static site in HTML, CSS and JavaScript, with no external dependencies.',
+          'Online booking system.',
+          'Published behind Cloudflare: DNS, TLS certificate and caching.',
+        ],
+        technos: ['HTML', 'CSS', 'JavaScript', 'Cloudflare'],
+        periode: '2024',
+        statut: 'livre',
+        vedette: false,
+        liens: [],
+      },
+      {
         id: 'photomaton-locations',
         titre: 'Photomaton Locations',
         resume:
@@ -124,6 +197,7 @@ export const en: Contenu = {
     titre: 'Background',
     experienceTitre: 'Experience',
     formationTitre: 'Education',
+    certificationsTitre: 'Certifications',
     experiences: [
       {
         titre: 'Developer — custom management application',
@@ -138,25 +212,37 @@ export const en: Contenu = {
         ],
       },
       {
-        titre: 'Internship then apprenticeship — IT production operations',
+        titre: 'IT production operations analyst — apprentice',
         organisation: 'Assurance Maladie — Saint-Étienne data centre',
         lieu: 'Saint-Étienne, France',
         periode: '2024 — 2025',
         details: [
-          'A six-week internship in 2024, extended into a one-year apprenticeship (2024 — 2025) at the data centre of the French national health insurance fund.',
-          'Handled incidents on the reimbursement processing chain, at the heart of a large-scale information system.',
-          'Worked on the Centreon monitoring platform: watching over production servers and batch jobs.',
-          'Automated the purge of superseded application versions: every upgrade left the previous releases sitting on the servers and eating into disk space — the purge reclaims it with no manual work.',
+          'A six-week internship in 2024, extended into a one-year apprenticeship.',
+          'Automated operations tasks with Ansible (deployments, configuration): up to 80% of the time saved on some of them.',
+          'Application installation and support: diagnosis, fixes, writing the procedures.',
+          'Helped make the environments more reliable: configuration tracking, documentation, good practice.',
+          'Technical support on the reimbursement processes — triaging and resolving incidents, around three tickets a week.',
         ],
       },
       {
-        titre: 'Shift supervisor — floor management',
-        organisation: 'Alliance Healthcare',
+        titre: 'Manager',
+        organisation: 'Alliance Healthcare Répartition',
         lieu: 'Montagny, France',
         periode: 'Since 2022',
         details: [
-          'Supervisor role held every Saturday since 2022, alongside my studies.',
-          'Lead a team of 15: organising the work, allocating tasks and following through on the floor.',
+          'Role held every Saturday since 2022, alongside my studies.',
+          'Day-to-day management of a team of around 15 order pickers: organising, prioritising, keeping the quality up.',
+          'Running the logistics processes and keeping them within the standards.',
+        ],
+      },
+      {
+        titre: 'Seasonal worker',
+        organisation: 'Soleil Levant',
+        lieu: '',
+        periode: '2020 — 2021',
+        details: [
+          'Fruit picking and sorting, within the quality and safety standards.',
+          'Teamwork and keeping up with the production rates.',
         ],
       },
     ],
@@ -184,14 +270,28 @@ export const en: Contenu = {
       },
       {
         diplome: 'BTS CIEL — Computing and Networks option',
-        etablissement: 'Lycée Georges Brassens',
+        etablissement: 'LPO Georges Brassens',
         lieu: 'Rive-de-Gier, France',
         periode: '2023 — 2025',
         details: [
-          'Two-year higher technical diploma: network and system administration, software development, cybersecurity and databases.',
+          'Two-year higher technical diploma in cybersecurity, computing and networks, and electronics.',
           'Second year completed as an apprentice at the Assurance Maladie data centre in Saint-Étienne.',
           'The networks and security grounding I am now building on with the SRS master’s track.',
         ],
+      },
+    ],
+    certifications: [
+      {
+        intitule: 'CCNA 1 & 2',
+        organisme: 'Cisco Networking Academy',
+        periode: '2025 & 2026',
+        details: ['Networking fundamentals, switching, routing and IP addressing.'],
+      },
+      {
+        intitule: 'PIX certification',
+        organisme: 'PIX',
+        periode: '2022 & 2025',
+        details: ['Scored 542 in 2025, up from 201 on a first attempt in 2022.'],
       },
     ],
   },
@@ -201,18 +301,41 @@ export const en: Contenu = {
     sousTitre: 'The tools I actually use, in production and on my own projects.',
     groupes: [
       {
-        categorie: 'Systems & networks',
-        items: ['Linux', 'System & network administration', 'Monitoring (Centreon)', 'Cybersecurity', 'Home Assistant', 'Automation'],
+        categorie: 'Systems',
+        items: ['Linux (admin, logs, permissions)', 'cron', 'Disk space management', 'VMware'],
       },
-      { categorie: 'Languages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
+      { categorie: 'Automation', items: ['Bash scripting', 'Ansible', 'Python'] },
       {
-        categorie: 'Front-end',
-        items: ['React', 'Vite', 'React Native / Expo', 'Flutter / Firebase', 'PWA & Service Workers', 'SVG', 'Accessibility (WCAG)'],
+        categorie: 'Networks',
+        items: [
+          'TCP / IP',
+          'SSH (keys, scp)',
+          'Diagnostics (ping, traceroute, ip)',
+          'Routers & switches',
+          'Addressing & segmentation (CIDR, VLAN)',
+          'DHCP',
+        ],
       },
-      { categorie: 'Back-end & data', items: ['Node.js', 'REST APIs', 'Odoo / XML-RPC', 'SQLite', 'Tomcat / Jakarta EE'] },
-      { categorie: 'Desktop & distribution', items: ['Electron', 'electron-builder', '.deb packaging', 'EAS Build'] },
-      { categorie: 'Quality & tooling', items: ['Vitest', 'Jest', 'Playwright', 'ESLint', 'Prettier', 'Git', 'CI/CD'] },
-      { categorie: 'Languages spoken', items: ['French — native', 'English — B2, professional working proficiency'] },
+      {
+        categorie: 'Operations',
+        items: ['Centreon monitoring', 'Nginx', 'Documentation & procedures', 'Ticketing (ICD)'],
+      },
+      {
+        categorie: 'Databases',
+        items: ['MySQL (users, privileges, backup basics)', 'SQLite'],
+      },
+      {
+        categorie: 'Development (secondary)',
+        items: ['C / C++', 'HTML / CSS / JS', 'React & TypeScript', 'Git', 'Agile methods'],
+      },
+      {
+        categorie: 'Working style',
+        items: ['Team player', 'Curious', 'Thorough', 'Organised'],
+      },
+      {
+        categorie: 'Languages spoken',
+        items: ['French — native', 'English — B2, professional working proficiency'],
+      },
     ],
   },
 

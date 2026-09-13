@@ -20,19 +20,26 @@
 
 ## Il reste
 
-Pour les retrouver dans le code : `grep -rn "À COMPLÉTER\|TO FILL IN" src/`
-
+- [ ] **Photo de profil** — celle du CV, si tu veux l'ajouter au site.
+- [ ] **Dates manquantes** : domotique Home Assistant (mise en « En continu »), application
+      planning et site web personnel (estimés 2025 et 2024) — à confirmer.
+- [ ] **« Site web personnel »** : s'agit-il de ce portfolio, ou d'un autre site ? La carte le
+      décrit comme un site vitrine avec réservations, derrière Cloudflare.
 - [ ] **Mention de licence** et projet de fin de licence, si tu veux les afficher.
-- [ ] **Projets à ajouter ?** Ton compte GitHub contient d'autres travaux qui mériteraient une
-      carte, notamment **lifprojet-emotion-recognition** (reconnaissance d'émotions) et
-      **photomaton-portail-render** (portail web). Dis-moi ce qu'ils font, je les rédige.
 
 ## Fichiers à déposer
 
-- [ ] `public/cv.pdf` — ton CV, le bouton pointe déjà dessus. (Je peux te le générer à partir du
-      contenu du site si tu n'en as pas sous la main.)
+- [ ] `public/cv.pdf` — le bouton pointe dessus (`/portfolio/cv.pdf` une fois déployé).
 - [ ] `public/apercu.png` — 1200 × 630 px, l'aperçu affiché quand on partage le lien.
-- [ ] Dans `index.html` : remplacer `https://exemple.vercel.app/` par ta vraie URL une fois déployé.
+
+## Déploiement
+
+L'URL cible est celle du CV : <https://joseanthony-dev.github.io/portfolio/>.
+`vite.config.ts` porte donc `base: '/portfolio/'` — **ne pas l'enlever**, sinon le CSS et le JS
+sont demandés à la racine du domaine et le site s'affiche blanc.
+
+- [ ] Créer le dépôt `portfolio` sur GitHub et pousser `main`.
+- [ ] Activer GitHub Pages (branche `gh-pages` ou action de déploiement).
 
 ## Dépôts GitHub
 
