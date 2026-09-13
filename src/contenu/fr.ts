@@ -7,9 +7,9 @@ import type { Contenu } from '../types'
 
 export const fr: Contenu = {
   meta: {
-    titre: 'Anthony Jose — Développeur logiciel',
+    titre: 'Anthony Jose — Systèmes, réseaux & sécurité',
     description:
-      "Étudiant en Master Informatique à Lyon, en recherche d'alternance pour la rentrée 2027. Applications web, desktop et mobile : React, TypeScript, Electron, React Native.",
+      "Étudiant en Master Informatique à Lyon, parcours SRS, en recherche d'alternance pour la rentrée 2027. Administration système et réseau, supervision, automatisation, cybersécurité.",
   },
 
   nav: {
@@ -22,9 +22,9 @@ export const fr: Contenu = {
   hero: {
     salutation: 'Bonjour, je suis',
     nom: 'Anthony Jose',
-    titre: 'Développeur logiciel — web, desktop & mobile',
+    titre: 'Systèmes, réseaux & sécurité',
     accroche:
-      "Je conçois et je livre des applications complètes, de la première maquette au déploiement chez l'utilisateur. React et TypeScript au quotidien, Electron pour le desktop, React Native pour le mobile.",
+      "Je viens de l'exploitation : une année d'alternance en informatique de production à l'Assurance Maladie, à traiter les incidents d'une chaîne de remboursement et à superviser serveurs et traitements sous Centreon. Linux, automatisation, fiabilité — et le développement en prolongement, pour construire les outils qui manquent.",
     recherche:
       'En recherche d’une alternance pour mon Master 2 — rentrée 2027, entre Lyon et Saint-Étienne, ou en télétravail.',
     ctaProjets: 'Voir mes projets',
@@ -35,9 +35,9 @@ export const fr: Contenu = {
   apropos: {
     titre: 'À propos',
     paragraphes: [
-      "Étudiant en Master Informatique à l'Université Claude Bernard Lyon 1, je passe le plus clair de mon temps libre à construire des logiciels qui servent vraiment à quelqu'un : un outil de gestion utilisé quotidiennement par une entreprise de photobooth, une application qui me suit dans mes cours, des applis mobiles pensées pour un usage réel.",
-      "Ce qui m'intéresse, c'est le produit fini : une interface claire, des données qui ne se perdent pas, une application qui s'installe et qui tourne. Je travaille en TypeScript strict, je teste ce que j'écris (Vitest, Jest, Playwright) et je documente pour que le code reste lisible six mois plus tard.",
-      "Je viens des réseaux et des systèmes : le BTS CIEL m’a donné un socle d’administration système, de réseau et de cybersécurité que je n’ai jamais lâché — Linux au quotidien, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Le développement est venu ensuite, et c’est la combinaison des deux qui m’intéresse : de l’automatisation, de la fiabilité, des outils concrets dont quelqu’un se sert vraiment. C’est exactement ce que je cherche en alternance, entre Lyon et Saint-Étienne.",
+      "Étudiant en Master Informatique à l'Université Claude Bernard Lyon 1, je me dirige vers le parcours SRS — Systèmes, Réseaux et Sécurité. C'est la suite logique de mon BTS CIEL option Informatique et Réseaux : administration système et réseau, cybersécurité, et une année d'alternance passée en informatique de production.",
+      "Ce qui m'intéresse, c'est que ça tourne. À l'Assurance Maladie, j'ai traité les incidents de la chaîne de remboursement, surveillé serveurs et traitements sous Centreon, et automatisé la purge des anciennes versions applicatives qui saturaient l'espace disque. Linux au quotidien, et de l'automatisation partout où elle remplace un geste manuel répété.",
+      "Le développement est venu en prolongement, et je continue : une application de bureau en production chez une entreprise de location de photobooths, des applis mobiles, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Savoir construire l'outil qui manque, c'est ce qui rend l'administration système vraiment intéressante. Je cherche une alternance pour mon Master 2, entre Lyon et Saint-Étienne.",
     ],
   },
 
@@ -205,8 +205,12 @@ export const fr: Contenu = {
 
   competences: {
     titre: 'Compétences',
-    sousTitre: 'Les outils que j’utilise réellement sur mes projets.',
+    sousTitre: 'Les outils que j’utilise réellement, en production comme sur mes projets.',
     groupes: [
+      {
+        categorie: 'Systèmes & réseaux',
+        items: ['Linux', 'Administration système & réseau', 'Supervision (Centreon)', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
+      },
       { categorie: 'Langages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
       {
         categorie: 'Front-end',
@@ -219,10 +223,6 @@ export const fr: Contenu = {
       {
         categorie: 'Desktop & distribution',
         items: ['Electron', 'electron-builder', 'Paquets .deb', 'EAS Build'],
-      },
-      {
-        categorie: 'Systèmes & réseaux',
-        items: ['Linux', 'Administration système & réseau', 'Supervision (Centreon)', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
       },
       {
         categorie: 'Qualité & outillage',

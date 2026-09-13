@@ -6,9 +6,9 @@ import type { Contenu } from '../types'
 
 export const en: Contenu = {
   meta: {
-    titre: 'Anthony Jose — Software Developer',
+    titre: 'Anthony Jose — Systems, Networks & Security',
     description:
-      "Computer science master's student in Lyon, France, looking for a September 2027 apprenticeship. Web, desktop and mobile applications: React, TypeScript, Electron, React Native.",
+      "Computer science master's student in Lyon, France, on the Systems, Networks and Security track, looking for a September 2027 apprenticeship. System and network administration, monitoring, automation, cybersecurity.",
   },
 
   nav: { projets: 'Projects', parcours: 'Background', competences: 'Skills', contact: 'Contact' },
@@ -16,9 +16,9 @@ export const en: Contenu = {
   hero: {
     salutation: "Hi, I'm",
     nom: 'Anthony Jose',
-    titre: 'Software developer — web, desktop & mobile',
+    titre: 'Systems, networks & security',
     accroche:
-      'I design and ship complete applications, from the first mockup to the user’s machine. React and TypeScript daily, Electron for desktop, React Native for mobile.',
+      'I come from operations: a year as an apprentice in IT production at the French national health insurance fund, handling incidents on a reimbursement processing chain and watching over servers and batch jobs with Centreon. Linux, automation, reliability — and development as the extension of it, to build the tools that are missing.',
     recherche:
       'Looking for a one-year apprenticeship alongside my final master’s year — starting September 2027, between Lyon and Saint-Étienne, or remote.',
     ctaProjets: 'See my work',
@@ -29,9 +29,9 @@ export const en: Contenu = {
   apropos: {
     titre: 'About',
     paragraphes: [
-      "I'm a computer science master's student at Université Claude Bernard Lyon 1, and I spend most of my spare time building software that someone actually uses: a management tool running daily at a photo booth rental company, an app that follows me through my courses, mobile apps designed for real use.",
-      'What interests me is the finished product: a clear interface, data that never gets lost, an application that installs and just runs. I work in strict TypeScript, I test what I write (Vitest, Jest, Playwright) and I document it so the code still reads well six months later.',
-      'I came to this from networks and systems: the BTS CIEL gave me a grounding in system and network administration and in cybersecurity that I never let go of — Linux daily, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Development came afterwards, and it is the combination of the two that interests me: automation, reliability, concrete tools that someone genuinely uses. That is exactly what I am looking for in an apprenticeship, between Lyon and Saint-Étienne.',
+      "I'm a computer science master's student at Université Claude Bernard Lyon 1, heading for the SRS track — Systems, Networks and Security. It is the logical next step after my BTS CIEL in computing and networks: system and network administration, cybersecurity, and a year spent as an apprentice in IT production.",
+      'What interests me is keeping things running. At the French national health insurance fund I handled incidents on the reimbursement processing chain, watched over servers and batch jobs with Centreon, and automated the purge of superseded application versions that were eating into disk space. Linux daily, and automation anywhere it replaces a repeated manual step.',
+      'Development came as the extension of that, and I have kept at it: a desktop application in production at a photo booth rental company, mobile apps, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Being able to build the tool that is missing is what makes system administration genuinely interesting. I am looking for an apprenticeship for my final master\'s year, between Lyon and Saint-Étienne.',
     ],
   },
 
@@ -198,8 +198,12 @@ export const en: Contenu = {
 
   competences: {
     titre: 'Skills',
-    sousTitre: 'The tools I actually use on my projects.',
+    sousTitre: 'The tools I actually use, in production and on my own projects.',
     groupes: [
+      {
+        categorie: 'Systems & networks',
+        items: ['Linux', 'System & network administration', 'Monitoring (Centreon)', 'Cybersecurity', 'Home Assistant', 'Automation'],
+      },
       { categorie: 'Languages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
       {
         categorie: 'Front-end',
@@ -207,10 +211,6 @@ export const en: Contenu = {
       },
       { categorie: 'Back-end & data', items: ['Node.js', 'REST APIs', 'Odoo / XML-RPC', 'SQLite', 'Tomcat / Jakarta EE'] },
       { categorie: 'Desktop & distribution', items: ['Electron', 'electron-builder', '.deb packaging', 'EAS Build'] },
-      {
-        categorie: 'Systems & networks',
-        items: ['Linux', 'System & network administration', 'Monitoring (Centreon)', 'Cybersecurity', 'Home Assistant', 'Automation'],
-      },
       { categorie: 'Quality & tooling', items: ['Vitest', 'Jest', 'Playwright', 'ESLint', 'Prettier', 'Git', 'CI/CD'] },
       { categorie: 'Languages spoken', items: ['French — native', 'English — B2, professional working proficiency'] },
     ],
