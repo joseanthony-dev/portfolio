@@ -16,7 +16,7 @@ export const en: Contenu = {
   hero: {
     salutation: "Hi, I'm",
     nom: 'Anthony Jose',
-    titre: 'Systems, networks & security — and a bit of development',
+    titre: 'Systems, networks & security — and development',
     accroche:
       'I come from operations: a year as an apprentice in IT production at the French national health insurance fund, handling incidents on a reimbursement processing chain and watching over servers and batch jobs with Centreon. Linux, automation, reliability — and development as the extension of it, to build the tools that are missing.',
     recherche:
@@ -38,7 +38,7 @@ export const en: Contenu = {
 
   projets: {
     titre: 'Projects',
-    sousTitre: 'I build things on the side too: real applications, designed and shipped end to end.',
+    sousTitre: 'I build software too: real applications, designed and shipped end to end.',
     voirTout: 'View code',
     statuts: { 'en-cours': 'In progress', livre: 'In production' },
     liste: [
@@ -367,8 +367,8 @@ export const en: Contenu = {
         items: ['MySQL (users, privileges, backup basics)', 'SQLite'],
       },
       {
-        categorie: 'Development (secondary)',
-        items: ['C / C++', 'HTML / CSS / JS', 'React & TypeScript', 'Git', 'Agile methods'],
+        categorie: 'Development',
+        items: ['C / C++', 'Java', 'React & TypeScript', 'Flutter / Dart', 'HTML / CSS / JS', 'Git', 'Agile methods'],
       },
       {
         categorie: 'Working style',

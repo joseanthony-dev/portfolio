@@ -22,7 +22,7 @@ export const fr: Contenu = {
   hero: {
     salutation: 'Bonjour, je suis',
     nom: 'Anthony Jose',
-    titre: 'Systèmes, réseaux & sécurité — et un peu de développement',
+    titre: 'Systèmes, réseaux & sécurité — et du développement',
     accroche:
       "Je viens de l'exploitation : une année d'alternance en informatique de production à l'Assurance Maladie, à traiter les incidents d'une chaîne de remboursement et à superviser serveurs et traitements sous Centreon. Linux, automatisation, fiabilité — et le développement en prolongement, pour construire les outils qui manquent.",
     recherche:
@@ -44,7 +44,7 @@ export const fr: Contenu = {
 
   projets: {
     titre: 'Projets',
-    sousTitre: 'Je développe aussi, à côté : des applications réelles, conçues et livrées de bout en bout.',
+    sousTitre: 'Je développe aussi : des applications réelles, conçues et livrées de bout en bout.',
     voirTout: 'Voir le code',
     statuts: { 'en-cours': 'En cours', livre: 'En production' },
     liste: [
@@ -379,8 +379,8 @@ export const fr: Contenu = {
         items: ['MySQL (utilisateurs, droits, notions de sauvegarde)', 'SQLite'],
       },
       {
-        categorie: 'Développement (complément)',
-        items: ['C / C++', 'HTML / CSS / JS', 'React & TypeScript', 'Git', 'Méthodes agiles'],
+        categorie: 'Développement',
+        items: ['C / C++', 'Java', 'React & TypeScript', 'Flutter / Dart', 'HTML / CSS / JS', 'Git', 'Méthodes agiles'],
       },
       {
         categorie: 'Savoir-être',
