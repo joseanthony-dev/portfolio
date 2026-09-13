@@ -26,7 +26,7 @@ export const fr: Contenu = {
     accroche:
       "Je conçois et je livre des applications complètes, de la première maquette au déploiement chez l'utilisateur. React et TypeScript au quotidien, Electron pour le desktop, React Native pour le mobile.",
     recherche:
-      'En recherche d’une alternance pour mon Master 2 — rentrée 2027, région lyonnaise ou télétravail.',
+      'En recherche d’une alternance pour mon Master 2 — rentrée 2027, entre Lyon et Saint-Étienne, ou en télétravail.',
     ctaProjets: 'Voir mes projets',
     ctaContact: 'Me contacter',
     ctaCv: 'Télécharger mon CV',
@@ -37,7 +37,7 @@ export const fr: Contenu = {
     paragraphes: [
       "Étudiant en Master Informatique à l'Université Claude Bernard Lyon 1, je passe le plus clair de mon temps libre à construire des logiciels qui servent vraiment à quelqu'un : un outil de gestion utilisé quotidiennement par une entreprise de photobooth, une application qui me suit dans mes cours, des applis mobiles pensées pour un usage réel.",
       "Ce qui m'intéresse, c'est le produit fini : une interface claire, des données qui ne se perdent pas, une application qui s'installe et qui tourne. Je travaille en TypeScript strict, je teste ce que j'écris (Vitest, Jest, Playwright) et je documente pour que le code reste lisible six mois plus tard.",
-      'À COMPLÉTER — ajoute ici une ou deux phrases plus personnelles : ce qui t’a amené au développement, ce que tu vises après le Master, tes centres d’intérêt.',
+      "Je viens des réseaux et des systèmes : le BTS CIEL m’a donné un socle d’administration système, de réseau et de cybersécurité que je n’ai jamais lâché — Linux au quotidien, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Le développement est venu ensuite, et c’est la combinaison des deux qui m’intéresse : de l’automatisation, de la fiabilité, des outils concrets dont quelqu’un se sert vraiment. C’est exactement ce que je cherche en alternance, entre Lyon et Saint-Étienne.",
     ],
   },
 
@@ -145,11 +145,24 @@ export const fr: Contenu = {
         ],
       },
       {
-        titre: 'À COMPLÉTER — autre expérience (stage, alternance, job, association)',
-        organisation: 'À COMPLÉTER',
-        lieu: 'À COMPLÉTER',
-        periode: 'À COMPLÉTER',
-        details: ['À COMPLÉTER — 2 à 3 puces concrètes : ce que tu as fait, avec quoi, quel résultat.'],
+        titre: 'Informatique de production',
+        organisation: 'Assurance Maladie — CTI de Saint-Étienne',
+        lieu: 'Saint-Étienne (42)',
+        periode: 'À COMPLÉTER — période (mois et année de début / de fin)',
+        details: [
+          "Informatique de production au Centre de Traitement Informatique de l'Assurance Maladie, sur un système d'information de grande échelle.",
+          'À COMPLÉTER — 2 à 3 puces concrètes : les chaînes et outils sur lesquels tu es intervenu, les incidents traités, ce que tu as automatisé.',
+        ],
+      },
+      {
+        titre: 'Responsable — management terrain',
+        organisation: 'Alliance Healthcare',
+        lieu: 'À COMPLÉTER — ville',
+        periode: 'À COMPLÉTER — période (chaque samedi, depuis …)',
+        details: [
+          'Poste de responsable tenu chaque samedi, en parallèle des études : encadrement de l’équipe et organisation du travail sur le terrain.',
+          'À COMPLÉTER — 2 à 3 puces concrètes : taille de l’équipe, périmètre confié, résultat obtenu.',
+        ],
       },
     ],
     formations: [
@@ -191,10 +204,10 @@ export const fr: Contenu = {
     titre: 'Compétences',
     sousTitre: 'Les outils que j’utilise réellement sur mes projets.',
     groupes: [
-      { categorie: 'Langages', items: ['TypeScript', 'JavaScript', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
+      { categorie: 'Langages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
       {
         categorie: 'Front-end',
-        items: ['React', 'Vite', 'React Native / Expo', 'PWA & Service Workers', 'SVG', 'Accessibilité (WCAG)'],
+        items: ['React', 'Vite', 'React Native / Expo', 'Flutter / Firebase', 'PWA & Service Workers', 'SVG', 'Accessibilité (WCAG)'],
       },
       {
         categorie: 'Back-end & données',
@@ -203,6 +216,10 @@ export const fr: Contenu = {
       {
         categorie: 'Desktop & distribution',
         items: ['Electron', 'electron-builder', 'Paquets .deb', 'EAS Build'],
+      },
+      {
+        categorie: 'Systèmes & réseaux',
+        items: ['Linux', 'Administration système & réseau', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
       },
       {
         categorie: 'Qualité & outillage',
@@ -221,7 +238,7 @@ export const fr: Contenu = {
       "Une opportunité d'alternance, une question sur un projet, ou simplement l'envie d'échanger ? J'essaie de répondre sous 48 h.",
     email: 'anthony.jose@outlook.fr',
     telephone: '06 42 16 24 15',
-    localisation: 'Montagny (69) — région lyonnaise, mobile et ouvert au télétravail',
+    localisation: 'Montagny (69) — mobile entre Lyon et Saint-Étienne, ouvert au télétravail',
     liens: [
       { label: 'GitHub', url: 'https://github.com/joseanthony-dev', type: 'github' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/joseanthony-zacharias', type: 'linkedin' },

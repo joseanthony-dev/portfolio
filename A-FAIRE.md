@@ -6,23 +6,31 @@
 - **Le Petit Flash** : projet familial mené seul, Montagny (69), depuis 2025
 - **Master Informatique** Lyon 1, M1 tronc commun → M2 **SRS** (Systèmes, Réseaux et Sécurité)
 - **Licence Informatique** Lyon 1, 2025-2026, en admission directe en 3ᵉ année après le BTS
-- **BTS CIEL**, lycée Georges Brassens, Rive-de-Gier (42)
+- **BTS CIEL** option A, Informatique et Réseaux (2023 — 2025), lycée Georges Brassens, Rive-de-Gier (42)
 - **Anglais B2**
 - **GitHub** <https://github.com/joseanthony-dev> et **LinkedIn** <https://www.linkedin.com/in/joseanthony-zacharias>
 - **Téléphone** 06 42 16 24 15 et e-mail anthony.jose@outlook.fr
+- **Expérience Assurance Maladie**, informatique de production au CTI de Saint-Étienne
+- **Expérience Alliance Healthcare**, responsable / management terrain, chaque samedi
+- **À propos, 3ᵉ paragraphe** rédigé à partir du résumé LinkedIn
+- **Compétences** : C++, Flutter / Firebase, Linux, admin système & réseau, cybersécurité, Home Assistant
+- **Zone de recherche** élargie à Lyon **et Saint-Étienne**
 
 ## Il reste
 
 Pour les retrouver dans le code : `grep -rn "À COMPLÉTER\|TO FILL IN" src/`
 
-- [ ] **BTS : les années** (ex. 2023 — 2025) et **l'option suivie** : Informatique et Réseaux (IR)
-      ou Électronique et Réseaux (ER) ? L'option IR est un vrai argument face au M2 SRS.
+L'export LinkedIn fourni était la version **Basic** : il ne contient que `Profile.csv` (identité,
+titre et résumé), sans `Positions.csv` ni `Education.csv`. Les deux expériences ont donc été
+reconstituées à partir du résumé — il manque les **dates**, le **lieu d'Alliance Healthcare** et
+les **puces concrètes**. Pour les obtenir d'un coup : LinkedIn → *Préférences* → *Obtenir une copie
+de vos données* → **« Télécharger l'archive complète »** (et non « Basic »).
+
+- [ ] **Assurance Maladie / CTI Saint-Étienne** : dates (mois + année), et 2 à 3 puces concrètes —
+      chaînes et outils, incidents traités, ce que tu as automatisé. Stage de BTS ?
+- [ ] **Alliance Healthcare** : ville, dates (depuis quand ?), et 2 à 3 puces — taille de l'équipe,
+      périmètre, résultat.
 - [ ] **Mention de licence** et projet de fin de licence, si tu veux les afficher.
-- [ ] **Deuxième expérience** (`parcours.experiences[1]`) — LinkedIn bloque la lecture automatique
-      (HTTP 999), je n'ai pas pu la récupérer. Copie-colle-moi le texte, je le mets en forme.
-      Si tu n'as pas d'autre expérience, supprime le bloc dans les deux fichiers.
-- [ ] **À propos, 3ᵉ paragraphe** — 1 ou 2 phrases plus personnelles. Donne-moi des notes en vrac,
-      je rédige.
 - [ ] **Projets à ajouter ?** Ton compte GitHub contient d'autres travaux qui mériteraient une
       carte, notamment **lifprojet-emotion-recognition** (reconnaissance d'émotions) et
       **photomaton-portail-render** (portail web). Dis-moi ce qu'ils font, je les rédige.

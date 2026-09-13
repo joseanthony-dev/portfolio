@@ -20,7 +20,7 @@ export const en: Contenu = {
     accroche:
       'I design and ship complete applications, from the first mockup to the user’s machine. React and TypeScript daily, Electron for desktop, React Native for mobile.',
     recherche:
-      'Looking for a one-year apprenticeship alongside my final master’s year — starting September 2027, Lyon area or remote.',
+      'Looking for a one-year apprenticeship alongside my final master’s year — starting September 2027, between Lyon and Saint-Étienne, or remote.',
     ctaProjets: 'See my work',
     ctaContact: 'Get in touch',
     ctaCv: 'Download my résumé',
@@ -31,7 +31,7 @@ export const en: Contenu = {
     paragraphes: [
       "I'm a computer science master's student at Université Claude Bernard Lyon 1, and I spend most of my spare time building software that someone actually uses: a management tool running daily at a photo booth rental company, an app that follows me through my courses, mobile apps designed for real use.",
       'What interests me is the finished product: a clear interface, data that never gets lost, an application that installs and just runs. I work in strict TypeScript, I test what I write (Vitest, Jest, Playwright) and I document it so the code still reads well six months later.',
-      'TO FILL IN — add a sentence or two that is more personal: what got you into development, what you are aiming for after the master’s, your interests.',
+      'I came to this from networks and systems: the BTS CIEL gave me a grounding in system and network administration and in cybersecurity that I never let go of — Linux daily, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Development came afterwards, and it is the combination of the two that interests me: automation, reliability, concrete tools that someone genuinely uses. That is exactly what I am looking for in an apprenticeship, between Lyon and Saint-Étienne.',
     ],
   },
 
@@ -138,11 +138,24 @@ export const en: Contenu = {
         ],
       },
       {
-        titre: 'TO FILL IN — other experience (internship, apprenticeship, job, student society)',
-        organisation: 'TO FILL IN',
-        lieu: 'TO FILL IN',
-        periode: 'TO FILL IN',
-        details: ['TO FILL IN — 2 or 3 concrete bullets: what you did, with what, what came of it.'],
+        titre: 'IT production operations',
+        organisation: 'Assurance Maladie — Saint-Étienne data centre',
+        lieu: 'Saint-Étienne, France',
+        periode: 'TO FILL IN — dates (start and end, month and year)',
+        details: [
+          'IT production operations at the data centre of the French national health insurance fund, on a large-scale information system.',
+          'TO FILL IN — 2 or 3 concrete bullets: the job chains and tools you worked on, the incidents you handled, what you automated.',
+        ],
+      },
+      {
+        titre: 'Shift supervisor — floor management',
+        organisation: 'Alliance Healthcare',
+        lieu: 'TO FILL IN — town',
+        periode: 'TO FILL IN — dates (every Saturday, since …)',
+        details: [
+          'Supervisor role held every Saturday alongside my studies: leading the team and organising the work on the floor.',
+          'TO FILL IN — 2 or 3 concrete bullets: team size, scope of responsibility, outcome.',
+        ],
       },
     ],
     formations: [
@@ -184,13 +197,17 @@ export const en: Contenu = {
     titre: 'Skills',
     sousTitre: 'The tools I actually use on my projects.',
     groupes: [
-      { categorie: 'Languages', items: ['TypeScript', 'JavaScript', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
+      { categorie: 'Languages', items: ['TypeScript', 'JavaScript', 'C++', 'Java', 'Python', 'SQL', 'HTML / CSS'] },
       {
         categorie: 'Front-end',
-        items: ['React', 'Vite', 'React Native / Expo', 'PWA & Service Workers', 'SVG', 'Accessibility (WCAG)'],
+        items: ['React', 'Vite', 'React Native / Expo', 'Flutter / Firebase', 'PWA & Service Workers', 'SVG', 'Accessibility (WCAG)'],
       },
       { categorie: 'Back-end & data', items: ['Node.js', 'REST APIs', 'Odoo / XML-RPC', 'SQLite', 'Tomcat / Jakarta EE'] },
       { categorie: 'Desktop & distribution', items: ['Electron', 'electron-builder', '.deb packaging', 'EAS Build'] },
+      {
+        categorie: 'Systems & networks',
+        items: ['Linux', 'System & network administration', 'Cybersecurity', 'Home Assistant', 'Automation'],
+      },
       { categorie: 'Quality & tooling', items: ['Vitest', 'Jest', 'Playwright', 'ESLint', 'Prettier', 'Git', 'CI/CD'] },
       { categorie: 'Languages spoken', items: ['French — native', 'English — B2, professional working proficiency'] },
     ],
@@ -202,7 +219,7 @@ export const en: Contenu = {
       'An apprenticeship opportunity, a question about a project, or just a conversation? I aim to reply within 48 hours.',
     email: 'anthony.jose@outlook.fr',
     telephone: '+33 6 42 16 24 15',
-    localisation: 'Montagny, France — Lyon area, happy to relocate or work remotely',
+    localisation: 'Montagny, France — mobile between Lyon and Saint-Étienne, open to remote work',
     liens: [
       { label: 'GitHub', url: 'https://github.com/joseanthony-dev', type: 'github' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/joseanthony-zacharias', type: 'linkedin' },
