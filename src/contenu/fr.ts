@@ -184,62 +184,6 @@ export const fr: Contenu = {
         // liens: [{ label: 'Code source', url: 'https://github.com/joseanthony-dev/photomaton-locations', type: 'github' }],
         liens: [],
       },
-      {
-        id: 'mes-cours',
-        titre: 'Mes cours',
-        resume:
-          "Application web hors-ligne qui rassemble emploi du temps, notes, devoirs et supports de cours d'un semestre de Master.",
-        contexte:
-          "Entre le calendrier ADE, les PDF de cours et les échéances de rendu, l'information était éparpillée. J'ai construit une PWA qui agrège tout et fonctionne sans connexion.",
-        points: [
-          "Import du calendrier universitaire ADE au format iCalendar et affichage d'un emploi du temps consolidé.",
-          'Lecture des supports PDF directement dans le navigateur via PDF.js, sans téléchargement préalable.',
-          'Progressive Web App : service worker généré au build, application installable et consultable hors connexion.',
-          'Tests unitaires Vitest et tests de bout en bout Playwright, dont un contrôle d’accessibilité automatisé (axe-core).',
-        ],
-        technos: ['React', 'Vite', 'PDF.js', 'Service Worker', 'Playwright', 'Vitest'],
-        periode: '2025',
-        statut: 'livre',
-        vedette: true,
-        liens: [],
-      },
-      {
-        id: 'suivi-forme',
-        titre: 'Suivi Forme',
-        resume:
-          'Application mobile de suivi de poids et d’habitudes, pensée « local-first » : aucune donnée ne quitte le téléphone.',
-        contexte:
-          "Les applications de suivi du marché demandent un compte et exploitent les données de santé. J'ai voulu l'inverse : tout est stocké localement, l'export reste à la main de l'utilisateur.",
-        points: [
-          'Stockage local via AsyncStorage, sans compte ni serveur.',
-          'Graphiques de progression dessinés en SVG natif (react-native-svg), sans bibliothèque de charting lourde.',
-          'Photos de suivi, import/export de sauvegardes et notifications de rappel.',
-          'Suite de tests Jest avec jest-expo, build de distribution via EAS.',
-        ],
-        technos: ['React Native', 'Expo', 'AsyncStorage', 'react-native-svg', 'Jest', 'EAS Build'],
-        periode: '2025',
-        statut: 'en-cours',
-        vedette: true,
-        liens: [],
-      },
-      {
-        id: 'tapis-vert',
-        titre: 'Tapis Vert',
-        resume:
-          "Application mobile d'analyse de sessions de roulette : suivi des mises, statistiques et visualisation des résultats.",
-        contexte:
-          'Un projet personnel pour explorer la modélisation probabiliste et la restitution de statistiques en temps réel sur mobile.',
-        points: [
-          'Calcul et affichage en direct des statistiques de session (répartition, écarts, bilan).',
-          'Interface dessinée en SVG pour représenter le tapis et l’historique des tirages.',
-          'Architecture testée avec Jest, état applicatif isolé de la couche d’affichage.',
-        ],
-        technos: ['React Native', 'Expo', 'react-native-svg', 'Jest'],
-        periode: '2025',
-        statut: 'en-cours',
-        vedette: false,
-        liens: [],
-      },
     ],
   },
 

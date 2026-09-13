@@ -178,61 +178,6 @@ export const en: Contenu = {
         // liens: [{ label: 'Source code', url: 'https://github.com/joseanthony-dev/photomaton-locations', type: 'github' }],
         liens: [],
       },
-      {
-        id: 'mes-cours',
-        titre: 'Mes cours',
-        resume:
-          'Offline-capable web app gathering a full semester of timetable, grades, assignments and course material.',
-        contexte:
-          'Between the university calendar, course PDFs and submission deadlines, everything was scattered. I built a PWA that pulls it all together and works without a connection.',
-        points: [
-          'Imports the university ADE calendar in iCalendar format and renders a consolidated timetable.',
-          'Reads course PDFs straight in the browser through PDF.js, with no prior download.',
-          'Progressive Web App: service worker generated at build time, installable and fully usable offline.',
-          'Vitest unit tests and Playwright end-to-end tests, including an automated accessibility check (axe-core).',
-        ],
-        technos: ['React', 'Vite', 'PDF.js', 'Service Worker', 'Playwright', 'Vitest'],
-        periode: '2025',
-        statut: 'livre',
-        vedette: true,
-        liens: [],
-      },
-      {
-        id: 'suivi-forme',
-        titre: 'Suivi Forme',
-        resume: 'Mobile weight and habit tracker built local-first: no data ever leaves the phone.',
-        contexte:
-          'Mainstream tracking apps require an account and monetise health data. I wanted the opposite: everything stored locally, exports entirely under the user’s control.',
-        points: [
-          'Local storage through AsyncStorage — no account, no server.',
-          'Progress charts drawn with native SVG (react-native-svg) instead of a heavy charting library.',
-          'Progress photos, backup import/export and reminder notifications.',
-          'Jest test suite with jest-expo, distribution builds through EAS.',
-        ],
-        technos: ['React Native', 'Expo', 'AsyncStorage', 'react-native-svg', 'Jest', 'EAS Build'],
-        periode: '2025',
-        statut: 'en-cours',
-        vedette: true,
-        liens: [],
-      },
-      {
-        id: 'tapis-vert',
-        titre: 'Tapis Vert',
-        resume:
-          'Mobile app for analysing roulette sessions: bet tracking, statistics and result visualisation.',
-        contexte:
-          'A personal project to explore probabilistic modelling and real-time statistics rendering on mobile.',
-        points: [
-          'Live session statistics (distribution, deviations, running balance).',
-          'SVG-drawn interface representing the table and the draw history.',
-          'Jest-tested architecture with application state kept separate from the view layer.',
-        ],
-        technos: ['React Native', 'Expo', 'react-native-svg', 'Jest'],
-        periode: '2025',
-        statut: 'en-cours',
-        vedette: false,
-        liens: [],
-      },
     ],
   },
 
