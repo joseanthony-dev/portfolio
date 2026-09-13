@@ -32,7 +32,7 @@ export const en: Contenu = {
     paragraphes: [
       "I'm a computer science master's student at Université Claude Bernard Lyon 1, heading for the SRS track — Systems, Networks and Security. It is the logical next step after my BTS CIEL in computing and networks: system and network administration, cybersecurity, and a year spent as an apprentice in IT production.",
       'What interests me is keeping things running. At the French national health insurance fund I handled incidents on the reimbursement processing chain, watched over servers and batch jobs with Centreon, and automated the purge of superseded application versions that were eating into disk space. Linux daily, and automation anywhere it replaces a repeated manual step.',
-      'Development came as the extension of that, and I have kept at it: a desktop application in production at a photo booth rental company, mobile apps, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Being able to build the tool that is missing is what makes system administration genuinely interesting. I am looking for an apprenticeship for my final master\'s year, between Lyon and Saint-Étienne.',
+      'Development came as the extension of that, and I have kept at it: a desktop application in production at my own photo booth rental business, mobile apps, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Being able to build the tool that is missing is what makes system administration genuinely interesting. I am looking for an apprenticeship for my final master\'s year, between Lyon and Saint-Étienne.',
     ],
   },
 
@@ -161,13 +161,13 @@ export const en: Contenu = {
         id: 'photomaton-locations',
         titre: 'Photomaton Locations',
         resume:
-          'Desktop application for managing photo booth rentals, running in production at Le Petit Flash.',
+          'Desktop application for managing photo booth rentals, running in production at my own business, Le Petit Flash.',
         contexte:
-          'A photo booth rental business was tracking bookings across scattered files. I designed a desktop application that centralises customers, equipment, contracts and scheduling, and syncs with their Odoo ERP.',
+          'My photo booth rental business was tracking bookings across scattered files. I designed a desktop application that centralises customers, equipment, contracts and scheduling, and syncs with our Odoo ERP.',
         points: [
           'Cross-platform Electron app distributed as a .deb package, versioned and released continuously (v1.31).',
           'Two-way customer import and synchronisation with Odoo, handling the ERP’s field constraints.',
-          'Local database: data stays on the client’s machine, with no dependency on a third-party server.',
+          'Local database: data stays on the machine, with no dependency on a third-party server.',
           'Vitest test suite with coverage reporting, ESLint and Prettier wired into the workflow.',
         ],
         technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Node.js'],
@@ -187,18 +187,6 @@ export const en: Contenu = {
     formationTitre: 'Education',
     certificationsTitre: 'Certifications',
     experiences: [
-      {
-        titre: 'Developer — custom management application',
-        organisation: 'Le Petit Flash (family business)',
-        lieu: 'Montagny, France',
-        periode: '2025 — present',
-        details: [
-          'Ran the project end to end on my own: gathering requirements from the users, design, development, release and maintenance.',
-          'Designed and built the desktop application that now handles all of the company’s rentals.',
-          'Integrated the application with the company’s Odoo ERP (customer and catalogue sync).',
-          'In service since the first release, with regular updates shipped since (v1.31).',
-        ],
-      },
       {
         titre: 'IT production operations analyst — apprentice',
         organisation: 'Assurance Maladie — Saint-Étienne data centre',

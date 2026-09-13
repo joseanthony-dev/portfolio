@@ -38,7 +38,7 @@ export const fr: Contenu = {
     paragraphes: [
       "Étudiant en Master Informatique à l'Université Claude Bernard Lyon 1, je me dirige vers le parcours SRS — Systèmes, Réseaux et Sécurité. C'est la suite logique de mon BTS CIEL option Informatique et Réseaux : administration système et réseau, cybersécurité, et une année d'alternance passée en informatique de production.",
       "Ce qui m'intéresse, c'est que ça tourne. À l'Assurance Maladie, j'ai traité les incidents de la chaîne de remboursement, surveillé serveurs et traitements sous Centreon, et automatisé la purge des anciennes versions applicatives qui saturaient l'espace disque. Linux au quotidien, et de l'automatisation partout où elle remplace un geste manuel répété.",
-      "Le développement est venu en prolongement, et je continue : une application de bureau en production chez une entreprise de location de photobooths, des applis mobiles, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Savoir construire l'outil qui manque, c'est ce qui rend l'administration système vraiment intéressante. Je cherche une alternance pour mon Master 2, entre Lyon et Saint-Étienne.",
+      "Le développement est venu en prolongement, et je continue : une application de bureau en production dans mon entreprise de location de photobooths, des applis mobiles, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Savoir construire l'outil qui manque, c'est ce qui rend l'administration système vraiment intéressante. Je cherche une alternance pour mon Master 2, entre Lyon et Saint-Étienne.",
     ],
   },
 
@@ -167,13 +167,13 @@ export const fr: Contenu = {
         id: 'photomaton-locations',
         titre: 'Photomaton Locations',
         resume:
-          "Application de bureau de gestion des locations de photobooth, utilisée en production par Le Petit Flash.",
+          "Application de bureau de gestion des locations de photobooths, en production dans mon entreprise, Le Petit Flash.",
         contexte:
-          "Une entreprise de location de photomatons gérait ses réservations dans des fichiers dispersés. J'ai conçu une application de bureau qui centralise clients, matériel, contrats et planning, et qui se synchronise avec leur ERP Odoo.",
+          "Mon entreprise de location de photobooths gérait ses réservations dans des fichiers dispersés. J'ai conçu une application de bureau qui centralise clients, matériel, contrats et planning, et qui se synchronise avec notre ERP Odoo.",
         points: [
           'Application Electron multiplateforme distribuée en paquet .deb, versionnée et publiée en continu (v1.31).',
           "Import et synchronisation bidirectionnelle des clients depuis Odoo, avec gestion des contraintes de champs de l'ERP.",
-          'Base de données locale : les données restent chez le client, aucune dépendance à un serveur tiers.',
+          'Base de données locale : les données restent sur le poste, aucune dépendance à un serveur tiers.',
           'Suite de tests Vitest avec rapport de couverture, ESLint et Prettier intégrés au flux de travail.',
         ],
         technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Node.js'],
@@ -193,18 +193,6 @@ export const fr: Contenu = {
     formationTitre: 'Formation',
     certificationsTitre: 'Certifications',
     experiences: [
-      {
-        titre: 'Développeur — application de gestion sur mesure',
-        organisation: 'Le Petit Flash (entreprise familiale)',
-        lieu: 'Montagny (69)',
-        periode: '2025 — aujourd’hui',
-        details: [
-          'Projet mené seul de bout en bout : recueil du besoin auprès des utilisateurs, conception, développement, mise en production et maintenance.',
-          "Conception et développement de l'application de bureau qui gère aujourd'hui l'ensemble des locations de l'entreprise.",
-          "Intégration avec l'ERP Odoo de l'entreprise (synchronisation des clients et du catalogue).",
-          'Application en service depuis la première version, avec des mises à jour régulières (v1.31).',
-        ],
-      },
       {
         titre: 'Analyste alternant en informatique de production',
         organisation: "Centre de Traitements Informatique — Assurance Maladie",
