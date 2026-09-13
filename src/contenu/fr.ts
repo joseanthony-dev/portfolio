@@ -145,23 +145,25 @@ export const fr: Contenu = {
         ],
       },
       {
-        titre: 'Informatique de production',
+        titre: 'Stage puis alternance — informatique de production',
         organisation: 'Assurance Maladie — CTI de Saint-Étienne',
         lieu: 'Saint-Étienne (42)',
-        periode: 'À COMPLÉTER — période (mois et année de début / de fin)',
+        periode: '2024 — 2025',
         details: [
-          "Informatique de production au Centre de Traitement Informatique de l'Assurance Maladie, sur un système d'information de grande échelle.",
-          'À COMPLÉTER — 2 à 3 puces concrètes : les chaînes et outils sur lesquels tu es intervenu, les incidents traités, ce que tu as automatisé.',
+          "Stage de 6 semaines en 2024, prolongé par une année d'alternance (2024 — 2025) au Centre de Traitement Informatique de l'Assurance Maladie.",
+          "Traitement des incidents de la chaîne de remboursement, au cœur d'un système d'information de grande échelle.",
+          'Interventions sur le superviseur Centreon : surveillance des serveurs et des traitements de production.',
+          "Automatisation : conception et mise en œuvre d'un projet de purge des applications.",
         ],
       },
       {
         titre: 'Responsable — management terrain',
         organisation: 'Alliance Healthcare',
-        lieu: 'À COMPLÉTER — ville',
-        periode: 'À COMPLÉTER — période (chaque samedi, depuis …)',
+        lieu: 'Montagny (69)',
+        periode: 'Depuis 2022',
         details: [
-          'Poste de responsable tenu chaque samedi, en parallèle des études : encadrement de l’équipe et organisation du travail sur le terrain.',
-          'À COMPLÉTER — 2 à 3 puces concrètes : taille de l’équipe, périmètre confié, résultat obtenu.',
+          'Poste de responsable tenu chaque samedi depuis 2022, en parallèle des études.',
+          "Encadrement d'une équipe de 15 personnes : organisation du travail, répartition des tâches et suivi sur le terrain.",
         ],
       },
     ],
@@ -194,6 +196,7 @@ export const fr: Contenu = {
         periode: '2023 — 2025',
         details: [
           'Administration de réseaux et de systèmes, développement logiciel, cybersécurité et bases de données.',
+          "2ᵉ année effectuée en alternance à l'Assurance Maladie, au CTI de Saint-Étienne.",
           'Socle réseaux et sécurité que je prolonge aujourd’hui avec la spécialisation SRS du Master.',
         ],
       },
@@ -219,7 +222,7 @@ export const fr: Contenu = {
       },
       {
         categorie: 'Systèmes & réseaux',
-        items: ['Linux', 'Administration système & réseau', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
+        items: ['Linux', 'Administration système & réseau', 'Supervision (Centreon)', 'Cybersécurité', 'Home Assistant', 'Automatisation'],
       },
       {
         categorie: 'Qualité & outillage',

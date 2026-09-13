@@ -10,8 +10,9 @@
 - **Anglais B2**
 - **GitHub** <https://github.com/joseanthony-dev> et **LinkedIn** <https://www.linkedin.com/in/joseanthony-zacharias>
 - **Téléphone** 06 42 16 24 15 et e-mail anthony.jose@outlook.fr
-- **Expérience Assurance Maladie**, informatique de production au CTI de Saint-Étienne
-- **Expérience Alliance Healthcare**, responsable / management terrain, chaque samedi
+- **Assurance Maladie**, CTI de Saint-Étienne : stage de 6 semaines en 2024 puis alternance
+  2024-2025 (purge d'applications, incidents chaîne de remboursement, superviseur Centreon)
+- **Alliance Healthcare**, Montagny (69), responsable depuis 2022, équipe de 15 personnes
 - **À propos, 3ᵉ paragraphe** rédigé à partir du résumé LinkedIn
 - **Compétences** : C++, Flutter / Firebase, Linux, admin système & réseau, cybersécurité, Home Assistant
 - **Zone de recherche** élargie à Lyon **et Saint-Étienne**
@@ -20,16 +21,6 @@
 
 Pour les retrouver dans le code : `grep -rn "À COMPLÉTER\|TO FILL IN" src/`
 
-L'export LinkedIn fourni était la version **Basic** : il ne contient que `Profile.csv` (identité,
-titre et résumé), sans `Positions.csv` ni `Education.csv`. Les deux expériences ont donc été
-reconstituées à partir du résumé — il manque les **dates**, le **lieu d'Alliance Healthcare** et
-les **puces concrètes**. Pour les obtenir d'un coup : LinkedIn → *Préférences* → *Obtenir une copie
-de vos données* → **« Télécharger l'archive complète »** (et non « Basic »).
-
-- [ ] **Assurance Maladie / CTI Saint-Étienne** : dates (mois + année), et 2 à 3 puces concrètes —
-      chaînes et outils, incidents traités, ce que tu as automatisé. Stage de BTS ?
-- [ ] **Alliance Healthcare** : ville, dates (depuis quand ?), et 2 à 3 puces — taille de l'équipe,
-      périmètre, résultat.
 - [ ] **Mention de licence** et projet de fin de licence, si tu veux les afficher.
 - [ ] **Projets à ajouter ?** Ton compte GitHub contient d'autres travaux qui mériteraient une
       carte, notamment **lifprojet-emotion-recognition** (reconnaissance d'émotions) et
