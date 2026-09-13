@@ -29,7 +29,6 @@
 
 ## Fichiers à déposer
 
-- [ ] `public/cv.pdf` — le bouton pointe dessus (`/portfolio/cv.pdf` une fois déployé).
 - [ ] `public/apercu.png` — 1200 × 630 px, l'aperçu affiché quand on partage le lien.
 
 ## Déploiement
@@ -38,8 +37,8 @@ L'URL cible est celle du CV : <https://joseanthony-dev.github.io/portfolio/>.
 `vite.config.ts` porte donc `base: '/portfolio/'` — **ne pas l'enlever**, sinon le CSS et le JS
 sont demandés à la racine du domaine et le site s'affiche blanc.
 
-- [ ] Créer le dépôt `portfolio` sur GitHub et pousser `main`.
-- [ ] Activer GitHub Pages (branche `gh-pages` ou action de déploiement).
+Le déploiement est automatique : `.github/workflows/deploy.yml` construit et publie le site
+à chaque `git push` sur `main`.
 
 ## Dépôts GitHub
 

@@ -24,7 +24,7 @@ export function Hero({ t }: { t: Contenu }) {
             <IconeMail />
             {t.hero.ctaContact}
           </a>
-          <a className="bouton bouton--discret" href={`${import.meta.env.BASE_URL}cv.pdf`} download>
+          <a className="bouton bouton--discret" href={`${import.meta.env.BASE_URL}CV_JOSE_Anthony.pdf`} download>
             <IconeTelechargement />
             {t.hero.ctaCv}
           </a>
