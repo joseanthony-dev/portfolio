@@ -402,7 +402,8 @@ a:hover { text-decoration: underline; }
   white-space: nowrap;
 }
 .etiquette--livre { background: var(--accent-clair); color: var(--accent); }
-.etiquette--en-cours {
+.etiquette--en-cours,
+.etiquette--non-distribue {
   background: var(--fond-alterne);
   color: var(--encre-tenue);
   border: 1px solid var(--bordure);

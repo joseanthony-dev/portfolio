@@ -40,7 +40,7 @@ export const en: Contenu = {
     titre: 'Projects',
     sousTitre: 'I build software too: real applications, designed and shipped end to end.',
     voirTout: 'View code',
-    statuts: { 'en-cours': 'In progress', livre: 'In production' },
+    statuts: { 'en-cours': 'In progress', livre: 'In production', 'non-distribue': 'Not distributed' },
     liste: [
       {
         id: 'outils-purge-shell',
@@ -96,7 +96,7 @@ export const en: Contenu = {
         ],
         technos: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Cloud Messaging', 'App Check'],
         periode: '2025',
-        statut: 'livre',
+        statut: 'non-distribue',
         vedette: true,
         liens: [],
       },

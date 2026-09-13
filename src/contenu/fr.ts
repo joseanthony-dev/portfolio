@@ -46,7 +46,7 @@ export const fr: Contenu = {
     titre: 'Projets',
     sousTitre: 'Je développe aussi : des applications réelles, conçues et livrées de bout en bout.',
     voirTout: 'Voir le code',
-    statuts: { 'en-cours': 'En cours', livre: 'En production' },
+    statuts: { 'en-cours': 'En cours', livre: 'En production', 'non-distribue': 'Non distribué' },
     liste: [
       {
         id: 'outils-purge-shell',
@@ -102,7 +102,7 @@ export const fr: Contenu = {
         ],
         technos: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Cloud Messaging', 'App Check'],
         periode: '2025',
-        statut: 'livre',
+        statut: 'non-distribue',
         vedette: true,
         liens: [],
       },

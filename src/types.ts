@@ -14,7 +14,7 @@ export type Projet = {
   points: string[]
   technos: string[]
   periode: string
-  statut: 'en-cours' | 'livre'
+  statut: 'en-cours' | 'livre' | 'non-distribue'
   vedette: boolean
   liens: Lien[]
 }
@@ -66,7 +66,7 @@ export type Contenu = {
     titre: string
     sousTitre: string
     voirTout: string
-    statuts: { 'en-cours': string; livre: string }
+    statuts: { 'en-cours': string; livre: string; 'non-distribue': string }
     liste: Projet[]
   }
   parcours: {
