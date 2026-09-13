@@ -11,7 +11,8 @@
 - **GitHub** <https://github.com/joseanthony-dev> et **LinkedIn** <https://www.linkedin.com/in/joseanthony-zacharias>
 - **Téléphone** 06 42 16 24 15 et e-mail anthony.jose@outlook.fr
 - **Assurance Maladie**, CTI de Saint-Étienne : stage de 6 semaines en 2024 puis alternance
-  2024-2025 (purge d'applications, incidents chaîne de remboursement, superviseur Centreon)
+  2024-2025 (purge automatisée des anciennes versions applicatives, incidents de la chaîne de
+  remboursement, superviseur Centreon)
 - **Alliance Healthcare**, Montagny (69), responsable depuis 2022, équipe de 15 personnes
 - **À propos, 3ᵉ paragraphe** rédigé à partir du résumé LinkedIn
 - **Compétences** : C++, Flutter / Firebase, Linux, admin système & réseau, cybersécurité, Home Assistant

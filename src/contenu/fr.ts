@@ -153,7 +153,7 @@ export const fr: Contenu = {
           "Stage de 6 semaines en 2024, prolongé par une année d'alternance (2024 — 2025) au Centre de Traitement Informatique de l'Assurance Maladie.",
           "Traitement des incidents de la chaîne de remboursement, au cœur d'un système d'information de grande échelle.",
           'Interventions sur le superviseur Centreon : surveillance des serveurs et des traitements de production.',
-          "Automatisation : conception et mise en œuvre d'un projet de purge des applications.",
+          "Automatisation de la purge des anciennes versions applicatives : à chaque montée de version, les livraisons précédentes restaient sur les serveurs et saturaient l'espace disque — la purge libère la place sans intervention manuelle.",
         ],
       },
       {

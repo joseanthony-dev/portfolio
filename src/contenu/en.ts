@@ -146,7 +146,7 @@ export const en: Contenu = {
           'A six-week internship in 2024, extended into a one-year apprenticeship (2024 — 2025) at the data centre of the French national health insurance fund.',
           'Handled incidents on the reimbursement processing chain, at the heart of a large-scale information system.',
           'Worked on the Centreon monitoring platform: watching over production servers and batch jobs.',
-          'Automation: designed and delivered an application purge project.',
+          'Automated the purge of superseded application versions: every upgrade left the previous releases sitting on the servers and eating into disk space — the purge reclaims it with no manual work.',
         ],
       },
       {
