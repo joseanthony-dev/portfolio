@@ -202,6 +202,11 @@ main:focus, main:focus-visible { outline: none; }
 .bouton-langue .est-actif { color: var(--accent); }
 
 .entete__burger { display: none; }
+/* Ouvert ou fermé, les deux tracés sont dans le HTML : c'est aria-expanded,
+   seule source de vérité de l'état, qui décide lequel se voit. */
+.entete__burger .burger-fermer { display: none; }
+.entete__burger[aria-expanded='true'] .burger-ouvrir { display: none; }
+.entete__burger[aria-expanded='true'] .burger-fermer { display: inline; }
 
 /* ── Boutons ───────────────────────────────────────────────────────────── */
 
@@ -607,6 +612,12 @@ main:focus, main:focus-visible { outline: none; }
 
 /* ── Contact ───────────────────────────────────────────────────────────── */
 
+/* Même principe pour la confirmation de copie : les deux icônes sont là, une
+   classe tranche. */
+.contact__copie .icone-check { display: none; }
+.contact__copie.est-copie .icone-copie { display: none; }
+.contact__copie.est-copie .icone-check { display: block; }
+
 .contact__bloc {
   display: flex;
   flex-wrap: wrap;
@@ -793,8 +804,37 @@ main:focus, main:focus-visible { outline: none; }
 }
 
 @media print {
-  .entete, .hero__grille, .hero__actions, .lien-evitement { display: none; }
+  /* Tout ce qui ne sert qu'à naviguer disparaît : sur papier, un bouton de thème
+     ou un lien « retour » n'a pas d'objet. */
+  .entete,
+  .hero__grille,
+  .hero__actions,
+  .lien-evitement,
+  .cas__retour,
+  .carte__cas {
+    display: none;
+  }
+
   body { background: #fff; color: #000; }
   .section { padding-block: 1rem; }
   .carte { break-inside: avoid; box-shadow: none; }
+
+  /* Une page de cas s'imprime comme un document : on desserre les marges, et on
+     évite qu'un titre ou un chiffre se retrouve seul en bas de page. */
+  .cas { padding-block: 0 1rem; }
+  .cas__corps, .cas__pied, .cas__entete { max-width: none; }
+  .cas__section, .chiffre, .cas__figure { break-inside: avoid; }
+  .cas__section h2 { break-after: avoid; }
+  .cas__chiffres { gap: 0.6rem; }
+  .chiffre { box-shadow: none; }
+
+  /* L'adresse d'un lien externe se perd à l'impression : on l'écrit en clair,
+     sans quoi le lecteur d'une page imprimée n'a aucun moyen de la retrouver. */
+  .lien-externe[href^='http']::after,
+  .contact__reseaux a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.82em;
+    color: #555;
+    word-break: break-all;
+  }
 }

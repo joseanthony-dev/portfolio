@@ -13,10 +13,10 @@ scripts. Everything is served from the domain, so visiting it sends no request t
 
 ## Stack
 
-React 19 · TypeScript · Vite 8 · plain CSS (no styling framework)
+TypeScript · Vite 8 · plain CSS (no styling framework) · React **at build time only**
 
-The site is fully static: the build emits HTML, CSS and a JS bundle, hostable anywhere. React is
-the only runtime dependency.
+The site is fully static: the build emits HTML, CSS and 1 kB of JavaScript, hostable anywhere.
+**No runtime dependencies at all**, React included.
 
 ## A few deliberate choices
 
@@ -27,13 +27,18 @@ therefore cannot drift apart in silence.
 
 **Rendered at build time.** The pages carry the whole text of the site, not just an empty
 `<div id="root">`: `scripts/prerendu.mjs` renders the application under Node at the end of the
-build and inserts the result. The content is readable without JavaScript and painted
-before the 82 kB bundle has loaded — the browser no longer waits for React to draw the page. React
-then hydrates that DOM instead of rebuilding it.
+build and inserts the result. The content is readable without JavaScript, and painted without
+waiting for anything.
 
-This comes with a constraint: the first client render must produce exactly the HTML from the build.
-It is checkable — the served markup is compared byte for byte against a fresh render — and it is
-what dictates the two choices below.
+**React never leaves the build.** The components in `src/composants/` are there to write the pages,
+not to animate them: the browser receives the generated HTML and `src/client.ts`, roughly 1 kB of
+plain JavaScript wiring the four interactive behaviours — theme toggle, mobile menu, copying the
+address, tracking the section being read. There is no hydration, so no React tree to rebuild or to
+reconcile.
+
+The gain is not theoretical: a first visit went from 120 kB down to **29 kB**. The bundle used to
+carry React and both languages' content — six projects, their case studies, in French and in
+English — in order to attach four click handlers.
 
 **One URL per language.** French sits at the root, English under `/en/`, each prerendered in its
 own language with its own `<html lang>`, title, description and `og:locale`, and each declaring the
@@ -89,6 +94,11 @@ which keeps it identical to the prerendered HTML either way.
 **Accessibility.** Skip link, keyboard navigation, contrast checked in both themes, and
 `prefers-reduced-motion` honoured.
 
+**The build re-reads itself.** `scripts/verifier.mjs` reopens the generated pages and refuses to let
+through a dead internal link, an anchor with no target, a wrong `<html lang>`, a canonical that does
+not name its own page, an `hreflang` set that fails to reference itself, or a page missing
+`noindex`. A build that finishes is no proof the site holds together: this one checks.
+
 **Images.** The portrait is WebP: the same photograph as a PNG weighed 196 kB, more than the whole
 rest of the site put together. The build target (`chrome111`, `safari16.4`) is more recent than
 WebP support, and the CSS already uses `color-mix()`: no browser able to render the site correctly
@@ -125,7 +135,7 @@ src/
   contenu/en.ts         English copy
   App.tsx               theme, and assembly of the sections
   index.css             all styling (theme variables at the top)
-  entree-client.tsx     browser entry point, hydrates the prerendered HTML
+  client.ts             the only JavaScript sent to the browser (~1 kB)
   entree-serveur.tsx    entry point for the build-time render
   composants/
     EnTete.tsx          navigation, link to the other language, theme, mobile menu
@@ -134,6 +144,7 @@ src/
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
   prerendu.mjs          writes every page
+  verifier.mjs          re-reads the built dist/ and fails the build if it is off
 ```
 
 ## Deployment

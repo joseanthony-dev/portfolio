@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import type { Contenu, Langue } from '../types'
 import { AUTRE, lienLangue, lienProjet } from '../langues'
 import { IconeLune, IconeSoleil } from './Icones'
@@ -8,78 +7,22 @@ type Props = {
   langue: Langue
   /** Identifiant du projet quand on est sur sa page de cas, sinon rien. */
   projet?: string
-  onTheme: () => void
 }
 
 const sections = ['projets', 'parcours', 'competences', 'contact'] as const
 
-export function EnTete({ t, langue, projet, onTheme }: Props) {
-  const [ouvert, setOuvert] = useState(false)
-  const [actif, setActif] = useState<string>('')
-  const entete = useRef<HTMLElement>(null)
-  const burger = useRef<HTMLButtonElement>(null)
-
+// Composant sans état : il n'est rendu qu'au build. Tout ce qui bouge — menu,
+// thème, section active — est repris côté navigateur par src/client.ts, qui
+// agit sur ce balisage plutôt que de le reconstruire.
+export function EnTete({ t, langue, projet }: Props) {
   // Les sections de la navigation vivent sur l'accueil. Depuis une page de cas,
   // leurs ancres doivent donc être précédées de l'adresse de l'accueil, sans quoi
   // elles pointeraient sur des identifiants absents de la page.
   const accueil = lienLangue(langue)
   const versSection = (id: string) => (projet ? `${accueil}#${id}` : `#${id}`)
 
-  useEffect(() => {
-    const cibles = sections
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null)
-
-    // L'observateur ne rapporte que les sections dont la visibilité a changé, pas
-    // l'état complet : on tient donc nous-mêmes la liste de celles qui croisent
-    // la bande centrale, sans quoi on ne saurait jamais qu'il n'y en a plus
-    // aucune — au-dessus de « Projets », dans le hero ou À propos.
-    const croisent = new Map<string, number>()
-
-    const observateur = new IntersectionObserver(
-      (entrees) => {
-        for (const e of entrees) {
-          if (e.isIntersecting) croisent.set(e.target.id, e.intersectionRatio)
-          else croisent.delete(e.target.id)
-        }
-        let meilleur = ''
-        let ratio = -1
-        for (const [id, r] of croisent) {
-          if (r > ratio) [meilleur, ratio] = [id, r]
-        }
-        setActif(meilleur)
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] },
-    )
-    cibles.forEach((c) => observateur.observe(c))
-    return () => observateur.disconnect()
-  }, [])
-
-  // Menu mobile ouvert : Échap le referme et rend le focus au bouton,
-  // un clic en dehors de l'en-tête le referme aussi.
-  useEffect(() => {
-    if (!ouvert) return
-
-    function surTouche(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        setOuvert(false)
-        burger.current?.focus()
-      }
-    }
-    function surClic(e: MouseEvent) {
-      if (!entete.current?.contains(e.target as Node)) setOuvert(false)
-    }
-
-    document.addEventListener('keydown', surTouche)
-    document.addEventListener('pointerdown', surClic)
-    return () => {
-      document.removeEventListener('keydown', surTouche)
-      document.removeEventListener('pointerdown', surClic)
-    }
-  }, [ouvert])
-
   return (
-    <header className="entete" ref={entete}>
+    <header className="entete">
       <div className="entete__contenu">
         <a className="entete__marque" href={projet ? accueil : '#haut'} aria-label={t.hero.nom}>
           <span className="entete__initiales" aria-hidden="true">
@@ -90,48 +33,37 @@ export function EnTete({ t, langue, projet, onTheme }: Props) {
           </span>
         </a>
 
-        <nav
-          id="nav-principale"
-          className={`entete__nav ${ouvert ? 'entete__nav--ouverte' : ''}`}
-          aria-label={t.a11y.menu}
-        >
+        <nav id="nav-principale" className="entete__nav" aria-label={t.a11y.menu}>
           {sections.map((id) => (
-            <a
-              key={id}
-              href={versSection(id)}
-              className={actif === id ? 'est-actif' : ''}
-              onClick={() => setOuvert(false)}
-            >
+            <a key={id} href={versSection(id)} data-section={id}>
               {t.nav[id]}
             </a>
           ))}
         </nav>
 
         <div className="entete__actions">
-          <button type="button" className="bouton-icone" onClick={onTheme} aria-label={t.a11y.changerTheme} title={t.a11y.changerTheme}>
+          <button
+            type="button"
+            className="bouton-icone"
+            data-bascule-theme
+            aria-label={t.a11y.changerTheme}
+            title={t.a11y.changerTheme}
+          >
             {/* Les deux icônes sont dans le HTML ; le CSS montre celle qui
                 correspond au thème déjà posé sur <html>, donc elle est juste
-                dès le HTML pré-rendu, sans attendre React. */}
+                dès le HTML pré-rendu, sans attendre le moindre script. */}
             <IconeSoleil className="icone-theme icone-theme--sombre" />
             <IconeLune className="icone-theme icone-theme--clair" />
           </button>
 
           {/* Chaque langue est une page à part : la bascule est un vrai lien,
-              ce qui la rend suivable par un moteur et ouvrable dans un onglet.
-              L'ancre de la section lue y est reportée — les identifiants sont les
-              mêmes dans les deux langues — pour retrouver sa place après le
-              changement de page. Vide au premier rendu, donc identique au HTML
-              pré-rendu, et les moteurs ne voient que l'URL propre. */}
+              ce qui la rend suivable et ouvrable dans un onglet. Sur l'accueil,
+              client.ts y reporte l'ancre de la section lue. */}
           <a
             className="bouton-langue"
-            href={
-              projet
-                ? lienProjet(AUTRE[langue], projet)
-                : actif
-                  ? `${lienLangue(AUTRE[langue])}#${actif}`
-                  : lienLangue(AUTRE[langue])
-            }
+            href={projet ? lienProjet(AUTRE[langue], projet) : lienLangue(AUTRE[langue])}
             hrefLang={AUTRE[langue]}
+            data-lien-langue
             aria-label={t.a11y.changerLangue}
             title={t.a11y.changerLangue}
           >
@@ -142,15 +74,17 @@ export function EnTete({ t, langue, projet, onTheme }: Props) {
 
           <button
             type="button"
-            ref={burger}
             className="bouton-icone entete__burger"
-            onClick={() => setOuvert((o) => !o)}
-            aria-expanded={ouvert}
+            data-bascule-menu
+            aria-expanded="false"
             aria-controls="nav-principale"
-            aria-label={ouvert ? t.a11y.fermerMenu : t.a11y.ouvrirMenu}
+            aria-label={t.a11y.ouvrirMenu}
+            data-ouvrir={t.a11y.ouvrirMenu}
+            data-fermer={t.a11y.fermerMenu}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
-              {ouvert ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+              <path className="burger-ouvrir" d="M4 7h16M4 12h16M4 17h16" />
+              <path className="burger-fermer" d="M6 6l12 12M18 6 6 18" />
             </svg>
           </button>
         </div>

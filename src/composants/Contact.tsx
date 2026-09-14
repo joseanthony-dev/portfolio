@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { Contenu } from '../types'
 import {
   IconeCheck,
@@ -12,19 +11,6 @@ import {
 } from './Icones'
 
 export function Contact({ t }: { t: Contenu }) {
-  const [copie, setCopie] = useState(false)
-
-  async function copierEmail() {
-    try {
-      await navigator.clipboard.writeText(t.contact.email)
-      setCopie(true)
-      window.setTimeout(() => setCopie(false), 2000)
-    } catch {
-      // Presse-papiers indisponible (contexte non sécurisé, permission refusée) :
-      // le lien mailto reste utilisable, on ne fait rien de plus.
-    }
-  }
-
   return (
     <section className="section section--alternee" id="contact">
       <div className="section__interieur contact">
@@ -36,9 +22,19 @@ export function Contact({ t }: { t: Contenu }) {
             <IconeMail />
             {t.contact.email}
           </a>
-          <button type="button" className="bouton bouton--discret" onClick={copierEmail}>
-            {copie ? <IconeCheck /> : <IconeCopie />}
-            {copie ? t.contact.copie_ok : t.contact.copie}
+          {/* Les deux icônes sont présentes ; client.ts bascule une classe et
+              échange le libellé, plutôt que de reconstruire le bouton. Si le
+              presse-papiers est indisponible, le lien mailto reste utilisable. */}
+          <button
+            type="button"
+            className="bouton bouton--discret contact__copie"
+            data-copier={t.contact.email}
+            data-libelle={t.contact.copie}
+            data-libelle-ok={t.contact.copie_ok}
+          >
+            <IconeCopie className="icone-copie" />
+            <IconeCheck className="icone-check" />
+            <span className="contact__copie-libelle">{t.contact.copie}</span>
           </button>
         </div>
 

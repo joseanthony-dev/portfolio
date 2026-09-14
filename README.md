@@ -15,10 +15,10 @@ tiers pour le visiteur.
 
 ## Stack
 
-React 19 · TypeScript · Vite 8 · CSS natif (aucun framework de style)
+TypeScript · Vite 8 · CSS natif (aucun framework de style) · React **au build seulement**
 
-Le site est entièrement statique : le build produit du HTML, du CSS et un bundle JS, hébergeables
-n'importe où. Aucune dépendance d'exécution en dehors de React.
+Le site est entièrement statique : le build produit du HTML, du CSS et 1 ko de JavaScript,
+hébergeables n'importe où. **Aucune dépendance d'exécution**, React compris.
 
 ## Quelques partis pris
 
@@ -29,13 +29,18 @@ langues ne peuvent donc pas diverger silencieusement.
 
 **Rendu au build.** Les pages contiennent tout le texte du site, pas seulement un
 `<div id="root">` vide : `scripts/prerendu.mjs` rend l'application dans Node à la fin du build et
-insère le résultat. Le contenu est donc lisible sans JavaScript et affiché avant que
-les 82 ko du bundle ne soient chargés — le navigateur n'attend plus React pour peindre la page.
-React s'hydrate ensuite sur ce DOM au lieu de le reconstruire.
+insère le résultat. Le contenu est donc lisible sans JavaScript, et affiché sans attendre quoi que
+ce soit.
 
-Cela impose une contrainte : le premier rendu client doit produire exactement le HTML du build.
-C'est vérifiable — le balisage servi est comparé octet pour octet au rendu d'une compilation
-fraîche — et c'est ce qui dicte les deux choix suivants.
+**React ne quitte jamais le build.** Les composants de `src/composants/` servent à écrire les pages,
+pas à les animer : le navigateur reçoit le HTML produit et `src/client.ts`, soit environ 1 ko de
+JavaScript natif qui branche les quatre comportements interactifs — bascule de thème, menu mobile,
+copie de l'adresse, suivi de la section lue. Il n'y a pas d'hydratation, donc pas d'arbre React à
+reconstruire ni à faire correspondre.
+
+Le gain n'est pas théorique : une première visite est passée de 120 à **29 ko**. Le bundle contenait
+React et le contenu des deux langues — les six projets, leurs études de cas, en français et en
+anglais — pour brancher quatre gestionnaires de clic.
 
 **Une URL par langue.** Le français est à la racine, l'anglais sous `/en/`, chacun pré-rendu dans
 sa langue avec son `<html lang>`, son titre, sa description et son `og:locale`, et chacun déclarant
@@ -90,6 +95,11 @@ ne dépend pas du thème, ce qui le rend identique au HTML pré-rendu dans les d
 **Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
 thèmes, et `prefers-reduced-motion` respecté.
 
+**Le build se relit.** `scripts/verifier.mjs` rouvre les pages produites et refuse de laisser passer
+un lien interne mort, une ancre sans cible, un `<html lang>` erroné, un canonique qui ne désigne pas
+la page, un ensemble `hreflang` qui ne se référence pas, ou une page sans `noindex`. Un build qui se
+termine ne prouve pas que le site tient : celui-ci le vérifie.
+
 **Images.** Le portrait est en WebP : la même photographie en PNG pesait 196 ko, soit plus que
 tout le reste du site réuni. Le format cible du build (`chrome111`, `safari16.4`) est plus récent
 que la prise en charge du WebP, et le CSS emploie déjà `color-mix()` : aucun navigateur capable
@@ -125,7 +135,7 @@ src/
   contenu/en.ts         texte anglais
   App.tsx               thème et assemblage des sections
   index.css             mise en forme complète (variables de thème en tête)
-  entree-client.tsx     point d'entrée navigateur, hydrate le HTML pré-rendu
+  client.ts             le seul JavaScript envoyé au navigateur (~1 ko)
   entree-serveur.tsx    point d'entrée du rendu au build
   composants/
     EnTete.tsx          navigation, lien vers l'autre langue, thème, menu mobile
@@ -134,6 +144,7 @@ src/
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
   prerendu.mjs          écrit toutes les pages
+  verifier.mjs          relit le dist/ produit et fait échouer le build s'il cloche
 ```
 
 ## Déploiement
