@@ -193,6 +193,7 @@ export const fr: Contenu = {
               titre: 'Ce que l’application couvrait',
               paragraphes: [
                 'L’affectation des heures et des secteurs, avec détection des conflits avant validation. La déclaration des disponibilités par chacun. Le covoiturage entre participants, et une messagerie pour remplacer les fils de discussion éparpillés.',
+                'La détection de conflits bloque la validation : une affectation qui en produit un ne peut pas être confirmée. Ce garde-fou vit dans l’application, et ne se confond pas avec la séparation des rôles décrite plus haut, appliquée par la base. Empêcher une erreur de saisie et empêcher un accès ne demandent ni la même rigueur ni le même endroit.',
                 'Les notifications push passent par Firebase Cloud Messaging et ouvrent directement l’écran concerné — une notification qui dépose l’utilisateur sur l’accueil lui laisse le travail de retrouver ce dont on lui parle. S’y ajoutent un tableau de bord, les retours des participants et l’export du récapitulatif.',
               ],
             },

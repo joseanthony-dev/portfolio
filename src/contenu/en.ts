@@ -187,6 +187,7 @@ export const en: Contenu = {
               titre: 'What the application covered',
               paragraphes: [
                 'Assignment of hours and sectors, with conflicts detected before anything is confirmed. Availability declared by each person. Car sharing between participants, and built-in messaging to replace scattered chat threads.',
+                'Conflict detection blocks confirmation: an assignment that produces one cannot be confirmed. That guard-rail lives in the application, and is not to be confused with the role separation described above, which the database enforces. Preventing a data-entry mistake and preventing an access do not call for the same rigour, nor for the same place.',
                 'Push notifications go through Firebase Cloud Messaging and open straight onto the relevant screen — a notification that drops the user on the home page leaves them to go and find what it was about. On top of that: a dashboard, participant feedback, and a summary export.',
               ],
             },
