@@ -272,7 +272,7 @@ export const en: Contenu = {
         resume:
           'A full image-processing pipeline: real-time face detection, emotion classification and face generation.',
         contexte:
-          'A university project introducing artificial intelligence, carried out by three of us — I took on the emotion classification. Three models chained inside a desktop application: find the faces in a webcam feed, recognise the emotion, and generate new faces conditioned on an emotion.',
+          'Final-year project of my bachelor’s degree, carried out by three of us in the introductory artificial intelligence course — I took on the emotion classification. Three models chained inside a desktop application: find the faces in a webcam feed, recognise the emotion, and generate new faces conditioned on an emotion.',
         points: [
           'Real-time face detection on a webcam feed (YOLO).',
           'Classification across seven emotions — anger, disgust, fear, joy, sadness, surprise, neutral — with a ResNet18 trained on FER2013.',
@@ -298,7 +298,7 @@ export const en: Contenu = {
             {
               titre: 'Three models, three people',
               paragraphes: [
-                'The application chains three models: a YOLO that finds faces in the webcam feed, a classifier that assigns an emotion to the face it found, and a variational autoencoder that generates new faces. There were three of us, one model each. The classifier was mine.',
+                'This final-year project chains three models: a YOLO that finds faces in the webcam feed, a classifier that assigns an emotion to the face it found, and a variational autoencoder that generates new faces. There were three of us, one model each. The classifier was mine.',
                 'What follows is about that part, and about wiring it to the rest.',
               ],
             },
@@ -477,6 +477,7 @@ export const en: Contenu = {
         details: [
           'Admitted directly into the final year on the strength of the BTS.',
           'Algorithms, object-oriented programming, databases, systems and networks.',
+          'Final-year project: “Emotion recognition” — face detection, classification and generation, in a team of three.',
         ],
       },
       {

@@ -278,7 +278,7 @@ export const fr: Contenu = {
         resume:
           'Chaîne complète de traitement d’images : détection de visages en temps réel, classification d’émotions et génération de visages.',
         contexte:
-          'Projet universitaire d’introduction à l’intelligence artificielle, mené à trois — j’ai pris en charge la classification des émotions. Trois modèles enchaînés dans une application de bureau : repérer les visages dans un flux webcam, reconnaître l’émotion, et générer de nouveaux visages conditionnés par une émotion.',
+          'Projet de fin de licence, mené à trois dans le cours d’introduction à l’intelligence artificielle — j’ai pris en charge la classification des émotions. Trois modèles enchaînés dans une application de bureau : repérer les visages dans un flux webcam, reconnaître l’émotion, et générer de nouveaux visages conditionnés par une émotion.',
         points: [
           'Détection de visages en temps réel sur flux webcam (YOLO).',
           'Classification sur sept émotions — colère, dégoût, peur, joie, tristesse, surprise, neutre — avec un ResNet18 entraîné sur FER2013.',
@@ -304,7 +304,7 @@ export const fr: Contenu = {
             {
               titre: 'Trois modèles, trois personnes',
               paragraphes: [
-                'L’application enchaîne trois modèles : un YOLO qui repère les visages dans le flux webcam, un classifieur qui attribue une émotion au visage trouvé, et un autoencodeur variationnel qui génère de nouveaux visages. Nous étions trois, chacun sur un modèle. Le classifieur était le mien.',
+                'Ce projet de fin de licence enchaîne trois modèles : un YOLO qui repère les visages dans le flux webcam, un classifieur qui attribue une émotion au visage trouvé, et un autoencodeur variationnel qui génère de nouveaux visages. Nous étions trois, chacun sur un modèle. Le classifieur était le mien.',
                 'Ce qui suit porte donc sur cette partie, et sur son raccordement au reste.',
               ],
             },
@@ -483,6 +483,7 @@ export const fr: Contenu = {
         details: [
           'Admission directe en 3ᵉ année à l’issue du BTS.',
           'Algorithmique, programmation orientée objet, bases de données, systèmes et réseaux.',
+          'Projet de fin de licence : « Reconnaissance d’émotions » — détection de visages, classification et génération, en équipe de trois.',
         ],
       },
       {
