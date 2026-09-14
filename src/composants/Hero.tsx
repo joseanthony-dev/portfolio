@@ -32,12 +32,18 @@ export function Hero({ t }: { t: Contenu }) {
         </div>
         </div>
 
+        {/* Le plus gros élément peint de la page, et le seul à télécharger avant
+            que le hero soit complet : on le sort en priorité haute. Les
+            dimensions sont déclarées pour réserver la place et éviter que le
+            texte ne saute quand l'image arrive. */}
         <img
           className="hero__photo"
-          src={`${import.meta.env.BASE_URL}photo.png`}
+          src={`${import.meta.env.BASE_URL}photo.webp`}
           alt={t.hero.photoAlt}
           width={308}
           height={461}
+          fetchPriority="high"
+          decoding="async"
         />
       </div>
     </section>

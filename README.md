@@ -46,6 +46,16 @@ ne dépend pas du thème, ce qui le rend identique au HTML pré-rendu dans les d
 **Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
 thèmes, et `prefers-reduced-motion` respecté.
 
+**Images.** Le portrait est en WebP : la même photographie en PNG pesait 196 ko, soit plus que
+tout le reste du site réuni. Le format cible du build (`chrome111`, `safari16.4`) est plus récent
+que la prise en charge du WebP, et le CSS emploie déjà `color-mix()` : aucun navigateur capable
+d'afficher le site correctement ne manque le WebP, donc pas de `<picture>` de repli à maintenir.
+La source reste plus grande que son affichage — un cercle de 205 px — pour rester nette sur les
+écrans à forte densité.
+
+`public/apercu.png` fait exception et reste en PNG : elle n'est jamais chargée par le site, seules
+les plateformes de partage la récupèrent, et leur prise en charge du WebP est irrégulière.
+
 **Styles.** Environ 12 ko de CSS écrits à la main, pilotés par des variables de thème regroupées en
 tête de `src/index.css`. Changer la couleur d'accent tient en une ligne.
 
