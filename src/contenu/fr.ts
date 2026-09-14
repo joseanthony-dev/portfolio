@@ -40,7 +40,7 @@ export const fr: Contenu = {
     paragraphes: [
       "Étudiant en Master Informatique à l'Université Claude Bernard Lyon 1, je me dirige vers le parcours SRS — Systèmes, Réseaux et Sécurité. C'est la suite logique de mon BTS CIEL option Informatique et Réseaux : administration système et réseau, cybersécurité, et une année d'alternance passée en informatique de production.",
       "Ce qui m'intéresse, c'est que ça tourne. À l'Assurance Maladie, j'ai traité les incidents de la chaîne de remboursement, surveillé serveurs et traitements sous Centreon, et automatisé la purge des anciennes versions applicatives qui saturaient l'espace disque. Linux au quotidien, et de l'automatisation partout où elle remplace un geste manuel répété.",
-      "Le développement est venu en prolongement, et je continue : une application de bureau en production dans mon entreprise de location de photobooths, des applis mobiles, du C++, et une maison entière automatisée sous Home Assistant à force de curiosité. Savoir construire l'outil qui manque, c'est ce qui rend l'administration système vraiment intéressante. Je cherche une alternance pour mon Master 2, entre Lyon et Saint-Étienne.",
+      "Le développement est venu en prolongement, et je continue : une application de bureau en production dans mon entreprise de location de photobooths, des applis mobiles, du C++, et une installation domotique que j’héberge et administre chez moi sous Home Assistant. Savoir construire l'outil qui manque, c'est ce qui rend l'administration système vraiment intéressante. Je cherche une alternance pour mon Master 2, entre Lyon et Saint-Étienne.",
     ],
   },
 
@@ -131,16 +131,17 @@ export const fr: Contenu = {
         id: 'domotique-home-assistant',
         titre: 'Domotique — Home Assistant',
         resume:
-          'Installation domotique complète sur réseau local : intégrations, automatisations, tableaux de bord et notifications.',
+          'Installation Home Assistant auto-hébergée sur Raspberry Pi : équipements Matter, automatisations, tableaux de bord et sauvegardes.',
         contexte:
-          'Un terrain de jeu permanent pour tout ce qui m’intéresse en systèmes et réseaux : des équipements hétérogènes à faire dialoguer, un service à garder disponible, et de l’automatisation à écrire pour que la maison réagisse sans qu’on lui demande.',
+          'Un service que j’héberge et que j’administre chez moi, de l’installation aux sauvegardes : l’occasion de tenir quelque chose en état de marche sur la durée, et d’écrire les automatisations qui font réagir la maison sans qu’on lui demande.',
         points: [
-          'Intégration d’équipements IoT variés sur un réseau local maîtrisé.',
-          'Automatisations et scénarios déclenchés par capteurs, horaires et présence.',
-          'Tableaux de bord sur mesure et notifications pilotées par événement.',
-          'Auto-hébergement : supervision du service, sauvegardes et mises à jour.',
+          'Home Assistant OS sur Raspberry Pi, administré de bout en bout : mises à jour, sauvegardes, restauration.',
+          'Cinq équipements Matter intégrés, avec automatisations déclenchées par capteurs, horaires et présence.',
+          'Tableau de bord de santé qui signale un équipement qui ne répond plus.',
+          'Sauvegardes doublées, locale et hors site : perdre le Raspberry Pi n’est pas perdre l’installation.',
+          'Aucun accès depuis l’extérieur, par choix : des capteurs et des lumières ne le justifient pas. La question se reposera quand volets et chauffage seront pilotés.',
         ],
-        technos: ['Home Assistant', 'IoT', 'YAML', 'Réseau local', 'Linux'],
+        technos: ['Home Assistant', 'Matter', 'Raspberry Pi', 'YAML'],
         periode: 'En continu',
         statut: 'en-cours',
         vedette: true,

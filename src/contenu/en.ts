@@ -34,7 +34,7 @@ export const en: Contenu = {
     paragraphes: [
       "I'm a computer science master's student at Université Claude Bernard Lyon 1, heading for the SRS track — Systems, Networks and Security. It is the logical next step after my BTS CIEL in computing and networks: system and network administration, cybersecurity, and a year spent as an apprentice in IT production.",
       'What interests me is keeping things running. At the French national health insurance fund I handled incidents on the reimbursement processing chain, watched over servers and batch jobs with Centreon, and automated the purge of superseded application versions that were eating into disk space. Linux daily, and automation anywhere it replaces a repeated manual step.',
-      'Development came as the extension of that, and I have kept at it: a desktop application in production at my own photo booth rental business, mobile apps, some C++, and a whole house automated with Home Assistant out of sheer curiosity. Being able to build the tool that is missing is what makes system administration genuinely interesting. I am looking for an apprenticeship for my final master\'s year, between Lyon and Saint-Étienne.',
+      'Development came as the extension of that, and I have kept at it: a desktop application in production at my own photo booth rental business, mobile apps, some C++, and a home automation setup I host and administer myself with Home Assistant. Being able to build the tool that is missing is what makes system administration genuinely interesting. I am looking for an apprenticeship for my final master\'s year, between Lyon and Saint-Étienne.',
     ],
   },
 
@@ -125,16 +125,17 @@ export const en: Contenu = {
         id: 'domotique-home-assistant',
         titre: 'Home automation — Home Assistant',
         resume:
-          'A full home automation setup on a local network: integrations, automations, dashboards and notifications.',
+          'A self-hosted Home Assistant setup on a Raspberry Pi: Matter devices, automations, dashboards and backups.',
         contexte:
-          'A permanent playground for everything that interests me in systems and networks: mismatched devices that have to talk to each other, a service to keep available, and automations to write so the house reacts without being asked.',
+          'A service I host and administer at home, from install to backups: a chance to keep something running over the long haul, and to write the automations that make the house react without being asked.',
         points: [
-          'A range of IoT devices integrated on a local network I control end to end.',
-          'Automations and scenarios triggered by sensors, schedules and presence.',
-          'Custom dashboards and event-driven notifications.',
-          'Self-hosted: monitoring the service, backups and updates.',
+          'Home Assistant OS on a Raspberry Pi, administered end to end: updates, backups, restores.',
+          'Five Matter devices integrated, with automations triggered by sensors, schedules and presence.',
+          'A health dashboard that flags a device which has stopped responding.',
+          'Backups kept in two places, local and off-site: losing the Raspberry Pi is not losing the setup.',
+          'No access from outside, by choice: sensors and lights do not warrant it. The question comes back when shutters and heating are controlled.',
         ],
-        technos: ['Home Assistant', 'IoT', 'YAML', 'Local networking', 'Linux'],
+        technos: ['Home Assistant', 'Matter', 'Raspberry Pi', 'YAML'],
         periode: 'Ongoing',
         statut: 'en-cours',
         vedette: true,
