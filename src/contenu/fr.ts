@@ -67,7 +67,7 @@ export const fr: Contenu = {
         points: [
           'Scripts Bash de nettoyage des anciennes versions et des logs, déclenchés par cron.',
           'Déploiement et configuration des scripts sur le parc via Ansible.',
-          'Jusqu’à 80 % de temps gagné sur les tâches de nettoyage auparavant manuelles.',
+          'Jusqu’à 80 % d’espace disque regagné, et une heure de nettoyage manuel par jour supprimée.',
           'Procédures rédigées pour que l’équipe puisse reprendre et adapter les outils.',
         ],
         technos: ['Bash', 'Ansible', 'cron', 'Linux'],
@@ -75,6 +75,54 @@ export const fr: Contenu = {
         statut: 'livre',
         vedette: true,
         liens: [],
+        cas: {
+          chapo:
+            'Environ trois cents serveurs, au moins un à nettoyer chaque jour, une heure de travail à chaque fois. Le script qui a remplacé ce geste devait surtout pouvoir se tromper sans rien casser.',
+          chiffres: [
+            { valeur: '~300', libelle: 'serveurs concernés' },
+            { valeur: '1 h / jour', libelle: 'de nettoyage manuel supprimée' },
+            { valeur: '80 %', libelle: 'd’espace disque regagné, mesuré avant / après' },
+          ],
+          sections: [
+            {
+              titre: 'Reconnaître une version supprimable',
+              paragraphes: [
+                'Chaque montée de version laissait la précédente en place, et rien ne disait laquelle pouvait partir : il fallait le déduire. Le critère retenu est le lien — une version vers laquelle plus aucun lien ne pointe n’est plus servie.',
+                'Le script conserve la version en production et la n-1, et ne regarde que ce qui est au-delà. Garder la n-1 n’est pas un confort : c’est ce qui permet de revenir en arrière si la version en cours se révèle défaillante. Une purge qui emporte le seul point de retour transforme un incident mineur en incident majeur.',
+              ],
+            },
+            {
+              titre: 'Renommer avant de supprimer',
+              paragraphes: [
+                'Un script de suppression qui se trompe sur trois cents serveurs fait plus de dégâts qu’une année de nettoyage oublié. La purge ne supprime donc rien le jour où elle s’exécute : elle renomme.',
+                'Les versions jugées obsolètes sont mises de côté, puis on attend le run du soir. S’il se déroule normalement, la suppression définitive a lieu le lendemain. Sinon, relancer le script restaure les versions renommées et l’on retrouve l’état d’avant.',
+                'Cette fenêtre de vérification est ce qui sépare un outil qu’on ose lancer sur un parc de production d’un outil qu’on garde pour plus tard.',
+              ],
+            },
+            {
+              titre: 'Se greffer sur l’existant plutôt qu’ajouter un outil',
+              paragraphes: [
+                'Ansible était déjà en place. Plutôt que de déployer les scripts par un autre canal, je les ai intégrés au lanceur que l’équipe utilisait déjà : la purge devient une entrée de plus, pas une procédure à part avec ses propres habitudes. Quelques ajustements de son interface ont suffi.',
+                'Le vrai travail était ailleurs. Une partie du parc n’était pas encore raccordée au serveur maître, donc hors de portée de l’automatisation. Il a fallu l’y ramener avant que le reste ait un sens.',
+              ],
+            },
+            {
+              titre: 'Deux systèmes, deux jeux de commandes',
+              paragraphes: [
+                'Le premier échec est venu de là. Le parc n’est pas homogène : AIX et Linux cohabitent, et les commandes ne se comportent pas de la même façon d’un côté et de l’autre — mêmes noms, options et sorties différentes. Un script écrit et validé sous Linux échoue sous AIX sans prévenir.',
+                'Il a fallu détecter le système au démarrage et brancher sur le jeu de commandes correspondant. C’est ce qui a le plus pesé sur le calendrier, et ce qui m’a appris à ne jamais supposer qu’un parc est uniforme.',
+              ],
+            },
+            {
+              titre: 'Mise en service et mesure',
+              paragraphes: [
+                'Un mois d’exécution en environnement de non-production avant la moindre approche de la production : le temps de voir passer les cas qu’on n’avait pas prévus, sur des serveurs qu’on peut casser.',
+                'Le gain se mesure à la taille des disques, relevée avant et après purge : jusqu’à 80 % de l’espace occupé par les livraisons obsolètes récupéré. Le reste ne se voit sur aucun graphique — c’est l’heure quotidienne que plus personne ne passe à faire ça à la main.',
+                'Des procédures écrites accompagnent les scripts, pour que l’équipe puisse les reprendre et les adapter sans moi.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'domotique-home-assistant',
