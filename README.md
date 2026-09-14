@@ -50,7 +50,7 @@ pour qu'un changement de langue ne fasse pas perdre sa place.
 
 Chaque projet a par ailleurs sa page de cas, au même régime : `/projets/<id>/` en français,
 `/projects/<id>/` en anglais, et chacune déclare en `hreflang` **le même projet** dans l'autre
-langue, pas l'accueil. Le build produit ainsi 16 pages — deux accueils et sept cas par langue.
+langue, pas l'accueil. Le build produit ainsi une page par couple langue / projet, plus les deux accueils.
 
 Il n'y a pas de routeur. La page à rendre est écrite sur `<html data-projet>` par le pré-rendu et
 relue par `entree-client.tsx` : le premier rendu client part du même arbre que le HTML reçu sans
@@ -133,7 +133,7 @@ src/
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          écrit les 16 pages et le sitemap
+  prerendu.mjs          écrit toutes les pages et le sitemap
 ```
 
 ## Déploiement
@@ -146,7 +146,7 @@ Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/port
 base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
 déployer ailleurs, retirer `base` et changer `SITE` dans `src/langues.ts`.
 
-Le build produit `dist/sitemap.xml`, qui liste les 16 pages et leurs alternatives. Il est
+Le build produit `dist/sitemap.xml`, qui liste toutes les pages et leurs alternatives. Il est
 servi depuis `/portfolio/sitemap.xml` et se déclare à Google via la Search Console.
 
 Il n'y a pas de `robots.txt` : un robot ne le lit qu'à la racine du domaine, et

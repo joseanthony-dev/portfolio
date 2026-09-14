@@ -48,8 +48,8 @@ language keeps your place.
 
 Every project also gets its own case-study page under the same regime: `/projets/<id>/` in
 French, `/projects/<id>/` in English, each declaring **the same project** in the other language
-through `hreflang` rather than the home page. The build therefore emits 16 pages — two home pages
-and seven case studies per language.
+through `hreflang` rather than the home page. The build therefore emits one page per
+language / project pair, plus the two home pages.
 
 There is no router. The page to render is written onto `<html data-projet>` by the prerender and
 read back by `entree-client.tsx`: the first client render starts from the same tree as the HTML it
@@ -133,7 +133,7 @@ src/
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          writes all 16 pages and the sitemap
+  prerendu.mjs          writes every page and the sitemap
 ```
 
 ## Deployment
@@ -145,7 +145,7 @@ Because the site is served from a subdirectory, `vite.config.ts` sets `base: '/p
 that base, assets would be requested from the domain root and the page would come up blank. To
 deploy elsewhere, drop `base` and change `SITE` in `src/langues.ts`.
 
-The build emits `dist/sitemap.xml`, listing all 16 pages and their alternates. It is served from
+The build emits `dist/sitemap.xml`, listing every page and their alternates. It is served from
 `/portfolio/sitemap.xml` and announced to Google through Search Console.
 
 There is no `robots.txt`: a crawler only reads it at the domain root, and

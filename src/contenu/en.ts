@@ -209,23 +209,6 @@ export const en: Contenu = {
         },
       },
       {
-        id: 'site-web-personnel',
-        titre: 'Personal website',
-        resume: 'A brochure site with an online booking system, served behind Cloudflare.',
-        contexte:
-          'A plain brochure site, written without a framework, paired with an online booking system. A chance to handle going live end to end: domain name, DNS, certificate and caching.',
-        points: [
-          'Static site in HTML, CSS and JavaScript, with no external dependencies.',
-          'Online booking system.',
-          'Published behind Cloudflare: DNS, TLS certificate and caching.',
-        ],
-        technos: ['HTML', 'CSS', 'JavaScript', 'Cloudflare'],
-        periode: '2024',
-        statut: 'livre',
-        vedette: false,
-        liens: [],
-      },
-      {
         id: 'shapez-craft',
         titre: 'Shapez Craft',
         resume:

@@ -215,23 +215,6 @@ export const fr: Contenu = {
         },
       },
       {
-        id: 'site-web-personnel',
-        titre: 'Site web personnel',
-        resume: 'Site vitrine avec système de réservations, servi derrière Cloudflare.',
-        contexte:
-          'Un site vitrine classique, écrit sans framework, doublé d’un système de réservations en ligne. L’occasion de prendre en main la mise en ligne de bout en bout : nom de domaine, DNS, certificat et mise en cache.',
-        points: [
-          'Site statique en HTML, CSS et JavaScript, sans dépendance externe.',
-          'Système de réservations en ligne.',
-          'Mise en ligne derrière Cloudflare : DNS, certificat TLS et cache.',
-        ],
-        technos: ['HTML', 'CSS', 'JavaScript', 'Cloudflare'],
-        periode: '2024',
-        statut: 'livre',
-        vedette: false,
-        liens: [],
-      },
-      {
         id: 'shapez-craft',
         titre: 'Shapez Craft',
         resume:
