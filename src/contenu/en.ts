@@ -289,7 +289,7 @@ export const en: Contenu = {
         resume:
           'A full image-processing pipeline: real-time face detection, emotion classification and face generation.',
         contexte:
-          'A university project introducing artificial intelligence. Three models chained inside a desktop application: find the faces in a webcam feed, recognise the emotion, and generate new faces conditioned on an emotion.',
+          'A university project introducing artificial intelligence, carried out by three of us — I took on the emotion classification. Three models chained inside a desktop application: find the faces in a webcam feed, recognise the emotion, and generate new faces conditioned on an emotion.',
         points: [
           'Real-time face detection on a webcam feed (YOLO).',
           'Classification across seven emotions — anger, disgust, fear, joy, sadness, surprise, neutral — with a ResNet18 trained on FER2013.',
@@ -302,6 +302,53 @@ export const en: Contenu = {
         statut: 'livre',
         vedette: true,
         liens: [],
+        cas: {
+          chapo:
+            'Three chained models, three people, one model each. Mine classifies the emotion — and the hard part was not writing it, but understanding what it does.',
+          chiffres: [
+            { valeur: 'Three of us', libelle: 'one model each; the classifier was my part' },
+            { valeur: '7 emotions', libelle: 'classified by a ResNet18 trained on FER2013' },
+            { valeur: '30 fps', libelle: 'for the whole chain, on a GPU' },
+          ],
+          sections: [
+            {
+              titre: 'Three models, three people',
+              paragraphes: [
+                'The application chains three models: a YOLO that finds faces in the webcam feed, a classifier that assigns an emotion to the face it found, and a variational autoencoder that generates new faces. There were three of us, one model each. The classifier was mine.',
+                'What follows is about that part, and about wiring it to the rest.',
+              ],
+            },
+            {
+              titre: 'A dataset that lies if you take it at its word',
+              paragraphes: [
+                'FER2013 is very unevenly distributed. Some emotions are abundant in it, others almost absent — disgust amounts to a handful of images against the thousands available for happiness or neutral.',
+                'A model trained on it without precautions mostly learns to ignore the rare classes: it can post a flattering overall accuracy while never once recognising one emotion out of seven. The number looks good, the classifier is not.',
+                'I attacked the problem from both ends: augmenting the images of the sparse classes, and giving those classes more weight during training, so that an error on a rare emotion costs more than one on a common emotion. Results improved markedly — and, more to the point, improved where it mattered.',
+              ],
+            },
+            {
+              titre: 'Understanding before wiring',
+              paragraphes: [
+                'This was my first contact with neural networks. The hard part was not writing code — PyTorch asks for little — but understanding what a classifier actually does: what each layer transforms, what the loss function punishes, why a training run degrades instead of improving.',
+                'The tooling served that as much as it served the quality of the result: early stopping so as not to keep pushing a run that is getting worse, TensorBoard to watch what happens rather than assume it, structured logging and thirty-two tests. On a subject you have not mastered yet, being able to observe beats being able to guess.',
+              ],
+            },
+            {
+              titre: 'Wiring the model to the rest',
+              paragraphes: [
+                'The other difficulty was the integration. A model that posts good numbers on a test set is not yet a model that runs: it has to be handed faces in exactly the format it expects, at the pace of the video feed, without breaking the frame rate.',
+                'The full chain holds thirty frames per second on a GPU, which makes it usable live rather than as a demonstration standing still.',
+              ],
+            },
+            {
+              titre: 'What the chain delivered, and what it did not',
+              paragraphes: [
+                'The generative part did not live up to its promise: the faces produced by the variational autoencoder did not look like much. That is a common outcome at this image size and quality, and it belongs in the project’s reckoning as much as anything else.',
+                'Detection and classification, on the other hand, worked live. For an introductory project that is the right split: what worked taught the method, what did not taught the limits.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'photomaton-locations',

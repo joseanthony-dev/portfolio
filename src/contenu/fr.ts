@@ -295,7 +295,7 @@ export const fr: Contenu = {
         resume:
           'Chaîne complète de traitement d’images : détection de visages en temps réel, classification d’émotions et génération de visages.',
         contexte:
-          'Projet universitaire d’introduction à l’intelligence artificielle. Trois modèles enchaînés dans une application de bureau : repérer les visages dans un flux webcam, reconnaître l’émotion, et générer de nouveaux visages conditionnés par une émotion.',
+          'Projet universitaire d’introduction à l’intelligence artificielle, mené à trois — j’ai pris en charge la classification des émotions. Trois modèles enchaînés dans une application de bureau : repérer les visages dans un flux webcam, reconnaître l’émotion, et générer de nouveaux visages conditionnés par une émotion.',
         points: [
           'Détection de visages en temps réel sur flux webcam (YOLO).',
           'Classification sur sept émotions — colère, dégoût, peur, joie, tristesse, surprise, neutre — avec un ResNet18 entraîné sur FER2013.',
@@ -308,6 +308,53 @@ export const fr: Contenu = {
         statut: 'livre',
         vedette: true,
         liens: [],
+        cas: {
+          chapo:
+            'Trois modèles enchaînés, trois personnes, un modèle chacun. Le mien classe l’émotion — et la difficulté n’a pas été de l’écrire, mais de comprendre ce qu’il fait.',
+          chiffres: [
+            { valeur: 'À trois', libelle: 'un modèle chacun ; le classifieur était ma part' },
+            { valeur: '7 émotions', libelle: 'classées par un ResNet18 entraîné sur FER2013' },
+            { valeur: '30 img/s', libelle: 'la chaîne complète, sur carte graphique' },
+          ],
+          sections: [
+            {
+              titre: 'Trois modèles, trois personnes',
+              paragraphes: [
+                'L’application enchaîne trois modèles : un YOLO qui repère les visages dans le flux webcam, un classifieur qui attribue une émotion au visage trouvé, et un autoencodeur variationnel qui génère de nouveaux visages. Nous étions trois, chacun sur un modèle. Le classifieur était le mien.',
+                'Ce qui suit porte donc sur cette partie, et sur son raccordement au reste.',
+              ],
+            },
+            {
+              titre: 'Un jeu de données qui ment si on le croit sur parole',
+              paragraphes: [
+                'FER2013 est très inégalement réparti. Certaines émotions y sont abondantes, d’autres presque absentes — le dégoût tient dans une poignée d’images face aux milliers dont disposent la joie ou le neutre.',
+                'Un modèle entraîné dessus sans précaution apprend surtout à ignorer les classes rares : il peut afficher une exactitude globale flatteuse tout en ne reconnaissant jamais une émotion sur sept. Le chiffre est bon, le classifieur ne l’est pas.',
+                'J’ai traité le problème par les deux bouts : augmenter les images des classes peu présentes, et donner plus de poids à ces classes dans l’apprentissage, pour qu’une erreur sur une émotion rare coûte davantage qu’une erreur sur une émotion courante. Les résultats s’en sont trouvés nettement meilleurs — et surtout meilleurs là où ça comptait.',
+              ],
+            },
+            {
+              titre: 'Comprendre avant de brancher',
+              paragraphes: [
+                'C’était mon premier contact avec les réseaux de neurones. La part difficile n’a pas été d’écrire du code — PyTorch en demande peu — mais de comprendre ce que fait réellement un classifieur : ce que chaque couche transforme, ce que la fonction de perte punit, pourquoi un entraînement se dégrade au lieu de progresser.',
+                'L’outillage a servi à ça autant qu’à la qualité du résultat : arrêt anticipé pour ne pas poursuivre un entraînement qui se dégrade, suivi TensorBoard pour voir ce qui se passe plutôt que le supposer, journalisation structurée et trente-deux tests. Sur un sujet qu’on ne maîtrise pas encore, pouvoir observer vaut mieux que pouvoir deviner.',
+              ],
+            },
+            {
+              titre: 'Raccorder le modèle au reste',
+              paragraphes: [
+                'L’autre difficulté était le branchement. Un modèle qui donne de bons chiffres sur un jeu de test n’est pas encore un modèle qui tourne : il faut lui livrer les visages dans le format exact qu’il attend, au rythme du flux vidéo, sans casser la cadence.',
+                'La chaîne complète tient trente images par seconde sur carte graphique, ce qui la rend utilisable en direct plutôt qu’en démonstration à l’arrêt.',
+              ],
+            },
+            {
+              titre: 'Ce que la chaîne a donné, et ce qu’elle n’a pas donné',
+              paragraphes: [
+                'La partie générative n’a pas tenu ses promesses : les visages produits par l’autoencodeur variationnel ne ressemblaient pas à grand-chose. C’est un résultat courant sur des images de cette taille et de cette qualité, et il fait partie du bilan du projet au même titre que le reste.',
+                'La détection et la classification, elles, fonctionnaient en direct. Pour un projet d’introduction, c’est le bon partage : ce qui a marché a appris la méthode, ce qui n’a pas marché a appris les limites.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'photomaton-locations',
