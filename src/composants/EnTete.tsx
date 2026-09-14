@@ -22,12 +22,24 @@ export function EnTete({ t, langue, onTheme }: Props) {
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
 
+    // L'observateur ne rapporte que les sections dont la visibilité a changé, pas
+    // l'état complet : on tient donc nous-mêmes la liste de celles qui croisent
+    // la bande centrale, sans quoi on ne saurait jamais qu'il n'y en a plus
+    // aucune — au-dessus de « Projets », dans le hero ou À propos.
+    const croisent = new Map<string, number>()
+
     const observateur = new IntersectionObserver(
       (entrees) => {
-        const visible = entrees
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible) setActif(visible.target.id)
+        for (const e of entrees) {
+          if (e.isIntersecting) croisent.set(e.target.id, e.intersectionRatio)
+          else croisent.delete(e.target.id)
+        }
+        let meilleur = ''
+        let ratio = -1
+        for (const [id, r] of croisent) {
+          if (r > ratio) [meilleur, ratio] = [id, r]
+        }
+        setActif(meilleur)
       },
       { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] },
     )
@@ -92,10 +104,14 @@ export function EnTete({ t, langue, onTheme }: Props) {
           </button>
 
           {/* Chaque langue est une page à part : la bascule est un vrai lien,
-              ce qui la rend suivable par un moteur et ouvrable dans un onglet. */}
+              ce qui la rend suivable par un moteur et ouvrable dans un onglet.
+              L'ancre de la section lue y est reportée — les identifiants sont les
+              mêmes dans les deux langues — pour retrouver sa place après le
+              changement de page. Vide au premier rendu, donc identique au HTML
+              pré-rendu, et les moteurs ne voient que l'URL propre. */}
           <a
             className="bouton-langue"
-            href={lienLangue(AUTRE[langue])}
+            href={actif ? `${lienLangue(AUTRE[langue])}#${actif}` : lienLangue(AUTRE[langue])}
             hrefLang={AUTRE[langue]}
             aria-label={t.a11y.changerLangue}
             title={t.a11y.changerLangue}
