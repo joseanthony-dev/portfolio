@@ -6,13 +6,12 @@ type Props = {
   t: Contenu
   langue: Langue
   onLangue: (l: Langue) => void
-  theme: 'clair' | 'sombre'
   onTheme: () => void
 }
 
 const sections = ['projets', 'parcours', 'competences', 'contact'] as const
 
-export function EnTete({ t, langue, onLangue, theme, onTheme }: Props) {
+export function EnTete({ t, langue, onLangue, onTheme }: Props) {
   const [ouvert, setOuvert] = useState(false)
   const [actif, setActif] = useState<string>('')
   const entete = useRef<HTMLElement>(null)
@@ -85,7 +84,11 @@ export function EnTete({ t, langue, onLangue, theme, onTheme }: Props) {
 
         <div className="entete__actions">
           <button type="button" className="bouton-icone" onClick={onTheme} aria-label={t.a11y.changerTheme} title={t.a11y.changerTheme}>
-            {theme === 'sombre' ? <IconeSoleil /> : <IconeLune />}
+            {/* Les deux icônes sont dans le HTML ; le CSS montre celle qui
+                correspond au thème déjà posé sur <html>, donc elle est juste
+                dès le HTML pré-rendu, sans attendre React. */}
+            <IconeSoleil className="icone-theme icone-theme--sombre" />
+            <IconeLune className="icone-theme icone-theme--clair" />
           </button>
 
           <button

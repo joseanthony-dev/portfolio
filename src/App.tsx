@@ -16,6 +16,9 @@ type Theme = 'clair' | 'sombre'
 // les navigateurs mobiles appliquent à leur barre d'adresse.
 const couleurBarre: Record<Theme, string> = { clair: '#fbfaf8', sombre: '#0d1013' }
 
+// Ces deux fonctions touchent au navigateur : elles ne sont appelées qu'après
+// l'hydratation, jamais pendant le rendu au build.
+
 function litLangue(): Langue {
   try {
     const stockee = localStorage.getItem('langue')
@@ -26,22 +29,40 @@ function litLangue(): Langue {
   return navigator.language?.toLowerCase().startsWith('fr') ? 'fr' : 'en'
 }
 
+// Le script inline d'index.html a déjà résolu le thème avant le premier rendu :
+// on relit sa décision plutôt que de refaire la détection, ce qui garantit que
+// l'état React et l'attribut sur <html> partent d'accord dès le départ. Aucun
+// élément du balisage ne dépend du thème, donc lire cette valeur pendant le
+// rendu ne met pas l'hydratation en défaut.
 function litTheme(): Theme {
-  try {
-    const stocke = localStorage.getItem('theme')
-    if (stocke === 'clair' || stocke === 'sombre') return stocke
-  } catch {
-    // idem : on suit la préférence système.
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
+  if (typeof document === 'undefined') return 'clair'
+  return document.documentElement.dataset.theme === 'sombre' ? 'sombre' : 'clair'
 }
 
 export default function App() {
-  const [langue, setLangue] = useState<Langue>(litLangue)
+  // Le HTML pré-rendu au build est en français : le premier rendu client doit dire
+  // la même chose, sinon l'hydratation trouve un DOM qu'elle n'a pas produit. La
+  // préférence réelle est lue juste après, une fois l'hydratation faite.
+  const [langue, setLangue] = useState<Langue>('fr')
   const [theme, setTheme] = useState<Theme>(litTheme)
+  const [prefsLues, setPrefsLues] = useState(false)
   const t = contenus[langue]
 
+  // Un setState dans un effet, volontairement : la préférence de langue vit dans
+  // le navigateur, et la lire pendant le rendu donnerait un premier rendu client
+  // différent du HTML pré-rendu. L'effet est le seul moment où l'hydratation est
+  // terminée et où l'on peut donc s'écarter du français du build.
   useEffect(() => {
+    // eslint-disable-next-line react/set-state-in-effect
+    setLangue(litLangue())
+    // eslint-disable-next-line react/set-state-in-effect
+    setPrefsLues(true)
+  }, [])
+
+  // Tant que la préférence n'est pas lue, `langue` vaut le français du pré-rendu :
+  // l'écrire dans localStorage écraserait un choix « en » encore non chargé.
+  useEffect(() => {
+    if (!prefsLues) return
     document.documentElement.lang = langue
     document.title = t.meta.titre
     document.querySelector('meta[name="description"]')?.setAttribute('content', t.meta.description)
@@ -50,7 +71,7 @@ export default function App() {
     } catch {
       // préférence non persistée, sans conséquence pour l'affichage
     }
-  }, [langue, t])
+  }, [langue, prefsLues, t])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -74,7 +95,6 @@ export default function App() {
         t={t}
         langue={langue}
         onLangue={setLangue}
-        theme={theme}
         onTheme={() => setTheme((v) => (v === 'clair' ? 'sombre' : 'clair'))}
       />
 

@@ -24,9 +24,24 @@ n'importe où. Aucune dépendance d'exécution en dehors de React.
 `Contenu` (`src/types.ts`) : si une traduction manque un champ, la compilation échoue. Les deux
 langues ne peuvent donc pas diverger silencieusement.
 
+**Rendu au build.** `dist/index.html` contient tout le texte du site, pas seulement un
+`<div id="root">` vide : `scripts/prerendu.mjs` rend l'application dans Node à la fin du build et
+insère le résultat. Le contenu est donc lisible sans JavaScript, indexable, et affiché avant que
+les 82 ko du bundle ne soient chargés — le navigateur n'attend plus React pour peindre la page.
+React s'hydrate ensuite sur ce DOM au lieu de le reconstruire.
+
+Cela impose une contrainte : le premier rendu client doit produire exactement le HTML du build.
+Toute lecture du navigateur — langue stockée, `navigator.language` — est donc repoussée après
+l'hydratation, dans un effet, et non faite pendant le rendu. Le HTML pré-rendu est en français,
+la version canonique du site ; un visiteur anglophone voit donc le français le temps que le bundle
+charge. Servir les deux langues sans ce décalage demanderait deux URL — `/` et `/en/` — ce qui
+ferait de la langue une vraie navigation plutôt qu'un état React.
+
 **Thème sans clignotement.** Un script inline dans `index.html` applique le thème enregistré avant
 le premier rendu, ce qui évite l'éclair blanc au chargement en mode sombre. Toute lecture de
 `localStorage` est protégée : le site fonctionne en navigation privée ou site data bloqué.
+Comme le thème est connu avant React, c'est le CSS qui choisit l'icône soleil / lune : le balisage
+ne dépend pas du thème, ce qui le rend identique au HTML pré-rendu dans les deux cas.
 
 **Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
 thèmes, et `prefers-reduced-motion` respecté.
@@ -55,10 +70,14 @@ src/
   contenu/en.ts         texte anglais
   App.tsx               langue, thème, assemblage des sections
   index.css             mise en forme complète (variables de thème en tête)
+  entree-client.tsx     point d'entrée navigateur, hydrate le HTML pré-rendu
+  entree-serveur.tsx    point d'entrée du rendu au build
   composants/
     EnTete.tsx          navigation, bascule langue et thème, menu mobile
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
+scripts/
+  prerendu.mjs          insère le HTML rendu au build dans dist/index.html
 ```
 
 ## Déploiement
@@ -80,4 +99,6 @@ dependencies** — no web fonts, no CDN, no third-party scripts.
 
 Built with React 19, TypeScript and Vite. All copy lives in two content files that must satisfy the
 same TypeScript type, so the French and English versions cannot drift apart without the build
-failing. Deployed to GitHub Pages on every push to `main`.
+failing. The app is rendered to static HTML at build time and hydrated in the browser, so the
+content is readable without JavaScript and paints before the bundle loads. Deployed to GitHub Pages
+on every push to `main`.

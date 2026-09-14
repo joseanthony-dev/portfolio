@@ -35,18 +35,23 @@
     <!-- Évite le clignotement blanc au chargement en thème sombre -->
     <script>
       (function () {
+        var t = null
+        // Seule la lecture du stockage peut lever : le repli sur la préférence
+        // système doit rester en dehors du try, sinon un navigateur qui bloque
+        // les données de site resterait en thème clair. App.tsx reprend cette
+        // décision telle quelle, elle doit donc être juste dans tous les cas.
         try {
-          var t = localStorage.getItem('theme')
-          if (t !== 'clair' && t !== 'sombre') {
-            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
-          }
-          document.documentElement.dataset.theme = t
-          document
-            .querySelector('meta[name="theme-color"]')
-            .setAttribute('content', t === 'sombre' ? '#0d1013' : '#fbfaf8')
+          t = localStorage.getItem('theme')
         } catch (e) {
-          /* pas de préférence accessible : on garde le thème clair */
+          /* stockage inaccessible : on s'en remet à la préférence système */
         }
+        if (t !== 'clair' && t !== 'sombre') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
+        }
+        document.documentElement.dataset.theme = t
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute('content', t === 'sombre' ? '#0d1013' : '#fbfaf8')
       })()
     </script>
 
@@ -69,6 +74,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/entree-client.tsx"></script>
   </body>
 </html>

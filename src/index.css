@@ -173,6 +173,12 @@ main:focus, main:focus-visible { outline: none; }
 }
 .bouton-icone:hover { color: var(--accent); border-color: var(--bordure-forte); }
 
+/* Bascule de thème : le balisage porte les deux icônes et le CSS tranche,
+   pour que le HTML pré-rendu au build convienne aux deux thèmes. */
+.icone-theme--sombre { display: none; }
+[data-theme='sombre'] .icone-theme--sombre { display: block; }
+[data-theme='sombre'] .icone-theme--clair { display: none; }
+
 .bouton-langue {
   display: flex;
   align-items: center;
