@@ -224,20 +224,76 @@ export const en: Contenu = {
         resume:
           'Desktop application for managing photo booth rentals, running in production at my own business, Le Petit Flash.',
         contexte:
-          'My photo booth rental business was tracking bookings across scattered files. I designed a desktop application that centralises customers, equipment, contracts and scheduling, and syncs with our Odoo ERP.',
+          'My photo booth rental business was running its rentals out of a mailbox. I designed a desktop application that centralises customers, equipment, contracts and scheduling, takes in the requests coming from Odoo, and talks to the booth itself.',
         points: [
-          'Cross-platform Electron app distributed as a .deb package, versioned and released continuously (v1.31).',
-          'Two-way customer import and synchronisation with Odoo, handling the ERP’s field constraints.',
+          'Electron app packaged as a .deb, versioned and released continuously (v1.31).',
+          'Requests arrive through an Odoo form and create the rental directly in the application, ERP field constraints included.',
+          'Booth monitoring by talking to its Raspberry Pi: PC and printer status, prints remaining, local photos, software lock.',
           'Local database: data stays on the machine, with no dependency on a third-party server.',
           'Vitest test suite with coverage reporting, ESLint and Prettier wired into the workflow.',
         ],
-        technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Node.js'],
+        technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Raspberry Pi', 'Node.js'],
         periode: '2025 — present',
         statut: 'livre',
         vedette: true,
         // Private repository for now. To show the link once it is public:
         // liens: [{ label: 'Source code', url: 'https://github.com/joseanthony-dev/photomaton-locations', type: 'github' }],
         liens: [],
+        cas: {
+          chapo:
+            'A business that keeps its rentals in a mailbox works — right up until something has to be found again. The application replaced the mailbox, then went on to talk to the booth.',
+          chiffres: [
+            { valeur: 'v1.31', libelle: 'running in production at the business' },
+            { valeur: 'Offline', libelle: 'everything stays readable with no network' },
+            { valeur: 'No server', libelle: 'to host or to administer' },
+          ],
+          sections: [
+            {
+              titre: 'A mailbox is not a database',
+              paragraphes: [
+                'Everything went through email: the enquiry, the back and forth, the contract, the dates. Every piece of information existed somewhere in a thread. Finding it again meant remembering who had written it, and when.',
+                'The application really does only one thing: it gives every piece of information a place. Customers, equipment, contracts, scheduling. The rest follows from that.',
+              ],
+            },
+            {
+              titre: 'Why a desktop application',
+              paragraphes: [
+                'The work happens on site, in venues where a network is not a given. That is exactly where a customer record has to be opened, a contract checked, a schedule consulted.',
+                'A web app would have been unusable at the precise moment it is needed. The desktop application keeps its data on the machine: with no connection, everything stays readable. That is not a convenience, it is the condition for the tool to exist in the field at all.',
+              ],
+            },
+            {
+              titre: 'Local data, and nothing to administer',
+              paragraphes: [
+                'The corollary is a welcome one: no server to host, back up, update or pay for. No provider to hand a business’s customer book to.',
+                'For a single-machine tool, that is the right rung of infrastructure. Adding a server would have added a service to keep running, without bringing anything the application does not already do.',
+              ],
+            },
+            {
+              titre: 'From enquiry to rental',
+              paragraphes: [
+                'Enquiries come in through an Odoo form and create the rental directly in the application. The flow runs one way: Odoo holds no customer record, it receives the enquiry and passes it on.',
+                'That choice sidesteps the most expensive problem in this kind of integration — two systems holding the same information and drifting apart. Here a single source is authoritative, so there is never a conflict to arbitrate. The work went mostly into living with the ERP’s field constraints.',
+                'Once the rental exists, the application takes over everything that used to be done by hand: sending emails, review requests, signature, setting up the photo sharing spaces, choosing the frame.',
+              ],
+            },
+            {
+              titre: 'Talking to the booth',
+              paragraphes: [
+                'The most interesting part is not the management side. Each booth houses a Raspberry Pi, and the application talks to it.',
+                'It reports the state of the machine and of the printer, how many prints are left, and gives access to the photos stored locally. It can also lock the booth in software.',
+                'Which means: knowing a printer is out of paper before a guest notices. This is remote equipment monitoring in the operational sense of the term — built here for a fleet of booths rather than a fleet of servers.',
+              ],
+            },
+            {
+              titre: 'A single user, and a real pipeline anyway',
+              paragraphes: [
+                'I am the only person who uses it. Releases are still packaged as .deb, numbered and published, and I pull updates the way any user would. The Vitest suite, coverage, ESLint and Prettier all run in the same flow.',
+                'That discipline is not decoration. Without it, a single-purpose tool becomes a program that only runs on the machine it was written on, and that nobody dares change a line of. It is also what will make it possible to hand over the day the business needs a second machine.',
+              ],
+            },
+          ],
+        },
       },
     ],
   },

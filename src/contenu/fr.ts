@@ -230,20 +230,76 @@ export const fr: Contenu = {
         resume:
           "Application de bureau de gestion des locations de photobooths, en production dans mon entreprise, Le Petit Flash.",
         contexte:
-          "Mon entreprise de location de photobooths gérait ses réservations dans des fichiers dispersés. J'ai conçu une application de bureau qui centralise clients, matériel, contrats et planning, et qui se synchronise avec notre ERP Odoo.",
+          "Mon entreprise de location de photobooths pilotait ses locations depuis une boîte mail. J'ai conçu une application de bureau qui centralise clients, matériel, contrats et planning, reçoit les demandes venues d'Odoo, et dialogue avec la borne elle-même.",
         points: [
-          'Application Electron multiplateforme distribuée en paquet .deb, versionnée et publiée en continu (v1.31).',
-          "Import et synchronisation bidirectionnelle des clients depuis Odoo, avec gestion des contraintes de champs de l'ERP.",
+          'Application Electron empaquetée en .deb, versionnée et publiée en continu (v1.31).',
+          "Les demandes arrivent par un formulaire Odoo et créent directement la location dans l'application, contraintes de champs de l'ERP comprises.",
+          'Supervision de la borne par dialogue avec son Raspberry Pi : état du PC et de l’imprimante, impressions restantes, photos locales, verrouillage logiciel.',
           'Base de données locale : les données restent sur le poste, aucune dépendance à un serveur tiers.',
           'Suite de tests Vitest avec rapport de couverture, ESLint et Prettier intégrés au flux de travail.',
         ],
-        technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Node.js'],
+        technos: ['Electron', 'React', 'TypeScript', 'Vite', 'Vitest', 'Odoo XML-RPC', 'Raspberry Pi', 'Node.js'],
         periode: '2025 — aujourd’hui',
         statut: 'livre',
         vedette: true,
         // Dépôt privé pour l'instant. Pour afficher le lien une fois rendu public :
         // liens: [{ label: 'Code source', url: 'https://github.com/joseanthony-dev/photomaton-locations', type: 'github' }],
         liens: [],
+        cas: {
+          chapo:
+            'Une entreprise qui tient ses locations dans une boîte mail marche — jusqu’au jour où il faut retrouver quelque chose. L’application a remplacé la boîte mail, puis elle est allée parler à la borne.',
+          chiffres: [
+            { valeur: 'v1.31', libelle: 'en production dans l’entreprise' },
+            { valeur: 'Hors ligne', libelle: 'tout reste consultable sans réseau' },
+            { valeur: 'Aucun serveur', libelle: 'à héberger ni à administrer' },
+          ],
+          sections: [
+            {
+              titre: 'Une boîte mail n’est pas une base de données',
+              paragraphes: [
+                'Tout passait par le courrier électronique : la demande, les échanges, le contrat, les dates. Chaque information existait, quelque part, dans un fil. La retrouver supposait de se souvenir de qui l’avait écrite et quand.',
+                'L’application ne fait au fond qu’une chose : donner une place à chaque information. Clients, matériel, contrats, planning. Le reste en découle.',
+              ],
+            },
+            {
+              titre: 'Pourquoi une application de bureau',
+              paragraphes: [
+                'Le métier se pratique sur place, dans des salles où le réseau n’est pas un acquis. C’est précisément là qu’il faut pouvoir ouvrir une fiche client, vérifier un contrat, consulter le planning.',
+                'Un site web aurait été inutilisable au moment exact où il sert. L’application de bureau garde ses données sur le poste : sans connexion, tout reste consultable. Ce n’est pas un choix de confort, c’est la condition pour que l’outil existe sur le terrain.',
+              ],
+            },
+            {
+              titre: 'Des données locales, et rien à administrer',
+              paragraphes: [
+                'Le corollaire est agréable : aucun serveur à héberger, à sauvegarder, à mettre à jour ou à payer. Pas de fournisseur à qui confier le carnet de clients d’une entreprise.',
+                'Pour un outil à un seul poste, c’est le bon échelon d’infrastructure. Ajouter un serveur aurait ajouté un service à tenir en état de marche, sans rien apporter que l’application ne fasse déjà.',
+              ],
+            },
+            {
+              titre: 'De la demande à la location',
+              paragraphes: [
+                'Les demandes arrivent par un formulaire Odoo et créent directement la location dans l’application. Le flux va dans un seul sens : Odoo ne tient pas de fiche client, il reçoit la demande et la transmet.',
+                'Ce choix évite le problème le plus coûteux de ce genre d’intégration — deux systèmes qui détiennent la même information et qui divergent. Ici, une seule source fait autorité, et il n’y a donc jamais de conflit à arbitrer. Le travail a surtout consisté à composer avec les contraintes de champs de l’ERP.',
+                'Une fois la location créée, l’application prend le relais sur tout ce qui se faisait à la main : envoi des courriels, demandes d’avis, signature, création des espaces de partage des photos, choix du cadre.',
+              ],
+            },
+            {
+              titre: 'Parler à la borne',
+              paragraphes: [
+                'La partie la plus intéressante n’est pas dans la gestion. Chaque borne abrite un Raspberry Pi, et l’application dialogue avec lui.',
+                'Elle en remonte l’état du poste et de l’imprimante, le nombre d’impressions restantes, et donne accès aux photos stockées localement. Elle permet aussi de verrouiller la borne par logiciel.',
+                'Autrement dit : savoir qu’une imprimante est à court de papier avant qu’un invité ne s’en aperçoive. C’est de la supervision d’équipement distant, au sens où on l’entend en exploitation — construite ici pour un parc de bornes plutôt que pour un parc de serveurs.',
+              ],
+            },
+            {
+              titre: 'Un seul utilisateur, et pourtant une vraie chaîne',
+              paragraphes: [
+                'Je suis le seul à m’en servir. Les versions sont malgré tout empaquetées en .deb, numérotées et publiées, et je récupère les mises à jour comme n’importe quel utilisateur le ferait. La suite de tests Vitest, la couverture, ESLint et Prettier tournent dans le même flux.',
+                'Cette discipline n’est pas du décor. Sans elle, un outil à usage unique devient un programme qui ne fonctionne que sur la machine où il a été écrit, et dont on n’ose plus changer une ligne. C’est aussi ce qui permettra de le confier à quelqu’un d’autre le jour où l’entreprise aura besoin d’un deuxième poste.',
+              ],
+            },
+          ],
+        },
       },
     ],
   },
