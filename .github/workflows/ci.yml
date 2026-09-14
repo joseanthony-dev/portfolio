@@ -1,0 +1,34 @@
+# Vérifie une branche avant qu'elle n'atteigne main. Le déploiement, lui, vit
+# dans deploy.yml et ne tourne que sur main.
+name: Vérification
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Une nouvelle poussée sur la même branche annule la vérification en cours :
+# seul son dernier état nous intéresse.
+concurrency:
+  group: verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verifier:
+    name: Lint et build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      # `npm run build` enchaîne tsc -b — qui fait échouer la compilation si une
+      # traduction manque un champ —, le build client, le build SSR, puis le
+      # pré-rendu, qui refuse de produire une page vide.
+      - run: npm run build

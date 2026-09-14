@@ -22,7 +22,19 @@ if (!html.includes(MARQUEUR)) {
   )
 }
 
-writeFileSync(CIBLE, html.replace(MARQUEUR, `<div id="root">${rendu()}</div>`))
+const corps = rendu()
+
+// Un rendu vide ou tronqué franchirait sans bruit tsc, le lint et les deux
+// builds, et publierait une page blanche. Le site fait environ 24 ko de
+// balisage : en dessous de 2 ko, quelque chose s'est tu.
+if (corps.length < 2000) {
+  throw new Error(
+    `Rendu anormalement court (${corps.length} octets) : le site serait publié ` +
+      'vide ou amputé. Construction interrompue.',
+  )
+}
+
+writeFileSync(CIBLE, html.replace(MARQUEUR, `<div id="root">${corps}</div>`))
 rmSync('dist-ssr', { recursive: true, force: true })
 
-console.log(`✓ ${CIBLE} pré-rendu`)
+console.log(`✓ ${CIBLE} pré-rendu (${(corps.length / 1024).toFixed(1)} ko de balisage)`)
