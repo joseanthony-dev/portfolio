@@ -54,6 +54,11 @@ function menu(ouvert: boolean) {
   burger.setAttribute('aria-expanded', String(ouvert))
   burger.setAttribute('aria-label', (ouvert ? burger.dataset.fermer : burger.dataset.ouvrir) ?? '')
   nav.classList.toggle('entete__nav--ouverte', ouvert)
+  // La navigation précède le burger dans le document : sans ce déplacement, une
+  // tabulation depuis le bouton sort du menu qu'on vient d'ouvrir au lieu d'y
+  // entrer. Après la classe et jamais avant — un élément en display:none ne
+  // prend pas le focus. Échap le rend au bouton, plus bas.
+  if (ouvert) nav.querySelector('a')?.focus()
 }
 
 burger?.addEventListener('click', () => menu(burger.getAttribute('aria-expanded') !== 'true'))
@@ -70,6 +75,13 @@ document.addEventListener('pointerdown', (e) => {
   if (burger?.getAttribute('aria-expanded') === 'true' && !entete?.contains(e.target as Node)) {
     menu(false)
   }
+})
+
+// Repassé en large, le panneau redevient une barre et le burger disparaît : son
+// aria-expanded resterait à « true » sur un bouton que plus personne ne voit.
+// Le seuil reprend celui de la media query de src/index.css.
+window.matchMedia('(max-width: 760px)').addEventListener('change', (e) => {
+  if (!e.matches) menu(false)
 })
 
 /* ── Copie de l'adresse ─────────────────────────────────────────────────── */

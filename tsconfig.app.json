@@ -17,6 +17,13 @@
     "jsx": "react-jsx",
 
     /* Linting */
+    // Le contenu des deux langues est typé par `Contenu` : c'est ce qui fait
+    // échouer la compilation quand une traduction perd un champ. Sans `strict`,
+    // un `undefined` y passait sans bruit et ressortait en texte manquant sur
+    // la page. `noUncheckedIndexedAccess` tient la même promesse pour les
+    // accès indexés des listes de projets et de compétences.
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,

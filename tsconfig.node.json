@@ -16,6 +16,10 @@
     "noEmit": true,
 
     /* Linting */
+    // `noUncheckedIndexedAccess` n'est pas repris de tsconfig.app.json : les
+    // scripts lisent beaucoup de résultats d'expressions régulières par indice,
+    // où le garde-fou n'apporterait que du bruit.
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
