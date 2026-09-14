@@ -244,6 +244,44 @@ export const en: Contenu = {
         statut: 'livre',
         vedette: false,
         liens: [],
+        cas: {
+          chapo:
+            'A two-person university project, most of which I wrote, with an architecture fixed by the brief. The point was therefore not to choose it, but to hold to it.',
+          chiffres: [
+            { valeur: '8', libelle: 'machines with distinct behaviours' },
+            { valeur: 'Two of us', libelle: 'a group project, most of which I wrote' },
+            { valeur: 'Report and defence', libelle: 'expected alongside the code itself' },
+          ],
+          sections: [
+            {
+              titre: 'An imposed architecture, and what comes of it',
+              paragraphes: [
+                'Strict MVC and the Observer pattern were not choices I made: the brief required them. What is left to do once that is settled turns out to be more instructive than it sounds — holding a boundary you did not decide on.',
+                'In practice the model — board, machines, items in transit — has no idea a display exists. It notifies, it does not draw. Every time the easy way out would be to let a display detail creep into the model, another route has to be found. That is constraining in the moment, and it is what kept the eight machines, all derived from a common class, comparable with one another.',
+              ],
+            },
+            {
+              titre: 'Zoom and layers',
+              paragraphes: [
+                'The difficulty did not come from the simulation but from the view. A board you can zoom in and out of forces every coordinate through one same transformation: what gets drawn, but also what gets clicked. The moment a single path escapes it, clicks land somewhere other than what you see.',
+                'Layers pose the opposite problem: board, belts, items in transit and machines overlap, and the drawing order decides what is visible. It follows from nothing, it has to be decided — and then honoured everywhere.',
+              ],
+            },
+            {
+              titre: 'Saving a game',
+              paragraphes: [
+                'A game in progress is written to a file and read back on load. It is the kind of feature that puts the architecture to the test: if the model really is independent of the display, writing it out and reading it back is enough. If anything from the view had slipped in, this is where it shows.',
+              ],
+            },
+            {
+              titre: 'Two of us, without being half each',
+              paragraphes: [
+                'There were two of us, and I wrote most of the project; my teammate contributed on a few points. The Git side went without a single conflict, which owes less to our process than to that imbalance: you do not step on each other when you are almost only one.',
+                'That is the real gap in this project. I came out of it better at architecture and at rendering, not at collaboration — I never had to review someone else’s code, or defend a decision to somebody who would have done it differently.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'emotion-recognition',

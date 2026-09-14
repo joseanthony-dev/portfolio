@@ -250,6 +250,44 @@ export const fr: Contenu = {
         statut: 'livre',
         vedette: false,
         liens: [],
+        cas: {
+          chapo:
+            'Un projet universitaire à deux, dont j’ai écrit l’essentiel, avec une architecture fixée par l’énoncé. L’intérêt n’était donc pas de la choisir, mais de la tenir.',
+          chiffres: [
+            { valeur: '8', libelle: 'machines aux comportements distincts' },
+            { valeur: 'À deux', libelle: 'projet de groupe, dont j’ai écrit l’essentiel' },
+            { valeur: 'Rapport et soutenance', libelle: 'attendus au même titre que le code' },
+          ],
+          sections: [
+            {
+              titre: 'Une architecture imposée, et ce qu’on en tire',
+              paragraphes: [
+                'Le MVC strict et le patron Observer ne sont pas des choix que j’ai faits : l’énoncé les imposait. Ce qui reste à faire, une fois cela posé, est plus instructif qu’il n’y paraît — tenir une frontière qu’on n’a pas décidée.',
+                'Concrètement, le modèle — plateau, machines, objets en circulation — ignore totalement qu’il existe un affichage. Il notifie, il ne dessine pas. Chaque fois qu’une facilité consisterait à faire remonter un détail d’affichage dans le modèle, il faut trouver l’autre chemin. C’est contraignant sur le moment, et c’est ce qui a permis aux huit machines, dérivées d’une classe commune, de rester comparables entre elles.',
+              ],
+            },
+            {
+              titre: 'Le zoom et les couches',
+              paragraphes: [
+                'La difficulté n’est pas venue de la simulation, mais de la vue. Un plateau que l’on peut agrandir et réduire oblige à faire passer toute coordonnée par une même transformation : ce qui est dessiné, mais aussi ce qui est cliqué. Dès qu’un seul chemin y échappe, les clics tombent à côté de ce que l’on voit.',
+                'Les couches posent le problème inverse : plateau, tapis, objets transportés et machines se recouvrent, et l’ordre de tracé décide de ce qui est visible. Il ne se déduit de rien, il se décide — et il faut s’y tenir partout.',
+              ],
+            },
+            {
+              titre: 'Sauvegarder une partie',
+              paragraphes: [
+                'Une partie en cours s’écrit dans un fichier et se relit au chargement. C’est le genre de fonction qui met l’architecture à l’épreuve : si le modèle est vraiment indépendant de l’affichage, il suffit de l’écrire et de le relire. Si quelque chose de la vue s’y était glissé, c’est le moment où ça se voit.',
+              ],
+            },
+            {
+              titre: 'À deux, sans être à moitié',
+              paragraphes: [
+                'Nous étions deux, et j’ai écrit l’essentiel du projet ; mon binôme est intervenu sur quelques points. Le travail sous Git s’est passé sans conflit, ce qui doit moins à notre organisation qu’à ce déséquilibre : on ne se marche pas dessus quand on n’est presque qu’un.',
+                'C’est le vrai manque de ce projet. J’y ai gagné en architecture et en rendu, pas en collaboration — je n’ai pas eu à relire le code d’un autre, ni à défendre une décision devant quelqu’un qui aurait fait autrement.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'emotion-recognition',
