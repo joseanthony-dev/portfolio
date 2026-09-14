@@ -8,6 +8,7 @@ import { Projets } from './composants/Projets'
 import { Parcours } from './composants/Parcours'
 import { Competences } from './composants/Competences'
 import { Contact } from './composants/Contact'
+import { PageProjet } from './composants/PageProjet'
 import { PiedDePage } from './composants/PiedDePage'
 
 type Theme = 'clair' | 'sombre'
@@ -26,12 +27,14 @@ function litTheme(): Theme {
   return document.documentElement.dataset.theme === 'sombre' ? 'sombre' : 'clair'
 }
 
-// La langue vient de l'URL : chaque version est une page à part, pré-rendue dans
-// sa langue, avec son <html lang> et ses métadonnées. Rien à détecter ni à
-// corriger après coup — le premier rendu client est déjà le bon.
-export default function App({ langue }: { langue: Langue }) {
+// La langue et la page viennent toutes deux de l'URL : chaque combinaison est
+// pré-rendue à part, avec son <html lang> et ses métadonnées. Rien à détecter ni
+// à corriger après coup — le premier rendu client est déjà le bon, et il n'y a
+// donc pas de routeur : `projet` dit simplement quoi rendre dans <main>.
+export default function App({ langue, projet }: { langue: Langue; projet?: string }) {
   const [theme, setTheme] = useState<Theme>(litTheme)
   const t = contenus[langue]
+  const cas = projet ? t.projets.liste.find((p) => p.id === projet) : undefined
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -54,16 +57,23 @@ export default function App({ langue }: { langue: Langue }) {
       <EnTete
         t={t}
         langue={langue}
+        projet={cas?.id}
         onTheme={() => setTheme((v) => (v === 'clair' ? 'sombre' : 'clair'))}
       />
 
       <main id="contenu" tabIndex={-1}>
-        <Hero t={t} />
-        <APropos t={t} />
-        <Projets t={t} />
-        <Parcours t={t} />
-        <Competences t={t} />
-        <Contact t={t} />
+        {cas ? (
+          <PageProjet t={t} langue={langue} projet={cas} />
+        ) : (
+          <>
+            <Hero t={t} />
+            <APropos t={t} />
+            <Projets t={t} langue={langue} />
+            <Parcours t={t} />
+            <Competences t={t} />
+            <Contact t={t} />
+          </>
+        )}
       </main>
 
       <PiedDePage t={t} />

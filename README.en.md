@@ -46,9 +46,39 @@ visitor never watches French go by while the bundle loads. The FR / EN switch is
 crawlable, openable in a new tab — and it carries the anchor of the section being read, so changing
 language keeps your place.
 
+Every project also gets its own case-study page under the same regime: `/projets/<id>/` in
+French, `/projects/<id>/` in English, each declaring **the same project** in the other language
+through `hreflang` rather than the home page. The build therefore emits 16 pages — two home pages
+and seven case studies per language.
+
+There is no router. The page to render is written onto `<html data-projet>` by the prerender and
+read back by `entree-client.tsx`: the first client render starts from the same tree as the HTML it
+received, without parsing the URL itself, and navigation happens through real links.
+
 `src/langues.ts` holds the site's public address and the path of each language. Canonical URLs,
 `og:url`, the `hreflang` links and the sitemap all derive from it: it is the only place to change
 when deploying elsewhere.
+
+**Case studies that are filled in, never hollow.** A case-study page is built from what the card
+already carries — the context and what was done — and grows with a project's optional `cas` field
+once it is written: a standfirst, free-form sections, headline figures, screenshots. A project
+without `cas` still gets a complete page rather than a page full of gaps.
+
+```ts
+cas: {
+  chapo: 'One sentence framing the problem.',
+  chiffres: [{ valeur: '80%', libelle: 'less time spent on cleanup' }],
+  sections: [
+    { titre: 'The constraint', paragraphes: ['…'] },
+    { titre: 'What I traded off', paragraphes: ['…', '…'] },
+  ],
+  images: [{ fichier: 'cas-purge.webp', alt: '…', legende: '…' }],
+}
+```
+
+Images go in `public/` and are referenced by file name alone. Like everything else, `cas` is bound
+by the `Contenu` type: a section added in French must be added in English too, or compilation
+fails.
 
 **No theme flash.** An inline script in `index.html` applies the stored theme before the first
 render, which avoids the white flash on load in dark mode. Every `localStorage` read is guarded, so
@@ -99,10 +129,11 @@ src/
   entree-serveur.tsx    entry point for the build-time render
   composants/
     EnTete.tsx          navigation, link to the other language, theme, mobile menu
+    PageProjet.tsx      a project's case-study page
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          writes both pages and the sitemap
+  prerendu.mjs          writes all 16 pages and the sitemap
 ```
 
 ## Deployment
@@ -114,7 +145,7 @@ Because the site is served from a subdirectory, `vite.config.ts` sets `base: '/p
 that base, assets would be requested from the domain root and the page would come up blank. To
 deploy elsewhere, drop `base` and change `SITE` in `src/langues.ts`.
 
-The build emits `dist/sitemap.xml`, listing both versions and their alternates. It is served from
+The build emits `dist/sitemap.xml`, listing all 16 pages and their alternates. It is served from
 `/portfolio/sitemap.xml` and announced to Google through Search Console.
 
 There is no `robots.txt`: a crawler only reads it at the domain root, and

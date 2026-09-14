@@ -6,6 +6,25 @@ export type Lien = {
   type: 'github' | 'demo' | 'telechargement' | 'site' | 'linkedin' | 'email'
 }
 
+/** Une section rédigée d'une page de cas : un titre, un ou plusieurs paragraphes. */
+export type SectionCas = { titre: string; paragraphes: string[] }
+
+/**
+ * Le fond d'une page de cas : ce qu'une carte ne peut pas porter — les
+ * contraintes, les arbitrages, les résultats. Entièrement facultatif. Un projet
+ * sans `cas` a quand même sa page, bâtie sur son contexte et ses réalisations ;
+ * ces sections-là viennent s'y ajouter quand elles sont écrites.
+ */
+export type Cas = {
+  /** Phrase d'attaque, affichée sous le titre. */
+  chapo?: string
+  sections: SectionCas[]
+  /** Résultats chiffrés, mis en avant en tête de page. */
+  chiffres?: { valeur: string; libelle: string }[]
+  /** Fichiers déposés dans public/, référencés par leur nom seul. */
+  images?: { fichier: string; alt: string; legende?: string }[]
+}
+
 export type Projet = {
   id: string
   titre: string
@@ -17,6 +36,7 @@ export type Projet = {
   statut: 'en-cours' | 'livre' | 'non-distribue'
   vedette: boolean
   liens: Lien[]
+  cas?: Cas
 }
 
 export type Poste = {
@@ -68,6 +88,14 @@ export type Contenu = {
     titre: string
     sousTitre: string
     technosLabel: string
+    /** Libellés de la page de cas. */
+    cas: {
+      lire: string
+      retour: string
+      contexte: string
+      realisations: string
+      chiffres: string
+    }
     statuts: { 'en-cours': string; livre: string; 'non-distribue': string }
     liste: Projet[]
   }

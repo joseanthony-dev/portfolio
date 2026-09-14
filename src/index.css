@@ -404,6 +404,21 @@ main:focus, main:focus-visible { outline: none; }
 }
 
 .carte__titre { font-size: 1.25rem; }
+/* Le titre mène au cas : il garde la couleur du texte pour ne pas transformer
+   la grille en mur de liens colorés. */
+.carte__titre a { color: inherit; }
+.carte__titre a:hover { color: var(--accent); text-decoration: none; }
+
+.carte__cas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.carte__cas:hover { text-decoration: none; }
+.carte__cas:hover .icone-miroir { transform: scaleX(-1) translateX(3px); }
+.icone-miroir { transform: scaleX(-1); transition: transform 0.15s; }
 
 .etiquette {
   flex: none;
@@ -635,6 +650,111 @@ main:focus, main:focus-visible { outline: none; }
   color: var(--encre-tenue);
 }
 .pied__contenu p { margin: 0; }
+
+/* ── Page de cas ───────────────────────────────────────────────────────── */
+
+.cas { display: block; padding-block: clamp(2rem, 5vw, 3.25rem) clamp(3.5rem, 8vw, 6rem); }
+
+.cas__retour {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+.cas__retour:hover { text-decoration: none; }
+.cas__retour:hover svg { transform: translateX(-3px); }
+.cas__retour svg { transition: transform 0.15s; }
+
+.cas__entete { max-width: 62ch; }
+.cas__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+.cas__periode {
+  font-family: var(--police-mono);
+  font-size: 0.78rem;
+  color: var(--encre-tenue);
+}
+.cas__titre { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin-bottom: 0.9rem; }
+.cas__resume { font-size: 1.08rem; color: var(--encre-douce); margin: 0; }
+
+.cas__chiffres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.chiffre {
+  flex: 1 1 160px;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--bordure);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--rayon-petit);
+  background: var(--surface);
+}
+.chiffre__valeur {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.chiffre__libelle { font-size: 0.88rem; color: var(--encre-douce); }
+
+/* Une seule colonne, calée sur la longueur de ligne confortable en lecture. */
+.cas__corps { max-width: 68ch; margin-top: clamp(2.5rem, 6vw, 3.5rem); }
+.cas__section + .cas__section { margin-top: 2.5rem; }
+.cas__section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bordure);
+}
+.cas__section p { color: var(--encre-douce); }
+.cas__section p:last-child { margin-bottom: 0; }
+
+.cas__points { display: grid; gap: 0.6rem; }
+.cas__points li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: var(--encre-douce);
+}
+.cas__points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.cas__figure { margin: 2.5rem 0 0; }
+.cas__figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  background: var(--surface);
+}
+.cas__figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  color: var(--encre-tenue);
+}
+
+.cas__pied {
+  max-width: 68ch;
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--bordure);
+}
+.cas__pied .carte__liens { margin-top: 1.2rem; }
 
 /* ── Mobile ────────────────────────────────────────────────────────────── */
 

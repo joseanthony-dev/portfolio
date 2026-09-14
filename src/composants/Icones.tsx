@@ -83,6 +83,15 @@ export function IconeLune({ className }: Props) {
   )
 }
 
+/** Flèche vers la gauche : retour à la vitrine depuis une page de cas. */
+export function IconeFleche({ className }: Props) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M19 12H5M11 18l-6-6 6-6" />
+    </svg>
+  )
+}
+
 export function IconeLieu({ className }: Props) {
   return (
     <svg {...base} className={className}>

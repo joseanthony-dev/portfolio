@@ -1,21 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Contenu, Langue } from '../types'
-import { AUTRE, lienLangue } from '../langues'
+import { AUTRE, lienLangue, lienProjet } from '../langues'
 import { IconeLune, IconeSoleil } from './Icones'
 
 type Props = {
   t: Contenu
   langue: Langue
+  /** Identifiant du projet quand on est sur sa page de cas, sinon rien. */
+  projet?: string
   onTheme: () => void
 }
 
 const sections = ['projets', 'parcours', 'competences', 'contact'] as const
 
-export function EnTete({ t, langue, onTheme }: Props) {
+export function EnTete({ t, langue, projet, onTheme }: Props) {
   const [ouvert, setOuvert] = useState(false)
   const [actif, setActif] = useState<string>('')
   const entete = useRef<HTMLElement>(null)
   const burger = useRef<HTMLButtonElement>(null)
+
+  // Les sections de la navigation vivent sur l'accueil. Depuis une page de cas,
+  // leurs ancres doivent donc être précédées de l'adresse de l'accueil, sans quoi
+  // elles pointeraient sur des identifiants absents de la page.
+  const accueil = lienLangue(langue)
+  const versSection = (id: string) => (projet ? `${accueil}#${id}` : `#${id}`)
 
   useEffect(() => {
     const cibles = sections
@@ -73,7 +81,7 @@ export function EnTete({ t, langue, onTheme }: Props) {
   return (
     <header className="entete" ref={entete}>
       <div className="entete__contenu">
-        <a className="entete__marque" href="#haut" aria-label={t.hero.nom}>
+        <a className="entete__marque" href={projet ? accueil : '#haut'} aria-label={t.hero.nom}>
           <span className="entete__initiales" aria-hidden="true">
             AJ
           </span>
@@ -88,7 +96,12 @@ export function EnTete({ t, langue, onTheme }: Props) {
           aria-label={t.a11y.menu}
         >
           {sections.map((id) => (
-            <a key={id} href={`#${id}`} className={actif === id ? 'est-actif' : ''} onClick={() => setOuvert(false)}>
+            <a
+              key={id}
+              href={versSection(id)}
+              className={actif === id ? 'est-actif' : ''}
+              onClick={() => setOuvert(false)}
+            >
               {t.nav[id]}
             </a>
           ))}
@@ -111,7 +124,13 @@ export function EnTete({ t, langue, onTheme }: Props) {
               pré-rendu, et les moteurs ne voient que l'URL propre. */}
           <a
             className="bouton-langue"
-            href={actif ? `${lienLangue(AUTRE[langue])}#${actif}` : lienLangue(AUTRE[langue])}
+            href={
+              projet
+                ? lienProjet(AUTRE[langue], projet)
+                : actif
+                  ? `${lienLangue(AUTRE[langue])}#${actif}`
+                  : lienLangue(AUTRE[langue])
+            }
             hrefLang={AUTRE[langue]}
             aria-label={t.a11y.changerLangue}
             title={t.a11y.changerLangue}

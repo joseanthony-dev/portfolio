@@ -42,6 +42,13 @@ export const en: Contenu = {
     titre: 'Projects',
     sousTitre: 'I build software too: real applications, designed and shipped end to end.',
     technosLabel: 'Technologies used',
+    cas: {
+      lire: 'Read the case study',
+      retour: 'All projects',
+      contexte: 'Context',
+      realisations: 'What I did',
+      chiffres: 'Results',
+    },
     statuts: { 'en-cours': 'In progress', livre: 'In production', 'non-distribue': 'Not distributed' },
     liste: [
       {

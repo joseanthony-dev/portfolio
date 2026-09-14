@@ -1,11 +1,16 @@
-import type { Contenu, Projet } from '../types'
-import { IconeGithub, IconeLien } from './Icones'
+import type { Contenu, Langue, Projet } from '../types'
+import { lienProjet } from '../langues'
+import { IconeFleche, IconeGithub, IconeLien } from './Icones'
 
-function Carte({ projet, t }: { projet: Projet; t: Contenu }) {
+function Carte({ projet, t, langue }: { projet: Projet; t: Contenu; langue: Langue }) {
+  const page = lienProjet(langue, projet.id)
+
   return (
     <article className={`carte ${projet.vedette ? 'carte--vedette' : ''}`}>
       <div className="carte__entete">
-        <h3 className="carte__titre">{projet.titre}</h3>
+        <h3 className="carte__titre">
+          <a href={page}>{projet.titre}</a>
+        </h3>
         <span className={`etiquette etiquette--${projet.statut}`}>{t.projets.statuts[projet.statut]}</span>
       </div>
 
@@ -25,21 +30,27 @@ function Carte({ projet, t }: { projet: Projet; t: Contenu }) {
         ))}
       </ul>
 
-      {projet.liens.length > 0 && (
-        <div className="carte__liens">
-          {projet.liens.map((lien) => (
-            <a key={lien.url} className="lien-externe" href={lien.url} target="_blank" rel="noreferrer noopener">
-              {lien.type === 'github' ? <IconeGithub /> : <IconeLien />}
-              {lien.label}
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="carte__liens">
+        {/* Le titre mène déjà au cas ; ce lien-ci porte le nom du projet dans son
+            libellé accessible, pour ne pas s'annoncer comme un « Lire le cas »
+            isolé de tout contexte. */}
+        <a className="carte__cas" href={page} aria-label={`${t.projets.cas.lire} — ${projet.titre}`}>
+          {t.projets.cas.lire}
+          <IconeFleche className="icone-miroir" />
+        </a>
+
+        {projet.liens.map((lien) => (
+          <a key={lien.url} className="lien-externe" href={lien.url} target="_blank" rel="noreferrer noopener">
+            {lien.type === 'github' ? <IconeGithub /> : <IconeLien />}
+            {lien.label}
+          </a>
+        ))}
+      </div>
     </article>
   )
 }
 
-export function Projets({ t }: { t: Contenu }) {
+export function Projets({ t, langue }: { t: Contenu; langue: Langue }) {
   return (
     <section className="section" id="projets">
       <div className="section__interieur">
@@ -48,7 +59,7 @@ export function Projets({ t }: { t: Contenu }) {
 
         <div className="projets__grille">
           {t.projets.liste.map((projet) => (
-            <Carte key={projet.id} projet={projet} t={t} />
+            <Carte key={projet.id} projet={projet} t={t} langue={langue} />
           ))}
         </div>
       </div>

@@ -48,6 +48,13 @@ export const fr: Contenu = {
     titre: 'Projets',
     sousTitre: 'Je développe aussi : des applications réelles, conçues et livrées de bout en bout.',
     technosLabel: 'Technologies utilisées',
+    cas: {
+      lire: 'Lire le cas',
+      retour: 'Tous les projets',
+      contexte: 'Le contexte',
+      realisations: 'Ce que j’ai fait',
+      chiffres: 'Résultats',
+    },
     statuts: { 'en-cours': 'En cours', livre: 'En production', 'non-distribue': 'Non distribué' },
     liste: [
       {

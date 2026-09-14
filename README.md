@@ -48,9 +48,38 @@ voit pas le français défiler le temps du chargement. La bascule FR / EN est un
 par un moteur, ouvrable dans un onglet — et il reporte l'ancre de la section en cours de lecture,
 pour qu'un changement de langue ne fasse pas perdre sa place.
 
+Chaque projet a par ailleurs sa page de cas, au même régime : `/projets/<id>/` en français,
+`/projects/<id>/` en anglais, et chacune déclare en `hreflang` **le même projet** dans l'autre
+langue, pas l'accueil. Le build produit ainsi 16 pages — deux accueils et sept cas par langue.
+
+Il n'y a pas de routeur. La page à rendre est écrite sur `<html data-projet>` par le pré-rendu et
+relue par `entree-client.tsx` : le premier rendu client part du même arbre que le HTML reçu sans
+avoir à interpréter l'URL, et la navigation se fait par de vrais liens.
+
 `src/langues.ts` tient l'adresse publique du site et le chemin de chaque langue. Les URL canoniques,
 `og:url`, les liens `hreflang` et le sitemap en découlent tous : c'est le seul endroit à changer
 pour déployer ailleurs.
+
+**Pages de cas nourries, jamais à trous.** Une page de cas est bâtie sur ce que la carte porte
+déjà — le contexte et les réalisations — et s'étoffe du champ facultatif `cas` d'un projet quand il
+est rédigé : un chapô, des sections libres, des résultats chiffrés, des captures. Un projet sans
+`cas` a donc une page complète, pas une page pleine de vides.
+
+```ts
+cas: {
+  chapo: 'Une phrase qui pose l’enjeu.',
+  chiffres: [{ valeur: '80 %', libelle: 'de temps gagné sur le nettoyage' }],
+  sections: [
+    { titre: 'La contrainte', paragraphes: ['…'] },
+    { titre: 'Ce que j’ai arbitré', paragraphes: ['…', '…'] },
+  ],
+  images: [{ fichier: 'cas-purge.webp', alt: '…', legende: '…' }],
+}
+```
+
+Les images se déposent dans `public/` et se citent par leur nom seul. Comme tout le reste, `cas`
+est soumis au type `Contenu` : une section ajoutée en français doit l'être en anglais, sinon la
+compilation échoue.
 
 **Thème sans clignotement.** Un script inline dans `index.html` applique le thème enregistré avant
 le premier rendu, ce qui évite l'éclair blanc au chargement en mode sombre. Toute lecture de
@@ -100,10 +129,11 @@ src/
   entree-serveur.tsx    point d'entrée du rendu au build
   composants/
     EnTete.tsx          navigation, lien vers l'autre langue, thème, menu mobile
+    PageProjet.tsx      page de cas d'un projet
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          écrit les deux pages et le sitemap
+  prerendu.mjs          écrit les 16 pages et le sitemap
 ```
 
 ## Déploiement
@@ -116,7 +146,7 @@ Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/port
 base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
 déployer ailleurs, retirer `base` et changer `SITE` dans `src/langues.ts`.
 
-Le build produit `dist/sitemap.xml`, qui liste les deux versions et leurs alternatives. Il est
+Le build produit `dist/sitemap.xml`, qui liste les 16 pages et leurs alternatives. Il est
 servi depuis `/portfolio/sitemap.xml` et se déclare à Google via la Search Console.
 
 Il n'y a pas de `robots.txt` : un robot ne le lit qu'à la racine du domaine, et

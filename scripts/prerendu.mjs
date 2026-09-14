@@ -1,19 +1,19 @@
 // Écrit les pages statiques du site à partir du gabarit produit par Vite.
 //
-// Chaque langue donne une page complète — dist/index.html en français,
-// dist/en/index.html en anglais — rendue au build plutôt qu'au chargement : le
-// texte est présent dès la première réponse, lisible sans JavaScript, indexable,
-// et affiché avant que le bundle ne soit chargé.
+// Chaque langue donne l'accueil et une page de cas par projet — dist/index.html,
+// dist/projets/<id>/index.html, et leurs équivalents sous dist/en/. Toutes sont
+// rendues au build plutôt qu'au chargement : leur texte est présent dès la
+// première réponse, lisible sans JavaScript, indexable, et affiché avant que le
+// bundle ne soit chargé.
 //
-// Chaque page porte ses propres métadonnées et déclare l'autre en hreflang, ce
-// qui permet aux moteurs d'indexer les deux versions séparément. Le sitemap les
-// reprend toutes les deux.
+// Chaque page porte ses propres métadonnées et déclare en hreflang la même page
+// dans l'autre langue — un cas renvoie au même cas, pas à l'accueil. Le sitemap
+// les reprend toutes.
 //
 // Tourne après `vite build` (qui produit le gabarit dist/index.html) et après le
 // build SSR (qui produit dist-ssr/entree-serveur.js).
 
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { dirname } from 'node:path'
 
 import { pages } from '../dist-ssr/entree-serveur.js'
 
@@ -45,19 +45,24 @@ function remplacer(source, ancien, nouveau, quoi) {
 const gabarit = readFileSync(GABARIT, 'utf8')
 const liste = pages()
 
-// Les liens hreflang sont les mêmes sur toutes les pages : chacune déclare
-// toutes les versions, elle-même comprise. x-default désigne celle que sert un
-// moteur quand aucune langue ne correspond — le français, version canonique.
-const alternatives = [
-  ...liste.map((p) => `<link rel="alternate" hreflang="${p.langue}" href="${p.url}" />`),
-  `<link rel="alternate" hreflang="x-default" href="${liste[0].url}" />`,
-].join('\n    ')
+// Chaque page déclare toutes ses versions, elle-même comprise — Google ignore un
+// ensemble hreflang dont un membre ne se référence pas. x-default désigne celle
+// que sert un moteur quand aucune langue ne correspond : le français, version
+// canonique, de cette page-ci et non de l'accueil.
+const alternatives = (p) =>
+  [
+    [p.langue, p.url],
+    [p.langueAutre, p.urlAutre],
+    ['x-default', p.langue === 'fr' ? p.url : p.urlAutre],
+  ]
+    .map(([code, url]) => `<link rel="alternate" hreflang="${code}" href="${url}" />`)
+    .join('\n    ')
 
 for (const p of liste) {
   if (p.html.length < 2000) {
     throw new Error(
-      `Rendu ${p.langue} anormalement court (${p.html.length} octets) : la page serait ` +
-        'publiée vide ou amputée. Construction interrompue.',
+      `Rendu ${p.chemin || 'racine'} anormalement court (${p.html.length} octets) : la page ` +
+        'serait publiée vide ou amputée. Construction interrompue.',
     )
   }
 
@@ -65,7 +70,7 @@ for (const p of liste) {
     <title>${ech(p.titre)}</title>
     <meta name="description" content="${ech(p.description)}" />
     <link rel="canonical" href="${p.url}" />
-    ${alternatives}
+    ${alternatives(p)}
     <meta property="og:title" content="${ech(p.titre)}" />
     <meta property="og:description" content="${ech(p.descriptionPartage)}" />
     <meta property="og:url" content="${p.url}" />
@@ -74,17 +79,23 @@ for (const p of liste) {
     <meta property="og:locale:alternate" content="${p.localeAutre}" />
     ${FIN}`
 
+  // La page à rendre est écrite sur <html>, d'où entree-client.tsx la relit : le
+  // premier rendu client part donc du même arbre que le HTML reçu, sans avoir à
+  // interpréter l'URL de son côté.
+  const racine = `<html lang="${p.langue}"${p.projet ? ` data-projet="${p.projet}"` : ''}`
+
   let html = gabarit
   const bloc = html.slice(html.indexOf(DEBUT), html.indexOf(FIN) + FIN.length)
   html = remplacer(html, bloc, meta, 'métadonnées de langue')
-  html = remplacer(html, '<html lang="fr"', `<html lang="${p.langue}"`, 'langue du document')
+  html = remplacer(html, '<html lang="fr"', racine, 'langue du document')
   html = remplacer(html, RACINE, `<div id="root">${p.html}</div>`, "point d'insertion")
 
   const cible = `dist/${p.chemin}index.html`
-  mkdirSync(dirname(cible), { recursive: true })
+  mkdirSync(`dist/${p.chemin}`, { recursive: true })
   writeFileSync(cible, html)
-  console.log(`✓ ${cible} — ${p.langue}, ${(p.html.length / 1024).toFixed(1)} ko de balisage`)
 }
+
+console.log(`✓ ${liste.length} pages pré-rendues`)
 
 const jour = new Date().toISOString().slice(0, 10)
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -94,13 +105,13 @@ ${liste
     (p) => `  <url>
     <loc>${p.url}</loc>
     <lastmod>${jour}</lastmod>
-    ${alternatives.replace(/<link /g, '<xhtml:link ')}
+    ${alternatives(p).replace(/<link /g, '<xhtml:link ')}
   </url>`,
   )
   .join('\n')}
 </urlset>
 `
 writeFileSync('dist/sitemap.xml', sitemap)
-console.log('✓ dist/sitemap.xml')
+console.log(`✓ dist/sitemap.xml — ${liste.length} URL`)
 
 rmSync('dist-ssr', { recursive: true, force: true })
