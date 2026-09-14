@@ -3,26 +3,8 @@ import { renderToString } from 'react-dom/server'
 import App from './App'
 import { Page404 } from './composants/Page404'
 import { contenus } from './contenu'
-import { AUTRE, CHEMINS, LANGUES, LOCALES, cheminProjet, urlAbsolue, urlProjet } from './langues'
-import type { Langue } from './types'
-
-export type Page = {
-  langue: Langue
-  langueAutre: Langue
-  /** Identifiant du projet, pour les pages de cas ; absent sur l'accueil. */
-  projet?: string
-  /** Chemin du dossier à écrire sous dist/, barre oblique finale comprise. */
-  chemin: string
-  url: string
-  /** La même page dans l'autre langue, pour hreflang. */
-  urlAutre: string
-  locale: string
-  localeAutre: string
-  titre: string
-  description: string
-  descriptionPartage: string
-  html: string
-}
+import { AUTRE, CHEMINS, IMAGE_PARTAGE, LANGUES, LOCALES, cheminProjet, urlAbsolue, urlProjet } from './langues'
+import type { Langue, Page } from './types'
 
 const rendre = (langue: Langue, projet?: string) =>
   renderToString(
@@ -59,6 +41,7 @@ export function pages(): Page[] {
       urlAutre: urlAbsolue(autre),
       locale: LOCALES[langue],
       localeAutre: LOCALES[autre],
+      imagePartage: IMAGE_PARTAGE,
       ...t.meta,
       html: rendre(langue),
     }
@@ -72,6 +55,9 @@ export function pages(): Page[] {
       urlAutre: urlProjet(autre, projet.id),
       locale: LOCALES[langue],
       localeAutre: LOCALES[autre],
+      // Site-wide aujourd'hui, mais porté par la page : le jour où un projet
+      // mérite son propre aperçu, il n'y a qu'ici à changer.
+      imagePartage: IMAGE_PARTAGE,
       titre: `${projet.titre} — ${t.hero.nom}`,
       // Le résumé du projet fait une description de page : une phrase, écrite
       // pour être lue seule.

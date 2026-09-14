@@ -5,8 +5,12 @@ import type { Langue } from './types'
 // langue portée par un état React, sur une seule adresse, ne permet pas.
 
 // Adresse publique du site, racine comprise. Seul endroit où elle est écrite :
-// les URL canoniques, og:url, hreflang et le sitemap en découlent.
+// les URL canoniques, og:url, hreflang et l'image de partage en découlent.
 export const SITE = 'https://joseanthony-dev.github.io/portfolio/'
+
+// Image d'aperçu des partages. Absolue, et non servie par la base de Vite : les
+// plateformes qui la récupèrent ne résolvent aucun chemin relatif.
+export const IMAGE_PARTAGE = `${SITE}apercu.png`
 
 // Chemin de chaque langue sous la racine du site. Le français est à la racine.
 export const CHEMINS: Record<Langue, string> = { fr: '', en: 'en/' }

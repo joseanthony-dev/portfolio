@@ -8,9 +8,12 @@
          scripts inline réellement produits. En développement, Vite injecte ses
          propres scripts : la politique ne s'applique donc qu'au site publié. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+    <!-- %BASE_URL% est substitué par Vite : la base ne s'écrit qu'une fois,
+         dans vite.config.ts. Un chemin relatif serait faux sur les pages de
+         cas, qui vivent deux niveaux plus bas. -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <!-- Couleur de la barre d'adresse mobile ; réglée par le script ci-dessous
-         puis tenue à jour par App.tsx à chaque bascule de thème. -->
+         puis tenue à jour par src/client.ts à chaque bascule de thème. -->
     <meta name="theme-color" content="#fbfaf8" />
 
     <meta name="author" content="Anthony Jose" />
@@ -20,9 +23,6 @@
          page directement et ne consultent aucun index. -->
     <meta name="robots" content="noindex, nofollow" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://joseanthony-dev.github.io/portfolio/apercu.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- métadonnées de langue -->
@@ -41,6 +41,9 @@
       content="Administration système et réseau, supervision, automatisation et cybersécurité — et du développement. Projets, parcours et CV."
     />
     <meta property="og:url" content="https://joseanthony-dev.github.io/portfolio/" />
+    <meta property="og:image" content="https://joseanthony-dev.github.io/portfolio/apercu.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Anthony Jose — Systèmes, réseaux &amp; sécurité" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:locale:alternate" content="en_US" />

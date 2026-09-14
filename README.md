@@ -57,13 +57,16 @@ Chaque projet a par ailleurs sa page de cas, au même régime : `/projets/<id>/`
 `/projects/<id>/` en anglais, et chacune déclare en `hreflang` **le même projet** dans l'autre
 langue, pas l'accueil. Le build produit ainsi une page par couple langue / projet, plus les deux accueils.
 
-Il n'y a pas de routeur. La page à rendre est écrite sur `<html data-projet>` par le pré-rendu et
-relue par `entree-client.tsx` : le premier rendu client part du même arbre que le HTML reçu sans
-avoir à interpréter l'URL, et la navigation se fait par de vrais liens.
+Il n'y a pas de routeur, et il n'y en a jamais besoin : le choix de la page est fait au build, par
+`scripts/prerendu.mjs`, et chaque adresse reçoit un fichier qui ne contient qu'elle. Le navigateur
+n'a donc rien à interpréter de l'URL, rien à router, rien à charger de plus — la navigation se fait
+par de vrais liens, et le serveur répond directement la bonne page.
 
 `src/langues.ts` tient l'adresse publique du site et le chemin de chaque langue. Les URL canoniques,
-`og:url` et les liens `hreflang` en découlent tous : c'est le seul endroit à changer
-pour déployer ailleurs.
+`og:url`, les liens `hreflang` et l'image d'aperçu des partages en découlent tous : c'est le seul
+endroit à changer pour déployer ailleurs. Le sous-dossier de service, lui, n'est écrit que dans
+`vite.config.ts` : le gabarit le reprend par `%BASE_URL%` et le vérificateur le relit sur le build,
+donc aucun des deux ne peut le contredire.
 
 **Pages de cas nourries, jamais à trous.** Une page de cas est bâtie sur ce que la carte porte
 déjà — le contexte et les réalisations — et s'étoffe du champ facultatif `cas` d'un projet quand il
@@ -92,9 +95,11 @@ le premier rendu, ce qui évite l'éclair blanc au chargement en mode sombre. To
 Comme le thème est connu avant React, c'est le CSS qui choisit l'icône soleil / lune : le balisage
 ne dépend pas du thème, ce qui le rend identique au HTML pré-rendu dans les deux cas.
 
-**Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
-thèmes, et `prefers-reduced-motion` respecté. Les changements d'état sont perceptibles autrement
-qu'à l'œil : la confirmation de copie est annoncée (`aria-live`), la section lue porte
+**Accessibilité.** Lien d'évitement, navigation au clavier, contrastes tenus au-dessus de 4,5:1 dans
+les deux thèmes — y compris les gris les plus discrets, qui ne portent que du texte de 12 à 14 px et
+n'ont donc droit à aucune indulgence —, et `prefers-reduced-motion` respecté. Les changements d'état sont perceptibles autrement
+qu'à l'œil : la confirmation de copie est annoncée par une région `role="status"` tenue à l'écart du bouton,
+pour que le changement de libellé ne soit pas dit deux fois ; la section lue porte
 `aria-current` et non une simple couleur, et le bouton de thème annonce sa destination — « Passer
 au thème sombre » — plutôt qu'une action indéterminée.
 
@@ -110,9 +115,19 @@ l'absence de `frame-ancestors` et de `report-uri`, qu'une balise ignore.
 
 **Le build se relit.** `scripts/verifier.mjs` rouvre les pages produites et refuse de laisser passer
 un lien interne mort, une ancre sans cible, un `<html lang>` erroné, un canonique qui ne désigne pas
-la page, un ensemble `hreflang` qui ne se référence pas, une page sans `noindex`, ou une CSP dont les
-empreintes ne correspondent plus aux scripts de la page. Un build qui se termine ne prouve pas que
-le site tient : celui-ci le vérifie.
+la page, un ensemble `hreflang` qui ne se référence pas, une page sans `noindex`, une CSP dont les
+empreintes ne correspondent plus aux scripts de la page, ou une première visite au-delà de son
+budget de poids. Un build qui se termine ne prouve pas que le site tient : celui-ci le vérifie.
+
+Le vérificateur se surveille aussi lui-même. Il ne connaît pas le sous-dossier de service : il le lit
+sur le build, et compte les liens qu'il a réellement examinés. En dessous d'un par page, il se
+déclare cassé plutôt que satisfait — sans quoi un déploiement ailleurs l'aurait rendu muet, et un
+contrôle muet ressemble en tout point à un site sans défaut.
+
+Les scripts de `scripts/` passent sous `tsc` comme le reste : ils restent en `.mjs`, exécutables tels
+quels par Node, mais leurs types sont écrits en JSDoc et vérifiés. Le contrat entre le rendu et le
+pré-rendu — le type `Page` — vit dans `src/types.ts`, seul module que les deux projets TypeScript
+savent lire, et il est donc contrôlé des deux côtés.
 
 **Images.** Le portrait est en WebP : la même photographie en PNG pesait 196 ko, soit plus que
 tout le reste du site réuni. Le format cible du build (`chrome111`, `safari16.4`) est plus récent
@@ -124,8 +139,9 @@ La source reste plus grande que son affichage — un cercle de 205 px — pour r
 `public/apercu.png` fait exception et reste en PNG : elle n'est jamais chargée par le site, seules
 les plateformes de partage la récupèrent, et leur prise en charge du WebP est irrégulière.
 
-**Styles.** Environ 12 ko de CSS écrits à la main, pilotés par des variables de thème regroupées en
-tête de `src/index.css`. Changer la couleur d'accent tient en une ligne.
+**Styles.** Environ 24 ko de CSS écrits à la main — 16 ko une fois minifiés, 4 ko sur le réseau —,
+pilotés par des variables de thème regroupées en tête de `src/index.css`. Changer la couleur
+d'accent tient en une ligne.
 
 ## Démarrer
 
@@ -143,7 +159,7 @@ Node 22 ou plus.
 
 ```
 src/
-  types.ts              contrat de données, garant de la parité FR / EN
+  types.ts              contrat de données : parité FR / EN, et contrat du pré-rendu
   langues.ts            adresse du site et chemin de chaque langue
   contenu/fr.ts         texte français
   contenu/en.ts         texte anglais

@@ -56,13 +56,16 @@ French, `/projects/<id>/` in English, each declaring **the same project** in the
 through `hreflang` rather than the home page. The build therefore emits one page per
 language / project pair, plus the two home pages.
 
-There is no router. The page to render is written onto `<html data-projet>` by the prerender and
-read back by `entree-client.tsx`: the first client render starts from the same tree as the HTML it
-received, without parsing the URL itself, and navigation happens through real links.
+There is no router, and none is ever needed: the page is chosen at build time by
+`scripts/prerendu.mjs`, and every address gets a file containing only itself. The browser has nothing
+to parse out of the URL, nothing to route, nothing extra to fetch — navigation happens through real
+links, and the server answers with the right page directly.
 
 `src/langues.ts` holds the site's public address and the path of each language. Canonical URLs,
-`og:url` and the `hreflang` links all derive from it: it is the only place to change
-when deploying elsewhere.
+`og:url`, the `hreflang` links and the share preview image all derive from it: it is the only place
+to change when deploying elsewhere. The serving subdirectory lives in `vite.config.ts` alone: the
+template picks it up through `%BASE_URL%` and the verifier reads it back off the build, so neither
+can contradict it.
 
 **Case studies that are filled in, never hollow.** A case-study page is built from what the card
 already carries — the context and what was done — and grows with a project's optional `cas` field
@@ -91,9 +94,11 @@ the site works in private browsing or with site data blocked. Since the theme is
 runs, CSS picks the sun / moon icon rather than a ternary: the markup does not depend on the theme,
 which keeps it identical to the prerendered HTML either way.
 
-**Accessibility.** Skip link, keyboard navigation, contrast checked in both themes, and
+**Accessibility.** Skip link, keyboard navigation, contrast held above 4.5:1 in both themes —
+including the quietest greys, which only ever carry 12–14 px text and so get no leniency — and
 `prefers-reduced-motion` honoured. State changes are perceivable by more than sight: the copy
-confirmation is announced (`aria-live`), the section being read carries `aria-current` rather than
+confirmation is announced through a `role="status"` region kept outside the button, so the label
+change is not spoken twice; the section being read carries `aria-current` rather than
 just a colour, and the theme button announces where it takes you — “Switch to the dark theme” —
 rather than some undetermined action.
 
@@ -109,9 +114,19 @@ Since GitHub Pages allows no HTTP headers, the policy travels in a `<meta>` tag 
 
 **The build re-reads itself.** `scripts/verifier.mjs` reopens the generated pages and refuses to let
 through a dead internal link, an anchor with no target, a wrong `<html lang>`, a canonical that does
-not name its own page, an `hreflang` set that fails to reference itself, a page missing `noindex`, or a CSP whose hashes
-no longer match the page's scripts. A build that finishes is no proof the site holds together: this
-one checks.
+not name its own page, an `hreflang` set that fails to reference itself, a page missing `noindex`, a
+CSP whose hashes no longer match the page's scripts, or a first visit over its weight budget. A build
+that finishes is no proof the site holds together: this one checks.
+
+The verifier watches itself too. It does not know the serving subdirectory: it reads it off the
+build, and counts the links it actually examined. Below one per page it declares itself broken rather
+than satisfied — otherwise deploying elsewhere would have struck it dumb, and a silent check looks
+exactly like a flawless site.
+
+The scripts under `scripts/` go through `tsc` like everything else: they stay `.mjs`, runnable by
+Node as they are, but their types are written in JSDoc and checked. The contract between the render
+and the prerender — the `Page` type — lives in `src/types.ts`, the only module both TypeScript
+projects can read, and is therefore enforced on both sides.
 
 **Images.** The portrait is WebP: the same photograph as a PNG weighed 196 kB, more than the whole
 rest of the site put together. The build target (`chrome111`, `safari16.4`) is more recent than
@@ -122,8 +137,8 @@ display size — a 205 px circle — to hold up on high-density screens.
 `public/apercu.png` is the exception and stays a PNG: the site never loads it, only link-preview
 crawlers fetch it, and their WebP support is uneven.
 
-**Styling.** Roughly 12 kB of hand-written CSS, driven by theme variables grouped at the top of
-`src/index.css`. Changing the accent colour takes one line.
+**Styling.** Roughly 24 kB of hand-written CSS — 16 kB minified, 4 kB over the wire — driven by
+theme variables grouped at the top of `src/index.css`. Changing the accent colour takes one line.
 
 ## Getting started
 
@@ -143,7 +158,7 @@ The source is written in French, file names included.
 
 ```
 src/
-  types.ts              data contract, guarantor of FR / EN parity
+  types.ts              data contract: FR / EN parity, and the prerender's contract
   langues.ts            site address and path of each language
   contenu/fr.ts         French copy
   contenu/en.ts         English copy

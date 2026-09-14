@@ -9,7 +9,10 @@
   --surface: #ffffff;
   --encre: #15191d;
   --encre-douce: #555f69;
-  --encre-tenue: #7d8790;
+  /* 5,05:1 sur --fond, 4,71:1 sur --fond-alterne, 5,27:1 sur --surface.
+     Toujours appliqué à du texte de 12 à 14 px, jamais exempté : il doit
+     tenir 4,5:1 sur les trois fonds, pas seulement sur le plus clair. */
+  --encre-tenue: #646d75;
   --bordure: #e4e1db;
   --bordure-forte: #d3cfc7;
   --accent: #0d6a5a;
@@ -31,7 +34,7 @@
   --surface: #161b20;
   --encre: #e9ecef;
   --encre-douce: #a3acb5;
-  --encre-tenue: #7a838c;
+  --encre-tenue: #828b94;
   --bordure: #252c33;
   --bordure-forte: #323a42;
   --accent: #4fd1b5;
@@ -94,6 +97,21 @@ a:hover { text-decoration: underline; }
 /* Cible du lien d'évitement : <main> prend le focus pour que la suite de la
    navigation clavier reparte du contenu, mais on ne l'encadre pas. */
 main:focus, main:focus-visible { outline: none; }
+
+/* Retiré de l'affichage sans l'être de l'arbre d'accessibilité : `display: none`
+   et `visibility: hidden` couperaient aussi les lecteurs d'écran, qui n'ont ici
+   rien à perdre. Sert aux annonces d'état qui n'ont pas de place à l'écran. */
+.visuellement-masque {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
 
 /* ── En-tête ───────────────────────────────────────────────────────────── */
 

@@ -563,7 +563,7 @@ export const en: Contenu = {
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/joseanthony-zacharias', type: 'linkedin' },
     ],
     copie: 'Copy address',
-    copie_ok: 'Address copied',
+    copieOk: 'Address copied',
   },
 
   erreur: {

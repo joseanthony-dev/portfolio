@@ -4,6 +4,8 @@
     "target": "es2023",
     "lib": ["ES2023"],
     "types": ["node"],
+    "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -19,5 +21,8 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts"]
+  // scripts/ produit et relit le site : c'est le filet qui garantit tout le
+  // reste, il est vérifié comme le reste. Les fichiers restent en .mjs, typés
+  // par JSDoc — ils s'exécutent tels quels sous node, sans étape de compilation.
+  "include": ["vite.config.ts", "scripts"]
 }

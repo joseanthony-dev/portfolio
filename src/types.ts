@@ -117,7 +117,7 @@ export type Contenu = {
     localisation: string
     liens: Lien[]
     copie: string
-    copie_ok: string
+    copieOk: string
   }
   /** Page servie pour une adresse qui ne mène nulle part. */
   erreur: { titre: string; message: string; retour: string }
@@ -131,4 +131,33 @@ export type Contenu = {
     fermerMenu: string
     allerAuContenu: string
   }
+}
+
+/**
+ * Une page à écrire sous `dist/`, telle que le rendu la remet au pré-rendu.
+ *
+ * Ce type vit ici, et non dans `entree-serveur.tsx`, parce que `scripts/` doit
+ * pouvoir le lire : les scripts sont en résolution `nodenext` là où `src/` est en
+ * résolution `bundler`, et ce fichier — sans le moindre import — est le seul que
+ * les deux projets savent charger. C'est le contrat entre les deux étapes du
+ * build, et il est vérifié des deux côtés.
+ */
+export type Page = {
+  langue: Langue
+  langueAutre: Langue
+  /** Identifiant du projet, pour les pages de cas ; absent sur l'accueil. */
+  projet?: string
+  /** Chemin du dossier à écrire sous dist/, barre oblique finale comprise. */
+  chemin: string
+  url: string
+  /** La même page dans l'autre langue, pour hreflang. */
+  urlAutre: string
+  locale: string
+  localeAutre: string
+  titre: string
+  description: string
+  descriptionPartage: string
+  /** Image d'aperçu du partage, absolue : aucune plateforme ne résout un chemin. */
+  imagePartage: string
+  html: string
 }

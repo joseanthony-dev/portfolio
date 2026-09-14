@@ -76,6 +76,9 @@ document.addEventListener('pointerdown', (e) => {
 
 const copie = document.querySelector<HTMLButtonElement>('[data-copier]')
 const libelle = copie?.querySelector('.contact__copie-libelle')
+// Région d'annonce, hors du bouton : y écrire ne renomme rien, donc la
+// confirmation est dite une fois et non deux.
+const annonce = document.querySelector<HTMLElement>('[data-annonce-copie]')
 
 copie?.addEventListener('click', async () => {
   try {
@@ -87,9 +90,13 @@ copie?.addEventListener('click', async () => {
   }
   copie.classList.add('est-copie')
   if (libelle) libelle.textContent = copie.dataset.libelleOk ?? ''
+  if (annonce) annonce.textContent = copie.dataset.libelleOk ?? ''
   window.setTimeout(() => {
     copie.classList.remove('est-copie')
     if (libelle) libelle.textContent = copie.dataset.libelle ?? ''
+    // Vidée pour qu'une seconde copie soit bien vue comme un changement, et
+    // donc annoncée à nouveau.
+    if (annonce) annonce.textContent = ''
   }, 2000)
 })
 

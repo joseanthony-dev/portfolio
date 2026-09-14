@@ -30,17 +30,22 @@ export function Contact({ t }: { t: Contenu }) {
             className="bouton bouton--discret contact__copie"
             data-copier={t.contact.email}
             data-libelle={t.contact.copie}
-            data-libelle-ok={t.contact.copie_ok}
+            data-libelle-ok={t.contact.copieOk}
           >
             <IconeCopie className="icone-copie" />
             <IconeCheck className="icone-check" />
-            {/* Le libellé change après la copie : sans région directe, un lecteur
-                d'écran n'en saurait rien, là où un voyant le lit aussitôt. */}
-            <span className="contact__copie-libelle" aria-live="polite">
-              {t.contact.copie}
-            </span>
+            {/* Ce libellé est aussi le nom accessible du bouton. Le doter d'un
+                aria-live ferait annoncer deux fois la copie sur les lecteurs qui
+                signalent déjà le changement de nom : l'annonce part de la région
+                voisine, qui ne nomme rien. */}
+            <span className="contact__copie-libelle">{t.contact.copie}</span>
           </button>
         </div>
+
+        {/* Hors du bouton, donc sans effet sur son nom. client.ts y écrit la
+            confirmation puis l'efface : un voyant lit le libellé et l'icône,
+            un lecteur d'écran entend ceci. */}
+        <p className="visuellement-masque" role="status" data-annonce-copie />
 
         {t.contact.telephone && (
           <p className="contact__ligne">
