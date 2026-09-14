@@ -92,12 +92,26 @@ runs, CSS picks the sun / moon icon rather than a ternary: the markup does not d
 which keeps it identical to the prerendered HTML either way.
 
 **Accessibility.** Skip link, keyboard navigation, contrast checked in both themes, and
-`prefers-reduced-motion` honoured.
+`prefers-reduced-motion` honoured. State changes are perceivable by more than sight: the copy
+confirmation is announced (`aria-live`), the section being read carries `aria-current` rather than
+just a colour, and the theme button announces where it takes you — “Switch to the dark theme” —
+rather than some undetermined action.
+
+**A strict security policy.** The site loads nothing from outside, which allows a closed CSP:
+`default-src 'self'`, `object-src 'none'`, `base-uri 'none'`, `form-action 'none'`, and neither
+`unsafe-inline` nor `unsafe-eval`. The two inline scripts — the theme and the structured data — are
+allowed **by SHA-256 hash**, computed at build time over the HTML actually produced rather than
+written by hand. A script changed without the policy following would fail the build before anything
+is published.
+
+Since GitHub Pages allows no HTTP headers, the policy travels in a `<meta>` tag — hence no
+`frame-ancestors` and no `report-uri`, which a tag ignores.
 
 **The build re-reads itself.** `scripts/verifier.mjs` reopens the generated pages and refuses to let
 through a dead internal link, an anchor with no target, a wrong `<html lang>`, a canonical that does
-not name its own page, an `hreflang` set that fails to reference itself, or a page missing
-`noindex`. A build that finishes is no proof the site holds together: this one checks.
+not name its own page, an `hreflang` set that fails to reference itself, a page missing `noindex`, or a CSP whose hashes
+no longer match the page's scripts. A build that finishes is no proof the site holds together: this
+one checks.
 
 **Images.** The portrait is WebP: the same photograph as a PNG weighed 196 kB, more than the whole
 rest of the site put together. The build target (`chrome111`, `safari16.4`) is more recent than

@@ -93,12 +93,26 @@ Comme le thème est connu avant React, c'est le CSS qui choisit l'icône soleil 
 ne dépend pas du thème, ce qui le rend identique au HTML pré-rendu dans les deux cas.
 
 **Accessibilité.** Lien d'évitement, navigation au clavier, contrastes vérifiés dans les deux
-thèmes, et `prefers-reduced-motion` respecté.
+thèmes, et `prefers-reduced-motion` respecté. Les changements d'état sont perceptibles autrement
+qu'à l'œil : la confirmation de copie est annoncée (`aria-live`), la section lue porte
+`aria-current` et non une simple couleur, et le bouton de thème annonce sa destination — « Passer
+au thème sombre » — plutôt qu'une action indéterminée.
+
+**Une politique de sécurité stricte.** Le site ne charge rien d'extérieur, ce qui permet une CSP
+fermée : `default-src 'self'`, `object-src 'none'`, `base-uri 'none'`, `form-action 'none'`, et ni
+`unsafe-inline` ni `unsafe-eval`. Les deux scripts inline — le thème et les données structurées —
+sont autorisés **par empreinte SHA-256**, calculée au build sur le HTML réellement produit plutôt
+qu'écrite à la main. Un script modifié sans que la politique suive ferait échouer la construction
+avant la mise en ligne.
+
+GitHub Pages ne permettant pas d'en-tête HTTP, la politique passe par une balise `<meta>` — d'où
+l'absence de `frame-ancestors` et de `report-uri`, qu'une balise ignore.
 
 **Le build se relit.** `scripts/verifier.mjs` rouvre les pages produites et refuse de laisser passer
 un lien interne mort, une ancre sans cible, un `<html lang>` erroné, un canonique qui ne désigne pas
-la page, un ensemble `hreflang` qui ne se référence pas, ou une page sans `noindex`. Un build qui se
-termine ne prouve pas que le site tient : celui-ci le vérifie.
+la page, un ensemble `hreflang` qui ne se référence pas, une page sans `noindex`, ou une CSP dont les
+empreintes ne correspondent plus aux scripts de la page. Un build qui se termine ne prouve pas que
+le site tient : celui-ci le vérifie.
 
 **Images.** Le portrait est en WebP : la même photographie en PNG pesait 196 ko, soit plus que
 tout le reste du site réuni. Le format cible du build (`chrome111`, `safari16.4`) est plus récent

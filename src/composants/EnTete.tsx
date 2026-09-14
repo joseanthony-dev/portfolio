@@ -42,12 +42,18 @@ export function EnTete({ t, langue, projet }: Props) {
         </nav>
 
         <div className="entete__actions">
+          {/* Le libellé annonce la destination, pas l'action : « Passer au thème
+              sombre » dit à la fois ce que fait le bouton et où l'on se trouve.
+              client.ts le réaligne au démarrage, le thème réel pouvant différer
+              de celui du pré-rendu, puis l'échange à chaque bascule. */}
           <button
             type="button"
             className="bouton-icone"
             data-bascule-theme
-            aria-label={t.a11y.changerTheme}
-            title={t.a11y.changerTheme}
+            aria-label={t.a11y.themeSombre}
+            title={t.a11y.themeSombre}
+            data-vers-sombre={t.a11y.themeSombre}
+            data-vers-clair={t.a11y.themeClair}
           >
             {/* Les deux icônes sont dans le HTML ; le CSS montre celle qui
                 correspond au thème déjà posé sur <html>, donc elle est juste

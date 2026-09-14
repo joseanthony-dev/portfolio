@@ -584,7 +584,8 @@ export const fr: Contenu = {
 
   a11y: {
     changerLangue: 'Passer le site en anglais',
-    changerTheme: 'Changer de thème (clair / sombre)',
+    themeSombre: 'Passer au thème sombre',
+    themeClair: 'Passer au thème clair',
     menu: 'Menu de navigation',
     ouvrirMenu: 'Ouvrir le menu de navigation',
     fermerMenu: 'Fermer le menu de navigation',

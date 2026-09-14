@@ -122,7 +122,8 @@ export type Contenu = {
   pied: { droits: string; construitAvec: string }
   a11y: {
     changerLangue: string
-    changerTheme: string
+    themeSombre: string
+    themeClair: string
     menu: string
     ouvrirMenu: string
     fermerMenu: string

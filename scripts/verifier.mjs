@@ -5,6 +5,7 @@
 // Tourne en fin de `npm run build`, donc aussi bien en local qu'en CI, et fait
 // échouer la chaîne avant qu'une page fautive ne soit publiée.
 
+import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 
@@ -66,6 +67,31 @@ for (const fichier of pages) {
   }
   if (!alternatives.some(([, code]) => code === 'x-default')) faute(page, 'pas de hreflang x-default')
 
+  // Une empreinte de CSP obsolète ne se voit pas à la lecture : le navigateur
+  // refuse simplement d'exécuter le script, et le thème cesse de fonctionner sans
+  // le moindre message. On recalcule donc ce que la politique devrait contenir.
+  const csp = attr(/http-equiv="Content-Security-Policy" content="([^"]+)"/)
+  if (!csp) {
+    faute(page, 'pas de politique de sécurité')
+  } else {
+    const declarees = new Set(csp.match(/'sha256-[A-Za-z0-9+/=]+'/g) ?? [])
+    const reelles = [...html.matchAll(/<script(?![^>]*\ssrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(
+      ([, corps]) => `'sha256-${createHash('sha256').update(corps).digest('base64')}'`,
+    )
+    for (const e of reelles) {
+      if (!declarees.has(e)) faute(page, `script inline non couvert par la CSP (${e})`)
+    }
+    if (declarees.size !== reelles.length) {
+      faute(page, `${declarees.size} empreinte(s) déclarée(s) pour ${reelles.length} script(s) inline`)
+    }
+    for (const d of ["default-src 'self'", "object-src 'none'", "base-uri 'none'"]) {
+      if (!csp.includes(d)) faute(page, `CSP sans ${d}`)
+    }
+    if (csp.includes("'unsafe-inline'") || csp.includes("'unsafe-eval'")) {
+      faute(page, 'CSP relâchée par unsafe-inline ou unsafe-eval')
+    }
+  }
+
   // Tout lien ou ressource interne doit aboutir sur un fichier réellement produit.
   for (const [, cible] of html.matchAll(/(?:href|src)="(\/portfolio\/[^"]*)"/g)) {
     const chemin = cible.split('#')[0].split('?')[0]
@@ -88,4 +114,6 @@ if (erreurs.length > 0) {
   process.exit(1)
 }
 
-console.log(`✓ ${pages.length} pages vérifiées — liens, ancres, langue, canoniques, hreflang, noindex`)
+console.log(
+  `✓ ${pages.length} pages vérifiées — liens, ancres, langue, canoniques, hreflang, noindex, CSP`,
+)

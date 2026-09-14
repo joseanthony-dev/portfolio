@@ -570,7 +570,8 @@ export const en: Contenu = {
 
   a11y: {
     changerLangue: 'Switch the site to French',
-    changerTheme: 'Toggle theme (light / dark)',
+    themeSombre: 'Switch to the dark theme',
+    themeClair: 'Switch to the light theme',
     menu: 'Navigation menu',
     ouvrirMenu: 'Open the navigation menu',
     fermerMenu: 'Close the navigation menu',

@@ -12,14 +12,30 @@ const couleurBarre = { clair: '#fbfaf8', sombre: '#0d1013' } as const
 
 /* ── Thème ──────────────────────────────────────────────────────────────── */
 
+const basculeTheme = document.querySelector<HTMLButtonElement>('[data-bascule-theme]')
+
+// Le libellé doit annoncer la destination, donc suivre le thème courant. Le
+// pré-rendu a supposé le thème clair ; si le script inline en a posé un autre,
+// on réaligne ici, avant toute interaction.
+function libelleTheme() {
+  if (!basculeTheme) return
+  const vers = racine.dataset.theme === 'sombre' ? 'versClair' : 'versSombre'
+  const libelle = basculeTheme.dataset[vers] ?? ''
+  basculeTheme.setAttribute('aria-label', libelle)
+  basculeTheme.setAttribute('title', libelle)
+}
+
+libelleTheme()
+
 // Le script inline d'index.html a déjà posé le thème avant le premier rendu :
 // on ne fait que le basculer, sans jamais avoir à le deviner.
-document.querySelector<HTMLButtonElement>('[data-bascule-theme]')?.addEventListener('click', () => {
+basculeTheme?.addEventListener('click', () => {
   const theme = racine.dataset.theme === 'sombre' ? 'clair' : 'sombre'
   racine.dataset.theme = theme
   document
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute('content', couleurBarre[theme])
+  libelleTheme()
   try {
     localStorage.setItem('theme', theme)
   } catch {
@@ -105,7 +121,13 @@ if (cibles.length > 0 && lienLangue) {
       for (const [id, r] of croisent) {
         if (r > ratio) [actif, ratio] = [id, r]
       }
-      for (const a of liens) a.classList.toggle('est-actif', a.dataset.section === actif)
+      for (const a of liens) {
+        const courant = a.dataset.section === actif
+        a.classList.toggle('est-actif', courant)
+        // La couleur seule ne dit rien à qui ne la voit pas.
+        if (courant) a.setAttribute('aria-current', 'true')
+        else a.removeAttribute('aria-current')
+      }
       // Changer de langue recharge la page : on y reporte l'ancre de la section
       // lue, les identifiants étant les mêmes des deux côtés.
       lienLangue.setAttribute('href', actif ? `${versAutreLangue}#${actif}` : versAutreLangue)

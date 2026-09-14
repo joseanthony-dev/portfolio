@@ -34,7 +34,11 @@ export function Contact({ t }: { t: Contenu }) {
           >
             <IconeCopie className="icone-copie" />
             <IconeCheck className="icone-check" />
-            <span className="contact__copie-libelle">{t.contact.copie}</span>
+            {/* Le libellé change après la copie : sans région directe, un lecteur
+                d'écran n'en saurait rien, là où un voyant le lit aussitôt. */}
+            <span className="contact__copie-libelle" aria-live="polite">
+              {t.contact.copie}
+            </span>
           </button>
         </div>
 
