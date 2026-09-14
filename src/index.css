@@ -767,6 +767,27 @@ main:focus, main:focus-visible { outline: none; }
 }
 .cas__pied .carte__liens { margin-top: 1.2rem; }
 
+/* ── Page d'erreur ─────────────────────────────────────────────────────── */
+
+.erreur { display: grid; place-items: center; min-height: 100svh; }
+.erreur__contenu { display: grid; gap: 2.5rem; justify-items: center; text-align: center; }
+.erreur__code {
+  font-family: var(--police-mono);
+  font-size: clamp(4rem, 18vw, 8rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--bordure-forte);
+}
+.erreur__langue { display: grid; gap: 0.9rem; justify-items: center; max-width: 46ch; }
+.erreur__titre { font-size: clamp(1.4rem, 3.5vw, 1.8rem); }
+.erreur__message { color: var(--encre-douce); margin: 0; }
+.erreur__langue + .erreur__langue {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--bordure);
+  width: 100%;
+}
+
 /* ── Mobile ────────────────────────────────────────────────────────────── */
 
 @media (max-width: 760px) {

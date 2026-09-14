@@ -157,14 +157,23 @@ src/
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          écrit toutes les pages
+  prerendu.mjs          écrit toutes les pages et la page d'erreur
   verifier.mjs          relit le dist/ produit et fait échouer le build s'il cloche
 ```
+
+## Licence
+
+Le code — `src/`, `scripts/`, la configuration — est sous licence MIT. Le contenu et les médias
+personnels — `src/contenu/`, `public/` : biographie, études de cas, CV, portrait — restent tous
+droits réservés. Le détail est dans [LICENSE](LICENSE).
+
+La distinction est volontaire : le code peut servir à quelqu'un, mon parcours non.
 
 ## Déploiement
 
 Publié sur GitHub Pages par `.github/workflows/deploy.yml`, qui construit et met en ligne le site
-à chaque `push` sur `main`. `.github/workflows/ci.yml` lance le lint et le build sur les pull
+à chaque `push` sur `main`. `dist/404.html`, bilingue et sans navigation, est servi pour toute
+adresse absente — un lien mort ramène chez soi au lieu de renvoyer la page générique de GitHub. `.github/workflows/ci.yml` lance le lint et le build sur les pull
 requests.
 
 Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/portfolio/'`. Sans cette

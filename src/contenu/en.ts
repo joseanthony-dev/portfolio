@@ -566,6 +566,12 @@ export const en: Contenu = {
     copie_ok: 'Address copied',
   },
 
+  erreur: {
+    titre: 'Page not found',
+    message: 'This address leads nowhere. The content may have been removed, or the address may be wrong.',
+    retour: 'Back to the home page',
+  },
+
   pied: { droits: 'Anthony Jose', construitAvec: 'Designed and built with React, TypeScript and Vite.' },
 
   a11y: {

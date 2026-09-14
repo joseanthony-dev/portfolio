@@ -119,6 +119,8 @@ export type Contenu = {
     copie: string
     copie_ok: string
   }
+  /** Page servie pour une adresse qui ne mène nulle part. */
+  erreur: { titre: string; message: string; retour: string }
   pied: { droits: string; construitAvec: string }
   a11y: {
     changerLangue: string

@@ -1,0 +1,66 @@
+Two different things live in this repository, and they are not covered by the
+same terms.
+
+Ce dépôt contient deux choses de nature différente, qui ne relèvent pas des
+mêmes conditions.
+
+
+────────────────────────────────────────────────────────────────────────────────
+1. SOURCE CODE — MIT License
+   LE CODE SOURCE — licence MIT
+────────────────────────────────────────────────────────────────────────────────
+
+Applies to the build tooling, components, scripts and stylesheets: everything
+under src/ and scripts/, plus the configuration files at the root.
+
+S'applique à l'outillage de construction, aux composants, aux scripts et aux
+feuilles de style : tout ce qui vit sous src/ et scripts/, ainsi qu'aux fichiers
+de configuration à la racine.
+
+Copyright (c) 2026 Anthony Jose
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+────────────────────────────────────────────────────────────────────────────────
+2. CONTENT AND PERSONAL MEDIA — All rights reserved
+   LE CONTENU ET LES MÉDIAS PERSONNELS — tous droits réservés
+────────────────────────────────────────────────────────────────────────────────
+
+Applies to everything under src/contenu/ and public/: the biography, the
+project write-ups and case studies, the CV, the portrait, the share image — in
+short, anything that describes a person or their work rather than instructing a
+machine.
+
+S'applique à tout ce qui vit sous src/contenu/ et public/ : la biographie, les
+descriptions de projets et les études de cas, le CV, le portrait, la vignette de
+partage — en somme, tout ce qui décrit une personne ou son travail plutôt que
+d'instruire une machine.
+
+Copyright (c) 2026 Anthony Jose. All rights reserved.
+Tous droits réservés.
+
+This material may be read and consulted. It may not be copied, republished,
+translated or reused, in whole or in part, without prior written permission.
+
+Ces éléments peuvent être lus et consultés. Ils ne peuvent être copiés,
+republiés, traduits ni réutilisés, en tout ou partie, sans autorisation écrite
+préalable.
+
+The MIT terms above grant no right whatsoever over this material.
+Les conditions MIT ci-dessus n'accordent aucun droit sur ces éléments.

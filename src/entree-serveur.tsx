@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { renderToString } from 'react-dom/server'
 import App from './App'
+import { Page404 } from './composants/Page404'
 import { contenus } from './contenu'
 import { AUTRE, CHEMINS, LANGUES, LOCALES, cheminProjet, urlAbsolue, urlProjet } from './langues'
 import type { Langue } from './types'
@@ -32,6 +33,19 @@ const rendre = (langue: Langue, projet?: string) =>
 
 // Appelé une fois au build. Chaque langue donne l'accueil et une page par projet,
 // chacune avec son balisage et tout ce qu'il faut pour en écrire les métadonnées.
+/**
+ * Page d'erreur, unique pour tout le site : GitHub Pages sert un seul fichier
+ * 404 quelle que soit l'adresse demandée. Elle n'a ni canonique ni hreflang —
+ * elle ne désigne aucune ressource — mais garde le reste du gabarit.
+ */
+export function page404(): string {
+  return renderToString(
+    <StrictMode>
+      <Page404 />
+    </StrictMode>,
+  )
+}
+
 export function pages(): Page[] {
   return LANGUES.flatMap((langue) => {
     const t = contenus[langue]

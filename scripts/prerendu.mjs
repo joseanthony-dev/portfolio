@@ -17,7 +17,7 @@
 import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 
-import { pages } from '../dist-ssr/entree-serveur.js'
+import { page404, pages } from '../dist-ssr/entree-serveur.js'
 
 const GABARIT = 'dist/index.html'
 const RACINE = '<div id="root"></div>'
@@ -132,6 +132,24 @@ for (const p of liste) {
   writeFileSync(cible, html)
 }
 
-console.log(`✓ ${liste.length} pages pré-rendues`)
+// GitHub Pages sert ce fichier pour toute adresse absente sous /portfolio/.
+// Sans lui, un lien mort renvoie la page d'erreur générique de GitHub, sans
+// rapport visuel avec le site ni moyen d'en revenir.
+{
+  const corps = page404()
+  const bloc = gabarit.slice(gabarit.indexOf(DEBUT), gabarit.indexOf(FIN) + FIN.length)
+  let html = gabarit
+  html = remplacer(
+    html,
+    bloc,
+    `${DEBUT}\n    <title>404 — ${liste[0].titre}</title>\n    ${FIN}`,
+    'métadonnées de la 404',
+  )
+  html = remplacer(html, RACINE, `<div id="root">${corps}</div>`, "point d'insertion de la 404")
+  html = remplacer(html, CSP, politique(html), 'politique de sécurité de la 404')
+  writeFileSync('dist/404.html', html)
+}
+
+console.log(`✓ ${liste.length} pages pré-rendues, plus la page d'erreur`)
 
 rmSync('dist-ssr', { recursive: true, force: true })

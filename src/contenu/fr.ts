@@ -577,6 +577,13 @@ export const fr: Contenu = {
     copie_ok: 'Adresse copiée',
   },
 
+  erreur: {
+    titre: 'Page introuvable',
+    message:
+      'Cette adresse ne mène à rien. Le contenu a pu être retiré, ou l’adresse comporte une erreur.',
+    retour: 'Retour à l’accueil',
+  },
+
   pied: {
     droits: 'Anthony Jose',
     construitAvec: 'Conçu et développé avec React, TypeScript et Vite.',

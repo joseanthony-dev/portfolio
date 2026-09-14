@@ -27,7 +27,9 @@ function pagesDe(dossier) {
   )
 }
 
-const pages = pagesDe(DIST).sort()
+// La page d'erreur subit les mêmes contrôles que les autres, à deux exceptions
+// près : elle ne désigne aucune ressource, donc ni canonique ni hreflang.
+const pages = [...pagesDe(DIST), join(DIST, '404.html')].sort()
 
 if (pages.length === 0) throw new Error(`Aucune page trouvée dans ${DIST}/.`)
 
@@ -35,6 +37,7 @@ const connues = new Set(pages.map((f) => BASE + relative(DIST, f).replace(/index
 
 for (const fichier of pages) {
   const page = relative(DIST, fichier)
+  const erreur404 = page === '404.html'
   const html = readFileSync(fichier, 'utf8')
   const attr = (motif) => (html.match(motif) ?? [])[1]
 
@@ -53,19 +56,22 @@ for (const fichier of pages) {
   // Le pré-rendu a-t-il bien inséré du contenu ?
   const corps = html.split('<div id="root">')[1] ?? ''
   const texte = corps.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
-  if (texte.length < 500) faute(page, `seulement ${texte.length} caractères de texte`)
+  const minimum = erreur404 ? 80 : 500
+  if (texte.length < minimum) faute(page, `seulement ${texte.length} caractères de texte`)
 
-  // Le canonique doit désigner la page elle-même.
-  const canonique = attr(/rel="canonical" href="[^"]*?(\/portfolio\/[^"]*)"/)
-  const propre = BASE + relative(DIST, fichier).replace(/index\.html$/, '')
-  if (canonique !== propre) faute(page, `canonique ${canonique} au lieu de ${propre}`)
+  if (!erreur404) {
+    // Le canonique doit désigner la page elle-même.
+    const canonique = attr(/rel="canonical" href="[^"]*?(\/portfolio\/[^"]*)"/)
+    const propre = BASE + relative(DIST, fichier).replace(/index\.html$/, '')
+    if (canonique !== propre) faute(page, `canonique ${canonique} au lieu de ${propre}`)
 
-  // Un ensemble hreflang dont un membre ne se référence pas est ignoré en bloc.
-  const alternatives = [...html.matchAll(/hreflang="([\w-]+)" href="[^"]*?(\/portfolio\/[^"]*)"/g)]
-  if (!alternatives.some(([, code, url]) => code === lang && url === propre)) {
-    faute(page, 'hreflang ne se référence pas elle-même')
+    // Un ensemble hreflang dont un membre ne se référence pas est ignoré en bloc.
+    const alternatives = [...html.matchAll(/hreflang="([\w-]+)" href="[^"]*?(\/portfolio\/[^"]*)"/g)]
+    if (!alternatives.some(([, code, url]) => code === lang && url === propre)) {
+      faute(page, 'hreflang ne se référence pas elle-même')
+    }
+    if (!alternatives.some(([, code]) => code === 'x-default')) faute(page, 'pas de hreflang x-default')
   }
-  if (!alternatives.some(([, code]) => code === 'x-default')) faute(page, 'pas de hreflang x-default')
 
   // Une empreinte de CSP obsolète ne se voit pas à la lecture : le navigateur
   // refuse simplement d'exécuter le script, et le thème cesse de fonctionner sans
