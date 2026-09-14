@@ -61,7 +61,7 @@ export const en: Contenu = {
         points: [
           'Bash scripts that clear out old versions and logs, driven by cron.',
           'Scripts deployed and configured across the estate with Ansible.',
-          'Up to 80% of disk space reclaimed, and an hour of daily manual cleanup removed.',
+          'Up to 80% less time: a purge goes from an hour to under ten minutes.',
           'Procedures written up so the team can pick the tooling up and adapt it.',
         ],
         technos: ['Bash', 'Ansible', 'cron', 'Linux'],
@@ -71,24 +71,24 @@ export const en: Contenu = {
         liens: [],
         cas: {
           chapo:
-            'Around three hundred servers, at least one to clean every day, an hour of work each time. Above all, the script that replaced that chore had to be able to get it wrong without breaking anything.',
+            'At least one purge a day, an hour of work each time. Above all, the script that replaced that chore had to be able to get it wrong without breaking anything.',
           chiffres: [
-            { valeur: '~300', libelle: 'servers involved' },
-            { valeur: '1 h / day', libelle: 'of manual cleanup removed' },
-            { valeur: '80%', libelle: 'of disk space reclaimed, measured before / after' },
+            { valeur: '1 h → 2-10 min', libelle: 'for a purge, previously done by hand' },
+            { valeur: '1 h → 5 min', libelle: 'for an installation check' },
+            { valeur: 'D+1', libelle: 'between setting aside and actual deletion' },
           ],
           sections: [
             {
               titre: 'Telling which version can go',
               paragraphes: [
-                'Every release left the previous one in place, and nothing said which could be removed: it had to be inferred. The criterion is the link — a version no link points to any more is no longer being served.',
+                'Every release left the previous one in place, and nothing said which could be removed: it had to be inferred. The criterion is the symbolic link — a version no link points to any more is no longer being served.',
                 'The script keeps the version in production and the one before it, and only looks beyond that. Keeping n-1 is not a comfort: it is what makes rolling back possible if the current version turns out to be faulty. A purge that takes away the only way back turns a minor incident into a major one.',
               ],
             },
             {
               titre: 'Rename before deleting',
               paragraphes: [
-                'A deletion script that gets it wrong across three hundred servers does more damage than a year of forgotten cleanup. So the purge deletes nothing on the day it runs: it renames.',
+                'A deletion script that gets it wrong across a whole estate does more damage than a year of forgotten cleanup. So the purge deletes nothing on the day it runs: it renames.',
                 'Versions judged obsolete are set aside, then the evening run is awaited. If it goes through normally, the actual deletion happens the next day. If not, running the script again restores the renamed versions and the previous state is back.',
                 'That verification window is what separates a tool you dare point at a production estate from one you keep for later.',
               ],
@@ -101,9 +101,9 @@ export const en: Contenu = {
               ],
             },
             {
-              titre: 'Two systems, two sets of commands',
+              titre: 'Two families of systems, two sets of commands',
               paragraphes: [
-                'The first failure came from there. The estate is not homogeneous: AIX and Linux live side by side, and the commands do not behave the same way on each — same names, different options and different output. A script written and validated on Linux fails on AIX without warning.',
+                'The first failure came from there. The estate is not homogeneous: two families of systems live side by side, and commands do not behave the same way across them — same names, different options and different output. A script written and validated on one fails on the other without warning.',
                 'The system had to be detected at start-up and the matching set of commands selected. That weighed on the schedule more than anything else, and it taught me never to assume an estate is uniform.',
               ],
             },
@@ -111,7 +111,7 @@ export const en: Contenu = {
               titre: 'Going live, and measuring',
               paragraphes: [
                 'A month of runs in a non-production environment before going anywhere near production: long enough to meet the cases nobody had anticipated, on servers you are allowed to break.',
-                'The gain is measured on disk usage, recorded before and after the purge: up to 80% of the space taken by obsolete releases reclaimed. The rest shows up on no graph — it is the hour a day nobody spends doing this by hand any more.',
+                'The gain shows on the stopwatch. A purge used to take about an hour; it now takes between two and ten minutes. The same approach applied to installation checks brought those from an hour down to five minutes. The effect on disk usage is confirmed by readings taken before and after each run.',
                 'Written procedures ship with the scripts, so the team can pick them up and adapt them without me.',
               ],
             },

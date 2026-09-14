@@ -67,7 +67,7 @@ export const fr: Contenu = {
         points: [
           'Scripts Bash de nettoyage des anciennes versions et des logs, déclenchés par cron.',
           'Déploiement et configuration des scripts sur le parc via Ansible.',
-          'Jusqu’à 80 % d’espace disque regagné, et une heure de nettoyage manuel par jour supprimée.',
+          'Jusqu’à 80 % de temps gagné : une purge passe d’une heure à moins de dix minutes.',
           'Procédures rédigées pour que l’équipe puisse reprendre et adapter les outils.',
         ],
         technos: ['Bash', 'Ansible', 'cron', 'Linux'],
@@ -77,24 +77,24 @@ export const fr: Contenu = {
         liens: [],
         cas: {
           chapo:
-            'Environ trois cents serveurs, au moins un à nettoyer chaque jour, une heure de travail à chaque fois. Le script qui a remplacé ce geste devait surtout pouvoir se tromper sans rien casser.',
+            'Au moins une purge par jour, une heure de travail à chaque fois. Le script qui a remplacé ce geste devait surtout pouvoir se tromper sans rien casser.',
           chiffres: [
-            { valeur: '~300', libelle: 'serveurs concernés' },
-            { valeur: '1 h / jour', libelle: 'de nettoyage manuel supprimée' },
-            { valeur: '80 %', libelle: 'd’espace disque regagné, mesuré avant / après' },
+            { valeur: '1 h → 2-10 min', libelle: 'pour une purge, auparavant manuelle' },
+            { valeur: '1 h → 5 min', libelle: 'pour un contrôle d’installation' },
+            { valeur: 'J+1', libelle: 'entre la mise à l’écart et la suppression définitive' },
           ],
           sections: [
             {
               titre: 'Reconnaître une version supprimable',
               paragraphes: [
-                'Chaque montée de version laissait la précédente en place, et rien ne disait laquelle pouvait partir : il fallait le déduire. Le critère retenu est le lien — une version vers laquelle plus aucun lien ne pointe n’est plus servie.',
+                'Chaque montée de version laissait la précédente en place, et rien ne disait laquelle pouvait partir : il fallait le déduire. Le critère retenu est le lien symbolique — une version vers laquelle plus aucun lien ne pointe n’est plus servie.',
                 'Le script conserve la version en production et la n-1, et ne regarde que ce qui est au-delà. Garder la n-1 n’est pas un confort : c’est ce qui permet de revenir en arrière si la version en cours se révèle défaillante. Une purge qui emporte le seul point de retour transforme un incident mineur en incident majeur.',
               ],
             },
             {
               titre: 'Renommer avant de supprimer',
               paragraphes: [
-                'Un script de suppression qui se trompe sur trois cents serveurs fait plus de dégâts qu’une année de nettoyage oublié. La purge ne supprime donc rien le jour où elle s’exécute : elle renomme.',
+                'Un script de suppression qui se trompe sur tout un parc fait plus de dégâts qu’une année de nettoyage oublié. La purge ne supprime donc rien le jour où elle s’exécute : elle renomme.',
                 'Les versions jugées obsolètes sont mises de côté, puis on attend le run du soir. S’il se déroule normalement, la suppression définitive a lieu le lendemain. Sinon, relancer le script restaure les versions renommées et l’on retrouve l’état d’avant.',
                 'Cette fenêtre de vérification est ce qui sépare un outil qu’on ose lancer sur un parc de production d’un outil qu’on garde pour plus tard.',
               ],
@@ -107,9 +107,9 @@ export const fr: Contenu = {
               ],
             },
             {
-              titre: 'Deux systèmes, deux jeux de commandes',
+              titre: 'Deux familles de systèmes, deux jeux de commandes',
               paragraphes: [
-                'Le premier échec est venu de là. Le parc n’est pas homogène : AIX et Linux cohabitent, et les commandes ne se comportent pas de la même façon d’un côté et de l’autre — mêmes noms, options et sorties différentes. Un script écrit et validé sous Linux échoue sous AIX sans prévenir.',
+                'Le premier échec est venu de là. Le parc n’est pas homogène : deux familles de systèmes y cohabitent, et les commandes ne s’y comportent pas de la même façon — mêmes noms, options et sorties différentes. Un script écrit et validé sur l’une échoue sur l’autre sans prévenir.',
                 'Il a fallu détecter le système au démarrage et brancher sur le jeu de commandes correspondant. C’est ce qui a le plus pesé sur le calendrier, et ce qui m’a appris à ne jamais supposer qu’un parc est uniforme.',
               ],
             },
@@ -117,7 +117,7 @@ export const fr: Contenu = {
               titre: 'Mise en service et mesure',
               paragraphes: [
                 'Un mois d’exécution en environnement de non-production avant la moindre approche de la production : le temps de voir passer les cas qu’on n’avait pas prévus, sur des serveurs qu’on peut casser.',
-                'Le gain se mesure à la taille des disques, relevée avant et après purge : jusqu’à 80 % de l’espace occupé par les livraisons obsolètes récupéré. Le reste ne se voit sur aucun graphique — c’est l’heure quotidienne que plus personne ne passe à faire ça à la main.',
+                'Le gain se lit au chronomètre. Une purge demandait environ une heure ; elle prend désormais entre deux et dix minutes. Le même travail appliqué aux contrôles d’installation les a fait passer d’une heure à cinq minutes. L’effet sur les disques se vérifie par relevé avant et après passage.',
                 'Des procédures écrites accompagnent les scripts, pour que l’équipe puisse les reprendre et les adapter sans moi.',
               ],
             },
