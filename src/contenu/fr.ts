@@ -313,7 +313,7 @@ export const fr: Contenu = {
             'Trois modèles enchaînés, trois personnes, un modèle chacun. Le mien classe l’émotion — et la difficulté n’a pas été de l’écrire, mais de comprendre ce qu’il fait.',
           chiffres: [
             { valeur: 'À trois', libelle: 'un modèle chacun ; le classifieur était ma part' },
-            { valeur: '~72 %', libelle: 'd’exactitude sur le jeu de test, 65 % en validation' },
+            { valeur: '~65 %', libelle: 'd’exactitude sur le jeu de validation, à hauteur humaine' },
             { valeur: '7 émotions', libelle: 'classées par un ResNet18 entraîné sur FER2013' },
             { valeur: '30 img/s', libelle: 'la chaîne complète, sur carte graphique' },
           ],
@@ -331,7 +331,8 @@ export const fr: Contenu = {
                 'FER2013 est très inégalement réparti. Certaines émotions y sont abondantes, d’autres presque absentes — le dégoût tient dans une poignée d’images face aux milliers dont disposent la joie ou le neutre.',
                 'Un modèle entraîné dessus sans précaution apprend surtout à ignorer les classes rares : il peut afficher une exactitude globale flatteuse tout en ne reconnaissant jamais une émotion sur sept. Le chiffre est bon, le classifieur ne l’est pas.',
                 'J’ai traité le problème par les deux bouts : augmenter les images des classes peu présentes, et donner plus de poids à ces classes dans l’apprentissage, pour qu’une erreur sur une émotion rare coûte davantage qu’une erreur sur une émotion courante. Les résultats s’en sont trouvés nettement meilleurs — et surtout meilleurs là où ça comptait.',
-                'Le classifieur atteint environ 72 % d’exactitude sur le jeu de test, et 65 % sur celui de validation. Le chiffre demande un repère pour vouloir dire quelque chose : sur FER2013, l’exactitude humaine mesurée par les auteurs du jeu de données se situe autour de 65 %. Sept classes, des images de quarante-huit pixels de côté en niveaux de gris, des étiquettes parfois discutables — c’est un jeu de données difficile, et les scores s’y lisent bas.',
+                'Le classifieur atteint environ 65 % d’exactitude sur le jeu de validation, contre 72 % sur les données d’entraînement. Seul le premier chiffre compte : le second mesure ce que le modèle a retenu, pas ce qu’il sait généraliser. L’écart modéré entre les deux est d’ailleurs plutôt bon signe — un modèle à 95 % à l’entraînement et 65 % en validation aurait surtout appris par cœur.',
+                'Encore faut-il un repère pour que 65 % veuille dire quelque chose : sur FER2013, l’exactitude humaine mesurée par les auteurs du jeu de données se situe elle aussi autour de 65 %. Sept classes, des images de quarante-huit pixels de côté en niveaux de gris, des étiquettes parfois discutables — c’est un jeu de données difficile, et les scores s’y lisent bas.',
               ],
             },
             {
@@ -344,7 +345,7 @@ export const fr: Contenu = {
             {
               titre: 'Raccorder le modèle au reste',
               paragraphes: [
-                'L’autre difficulté était le branchement. Un modèle qui donne de bons chiffres sur un jeu de test n’est pas encore un modèle qui tourne : il faut lui livrer les visages dans le format exact qu’il attend, au rythme du flux vidéo, sans casser la cadence.',
+                'L’autre difficulté était le branchement. Un modèle qui donne de bons chiffres en évaluation n’est pas encore un modèle qui tourne : il faut lui livrer les visages dans le format exact qu’il attend, au rythme du flux vidéo, sans casser la cadence.',
                 'La chaîne complète tient trente images par seconde sur carte graphique, ce qui la rend utilisable en direct plutôt qu’en démonstration à l’arrêt.',
               ],
             },

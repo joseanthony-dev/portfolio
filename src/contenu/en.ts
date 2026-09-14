@@ -307,7 +307,7 @@ export const en: Contenu = {
             'Three chained models, three people, one model each. Mine classifies the emotion — and the hard part was not writing it, but understanding what it does.',
           chiffres: [
             { valeur: 'Three of us', libelle: 'one model each; the classifier was my part' },
-            { valeur: '~72%', libelle: 'accuracy on the test set, 65% on validation' },
+            { valeur: '~65%', libelle: 'accuracy on the validation set, on a par with humans' },
             { valeur: '7 emotions', libelle: 'classified by a ResNet18 trained on FER2013' },
             { valeur: '30 fps', libelle: 'for the whole chain, on a GPU' },
           ],
@@ -325,7 +325,8 @@ export const en: Contenu = {
                 'FER2013 is very unevenly distributed. Some emotions are abundant in it, others almost absent — disgust amounts to a handful of images against the thousands available for happiness or neutral.',
                 'A model trained on it without precautions mostly learns to ignore the rare classes: it can post a flattering overall accuracy while never once recognising one emotion out of seven. The number looks good, the classifier is not.',
                 'I attacked the problem from both ends: augmenting the images of the sparse classes, and giving those classes more weight during training, so that an error on a rare emotion costs more than one on a common emotion. Results improved markedly — and, more to the point, improved where it mattered.',
-                'The classifier reaches about 72% accuracy on the test set, and 65% on the validation set. The figure needs a reference point to mean anything: on FER2013, the human accuracy measured by the dataset’s own authors sits around 65%. Seven classes, forty-eight-pixel greyscale images, labels that are sometimes arguable — it is a hard dataset, and scores read low on it.',
+                'The classifier reaches about 65% accuracy on the validation set, against 72% on the training data. Only the first figure counts: the second measures what the model retained, not what it can generalise. The modest gap between them is in fact a good sign — a model at 95% on training and 65% on validation would mostly have learned by heart.',
+                'That 65% still needs a reference point to mean anything: on FER2013, the human accuracy measured by the dataset’s own authors also sits around 65%. Seven classes, forty-eight-pixel greyscale images, labels that are sometimes arguable — it is a hard dataset, and scores read low on it.',
               ],
             },
             {
@@ -338,7 +339,7 @@ export const en: Contenu = {
             {
               titre: 'Wiring the model to the rest',
               paragraphes: [
-                'The other difficulty was the integration. A model that posts good numbers on a test set is not yet a model that runs: it has to be handed faces in exactly the format it expects, at the pace of the video feed, without breaking the frame rate.',
+                'The other difficulty was the integration. A model that posts good numbers in evaluation is not yet a model that runs: it has to be handed faces in exactly the format it expects, at the pace of the video feed, without breaking the frame rate.',
                 'The full chain holds thirty frames per second on a GPU, which makes it usable live rather than as a demonstration standing still.',
               ],
             },
