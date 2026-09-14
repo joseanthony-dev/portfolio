@@ -1,0 +1,42 @@
+# Le site affiche de la sécurité ; la chaîne qui le construit doit la tenir.
+# Rien ici n'atteint le navigateur — React ne sert qu'au build — mais tout y a
+# accès au dépôt et au déploiement. Sans mise à jour, `npm ci` réinstallerait
+# indéfiniment les versions figées dans package-lock.json.
+#
+# Les pull requests ouvertes ici visent main, donc passent par ci.yml : lint,
+# tsc, build, pré-rendu et vérification des pages produites. Une montée qui
+# casse le site se voit avant d'être fusionnée, pas après.
+
+version: 2
+
+updates:
+  # ── Dépendances npm ──────────────────────────────────────────────────────
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    # Les correctifs et les mineures arrivent ensemble : sur sept paquets qui
+    # bougent tous les mois, une pull request par version rendrait la boîte
+    # illisible et personne ne les lirait. Les majeures restent séparées —
+    # Vite, TypeScript ou React qui change de majeure demande un vrai coup
+    # d'œil, pas une fusion machinale.
+    groups:
+      outils-de-build:
+        patterns: ['*']
+        update-types: [minor, patch]
+    open-pull-requests-limit: 5
+
+  # ── Actions GitHub ───────────────────────────────────────────────────────
+  # Les workflows épinglent chaque action par empreinte de commit plutôt que
+  # par tag : un tag est mutable, et celui qui le déplace exécute son code avec
+  # les droits `pages: write` et `id-token: write` du déploiement. Dependabot
+  # sait lire ces empreintes, et met à jour le commentaire de version qui les
+  # accompagne en même temps que l'empreinte elle-même.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ['*']
+        update-types: [minor, patch]
