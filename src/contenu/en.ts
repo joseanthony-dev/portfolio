@@ -147,9 +147,9 @@ export const en: Contenu = {
         resume:
           'A mobile app for running a team: assigning hours and sectors, availability, car sharing and messaging, with two distinct roles.',
         contexte:
-          'Every Saturday I lead a team of around fifteen order pickers. Splitting up the hours and the sectors, knowing who was available and telling everyone in time was done by phone and by text, with the oversights that come with it. I built the tool that was missing — knowing the problem from the inside, since I was the one living it.',
+          'Every Saturday I used to lead a team of around fifteen order pickers. Splitting up the hours and the sectors, knowing who was available and telling everyone in time was done by phone and by text, with the oversights that come with it. I built the tool that was missing — knowing the problem from the inside, since I was the one living it.',
         points: [
-          'Two separate roles, lead and picker, backed by Firebase custom claims and distinct screens.',
+          'Two separate roles, lead and picker, enforced by Firestore security rules rather than by the interface alone.',
           'Assignment of hours and sectors, with automatic conflict detection before anything is confirmed.',
           'Availability declarations, car sharing between participants and built-in messaging.',
           'Push notifications (Firebase Cloud Messaging) routed to the right screen on open.',
@@ -160,6 +160,52 @@ export const en: Contenu = {
         statut: 'non-distribue',
         vedette: true,
         liens: [],
+        cas: {
+          chapo:
+            'A tool written for a problem I lived myself, tested, then never put into service: I stopped leading Saturdays before it ever ran. What remains of it is what it taught me.',
+          chiffres: [
+            { valeur: '~15', libelle: 'pickers to schedule every Saturday' },
+            { valeur: '2 roles', libelle: 'separated by Firestore rules, not by screens' },
+            { valeur: 'Never shipped', libelle: 'the need disappeared before it went live' },
+          ],
+          sections: [
+            {
+              titre: 'A problem known from the inside',
+              paragraphes: [
+                'Assigning fifteen-odd people to sectors and time slots, knowing who was available, keeping everyone informed: all of it happened by phone and by text. It works, with the oversights that come with it — a sector left uncovered, someone told twice, an unavailability only I knew about.',
+                'I had nobody to interview to establish the requirements: I lived them every Saturday. That is comfortable for designing, and misleading for everything else — a sole user who is also the developer never runs into what he found obvious.',
+              ],
+            },
+            {
+              titre: 'Separating roles on the server, not on the screen',
+              paragraphes: [
+                'The application has two roles: lead and picker. On a mobile app, the temptation is to settle for showing different screens. That protects nothing: the data itself stays reachable by anyone who knows how to ask for it.',
+                'So the separation is carried by Firestore security rules, which decide at the database level what each role may read and write. The interface follows that decision, it does not stand in for it. App Check rounds it off by restricting API use to legitimate instances of the app.',
+              ],
+            },
+            {
+              titre: 'What the application covered',
+              paragraphes: [
+                'Assignment of hours and sectors, with conflicts detected before anything is confirmed. Availability declared by each person. Car sharing between participants, and built-in messaging to replace scattered chat threads.',
+                'Push notifications go through Firebase Cloud Messaging and open straight onto the relevant screen — a notification that drops the user on the home page leaves them to go and find what it was about. On top of that: a dashboard, participant feedback, and a summary export.',
+              ],
+            },
+            {
+              titre: 'Tested by two, then made redundant',
+              paragraphes: [
+                'The application ran in a two-person test with a colleague. It never went further: I stopped leading the Saturday team, and the need it answered disappeared with that change.',
+                'Nothing failed technically. It is simply what happens to a tool cut for one specific situation when the situation changes — and one more reason to ship early rather than finish before showing.',
+              ],
+            },
+            {
+              titre: 'What I would do differently: the web',
+              paragraphes: [
+                'I would build this as a web application. The mobile app was only distributed on Android, which ruled out part of the team from the start: a coordination tool that will not open on everybody’s phone coordinates nothing.',
+                'Choosing Flutter also cost time, since I did not know it. The learning is not wasted, but it was not in the service of this project: the platform is chosen on who has to be able to open the tool, not on what you feel like learning.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'site-web-personnel',

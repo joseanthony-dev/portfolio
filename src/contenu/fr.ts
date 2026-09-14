@@ -153,9 +153,9 @@ export const fr: Contenu = {
         resume:
           'Application mobile de gestion d’équipe : affectation des heures et des secteurs, disponibilités, covoiturage et messagerie, avec deux rôles distincts.',
         contexte:
-          'J’encadre chaque samedi une équipe d’une quinzaine de préparateurs. Répartir les heures et les secteurs, savoir qui est disponible et prévenir tout le monde se faisait au téléphone et par messages, avec les oublis que ça suppose. J’ai développé l’outil qui manquait — en connaissant le problème de l’intérieur, puisque c’est moi qui le vivais.',
+          'J’encadrais chaque samedi une équipe d’une quinzaine de préparateurs. Répartir les heures et les secteurs, savoir qui est disponible et prévenir tout le monde se faisait au téléphone et par messages, avec les oublis que ça suppose. J’ai développé l’outil qui manquait — en connaissant le problème de l’intérieur, puisque c’est moi qui le vivais.',
         points: [
-          'Deux rôles séparés, chef et préparateur, portés par des droits Firebase (custom claims) et des écrans distincts.',
+          'Deux rôles séparés, chef et préparateur, appliqués par les règles de sécurité Firestore et non par le seul affichage.',
           'Affectation des heures et des secteurs, avec détection automatique des conflits avant validation.',
           'Déclaration des disponibilités, covoiturage entre participants et messagerie intégrée.',
           'Notifications push (Firebase Cloud Messaging) routées vers le bon écran à l’ouverture.',
@@ -166,6 +166,52 @@ export const fr: Contenu = {
         statut: 'non-distribue',
         vedette: true,
         liens: [],
+        cas: {
+          chapo:
+            'Un outil écrit pour un problème que je vivais moi-même, testé, puis jamais mis en service : j’ai cessé d’encadrer le samedi avant qu’il ne serve. Ce qu’il en reste est ce qu’il m’a appris.',
+          chiffres: [
+            { valeur: '~15', libelle: 'préparateurs à répartir chaque samedi' },
+            { valeur: '2 rôles', libelle: 'séparés par les règles Firestore, pas par les écrans' },
+            { valeur: 'Jamais déployé', libelle: 'le besoin a disparu avant la mise en service' },
+          ],
+          sections: [
+            {
+              titre: 'Un problème connu de l’intérieur',
+              paragraphes: [
+                'Répartir une quinzaine de personnes sur des secteurs et des créneaux, savoir qui est disponible, prévenir tout le monde : tout cela se faisait au téléphone et par messages. Ça fonctionne, avec les oublis que ça suppose — un secteur découvert, quelqu’un prévenu deux fois, une indisponibilité connue de moi seul.',
+                'Je n’ai eu personne à interroger pour établir le besoin : je le vivais chaque samedi. C’est confortable pour concevoir, et trompeur pour le reste — un utilisateur unique qui est aussi le développeur ne se heurte jamais à ce qu’il a trouvé évident.',
+              ],
+            },
+            {
+              titre: 'Séparer les rôles côté serveur, pas côté écran',
+              paragraphes: [
+                'L’application a deux rôles : chef et préparateur. La tentation, sur une application mobile, est de se contenter d’afficher des écrans différents. Cela ne protège rien : les données, elles, restent accessibles à qui sait les demander.',
+                'La séparation est donc portée par les règles de sécurité Firestore, qui décident au niveau de la base ce que chaque rôle peut lire et écrire. L’interface suit cette décision, elle ne la remplace pas. App Check complète l’ensemble en limitant l’usage de l’API aux instances légitimes de l’application.',
+              ],
+            },
+            {
+              titre: 'Ce que l’application couvrait',
+              paragraphes: [
+                'L’affectation des heures et des secteurs, avec détection des conflits avant validation. La déclaration des disponibilités par chacun. Le covoiturage entre participants, et une messagerie pour remplacer les fils de discussion éparpillés.',
+                'Les notifications push passent par Firebase Cloud Messaging et ouvrent directement l’écran concerné — une notification qui dépose l’utilisateur sur l’accueil lui laisse le travail de retrouver ce dont on lui parle. S’y ajoutent un tableau de bord, les retours des participants et l’export du récapitulatif.',
+              ],
+            },
+            {
+              titre: 'Testé à deux, puis rendu inutile',
+              paragraphes: [
+                'L’application a tourné lors d’un test à deux avec un collègue. Elle n’est jamais allée plus loin : j’ai cessé d’encadrer l’équipe du samedi, et le besoin auquel elle répondait a disparu avec ce changement.',
+                'Rien n’a échoué techniquement. C’est simplement le sort d’un outil taillé pour une situation précise quand la situation change — et une raison de plus de livrer tôt plutôt que de finir avant de montrer.',
+              ],
+            },
+            {
+              titre: 'Ce que je ferais autrement : le web',
+              paragraphes: [
+                'Je referais cet outil comme une application web. L’application mobile n’était distribuée que sur Android, ce qui excluait d’emblée une partie de l’équipe : un outil de coordination qui ne s’ouvre pas sur le téléphone de tout le monde ne coordonne rien.',
+                'Le choix de Flutter a par ailleurs coûté du temps, puisque je ne le connaissais pas. L’apprentissage n’est pas perdu, mais il n’était pas au service de ce projet-ci : la plateforme se choisit sur qui doit pouvoir ouvrir l’outil, pas sur ce qu’on a envie d’apprendre.',
+              ],
+            },
+          ],
+        },
       },
       {
         id: 'site-web-personnel',
