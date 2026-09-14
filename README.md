@@ -1,3 +1,5 @@
+*[English version](README.en.md)*
+
 # Portfolio — Anthony Jose
 
 Site personnel présentant mon parcours, mes projets et mes compétences en systèmes, réseaux
@@ -43,8 +45,8 @@ par un état React, sur une seule adresse, interdit.
 La langue n'est pas détectée : elle est lue sur `<html lang>`, que le pré-rendu a écrit. Le premier
 rendu client est donc déjà le bon, il n'y a rien à corriger après coup, et un visiteur anglophone ne
 voit pas le français défiler le temps du chargement. La bascule FR / EN est un vrai lien — suivable
-par un moteur, ouvrable dans un onglet. Contrepartie : changer de langue recharge la page et ramène
-en haut du document.
+par un moteur, ouvrable dans un onglet — et il reporte l'ancre de la section en cours de lecture,
+pour qu'un changement de langue ne fasse pas perdre sa place.
 
 `src/langues.ts` tient l'adresse publique du site et le chemin de chaque langue. Les URL canoniques,
 `og:url`, les liens `hreflang` et le sitemap en découlent tous : c'est le seul endroit à changer
@@ -107,7 +109,8 @@ scripts/
 ## Déploiement
 
 Publié sur GitHub Pages par `.github/workflows/deploy.yml`, qui construit et met en ligne le site
-à chaque `push` sur `main`.
+à chaque `push` sur `main`. `.github/workflows/ci.yml` lance le lint et le build sur les pull
+requests.
 
 Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/portfolio/'`. Sans cette
 base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
@@ -119,18 +122,3 @@ servi depuis `/portfolio/sitemap.xml` et se déclare à Google via la Search Con
 Il n'y a pas de `robots.txt` : un robot ne le lit qu'à la racine du domaine, et
 `joseanthony-dev.github.io/` relève d'un autre dépôt que celui-ci. Son absence ne bloque rien —
 sans lui, tout est explorable, ce qui est le comportement voulu.
-
----
-
-## In English
-
-A personal site presenting my background, projects and skills in systems, networks and security.
-Bilingual, light and dark themes, responsive, keyboard accessible, and with **no external runtime
-dependencies** — no web fonts, no CDN, no third-party scripts.
-
-Built with React 19, TypeScript and Vite. All copy lives in two content files that must satisfy the
-same TypeScript type, so the French and English versions cannot drift apart without the build
-failing. Each language is rendered to its own static page at build time — French at the root,
-English under `/en/`, cross-declared with `hreflang` — and hydrated in the browser, so both are
-independently indexable and readable without JavaScript. Deployed to GitHub Pages on every push to
-`main`.

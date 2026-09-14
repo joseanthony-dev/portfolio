@@ -1,0 +1,122 @@
+*[Version française](README.md)*
+
+# Portfolio — Anthony Jose
+
+Personal site presenting my background, projects and skills in systems, networks and security.
+
+**→ [joseanthony-dev.github.io/portfolio](https://joseanthony-dev.github.io/portfolio/)**
+
+Bilingual French / English — one URL per language —, light and dark themes, responsive, keyboard
+accessible.
+The site loads **no external resources** at runtime: no Google Fonts, no CDN, no third-party
+scripts. Everything is served from the domain, so visiting it sends no request to any third party.
+
+## Stack
+
+React 19 · TypeScript · Vite 8 · plain CSS (no styling framework)
+
+The site is fully static: the build emits HTML, CSS and a JS bundle, hostable anywhere. React is
+the only runtime dependency.
+
+## A few deliberate choices
+
+**Content kept apart from presentation.** Every string lives in `src/contenu/fr.ts` and
+`src/contenu/en.ts`, never in a component. Both files must satisfy the same `Contenu` type
+(`src/types.ts`): if a translation is missing a field, compilation fails. The two languages
+therefore cannot drift apart in silence.
+
+**Rendered at build time.** The pages carry the whole text of the site, not just an empty
+`<div id="root">`: `scripts/prerendu.mjs` renders the application under Node at the end of the
+build and inserts the result. The content is readable without JavaScript, indexable, and painted
+before the 82 kB bundle has loaded — the browser no longer waits for React to draw the page. React
+then hydrates that DOM instead of rebuilding it.
+
+This comes with a constraint: the first client render must produce exactly the HTML from the build.
+It is checkable — the served markup is compared byte for byte against a fresh render — and it is
+what dictates the two choices below.
+
+**One URL per language.** French sits at the root, English under `/en/`, each prerendered in its
+own language with its own `<html lang>`, title, description and `og:locale`, and each declaring the
+other through `hreflang`. Both versions are independently indexable, which a language held in React
+state on a single address rules out.
+
+The language is not detected: it is read from `<html lang>`, which the prerender wrote. The first
+client render is therefore already correct, nothing needs fixing afterwards, and an English-speaking
+visitor never watches French go by while the bundle loads. The FR / EN switch is a real link —
+crawlable, openable in a new tab — and it carries the anchor of the section being read, so changing
+language keeps your place.
+
+`src/langues.ts` holds the site's public address and the path of each language. Canonical URLs,
+`og:url`, the `hreflang` links and the sitemap all derive from it: it is the only place to change
+when deploying elsewhere.
+
+**No theme flash.** An inline script in `index.html` applies the stored theme before the first
+render, which avoids the white flash on load in dark mode. Every `localStorage` read is guarded, so
+the site works in private browsing or with site data blocked. Since the theme is known before React
+runs, CSS picks the sun / moon icon rather than a ternary: the markup does not depend on the theme,
+which keeps it identical to the prerendered HTML either way.
+
+**Accessibility.** Skip link, keyboard navigation, contrast checked in both themes, and
+`prefers-reduced-motion` honoured.
+
+**Images.** The portrait is WebP: the same photograph as a PNG weighed 196 kB, more than the whole
+rest of the site put together. The build target (`chrome111`, `safari16.4`) is more recent than
+WebP support, and the CSS already uses `color-mix()`: no browser able to render the site correctly
+lacks WebP, so there is no `<picture>` fallback to maintain. The source stays larger than its
+display size — a 205 px circle — to hold up on high-density screens.
+
+`public/apercu.png` is the exception and stays a PNG: the site never loads it, only link-preview
+crawlers fetch it, and their WebP support is uneven.
+
+**Styling.** Roughly 12 kB of hand-written CSS, driven by theme variables grouped at the top of
+`src/index.css`. Changing the accent colour takes one line.
+
+## Getting started
+
+```bash
+npm install
+npm run dev        # development server
+npm run build      # emits dist/
+npm run preview    # serves the compiled dist/
+npm run lint
+```
+
+Node 22 or newer.
+
+## Layout
+
+The source is written in French, file names included.
+
+```
+src/
+  types.ts              data contract, guarantor of FR / EN parity
+  langues.ts            site address and path of each language
+  contenu/fr.ts         French copy
+  contenu/en.ts         English copy
+  App.tsx               theme, and assembly of the sections
+  index.css             all styling (theme variables at the top)
+  entree-client.tsx     browser entry point, hydrates the prerendered HTML
+  entree-serveur.tsx    entry point for the build-time render
+  composants/
+    EnTete.tsx          navigation, link to the other language, theme, mobile menu
+    Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
+    Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
+scripts/
+  prerendu.mjs          writes both pages and the sitemap
+```
+
+## Deployment
+
+Published to GitHub Pages by `.github/workflows/deploy.yml`, which builds and ships the site on
+every `push` to `main`. `.github/workflows/ci.yml` runs lint and build on pull requests.
+
+Because the site is served from a subdirectory, `vite.config.ts` sets `base: '/portfolio/'`. Without
+that base, assets would be requested from the domain root and the page would come up blank. To
+deploy elsewhere, drop `base` and change `SITE` in `src/langues.ts`.
+
+The build emits `dist/sitemap.xml`, listing both versions and their alternates. It is served from
+`/portfolio/sitemap.xml` and announced to Google through Search Console.
+
+There is no `robots.txt`: a crawler only reads it at the domain root, and
+`joseanthony-dev.github.io/` belongs to a repository other than this one. Its absence blocks
+nothing — without it everything is crawlable, which is the intended behaviour.
