@@ -39,7 +39,7 @@ export const en: Contenu = {
   projets: {
     titre: 'Projects',
     sousTitre: 'I build software too: real applications, designed and shipped end to end.',
-    voirTout: 'View code',
+    technosLabel: 'Technologies used',
     statuts: { 'en-cours': 'In progress', livre: 'In production', 'non-distribue': 'Not distributed' },
     liste: [
       {
@@ -336,5 +336,8 @@ export const en: Contenu = {
     changerLangue: 'Switch the site to French',
     changerTheme: 'Toggle theme (light / dark)',
     menu: 'Navigation menu',
+    ouvrirMenu: 'Open the navigation menu',
+    fermerMenu: 'Close the navigation menu',
+    allerAuContenu: 'Skip to content',
   },
 }

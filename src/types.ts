@@ -65,7 +65,7 @@ export type Contenu = {
   projets: {
     titre: string
     sousTitre: string
-    voirTout: string
+    technosLabel: string
     statuts: { 'en-cours': string; livre: string; 'non-distribue': string }
     liste: Projet[]
   }
@@ -90,5 +90,12 @@ export type Contenu = {
     copie_ok: string
   }
   pied: { droits: string; construitAvec: string }
-  a11y: { changerLangue: string; changerTheme: string; menu: string }
+  a11y: {
+    changerLangue: string
+    changerTheme: string
+    menu: string
+    ouvrirMenu: string
+    fermerMenu: string
+    allerAuContenu: string
+  }
 }

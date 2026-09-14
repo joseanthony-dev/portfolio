@@ -19,7 +19,7 @@ function Carte({ projet, t }: { projet: Projet; t: Contenu }) {
         ))}
       </ul>
 
-      <ul className="technos" aria-label="Technologies">
+      <ul className="technos" aria-label={t.projets.technosLabel}>
         {projet.technos.map((techno) => (
           <li key={techno}>{techno}</li>
         ))}

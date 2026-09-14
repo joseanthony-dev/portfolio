@@ -12,6 +12,10 @@ import { PiedDePage } from './composants/PiedDePage'
 
 type Theme = 'clair' | 'sombre'
 
+// Doit rester aligné sur --fond dans src/index.css : c'est la couleur que
+// les navigateurs mobiles appliquent à leur barre d'adresse.
+const couleurBarre: Record<Theme, string> = { clair: '#fbfaf8', sombre: '#0d1013' }
+
 function litLangue(): Langue {
   try {
     const stockee = localStorage.getItem('langue')
@@ -50,6 +54,9 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', couleurBarre[theme])
     try {
       localStorage.setItem('theme', theme)
     } catch {
@@ -59,8 +66,8 @@ export default function App() {
 
   return (
     <>
-      <a className="lien-evitement" href="#projets">
-        {langue === 'fr' ? 'Aller au contenu' : 'Skip to content'}
+      <a className="lien-evitement" href="#contenu">
+        {t.a11y.allerAuContenu}
       </a>
 
       <EnTete
@@ -71,7 +78,7 @@ export default function App() {
         onTheme={() => setTheme((v) => (v === 'clair' ? 'sombre' : 'clair'))}
       />
 
-      <main>
+      <main id="contenu" tabIndex={-1}>
         <Hero t={t} />
         <APropos t={t} />
         <Projets t={t} />

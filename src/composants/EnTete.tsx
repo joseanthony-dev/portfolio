@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Contenu, Langue } from '../types'
 import { IconeLune, IconeSoleil } from './Icones'
 
@@ -15,6 +15,8 @@ const sections = ['projets', 'parcours', 'competences', 'contact'] as const
 export function EnTete({ t, langue, onLangue, theme, onTheme }: Props) {
   const [ouvert, setOuvert] = useState(false)
   const [actif, setActif] = useState<string>('')
+  const entete = useRef<HTMLElement>(null)
+  const burger = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const cibles = sections
@@ -34,17 +36,46 @@ export function EnTete({ t, langue, onLangue, theme, onTheme }: Props) {
     return () => observateur.disconnect()
   }, [])
 
+  // Menu mobile ouvert : Échap le referme et rend le focus au bouton,
+  // un clic en dehors de l'en-tête le referme aussi.
+  useEffect(() => {
+    if (!ouvert) return
+
+    function surTouche(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setOuvert(false)
+        burger.current?.focus()
+      }
+    }
+    function surClic(e: MouseEvent) {
+      if (!entete.current?.contains(e.target as Node)) setOuvert(false)
+    }
+
+    document.addEventListener('keydown', surTouche)
+    document.addEventListener('pointerdown', surClic)
+    return () => {
+      document.removeEventListener('keydown', surTouche)
+      document.removeEventListener('pointerdown', surClic)
+    }
+  }, [ouvert])
+
   return (
-    <header className="entete">
+    <header className="entete" ref={entete}>
       <div className="entete__contenu">
-        <a className="entete__marque" href="#haut">
+        <a className="entete__marque" href="#haut" aria-label={t.hero.nom}>
           <span className="entete__initiales" aria-hidden="true">
             AJ
           </span>
-          <span className="entete__nom">{t.hero.nom}</span>
+          <span className="entete__nom" aria-hidden="true">
+            {t.hero.nom}
+          </span>
         </a>
 
-        <nav className={`entete__nav ${ouvert ? 'entete__nav--ouverte' : ''}`} aria-label={t.a11y.menu}>
+        <nav
+          id="nav-principale"
+          className={`entete__nav ${ouvert ? 'entete__nav--ouverte' : ''}`}
+          aria-label={t.a11y.menu}
+        >
           {sections.map((id) => (
             <a key={id} href={`#${id}`} className={actif === id ? 'est-actif' : ''} onClick={() => setOuvert(false)}>
               {t.nav[id]}
@@ -71,10 +102,12 @@ export function EnTete({ t, langue, onLangue, theme, onTheme }: Props) {
 
           <button
             type="button"
+            ref={burger}
             className="bouton-icone entete__burger"
             onClick={() => setOuvert((o) => !o)}
             aria-expanded={ouvert}
-            aria-label={t.a11y.menu}
+            aria-controls="nav-principale"
+            aria-label={ouvert ? t.a11y.fermerMenu : t.a11y.ouvrirMenu}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
               {ouvert ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}

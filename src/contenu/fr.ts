@@ -45,7 +45,7 @@ export const fr: Contenu = {
   projets: {
     titre: 'Projets',
     sousTitre: 'Je développe aussi : des applications réelles, conçues et livrées de bout en bout.',
-    voirTout: 'Voir le code',
+    technosLabel: 'Technologies utilisées',
     statuts: { 'en-cours': 'En cours', livre: 'En production', 'non-distribue': 'Non distribué' },
     liste: [
       {
@@ -350,5 +350,8 @@ export const fr: Contenu = {
     changerLangue: 'Passer le site en anglais',
     changerTheme: 'Changer de thème (clair / sombre)',
     menu: 'Menu de navigation',
+    ouvrirMenu: 'Ouvrir le menu de navigation',
+    fermerMenu: 'Fermer le menu de navigation',
+    allerAuContenu: 'Aller au contenu',
   },
 }

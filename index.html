@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+    <!-- Couleur de la barre d'adresse mobile ; réglée par le script ci-dessous
+         puis tenue à jour par App.tsx à chaque bascule de thème. -->
+    <meta name="theme-color" content="#fbfaf8" />
 
     <title>Anthony Jose — Systèmes, réseaux &amp; sécurité</title>
     <meta
@@ -38,6 +41,9 @@
             t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
           }
           document.documentElement.dataset.theme = t
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', t === 'sombre' ? '#0d1013' : '#fbfaf8')
         } catch (e) {
           /* pas de préférence accessible : on garde le thème clair */
         }
