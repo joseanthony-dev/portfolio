@@ -4,7 +4,17 @@ import App from './App'
 import { Page404 } from './composants/Page404'
 import { contenus } from './contenu'
 import { donneesStructurees } from './donnees-structurees'
-import { AUTRE, CHEMINS, IMAGE_PARTAGE, LANGUES, LOCALES, cheminProjet, urlAbsolue, urlProjet } from './langues'
+import {
+  AUTRE,
+  CHEMINS,
+  IMAGE_PARTAGE,
+  LANGUES,
+  LOCALES,
+  TYPE_IMAGE_PARTAGE,
+  cheminProjet,
+  urlAbsolue,
+  urlProjet,
+} from './langues'
 import type { Langue, Page } from './types'
 
 const rendre = (langue: Langue, projet?: string) =>
@@ -43,6 +53,7 @@ export function pages(): Page[] {
       locale: LOCALES[langue],
       localeAutre: LOCALES[autre],
       imagePartage: IMAGE_PARTAGE,
+      typeImagePartage: TYPE_IMAGE_PARTAGE,
       donneesStructurees: donneesStructurees(t, urlAbsolue(langue)),
       ...t.meta,
       html: rendre(langue),
@@ -60,6 +71,7 @@ export function pages(): Page[] {
       // Site-wide aujourd'hui, mais porté par la page : le jour où un projet
       // mérite son propre aperçu, il n'y a qu'ici à changer.
       imagePartage: IMAGE_PARTAGE,
+      typeImagePartage: TYPE_IMAGE_PARTAGE,
       // La fiche décrit la personne, pas le projet : seule son `url` change,
       // pour qu'elle désigne la page qui la porte.
       donneesStructurees: donneesStructurees(t, urlProjet(langue, projet.id)),

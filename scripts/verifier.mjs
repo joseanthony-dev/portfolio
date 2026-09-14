@@ -142,6 +142,33 @@ for (const fichier of pages) {
     }
   }
 
+  // L'image de partage échappe à tous les autres contrôles : elle vit dans un
+  // attribut content=, que le motif des liens internes ne lit pas — il ne
+  // connaît que href et src —, et aucun navigateur ne la demande jamais, seules
+  // les plateformes de partage le font. La renommer sans suivre IMAGE_PARTAGE ne
+  // casserait donc rien de visible ici : l'aperçu serait simplement vide chez
+  // celui qui reçoit le lien, et personne ne le saurait.
+  const image = attr(/property="og:image" content="([^"]+)"/)
+  if (!image) {
+    faute(page, 'pas de og:image')
+  } else {
+    const i = image.indexOf(BASE)
+    const sur = i === -1 ? '' : join(DIST, image.slice(i + BASE.length))
+    if (!sur || !existsSync(sur) || !statSync(sur).isFile()) {
+      faute(page, `og:image absente du build (${image})`)
+    } else {
+      // Le type déclaré doit suivre le fichier : changer de format sans changer
+      // TYPE_IMAGE_PARTAGE annoncerait un PNG là où il y a un JPEG.
+      /** @type {Record<string, string>} */
+      const types = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' }
+      const attendu = types[(sur.match(/\.[a-z]+$/) ?? [''])[0]]
+      const declare = attr(/property="og:image:type" content="([^"]+)"/)
+      if (attendu && declare !== attendu) {
+        faute(page, `og:image:type ${declare ?? 'absent'} pour un fichier ${attendu}`)
+      }
+    }
+  }
+
   // Tout lien ou ressource interne doit aboutir sur un fichier réellement produit.
   for (const [, cible] of html.matchAll(motifInterne)) {
     internesVus += 1
@@ -213,5 +240,5 @@ if (erreurs.length > 0) {
 
 console.log(
   `✓ ${pages.length} pages vérifiées (${internesVus} liens internes) — liens, ancres, langue, ` +
-    `canoniques, hreflang, noindex, CSP`,
+    `canoniques, hreflang, noindex, CSP, image de partage`,
 )

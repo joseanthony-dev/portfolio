@@ -115,8 +115,9 @@ Since GitHub Pages allows no HTTP headers, the policy travels in a `<meta>` tag 
 **The build re-reads itself.** `scripts/verifier.mjs` reopens the generated pages and refuses to let
 through a dead internal link, an anchor with no target, a wrong `<html lang>`, a canonical that does
 not name its own page, an `hreflang` set that fails to reference itself, a page missing `noindex`, a
-CSP whose hashes no longer match the page's scripts, or a first visit over its weight budget. A build
-that finishes is no proof the site holds together: this one checks.
+CSP whose hashes no longer match the page's scripts, a share image missing from the build or wrongly
+typed, or a first visit over its weight budget. A build that finishes is no proof the site holds
+together: this one checks.
 
 The verifier watches itself too. It does not know the serving subdirectory: it reads it off the
 build, and counts the links it actually examined. Below one per page it declares itself broken rather
@@ -134,8 +135,13 @@ WebP support, and the CSS already uses `color-mix()`: no browser able to render 
 lacks WebP, so there is no `<picture>` fallback to maintain. The source stays larger than its
 display size — a 205 px circle — to hold up on high-density screens.
 
-`public/apercu.png` is the exception and stays a PNG: the site never loads it, only link-preview
-crawlers fetch it, and their WebP support is uneven.
+`public/apercu.jpg` follows a different rule: the site never loads it, only link-preview crawlers
+fetch it, and their WebP support is uneven — hence a JPEG, which every one of them reads. It weighed
+167 kB as a PNG against 54 kB as a JPEG, with no visible difference at the size a preview is shown;
+recompressing the PNG losslessly gained nothing, it already was. Carried by a `content=` attribute
+and an absolute URL, it escapes the internal-link check, which only reads `href` and `src`: the
+verifier therefore checks it separately, both its existence and its `og:image:type`. A missing image
+would show up nowhere but at the far end of the link, for whoever received it.
 
 **Styling.** Roughly 24 kB of hand-written CSS — 16 kB minified, 4 kB over the wire — driven by
 theme variables grouped at the top of `src/index.css`. Changing the accent colour takes one line.

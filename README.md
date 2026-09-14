@@ -116,8 +116,9 @@ l'absence de `frame-ancestors` et de `report-uri`, qu'une balise ignore.
 **Le build se relit.** `scripts/verifier.mjs` rouvre les pages produites et refuse de laisser passer
 un lien interne mort, une ancre sans cible, un `<html lang>` erroné, un canonique qui ne désigne pas
 la page, un ensemble `hreflang` qui ne se référence pas, une page sans `noindex`, une CSP dont les
-empreintes ne correspondent plus aux scripts de la page, ou une première visite au-delà de son
-budget de poids. Un build qui se termine ne prouve pas que le site tient : celui-ci le vérifie.
+empreintes ne correspondent plus aux scripts de la page, une image de partage absente du build ou
+mal typée, ou une première visite au-delà de son budget de poids. Un build qui se termine ne prouve
+pas que le site tient : celui-ci le vérifie.
 
 Le vérificateur se surveille aussi lui-même. Il ne connaît pas le sous-dossier de service : il le lit
 sur le build, et compte les liens qu'il a réellement examinés. En dessous d'un par page, il se
@@ -136,8 +137,13 @@ d'afficher le site correctement ne manque le WebP, donc pas de `<picture>` de re
 La source reste plus grande que son affichage — un cercle de 205 px — pour rester nette sur les
 écrans à forte densité.
 
-`public/apercu.png` fait exception et reste en PNG : elle n'est jamais chargée par le site, seules
-les plateformes de partage la récupèrent, et leur prise en charge du WebP est irrégulière.
+`public/apercu.jpg` suit une autre règle : le site ne la charge jamais, seules les plateformes de
+partage la récupèrent, et leur prise en charge du WebP est irrégulière — d'où un JPEG, que toutes
+savent lire. Elle pesait 167 ko en PNG contre 54 en JPEG, sans différence visible à la taille où un
+aperçu s'affiche ; recompresser le PNG sans perte ne gagnait rien, il l'était déjà. Portée par un
+attribut `content=` et par une URL absolue, elle échappe au contrôle des liens internes, qui ne lit
+que `href` et `src` : le vérificateur la contrôle donc à part, existence et `og:image:type`. Une
+image manquante ne se verrait nulle part ailleurs qu'à l'arrivée du lien, chez son destinataire.
 
 **Styles.** Environ 24 ko de CSS écrits à la main — 16 ko une fois minifiés, 4 ko sur le réseau —,
 pilotés par des variables de thème regroupées en tête de `src/index.css`. Changer la couleur

@@ -134,6 +134,7 @@ for (const p of liste) {
     <meta property="og:description" content="${ech(p.descriptionPartage)}" />
     <meta property="og:url" content="${p.url}" />
     <meta property="og:image" content="${p.imagePartage}" />
+    <meta property="og:image:type" content="${p.typeImagePartage}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="${ech(p.titre)}" />
@@ -171,7 +172,8 @@ for (const p of liste) {
     html,
     bloc,
     `${DEBUT}\n    <title>404 — ${liste[0].titre}</title>\n` +
-      `    <meta property="og:image" content="${liste[0].imagePartage}" />\n    ${FIN}`,
+      `    <meta property="og:image" content="${liste[0].imagePartage}" />\n` +
+      `    <meta property="og:image:type" content="${liste[0].typeImagePartage}" />\n    ${FIN}`,
     'métadonnées de la 404',
   )
   html = remplacer(html, RACINE, `<div id="root">${corps}</div>`, "point d'insertion de la 404")

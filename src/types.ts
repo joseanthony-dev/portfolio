@@ -171,6 +171,8 @@ export type Page = {
   descriptionPartage: string
   /** Image d'aperçu du partage, absolue : aucune plateforme ne résout un chemin. */
   imagePartage: string
+  /** Type MIME de l'image ci-dessus : certaines plateformes s'y fient. */
+  typeImagePartage: string
   /** Fiche schema.org sérialisée, prête à être écrite telle quelle dans le <head>. */
   donneesStructurees: string
   html: string

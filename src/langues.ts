@@ -10,7 +10,10 @@ export const SITE = 'https://joseanthony-dev.github.io/portfolio/'
 
 // Image d'aperçu des partages. Absolue, et non servie par la base de Vite : les
 // plateformes qui la récupèrent ne résolvent aucun chemin relatif.
-export const IMAGE_PARTAGE = `${SITE}apercu.png`
+export const IMAGE_PARTAGE = `${SITE}apercu.jpg`
+
+/** Type MIME de l'image ci-dessus, déclaré en og:image:type. */
+export const TYPE_IMAGE_PARTAGE = 'image/jpeg'
 
 // Chemin de chaque langue sous la racine du site. Le français est à la racine.
 export const CHEMINS: Record<Langue, string> = { fr: '', en: 'en/' }
