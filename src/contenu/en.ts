@@ -9,6 +9,8 @@ export const en: Contenu = {
     titre: 'Anthony Jose — Systems, Networks & Security',
     description:
       "Computer science master's student in Lyon, France, on the Systems, Networks and Security track, looking for a September 2027 apprenticeship. System and network administration, monitoring, automation, cybersecurity — and building the tooling that goes with it.",
+    descriptionPartage:
+      'System and network administration, monitoring, automation and cybersecurity — and software development. Projects, background and CV.',
   },
 
   nav: { projets: 'Projects', parcours: 'Background', competences: 'Skills', contact: 'Contact' },

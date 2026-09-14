@@ -10,6 +10,8 @@ export const fr: Contenu = {
     titre: 'Anthony Jose — Systèmes, réseaux & sécurité',
     description:
       "Étudiant en Master Informatique à Lyon, parcours SRS, en recherche d'alternance pour la rentrée 2027. Administration système et réseau, supervision, automatisation, cybersécurité — et le développement des outils qui vont avec.",
+    descriptionPartage:
+      'Administration système et réseau, supervision, automatisation et cybersécurité — et du développement. Projets, parcours et CV.',
   },
 
   nav: {

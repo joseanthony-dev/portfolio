@@ -48,7 +48,9 @@ export type GroupeCompetences = {
 }
 
 export type Contenu = {
-  meta: { titre: string; description: string }
+  // `description` sert la balise meta ; `descriptionPartage`, plus courte,
+  // sert les aperçus de liens, où le texte est tronqué plus tôt.
+  meta: { titre: string; description: string; descriptionPartage: string }
   nav: { projets: string; parcours: string; competences: string; contact: string }
   hero: {
     salutation: string

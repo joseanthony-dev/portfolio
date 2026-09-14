@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Contenu, Langue } from '../types'
+import { AUTRE, lienLangue } from '../langues'
 import { IconeLune, IconeSoleil } from './Icones'
 
 type Props = {
   t: Contenu
   langue: Langue
-  onLangue: (l: Langue) => void
   onTheme: () => void
 }
 
 const sections = ['projets', 'parcours', 'competences', 'contact'] as const
 
-export function EnTete({ t, langue, onLangue, onTheme }: Props) {
+export function EnTete({ t, langue, onTheme }: Props) {
   const [ouvert, setOuvert] = useState(false)
   const [actif, setActif] = useState<string>('')
   const entete = useRef<HTMLElement>(null)
@@ -91,17 +91,19 @@ export function EnTete({ t, langue, onLangue, onTheme }: Props) {
             <IconeLune className="icone-theme icone-theme--clair" />
           </button>
 
-          <button
-            type="button"
+          {/* Chaque langue est une page à part : la bascule est un vrai lien,
+              ce qui la rend suivable par un moteur et ouvrable dans un onglet. */}
+          <a
             className="bouton-langue"
-            onClick={() => onLangue(langue === 'fr' ? 'en' : 'fr')}
+            href={lienLangue(AUTRE[langue])}
+            hrefLang={AUTRE[langue]}
             aria-label={t.a11y.changerLangue}
             title={t.a11y.changerLangue}
           >
             <span className={langue === 'fr' ? 'est-actif' : ''}>FR</span>
             <span aria-hidden="true">/</span>
             <span className={langue === 'en' ? 'est-actif' : ''}>EN</span>
-          </button>
+          </a>
 
           <button
             type="button"

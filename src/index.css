@@ -194,8 +194,11 @@ main:focus, main:focus-visible { outline: none; }
   font-weight: 650;
   letter-spacing: 0.04em;
   cursor: pointer;
+  /* C'est un lien vers l'autre version du site, pas un bouton : on neutralise
+     le soulignement que porte `a` par défaut. */
+  text-decoration: none;
 }
-.bouton-langue:hover { border-color: var(--bordure-forte); }
+.bouton-langue:hover { border-color: var(--bordure-forte); text-decoration: none; }
 .bouton-langue .est-actif { color: var(--accent); }
 
 .entete__burger { display: none; }

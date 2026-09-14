@@ -5,7 +5,8 @@ et sécurité.
 
 **→ [joseanthony-dev.github.io/portfolio](https://joseanthony-dev.github.io/portfolio/)**
 
-Bilingue français / anglais, thème clair et sombre, responsive, accessible au clavier.
+Bilingue français / anglais — une URL par langue —, thème clair et sombre, responsive,
+accessible au clavier.
 Le site ne charge **aucune ressource externe** à l'exécution : pas de police Google, pas de CDN,
 pas de script tiers. Tout est servi depuis le domaine, ce qui évite toute requête vers un service
 tiers pour le visiteur.
@@ -24,18 +25,30 @@ n'importe où. Aucune dépendance d'exécution en dehors de React.
 `Contenu` (`src/types.ts`) : si une traduction manque un champ, la compilation échoue. Les deux
 langues ne peuvent donc pas diverger silencieusement.
 
-**Rendu au build.** `dist/index.html` contient tout le texte du site, pas seulement un
+**Rendu au build.** Les pages contiennent tout le texte du site, pas seulement un
 `<div id="root">` vide : `scripts/prerendu.mjs` rend l'application dans Node à la fin du build et
 insère le résultat. Le contenu est donc lisible sans JavaScript, indexable, et affiché avant que
 les 82 ko du bundle ne soient chargés — le navigateur n'attend plus React pour peindre la page.
 React s'hydrate ensuite sur ce DOM au lieu de le reconstruire.
 
 Cela impose une contrainte : le premier rendu client doit produire exactement le HTML du build.
-Toute lecture du navigateur — langue stockée, `navigator.language` — est donc repoussée après
-l'hydratation, dans un effet, et non faite pendant le rendu. Le HTML pré-rendu est en français,
-la version canonique du site ; un visiteur anglophone voit donc le français le temps que le bundle
-charge. Servir les deux langues sans ce décalage demanderait deux URL — `/` et `/en/` — ce qui
-ferait de la langue une vraie navigation plutôt qu'un état React.
+C'est vérifiable — le balisage servi est comparé octet pour octet au rendu d'une compilation
+fraîche — et c'est ce qui dicte les deux choix suivants.
+
+**Une URL par langue.** Le français est à la racine, l'anglais sous `/en/`, chacun pré-rendu dans
+sa langue avec son `<html lang>`, son titre, sa description et son `og:locale`, et chacun déclarant
+l'autre en `hreflang`. Les deux versions sont donc indexables séparément, ce qu'une langue portée
+par un état React, sur une seule adresse, interdit.
+
+La langue n'est pas détectée : elle est lue sur `<html lang>`, que le pré-rendu a écrit. Le premier
+rendu client est donc déjà le bon, il n'y a rien à corriger après coup, et un visiteur anglophone ne
+voit pas le français défiler le temps du chargement. La bascule FR / EN est un vrai lien — suivable
+par un moteur, ouvrable dans un onglet. Contrepartie : changer de langue recharge la page et ramène
+en haut du document.
+
+`src/langues.ts` tient l'adresse publique du site et le chemin de chaque langue. Les URL canoniques,
+`og:url`, les liens `hreflang` et le sitemap en découlent tous : c'est le seul endroit à changer
+pour déployer ailleurs.
 
 **Thème sans clignotement.** Un script inline dans `index.html` applique le thème enregistré avant
 le premier rendu, ce qui évite l'éclair blanc au chargement en mode sombre. Toute lecture de
@@ -76,18 +89,19 @@ Node 22 ou plus.
 ```
 src/
   types.ts              contrat de données, garant de la parité FR / EN
+  langues.ts            adresse du site et chemin de chaque langue
   contenu/fr.ts         texte français
   contenu/en.ts         texte anglais
-  App.tsx               langue, thème, assemblage des sections
+  App.tsx               thème et assemblage des sections
   index.css             mise en forme complète (variables de thème en tête)
   entree-client.tsx     point d'entrée navigateur, hydrate le HTML pré-rendu
   entree-serveur.tsx    point d'entrée du rendu au build
   composants/
-    EnTete.tsx          navigation, bascule langue et thème, menu mobile
+    EnTete.tsx          navigation, lien vers l'autre langue, thème, menu mobile
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          insère le HTML rendu au build dans dist/index.html
+  prerendu.mjs          écrit les deux pages et le sitemap
 ```
 
 ## Déploiement
@@ -97,7 +111,14 @@ Publié sur GitHub Pages par `.github/workflows/deploy.yml`, qui construit et me
 
 Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/portfolio/'`. Sans cette
 base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
-déployer ailleurs, retirer `base` et mettre à jour les URL canoniques de `index.html`.
+déployer ailleurs, retirer `base` et changer `SITE` dans `src/langues.ts`.
+
+Le build produit `dist/sitemap.xml`, qui liste les deux versions et leurs alternatives. Il est
+servi depuis `/portfolio/sitemap.xml` et se déclare à Google via la Search Console.
+
+Il n'y a pas de `robots.txt` : un robot ne le lit qu'à la racine du domaine, et
+`joseanthony-dev.github.io/` relève d'un autre dépôt que celui-ci. Son absence ne bloque rien —
+sans lui, tout est explorable, ce qui est le comportement voulu.
 
 ---
 
@@ -109,6 +130,7 @@ dependencies** — no web fonts, no CDN, no third-party scripts.
 
 Built with React 19, TypeScript and Vite. All copy lives in two content files that must satisfy the
 same TypeScript type, so the French and English versions cannot drift apart without the build
-failing. The app is rendered to static HTML at build time and hydrated in the browser, so the
-content is readable without JavaScript and paints before the bundle loads. Deployed to GitHub Pages
-on every push to `main`.
+failing. Each language is rendered to its own static page at build time — French at the root,
+English under `/en/`, cross-declared with `hreflang` — and hydrated in the browser, so both are
+independently indexable and readable without JavaScript. Deployed to GitHub Pages on every push to
+`main`.
