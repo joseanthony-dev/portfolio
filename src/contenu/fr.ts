@@ -81,6 +81,7 @@ export const fr: Contenu = {
           chiffres: [
             { valeur: '1 h → 2-10 min', libelle: 'pour une purge, auparavant manuelle' },
             { valeur: '1 h → 5 min', libelle: 'pour un contrôle d’installation' },
+            { valeur: '50 à 80 %', libelle: 'd’espace disque libéré par passage' },
             { valeur: 'J+1', libelle: 'entre la mise à l’écart et la suppression définitive' },
           ],
           sections: [
@@ -104,6 +105,7 @@ export const fr: Contenu = {
               paragraphes: [
                 'Ansible était déjà en place. Plutôt que de déployer les scripts par un autre canal, je les ai intégrés au lanceur que l’équipe utilisait déjà : la purge devient une entrée de plus, pas une procédure à part avec ses propres habitudes. Quelques ajustements de son interface ont suffi.',
                 'Le vrai travail était ailleurs. Une partie du parc n’était pas encore raccordée au serveur maître, donc hors de portée de l’automatisation. Il a fallu l’y ramener avant que le reste ait un sens.',
+                'Le bénéfice de ce choix s’est vu au second outil. Une fois le chemin ouvert, ajouter le contrôle automatique des installations n’a coûté qu’un script de plus au même endroit — pas un nouveau canal de déploiement, pas une nouvelle habitude à faire prendre.',
               ],
             },
             {
@@ -117,7 +119,8 @@ export const fr: Contenu = {
               titre: 'Mise en service et mesure',
               paragraphes: [
                 'Un mois d’exécution en environnement de non-production avant la moindre approche de la production : le temps de voir passer les cas qu’on n’avait pas prévus, sur des serveurs qu’on peut casser.',
-                'Le gain se lit au chronomètre. Une purge demandait environ une heure ; elle prend désormais entre deux et dix minutes. Le même travail appliqué aux contrôles d’installation les a fait passer d’une heure à cinq minutes. L’effet sur les disques se vérifie par relevé avant et après passage.',
+                'Le gain se lit au chronomètre. Une purge demandait environ une heure ; elle prend désormais entre deux et dix minutes, et un contrôle d’installation est passé d’une heure à cinq minutes.',
+                'L’espace regagné se relève avant et après passage : entre 50 et 80 % de l’occupation selon les serveurs, l’écart tenant au nombre de versions que chacun avait accumulées.',
                 'Des procédures écrites accompagnent les scripts, pour que l’équipe puisse les reprendre et les adapter sans moi.',
               ],
             },

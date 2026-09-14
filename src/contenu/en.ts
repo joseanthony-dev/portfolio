@@ -75,6 +75,7 @@ export const en: Contenu = {
           chiffres: [
             { valeur: '1 h → 2-10 min', libelle: 'for a purge, previously done by hand' },
             { valeur: '1 h → 5 min', libelle: 'for an installation check' },
+            { valeur: '50 to 80%', libelle: 'of disk space freed per run' },
             { valeur: 'D+1', libelle: 'between setting aside and actual deletion' },
           ],
           sections: [
@@ -98,6 +99,7 @@ export const en: Contenu = {
               paragraphes: [
                 'Ansible was already in place. Rather than shipping the scripts through some other channel, I folded them into the launcher the team already used: the purge becomes one more entry, not a separate procedure with habits of its own. A few adjustments to its interface were enough.',
                 'The real work was elsewhere. Part of the estate was not yet wired to the master server, and therefore out of reach of any automation. It had to be brought in before the rest meant anything.',
+                'The payoff of that choice showed up with the second tool. Once the path existed, adding automated installation checks cost nothing more than another script in the same place — no new deployment channel, no new habit to instil.',
               ],
             },
             {
@@ -111,7 +113,8 @@ export const en: Contenu = {
               titre: 'Going live, and measuring',
               paragraphes: [
                 'A month of runs in a non-production environment before going anywhere near production: long enough to meet the cases nobody had anticipated, on servers you are allowed to break.',
-                'The gain shows on the stopwatch. A purge used to take about an hour; it now takes between two and ten minutes. The same approach applied to installation checks brought those from an hour down to five minutes. The effect on disk usage is confirmed by readings taken before and after each run.',
+                'The gain shows on the stopwatch. A purge used to take about an hour; it now takes between two and ten minutes, and an installation check went from an hour to five.',
+                'Reclaimed space is recorded before and after each run: between 50 and 80% of what was occupied, depending on the server — the spread reflecting how many releases each had piled up.',
                 'Written procedures ship with the scripts, so the team can pick them up and adapt them without me.',
               ],
             },
