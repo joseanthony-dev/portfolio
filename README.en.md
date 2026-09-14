@@ -27,7 +27,7 @@ therefore cannot drift apart in silence.
 
 **Rendered at build time.** The pages carry the whole text of the site, not just an empty
 `<div id="root">`: `scripts/prerendu.mjs` renders the application under Node at the end of the
-build and inserts the result. The content is readable without JavaScript, indexable, and painted
+build and inserts the result. The content is readable without JavaScript and painted
 before the 82 kB bundle has loaded — the browser no longer waits for React to draw the page. React
 then hydrates that DOM instead of rebuilding it.
 
@@ -37,7 +37,7 @@ what dictates the two choices below.
 
 **One URL per language.** French sits at the root, English under `/en/`, each prerendered in its
 own language with its own `<html lang>`, title, description and `og:locale`, and each declaring the
-other through `hreflang`. Both versions are independently indexable, which a language held in React
+other through `hreflang`. Each language is a page in its own right, which a language held in React
 state on a single address rules out.
 
 The language is not detected: it is read from `<html lang>`, which the prerender wrote. The first
@@ -56,7 +56,7 @@ read back by `entree-client.tsx`: the first client render starts from the same t
 received, without parsing the URL itself, and navigation happens through real links.
 
 `src/langues.ts` holds the site's public address and the path of each language. Canonical URLs,
-`og:url`, the `hreflang` links and the sitemap all derive from it: it is the only place to change
+`og:url` and the `hreflang` links all derive from it: it is the only place to change
 when deploying elsewhere.
 
 **Case studies that are filled in, never hollow.** A case-study page is built from what the card
@@ -133,7 +133,7 @@ src/
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          writes every page and the sitemap
+  prerendu.mjs          writes every page
 ```
 
 ## Deployment
@@ -145,9 +145,12 @@ Because the site is served from a subdirectory, `vite.config.ts` sets `base: '/p
 that base, assets would be requested from the domain root and the page would come up blank. To
 deploy elsewhere, drop `base` and change `SITE` in `src/langues.ts`.
 
-The build emits `dist/sitemap.xml`, listing every page and their alternates. It is served from
-`/portfolio/sitemap.xml` and announced to Google through Search Console.
+**The site is not meant to be indexed.** Every page carries
+`<meta name="robots" content="noindex, nofollow">`: it is shared by link, in an application, not
+found by searching my name. There is therefore no sitemap and no submission to any search engine.
 
-There is no `robots.txt`: a crawler only reads it at the domain root, and
-`joseanthony-dev.github.io/` belongs to a repository other than this one. Its absence blocks
-nothing — without it everything is crawlable, which is the intended behaviour.
+It is an instruction, not a protection: serious engines honour it, the page stays readable to
+anything that does not, and it remains publicly reachable to anyone holding the address. The `og:`
+tags stay — they drive the preview LinkedIn and messaging apps show, and those read the page
+directly without consulting any index. The `hreflang` links and canonical URLs stay too: inert
+while `noindex` is there, correct the day it is not.

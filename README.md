@@ -29,7 +29,7 @@ langues ne peuvent donc pas diverger silencieusement.
 
 **Rendu au build.** Les pages contiennent tout le texte du site, pas seulement un
 `<div id="root">` vide : `scripts/prerendu.mjs` rend l'application dans Node à la fin du build et
-insère le résultat. Le contenu est donc lisible sans JavaScript, indexable, et affiché avant que
+insère le résultat. Le contenu est donc lisible sans JavaScript et affiché avant que
 les 82 ko du bundle ne soient chargés — le navigateur n'attend plus React pour peindre la page.
 React s'hydrate ensuite sur ce DOM au lieu de le reconstruire.
 
@@ -39,7 +39,7 @@ fraîche — et c'est ce qui dicte les deux choix suivants.
 
 **Une URL par langue.** Le français est à la racine, l'anglais sous `/en/`, chacun pré-rendu dans
 sa langue avec son `<html lang>`, son titre, sa description et son `og:locale`, et chacun déclarant
-l'autre en `hreflang`. Les deux versions sont donc indexables séparément, ce qu'une langue portée
+l'autre en `hreflang`. Chaque langue est ainsi une page à part entière, ce qu'une langue portée
 par un état React, sur une seule adresse, interdit.
 
 La langue n'est pas détectée : elle est lue sur `<html lang>`, que le pré-rendu a écrit. Le premier
@@ -57,7 +57,7 @@ relue par `entree-client.tsx` : le premier rendu client part du même arbre que 
 avoir à interpréter l'URL, et la navigation se fait par de vrais liens.
 
 `src/langues.ts` tient l'adresse publique du site et le chemin de chaque langue. Les URL canoniques,
-`og:url`, les liens `hreflang` et le sitemap en découlent tous : c'est le seul endroit à changer
+`og:url` et les liens `hreflang` en découlent tous : c'est le seul endroit à changer
 pour déployer ailleurs.
 
 **Pages de cas nourries, jamais à trous.** Une page de cas est bâtie sur ce que la carte porte
@@ -133,7 +133,7 @@ src/
     Hero.tsx  APropos.tsx  Projets.tsx  Parcours.tsx
     Competences.tsx  Contact.tsx  PiedDePage.tsx  Icones.tsx
 scripts/
-  prerendu.mjs          écrit toutes les pages et le sitemap
+  prerendu.mjs          écrit toutes les pages
 ```
 
 ## Déploiement
@@ -146,9 +146,12 @@ Le site étant servi depuis un sous-dossier, `vite.config.ts` fixe `base: '/port
 base, les assets seraient demandés à la racine du domaine et la page s'afficherait vide. Pour
 déployer ailleurs, retirer `base` et changer `SITE` dans `src/langues.ts`.
 
-Le build produit `dist/sitemap.xml`, qui liste toutes les pages et leurs alternatives. Il est
-servi depuis `/portfolio/sitemap.xml` et se déclare à Google via la Search Console.
+**Le site n'a pas vocation à être indexé.** Toutes les pages portent
+`<meta name="robots" content="noindex, nofollow">` : il se partage par lien, dans une candidature,
+et non par une recherche sur mon nom. Il n'y a donc ni sitemap ni déclaration à un moteur.
 
-Il n'y a pas de `robots.txt` : un robot ne le lit qu'à la racine du domaine, et
-`joseanthony-dev.github.io/` relève d'un autre dépôt que celui-ci. Son absence ne bloque rien —
-sans lui, tout est explorable, ce qui est le comportement voulu.
+C'est une consigne, pas une protection : les moteurs sérieux la respectent, la page reste lisible
+par qui l'ignore, et elle demeure publiquement accessible à qui a l'adresse. Les balises `og:`
+restent en place — elles servent l'aperçu affiché par LinkedIn et les messageries, qui lisent la
+page directement sans consulter aucun index. Les `hreflang` et les URL canoniques restent
+également : inertes tant que `noindex` est là, justes le jour où il ne le serait plus.

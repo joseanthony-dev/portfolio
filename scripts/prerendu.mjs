@@ -7,8 +7,9 @@
 // bundle ne soit chargé.
 //
 // Chaque page porte ses propres métadonnées et déclare en hreflang la même page
-// dans l'autre langue — un cas renvoie au même cas, pas à l'accueil. Le sitemap
-// les reprend toutes.
+// dans l'autre langue — un cas renvoie au même cas, pas à l'accueil. Ces balises
+// sont inertes tant que le site porte noindex (voir index.html), et restent en
+// place pour le jour où il cesserait de le porter.
 //
 // Tourne après `vite build` (qui produit le gabarit dist/index.html) et après le
 // build SSR (qui produit dist-ssr/entree-serveur.js).
@@ -96,22 +97,5 @@ for (const p of liste) {
 }
 
 console.log(`✓ ${liste.length} pages pré-rendues`)
-
-const jour = new Date().toISOString().slice(0, 10)
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${liste
-  .map(
-    (p) => `  <url>
-    <loc>${p.url}</loc>
-    <lastmod>${jour}</lastmod>
-    ${alternatives(p).replace(/<link /g, '<xhtml:link ')}
-  </url>`,
-  )
-  .join('\n')}
-</urlset>
-`
-writeFileSync('dist/sitemap.xml', sitemap)
-console.log(`✓ dist/sitemap.xml — ${liste.length} URL`)
 
 rmSync('dist-ssr', { recursive: true, force: true })
