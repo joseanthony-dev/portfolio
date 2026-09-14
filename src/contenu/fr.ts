@@ -313,6 +313,7 @@ export const fr: Contenu = {
             'Trois modèles enchaînés, trois personnes, un modèle chacun. Le mien classe l’émotion — et la difficulté n’a pas été de l’écrire, mais de comprendre ce qu’il fait.',
           chiffres: [
             { valeur: 'À trois', libelle: 'un modèle chacun ; le classifieur était ma part' },
+            { valeur: '~72 %', libelle: 'd’exactitude sur le jeu de test, 65 % en validation' },
             { valeur: '7 émotions', libelle: 'classées par un ResNet18 entraîné sur FER2013' },
             { valeur: '30 img/s', libelle: 'la chaîne complète, sur carte graphique' },
           ],
@@ -330,6 +331,7 @@ export const fr: Contenu = {
                 'FER2013 est très inégalement réparti. Certaines émotions y sont abondantes, d’autres presque absentes — le dégoût tient dans une poignée d’images face aux milliers dont disposent la joie ou le neutre.',
                 'Un modèle entraîné dessus sans précaution apprend surtout à ignorer les classes rares : il peut afficher une exactitude globale flatteuse tout en ne reconnaissant jamais une émotion sur sept. Le chiffre est bon, le classifieur ne l’est pas.',
                 'J’ai traité le problème par les deux bouts : augmenter les images des classes peu présentes, et donner plus de poids à ces classes dans l’apprentissage, pour qu’une erreur sur une émotion rare coûte davantage qu’une erreur sur une émotion courante. Les résultats s’en sont trouvés nettement meilleurs — et surtout meilleurs là où ça comptait.',
+                'Le classifieur atteint environ 72 % d’exactitude sur le jeu de test, et 65 % sur celui de validation. Le chiffre demande un repère pour vouloir dire quelque chose : sur FER2013, l’exactitude humaine mesurée par les auteurs du jeu de données se situe autour de 65 %. Sept classes, des images de quarante-huit pixels de côté en niveaux de gris, des étiquettes parfois discutables — c’est un jeu de données difficile, et les scores s’y lisent bas.',
               ],
             },
             {
