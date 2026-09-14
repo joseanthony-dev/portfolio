@@ -26,7 +26,11 @@ export const en: Contenu = {
     photoAlt: 'Portrait of Anthony Jose',
     ctaProjets: 'See my work',
     ctaContact: 'Get in touch',
-    ctaCv: 'Download my résumé',
+    // Tant que le CV n'existe qu'en français, le bouton le dit : un recruteur
+    // anglophone doit pouvoir décider avant de télécharger, pas après avoir
+    // ouvert le fichier. Voir hero.cv dans src/types.ts.
+    ctaCv: 'Download my résumé (in French)',
+    cv: { fichier: 'CV_JOSE_Anthony.pdf', langue: 'fr' },
   },
 
   apropos: {
@@ -564,6 +568,20 @@ export const en: Contenu = {
     ],
     copie: 'Copy address',
     copieOk: 'Address copied',
+  },
+
+  schema: {
+    jobTitle: 'Systems and network administrator',
+    knowsAbout: [
+      'Linux',
+      'System and network administration',
+      'Monitoring',
+      'Centreon',
+      'Cybersecurity',
+      'Automation',
+      'TypeScript',
+      'C++',
+    ],
   },
 
   erreur: {

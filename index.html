@@ -47,6 +47,25 @@
     <meta property="og:image:alt" content="Anthony Jose — Systèmes, réseaux &amp; sécurité" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:locale:alternate" content="en_US" />
+    <!-- Fiche schema.org de la personne. Écrite par langue au pré-rendu, à
+         partir de `schema` dans src/contenu/*.ts ; la version française
+         ci-dessous sert telle quelle en développement. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anthony Jose",
+        "jobTitle": "Administrateur systèmes et réseaux",
+        "email": "mailto:anthony.jose@outlook.fr",
+        "address": { "@type": "PostalAddress", "addressLocality": "Montagny", "addressRegion": "Rhône", "addressCountry": "FR" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Université Claude Bernard Lyon 1" },
+        "sameAs": [
+          "https://github.com/joseanthony-dev",
+          "https://www.linkedin.com/in/joseanthony-zacharias"
+        ],
+        "knowsAbout": ["Linux", "Administration système et réseau", "Supervision", "Centreon", "Cybersécurité", "Automatisation", "TypeScript", "C++"]
+      }
+    </script>
     <!-- fin métadonnées de langue -->
 
     <!-- Évite le clignotement blanc au chargement en thème sombre -->
@@ -70,23 +89,6 @@
           .querySelector('meta[name="theme-color"]')
           .setAttribute('content', t === 'sombre' ? '#0d1013' : '#fbfaf8')
       })()
-    </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Anthony Jose",
-        "jobTitle": "Administrateur systèmes et réseaux",
-        "email": "mailto:anthony.jose@outlook.fr",
-        "address": { "@type": "PostalAddress", "addressLocality": "Montagny", "addressRegion": "Rhône", "addressCountry": "FR" },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Université Claude Bernard Lyon 1" },
-        "sameAs": [
-          "https://github.com/joseanthony-dev",
-          "https://www.linkedin.com/in/joseanthony-zacharias"
-        ],
-        "knowsAbout": ["Linux", "Administration système et réseau", "Supervision", "Centreon", "Cybersécurité", "Automatisation", "TypeScript", "C++"]
-      }
     </script>
   </head>
   <body>

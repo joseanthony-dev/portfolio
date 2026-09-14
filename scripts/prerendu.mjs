@@ -69,9 +69,10 @@ const liste = pages()
 
 /**
  * Le site ne charge rien d'extérieur : la politique peut donc être aussi fermée
- * que possible. Les deux scripts inline — le thème et les données structurées —
- * sont autorisés par empreinte plutôt que par 'unsafe-inline', ce qui n'ouvre la
- * porte qu'à ces contenus-là, à l'octet près.
+ * que possible. Les scripts inline — le thème, et la fiche schema.org sur toutes
+ * les pages sauf la 404 — sont autorisés par empreinte plutôt que par
+ * 'unsafe-inline', ce qui n'ouvre la porte qu'à ces contenus-là, à l'octet près.
+ * La fiche étant traduite, son empreinte diffère d'une langue à l'autre.
  *
  * Les empreintes sont calculées sur le HTML produit, jamais écrites à la main :
  * un script modifié sans que la politique suive casserait le site en silence.
@@ -138,6 +139,7 @@ for (const p of liste) {
     <meta property="og:image:alt" content="${ech(p.titre)}" />
     <meta property="og:locale" content="${p.locale}" />
     <meta property="og:locale:alternate" content="${p.localeAutre}" />
+    <script type="application/ld+json">${p.donneesStructurees}</script>
     ${FIN}`
 
   // Il n'y a pas de routeur : le choix de la page est fait ici, au build, et le

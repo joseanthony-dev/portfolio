@@ -33,6 +33,7 @@ export const fr: Contenu = {
     ctaProjets: 'Voir mes projets',
     ctaContact: 'Me contacter',
     ctaCv: 'Télécharger mon CV',
+    cv: { fichier: 'CV_JOSE_Anthony.pdf', langue: 'fr' },
   },
 
   apropos: {
@@ -575,6 +576,20 @@ export const fr: Contenu = {
     ],
     copie: 'Copier l’adresse',
     copieOk: 'Adresse copiée',
+  },
+
+  schema: {
+    jobTitle: 'Administrateur systèmes et réseaux',
+    knowsAbout: [
+      'Linux',
+      'Administration système et réseau',
+      'Supervision',
+      'Centreon',
+      'Cybersécurité',
+      'Automatisation',
+      'TypeScript',
+      'C++',
+    ],
   },
 
   erreur: {

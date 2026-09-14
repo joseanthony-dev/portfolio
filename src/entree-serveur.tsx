@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import App from './App'
 import { Page404 } from './composants/Page404'
 import { contenus } from './contenu'
+import { donneesStructurees } from './donnees-structurees'
 import { AUTRE, CHEMINS, IMAGE_PARTAGE, LANGUES, LOCALES, cheminProjet, urlAbsolue, urlProjet } from './langues'
 import type { Langue, Page } from './types'
 
@@ -42,6 +43,7 @@ export function pages(): Page[] {
       locale: LOCALES[langue],
       localeAutre: LOCALES[autre],
       imagePartage: IMAGE_PARTAGE,
+      donneesStructurees: donneesStructurees(t, urlAbsolue(langue)),
       ...t.meta,
       html: rendre(langue),
     }
@@ -58,6 +60,9 @@ export function pages(): Page[] {
       // Site-wide aujourd'hui, mais porté par la page : le jour où un projet
       // mérite son propre aperçu, il n'y a qu'ici à changer.
       imagePartage: IMAGE_PARTAGE,
+      // La fiche décrit la personne, pas le projet : seule son `url` change,
+      // pour qu'elle désigne la page qui la porte.
+      donneesStructurees: donneesStructurees(t, urlProjet(langue, projet.id)),
       titre: `${projet.titre} — ${t.hero.nom}`,
       // Le résumé du projet fait une description de page : une phrase, écrite
       // pour être lue seule.

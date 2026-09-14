@@ -25,7 +25,15 @@ export function Hero({ t }: { t: Contenu }) {
             <IconeMail />
             {t.hero.ctaContact}
           </a>
-          <a className="bouton bouton--discret" href={`${import.meta.env.BASE_URL}CV_JOSE_Anthony.pdf`} download>
+          {/* `hrefLang` porte la langue du document, qui n'est pas forcément
+              celle de la page : le libellé le dit déjà à l'écran, ceci le dit
+              aux technologies d'assistance. */}
+          <a
+            className="bouton bouton--discret"
+            href={`${import.meta.env.BASE_URL}${t.hero.cv.fichier}`}
+            hrefLang={t.hero.cv.langue}
+            download
+          >
             <IconeTelechargement />
             {t.hero.ctaCv}
           </a>

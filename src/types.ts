@@ -82,6 +82,13 @@ export type Contenu = {
     ctaProjets: string
     ctaContact: string
     ctaCv: string
+    /**
+     * Le CV proposé au téléchargement. `langue` est celle du document, pas celle
+     * de la page : tant qu'une version anglaise n'existe pas, la page anglaise
+     * sert le CV français et doit le dire plutôt que de le laisser découvrir à
+     * l'ouverture du fichier.
+     */
+    cv: { fichier: string; langue: Langue }
   }
   apropos: { titre: string; paragraphes: string[] }
   projets: {
@@ -119,6 +126,11 @@ export type Contenu = {
     copie: string
     copieOk: string
   }
+  /**
+   * Les seuls champs traduisibles de la fiche schema.org — le nom, l'adresse et
+   * les comptes n'ont pas de version par langue. Voir donnees-structurees.ts.
+   */
+  schema: { jobTitle: string; knowsAbout: string[] }
   /** Page servie pour une adresse qui ne mène nulle part. */
   erreur: { titre: string; message: string; retour: string }
   pied: { droits: string; construitAvec: string }
@@ -159,5 +171,7 @@ export type Page = {
   descriptionPartage: string
   /** Image d'aperçu du partage, absolue : aucune plateforme ne résout un chemin. */
   imagePartage: string
+  /** Fiche schema.org sérialisée, prête à être écrite telle quelle dans le <head>. */
+  donneesStructurees: string
   html: string
 }
